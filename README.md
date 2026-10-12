@@ -127,9 +127,10 @@ packages/elements   @seaglass/elements
 packages/react      @seaglass/react
 packages/tailwind   @seaglass/tailwind
 legacy/             original documentation site (reference)
+demo/               same prototype, deployed to GitHub Pages
 ```
 
 ```bash
 pnpm install
-pnpm ci    # lint, typecheck, build, test
+pnpm check    # lint, typecheck, build, test
 ```

@@ -25,7 +25,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --build --pretty false",
     "test": "vitest run",
-    "ci": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
+    "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
     "release:dry": "node ./scripts/release-dry.mjs",
     "prepare": "husky || true"
   },

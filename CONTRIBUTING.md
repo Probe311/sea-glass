@@ -9,7 +9,7 @@ Thanks for helping. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ```bash
 pnpm install
-pnpm ci
+pnpm check
 ```
 
 The original prototype lives in `legacy/` and is not linted. New work belongs in `packages/`.
@@ -21,6 +21,7 @@ The original prototype lives in `legacy/` and is not linted. New work belongs in
 | `pnpm build`     | Style Dictionary + CSS bundle + `tsc`      |
 | `pnpm lint`      | ESLint, Stylelint (`sg-` prefix), Prettier |
 | `pnpm test`      | Vitest                                     |
+| `pnpm check`     | lint + typecheck + build + test            |
 | `pnpm changeset` | Record a semver bump                       |
 
 ## Conventions

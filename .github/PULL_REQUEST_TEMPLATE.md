@@ -5,7 +5,7 @@
 ## Checklist
 
 - [ ] Tests added or updated (or N/A)
-- [ ] `pnpm ci` passes locally
+- [ ] `pnpm check` passes locally
 - [ ] Changeset added (`pnpm changeset`) for a published API change
 - [ ] Classes use the `sg-` prefix; new tokens live in DTCG JSON, not as magic numbers
 - [ ] Keyboard + `:focus-visible` considered; `prefers-reduced-motion` / transparency respected

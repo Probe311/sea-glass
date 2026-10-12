@@ -2,6 +2,7 @@ node_modules
 dist
 coverage
 legacy
+demo
 pnpm-lock.yaml
 CHANGELOG.md
 CODE_OF_CONDUCT.md
