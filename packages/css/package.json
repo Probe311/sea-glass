@@ -1,0 +1,32 @@
+{
+  "name": "@sea-glass/css",
+  "version": "0.1.0",
+  "description": "Sea Glass design tokens and glass material styles",
+  "license": "MIT",
+  "type": "module",
+  "main": "./sea-glass.css",
+  "exports": {
+    ".": "./sea-glass.css",
+    "./glass.css": "./glass.css",
+    "./ui.css": "./ui.css",
+    "./sea-glass.css": "./sea-glass.css"
+  },
+  "files": [
+    "*.css"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Probe311/sea-glass.git",
+    "directory": "packages/css"
+  },
+  "keywords": [
+    "css",
+    "design-system",
+    "glassmorphism",
+    "sea-glass",
+    "tokens"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

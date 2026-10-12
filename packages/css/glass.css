@@ -1,0 +1,168 @@
+/* Sea Glass v4 · tokens et matériau
+   Modèle de lumière
+   - Une seule source, en haut à gauche.
+   - Objet posé : arête éclairée en haut à gauche, caustique teintée sur l'arête opposée (bas droite).
+   - Objet creusé : tout s'inverse. Ombre en haut à gauche, lumière qui remonte en bas à droite.
+   - Le reflet de surface et l'angle du liseré suivent le pointeur, la caustique reste à l'opposé.
+   Six propriétés : frosted, refractive, alive, rim, tint, glow. */
+
+@property --mx { syntax: '<percentage>'; inherits: false; initial-value: 28%; }
+@property --my { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
+@property --ang { syntax: '<angle>'; inherits: false; initial-value: 140deg; }
+
+:root {
+  --font-display: 'Google Sans', 'Outfit', system-ui, sans-serif;
+  --font-body: 'Roboto', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
+
+  /* Sol et encre */
+  --ground: #F6FAF7;
+  --ground-2: #EDF3F0;
+  --ink: #17262A;
+  --ink-2: #3E4F52;
+  --ink-3: #566568;
+  --line: rgba(23, 38, 42, 0.12);
+  --focus: #2F55C4;
+  --drop: 24, 64, 58;       /* ombres portées (r, g, b) */
+  --shade: 34, 92, 78;      /* ombres internes (r, g, b) */
+
+  /* Verre */
+  --ga: 0.74;               /* opacité sur sol uni */
+  --ga-scene: 0.26;         /* opacité sur décor coloré */
+  --spec: rgba(255, 255, 255, 0.5);
+  --sheen: rgba(255, 255, 255, 0.22);
+  --lit-a: 0.95;            /* arête éclairée */
+  --ce: 70%;                /* arête opposée : part de la couleur du verre */
+  --cc: 55%;                /* caustique douce : part de la couleur du verre */
+
+  /* Creux : lumière inversée */
+  --c-lo: rgba(34, 92, 78, 0.36);
+  --c-hi: rgba(255, 255, 255, 0.95);
+  --well-a: 0.5;
+  --well-b: 0.85;
+  --well: linear-gradient(180deg, rgb(255 255 255 / var(--well-a)), rgb(255 255 255 / var(--well-b)));
+  --carved: inset 1.5px 2px 3px -1px var(--c-lo), inset -1px -1.5px 1px -1px var(--c-hi), 0 1px 0 var(--c-hi);
+
+  --on-tint: #14463A;
+  --teal: #4F9482;
+  --teal-hi: #7BBFAC;
+
+  /* Galets : valeur pleine et encre */
+  --seafoam: #B9E3D6; --kelly: #4FA877; --citron: #D8DB9C; --aqua: #5CC4EC;
+  --cornflower: #C3D3F0; --cobalt: #6B8CE3; --lavender: #E4DAE8; --ruby: #E07662;
+  --amber: #F7C96B; --rootbeer: #B5866A; --clear: #F7F9F7; --mist: #CDD5D4;
+  --seafoam-ink: #1D4D41; --kelly-ink: #0E2A1D; --citron-ink: #4A4E0F; --aqua-ink: #05455E;
+  --cornflower-ink: #243C73; --cobalt-ink: #14295F; --lavender-ink: #4B3A59; --ruby-ink: #5E1E12;
+  --amber-ink: #5A3D03; --rootbeer-ink: #4A2E1C; --clear-ink: #2B3735; --mist-ink: #36413F;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 28px; --r-pill: 999px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+  --tex: 0.32;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0F1513; --ground-2: #161D1B;
+    --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
+    --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
+    --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
+    --lit-a: 0.6; --ce: 40%; --cc: 30%;
+    --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
+    --on-tint: #E8F7F1; --teal: #7BBFAC; --teal-hi: #A8DCCB;
+    --seafoam-ink: #CFF0E5; --kelly-ink: #BDEBD0; --aqua-ink: #C6EDFB; --cobalt-ink: #D5E0FA; --amber-ink: #FBE3A8; --ruby-ink: #FBD3CB;
+    --tex: 0.1;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0F1513; --ground-2: #161D1B;
+  --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
+  --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
+  --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
+  --lit-a: 0.6; --ce: 40%; --cc: 30%;
+  --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
+  --on-tint: #E8F7F1; --teal: #7BBFAC; --teal-hi: #A8DCCB;
+  --seafoam-ink: #CFF0E5; --kelly-ink: #BDEBD0; --aqua-ink: #C6EDFB; --cobalt-ink: #D5E0FA; --amber-ink: #FBE3A8; --ruby-ink: #FBD3CB;
+  --tex: 0.1;
+}
+
+/* ================= Le matériau ================= */
+.lg {
+  --lg-r: var(--r-xl);
+  --lg-blur: 12px;
+  --tint: 255 255 255;
+  --tint-a: 0.5;
+  --glow: 79 168 119;
+  --glass-a: var(--ga);
+  /* couleur de la lumière qui traverse le verre : la teinte, éclaircie */
+  --cs: color-mix(in srgb, rgb(var(--tint)) 40%, #fff);
+  --sh-in:
+    inset 1.5px 1.5px 1.5px -1px rgb(255 255 255 / var(--lit-a)),
+    inset -1.5px -1.5px 1.5px -1px color-mix(in srgb, var(--cs) var(--ce), transparent),
+    inset -6px -8px 12px -9px color-mix(in srgb, var(--cs) var(--cc), transparent),
+    inset 0 -12px 18px -14px rgba(var(--shade), 0.2);
+  --sh-out: 0 1px 2px rgba(var(--drop), 0.1), 0 10px 22px -14px rgba(var(--drop), 0.4);
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--lg-r);
+  color: var(--ink);
+  background: linear-gradient(160deg, rgb(255 255 255 / calc(var(--glass-a) + 0.16)), rgb(255 255 255 / var(--glass-a)) 62%, rgb(255 255 255 / calc(var(--glass-a) - 0.06)));
+  box-shadow: var(--sh-in), var(--sh-out);
+  transition: transform 260ms var(--spring), box-shadow 260ms var(--ease), background 260ms var(--ease), --mx 140ms ease-out, --my 140ms ease-out, --ang 180ms ease-out;
+}
+.scene .lg { --glass-a: var(--ga-scene); }
+
+/* 1 · frosted : verre dépoli. Le flou n'est appliqué qu'au-dessus d'un décor :
+   sur un sol uni il ne se voit pas et coûte cher. */
+.scene .lg[data-frosted], .lg.over[data-frosted] {
+  -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(1.6) brightness(1.03);
+  backdrop-filter: blur(var(--lg-blur)) saturate(1.6) brightness(1.03);
+}
+/* 2 · refractive : le décor se déforme dans l'épaisseur du verre (Chromium) */
+.sg-refract .scene .lg[data-refractive], .sg-refract .lg.over[data-refractive] {
+  -webkit-backdrop-filter: blur(calc(var(--lg-blur) * 0.5)) url(#sg-refract) saturate(1.6) brightness(1.04);
+  backdrop-filter: blur(calc(var(--lg-blur) * 0.5)) url(#sg-refract) saturate(1.6) brightness(1.04);
+}
+
+/* 4 · rim : liseré d'arête. Vif côté lumière, repris côté opposé dans la couleur du verre. */
+.lg::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: 2; opacity: 0;
+  background: linear-gradient(var(--ang), rgb(255 255 255 / var(--lit-a)), rgb(255 255 255 / 0) 30%, rgb(255 255 255 / 0) 62%, color-mix(in srgb, var(--cs) 85%, transparent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.lg[data-rim]::before { opacity: 1; }
+.lg:not([data-rim]) { --sh-in: inset 0 0 0 0 transparent; --sh-out: 0 1px 2px rgba(var(--drop), 0.08), 0 10px 22px -14px rgba(var(--drop), 0.3); }
+
+/* 5 · tint : la matière prend la couleur d'un galet, de façon mate */
+.lg[data-tint] {
+  background:
+    radial-gradient(110% 90% at 14% 0%, rgb(255 255 255 / 0.38), transparent 58%),
+    linear-gradient(165deg, rgb(var(--tint) / calc(var(--tint-a) + 0.1)), rgb(var(--tint) / var(--tint-a)) 70%, rgb(var(--tint) / calc(var(--tint-a) + 0.06)));
+}
+
+/* 6 · glow : lumière diffuse sous l'objet, toujours de la couleur de sa teinte */
+.lg[data-glow] { --sh-out: 0 1px 2px rgba(var(--drop), 0.1), 0 12px 26px -12px rgb(var(--glow) / 0.6); }
+
+/* Reflet de surface : une nappe douce en haut, une tache qui suit le pointeur */
+.lg::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
+  background:
+    radial-gradient(75% 55% at var(--mx) var(--my), var(--spec), rgb(255 255 255 / 0) 62%),
+    linear-gradient(180deg, var(--sheen), rgb(255 255 255 / 0) 42%);
+  mix-blend-mode: soft-light; opacity: 0.85; transition: opacity 200ms var(--ease);
+}
+.lg[data-alive]:hover::after { opacity: 1; }
+
+/* 3 · alive : la matière grossit au survol (scale 1.05) et s'enfonce à l'appui */
+.lg[data-alive]:hover { transform: scale(var(--hs, 1.05)); }
+.lg[data-alive]:active { transform: scale(var(--as, 0.97)); }
+
+/* Creux : la lumière s'inverse */
+.lg.carved { --sh-in: inset 1.5px 2px 3px -1px var(--c-lo), inset -1px -1.5px 1px -1px var(--c-hi); --sh-out: 0 1px 0 var(--c-hi); }
+.lg.carved:not([data-tint]) { background: var(--well); }
+.lg.carved::after { display: none; }
+
+.lg > :where(*) { position: relative; z-index: 4; }
+
+@media (prefers-reduced-motion: reduce) { .lg { transition: none; } .lg[data-alive]:hover, .lg[data-alive]:active { transform: none; } }

@@ -1,0 +1,10 @@
+title: "[Idea] "
+labels: [idea]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: How does this fit the sea-glass material model?
+    validations:
+      required: true

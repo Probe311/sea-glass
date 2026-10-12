@@ -1,0 +1,23 @@
+{
+  "name": "sea-glass-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sea Glass design system monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @sea-glass/react",
+    "typecheck": "npm run typecheck -w @sea-glass/react",
+    "demo": "npx --yes serve demo -p 4173",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Probe311/sea-glass.git"
+  },
+  "license": "MIT"
+}
