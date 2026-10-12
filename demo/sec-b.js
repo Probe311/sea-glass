@@ -95,17 +95,18 @@
       return h('div', { style: { width: '100%', minWidth: 0 } }, h(UI.Slider, Object.assign({ value: 45, unit: ' m', 'aria-label': 'Profondeur' }, s)));
     }
     var tones = [['seafoam', 'Seafoam · défaut', 72, undefined], ['aqua', 'Aqua · information', 48, undefined], ['amber', 'Amber · attention', 86, undefined], ['ruby', 'Ruby · critique', 94, undefined]];
-    return h(D.Section, { id: 'curseur', label: 'Composants', title: 'Curseur et progression', lead: 'Le rail est creusé dans le verre : l’ombre tombe en haut à gauche, la lumière remonte en bas à droite. Le remplissage est un verre teinté seafoam. Au repos, la poignée est un jonc vertical qui s’évase dans le remplissage. À l’appui, c’est un galet rond entouré d’ondes, avec une bulle qui indique la valeur.' },
+    return h(D.Section, { id: 'curseur', label: 'Composants', title: 'Curseur et progression', lead: 'Le rail est un givre translucide. Le remplissage seafoam et la poignée forment une seule matière : au repos une capsule mint soudée au fill ; à l’appui le rail gonfle (bulge) et la poignée devient une perle de verre blanche. Option pipette : un bulbe à gauche de la capsule.' },
       h(D.Sub, { title: 'Variantes' },
         h(D.Panel, { tag: 'Aperçu', cap: 'Glisse, clique sur le rail, ou utilise les flèches, Début, Fin, Page haut et Page bas.' },
           h('div', { className: 'g2' },
             h(UI.Slider, { label: 'Profondeur', value: 40, unit: ' m' }),
+            h(UI.Slider, { label: 'Pipette', value: 55, unit: ' m', thumb: 'pipette' }),
             h(UI.Slider, { label: 'Plage de marée', range: true, value: [20, 70], unit: ' %' }),
             h(UI.Slider, { label: 'Houle', value: 30, min: 0, max: 100, step: 10, marks: true, unit: ' cm' }),
             h(UI.Slider, { label: 'Désactivé', value: 25, unit: ' m', disabled: true })))),
-      h(D.Sub, { title: 'États', text: 'Défaut, survol et appui reprennent tes références. Le focus n’apparaît qu’au clavier.' },
+      h(D.Sub, { title: 'États', text: 'Défaut = capsule mint continue. Appui = bulge + perle blanche. Le focus n’apparaît qu’au clavier.' },
         h(D.Panel, { tag: 'Matrice' }, h(D.Matrix, { tall: true, corner: 'Composant', cols: [['rest', 'Défaut'], ['hover', 'Survol'], ['press', 'Appui'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['s', 'Curseur']], render: cell }))),
-      h(D.Sub, { title: 'Progression', text: 'Même rail creusé et même verre de remplissage, sans poignée. Quatre teintes, trois tailles, un tampon pour les chargements, un mode indéterminé et un anneau.' },
+      h(D.Sub, { title: 'Progression', text: 'Les barres gardent un rail creusé (sémantique différente du curseur interactif) et le même verre de remplissage. Quatre teintes, trois tailles, tampon, indéterminé et anneau.' },
         h(D.Panel, { tag: 'Barres', cap: 'Le remplissage rebondit légèrement à l’arrivée. Le mode indéterminé n’anime que transform.' },
           h('div', { className: 'g2' },
             h(UI.Progress, { label: 'Collection', value: 60, showValue: true }),
@@ -119,14 +120,15 @@
             h('div', { className: 'stack', style: { gap: 14 } }, tones.map(function (t) { return h(UI.Progress, { key: t[0], label: t[1], value: t[2], tone: t[0] === 'seafoam' ? undefined : t[0], showValue: true }); })),
             h('div', { className: 'stage center', style: { gap: 28 } }, [18, 64, 100].map(function (v) { return h('div', { key: v, className: 'stack', style: { justifyItems: 'center', gap: 8 } }, h(UI.Ring, { value: v, size: 84, label: 'Complétion ' + v + ' %' }), h('span', { className: 'label' }, v === 100 ? 'Terminé' : v + ' %')); }))))),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
-        ['Rail', '22 px, pilule creusée', 'Ombre interne en haut à gauche, lumière en bas à droite.'],
-        ['Course de la poignée', 'Bornée par 6 px de chaque côté', 'La poignée ne dépasse jamais du rail.'],
-        ['Jonc', '12 × 40 px, rayon 8', 'Évasé dans le remplissage par deux congés de 9 px.'],
-        ['Appui', 'Galet de 34 px, deux ondes, bulle de valeur', 'Les congés disparaissent. La bulle suit aussi le focus clavier.'],
-        ['Plage', 'Deux poignées', 'La poignée la plus proche du clic est choisie, elles ne se croisent pas.'],
+        ['Rail (curseur)', '20 px, givre + liseré blanc', 'Translucide ; pas de modèle creusé.'],
+        ['Course', 'Bornée par 10 px de chaque côté', 'Alignée sur le centre de la capsule.'],
+        ['Repos', 'Capsule 14 × 36 px, mint', 'Congés + blob soudent fill et poignée.'],
+        ['Pipette', 'thumb="pipette"', 'Bulbe mint à gauche de la capsule.'],
+        ['Appui', 'Bulge ~52 px + perle blanche 28 px', 'Anneaux blancs ; bulle de valeur.'],
+        ['Plage', 'Deux capsules', 'Sans bulge (lisibilité des deux poignées).'],
         ['Paliers', 'Jusqu’à 20 crans', 'Les crans atteints passent en vert.'],
         ['Clavier', '← → ↑ ↓, Début, Fin, PgUp, PgDn', 'role="slider", aria-valuenow, aria-valuetext.'],
-        ['Barre de progression', '10 · 18 · 26 px', 'Remplissage inscrit dans le rail, à 2 px du bord.'],
+        ['Barre de progression', '10 · 18 · 26 px, rail creusé', 'Remplissage à 2 px du bord ; distinct du curseur.'],
         ['Anneau', '72 px par défaut', 'SVG, trait de 3,6 unités, valeur au centre.']] }),
       h(D.Usage, { dos: ['Afficher la valeur courante dans l’en-tête et dans la bulle.', 'Utiliser les paliers quand les valeurs sont peu nombreuses.', 'Réserver le mode indéterminé aux durées inconnues.'], donts: ['Employer un curseur pour une valeur à saisir précisément : prévois un champ.', 'Mélanger plusieurs teintes de progression sur la même vue.', 'Animer la largeur d’une barre indéterminée : seul transform est animé.'] }));
   };

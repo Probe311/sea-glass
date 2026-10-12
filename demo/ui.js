@@ -96,7 +96,7 @@
     }
     function fromX(x) {
       var r = box.current.getBoundingClientRect();
-      var f = Math.max(0, Math.min(1, (x - r.left - 6) / Math.max(1, r.width - 12)));
+      var f = Math.max(0, Math.min(1, (x - r.left - 10) / Math.max(1, r.width - 20)));
       return snap(min + f * (max - min));
     }
     function down(e) {
@@ -139,11 +139,15 @@
         h('div', { className: 'sl-rail' }), h('div', { className: 'sl-fill' }), ticks,
         vals.map(function (v, i) {
           var name = range ? (p.label || p['aria-label'] || 'Plage') + (i === 0 ? ', minimum' : ', maximum') : undefined;
-          return h('div', { key: i, className: cls('sl-thumb', drag === i && 'act'), role: 'slider', tabIndex: p.disabled ? -1 : 0,
+          return h('div', { key: i, className: cls('sl-thumb', drag === i && 'act', p.thumb === 'pipette' && 'pipette'), role: 'slider', tabIndex: p.disabled ? -1 : 0,
             'aria-valuemin': range && i === 1 ? vals[0] : min, 'aria-valuemax': range && i === 0 ? vals[1] : max, 'aria-valuenow': v, 'aria-valuetext': v + unit,
             'aria-labelledby': !range && p.label ? id : undefined, 'aria-label': range ? name : (p.label ? undefined : p['aria-label']), 'aria-disabled': p.disabled || undefined,
             style: { '--v': frac(v) }, onKeyDown: function (e) { key(e, i); } },
-            h('i', { className: 'ring r2' }), h('i', { className: 'ring r1' }), h('i', { className: 'fl t' }), h('i', { className: 'fl b' }), h('i', { className: 'stem' }),
+            h('i', { className: 'blob', 'aria-hidden': true }),
+            h('i', { className: 'bulb', 'aria-hidden': true }),
+            h('i', { className: 'fl t', 'aria-hidden': true }), h('i', { className: 'fl b', 'aria-hidden': true }),
+            h('i', { className: 'stem', 'aria-hidden': true }),
+            h('i', { className: 'ring r2', 'aria-hidden': true }), h('i', { className: 'ring r1', 'aria-hidden': true }),
             h(Glass, { as: 'span', className: 'sl-bub', tint: 'seafoam', tintA: 0.85, frosted: false, refractive: false, alive: false, glow: false, rim: true, 'aria-hidden': true }, v + unit));
         })));
   };

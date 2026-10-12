@@ -70,55 +70,148 @@
 .cb.dis { opacity: 0.45; cursor: not-allowed; }
 .cb.dis input { cursor: not-allowed; }
 
-/* ---------- Curseur : rail creusé, remplissage de verre, jonc ou galet ---------- */
-.sl, .pg, .ring { --ft: #B6E5D6; --fb: #8CCDB7; --fg: 79, 168, 119; }
-:root[data-theme="dark"] .sl, :root[data-theme="dark"] .pg:not([class*="t-"]), :root[data-theme="dark"] .ring { --ft: #7DCEB4; --fb: #4DAE94; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sl, :root:not([data-theme="light"]) .pg:not([class*="t-"]), :root:not([data-theme="light"]) .ring { --ft: #7DCEB4; --fb: #4DAE94; } }
+/* ---------- Curseur : rail givré, matière continue, capsule → perle + bulge ---------- */
+.sl, .pg, .ring { --ft: #B6E5D6; --fb: #8CCDB7; --fg: 79, 168, 119; --sl-mint: #A8D5BA; --sl-mint-deep: #7EBF9A; }
+:root[data-theme="dark"] .sl, :root[data-theme="dark"] .pg:not([class*="t-"]), :root[data-theme="dark"] .ring { --ft: #7DCEB4; --fb: #4DAE94; --sl-mint: #7DCEB4; --sl-mint-deep: #4DAE94; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sl, :root:not([data-theme="light"]) .pg:not([class*="t-"]), :root:not([data-theme="light"]) .ring { --ft: #7DCEB4; --fb: #4DAE94; --sl-mint: #7DCEB4; --sl-mint-deep: #4DAE94; } }
 
-.sl { --a: 0; --b: 0.4; position: relative; height: 48px; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-.sl.marks { height: 66px; }
-.sl-rail { position: absolute; left: 0; right: 0; top: 13px; height: 22px; border-radius: 999px; background: var(--well); box-shadow: var(--carved); }
-.sl-fill { position: absolute; left: 0; top: 13px; height: 22px; width: calc(6px + (100% - 12px) * var(--b)); border-radius: 999px; overflow: hidden;
+.sl { --a: 0; --b: 0.4; --sl-h: 20px; position: relative; height: 52px; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.sl.marks { height: 70px; }
+
+/* Rail vide : givre translucide (pas creusé) */
+.sl-rail {
+  position: absolute; left: 0; right: 0; top: 16px; height: var(--sl-h); border-radius: 999px;
+  background: color-mix(in srgb, #fff 72%, var(--ground-2));
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(var(--shade), 0.06), 0 1px 2px rgba(var(--drop), 0.06);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
+}
+:root[data-theme="dark"] .sl-rail { background: color-mix(in srgb, #fff 10%, var(--ground-2)); border-color: rgba(255, 255, 255, 0.18); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .sl-rail { background: color-mix(in srgb, #fff 10%, var(--ground-2)); border-color: rgba(255, 255, 255, 0.18); } }
+
+/* Fill mint : s’arrête sous le pouce pour une matière continue */
+.sl-fill {
+  position: absolute; left: 0; top: 16px; height: var(--sl-h);
+  width: calc(10px + (100% - 20px) * var(--b));
+  border-radius: 999px; overflow: hidden; z-index: 1;
   background: linear-gradient(180deg, var(--ft), var(--fb));
-  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.85), inset 0 -2px 3px -1px rgba(10, 90, 70, 0.28), 0 6px 12px -6px rgba(var(--fg), 0.6); }
-.sl-fill::after { content: ""; position: absolute; left: 7px; right: 7px; top: 2px; height: 8px; border-radius: 999px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); }
-.sl.range .sl-fill { left: calc(6px + (100% - 12px) * var(--a)); width: calc((100% - 12px) * (var(--b) - var(--a))); }
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.75), inset 0 -2px 3px -1px rgba(10, 90, 70, 0.22);
+}
+.sl-fill::after { content: ""; position: absolute; left: 8px; right: 10px; top: 2px; height: 7px; border-radius: 999px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0)); }
+.sl.range .sl-fill { left: calc(10px + (100% - 20px) * var(--a)); width: calc((100% - 20px) * (var(--b) - var(--a))); }
 .sl:not(.drag) .sl-fill { transition: width 220ms var(--ease), left 220ms var(--ease); }
 
-.sl-thumb { position: absolute; top: 4px; left: calc(6px + (100% - 12px) * var(--v)); width: 12px; height: 40px; margin-left: -6px; border-radius: 8px; outline: none; z-index: 2; }
+.sl-thumb {
+  position: absolute; top: 0; left: calc(10px + (100% - 20px) * var(--v));
+  width: 44px; height: 52px; margin-left: -22px; outline: none; z-index: 3;
+}
 .sl:not(.drag) .sl-thumb { transition: left 220ms var(--ease); }
 .sl-thumb:focus-visible { outline: none !important; }
-.sl-thumb .stem { position: absolute; left: 50%; top: 50%; width: 12px; height: 40px; transform: translate(-50%, -50%); border-radius: 8px;
-  background: linear-gradient(90deg, var(--teal-hi), var(--teal));
-  box-shadow: inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.6), inset -1px -1px 0 rgba(255, 255, 255, 0.28), inset -3px -4px 5px -3px rgba(5, 55, 43, 0.4), 0 5px 9px -3px rgba(var(--drop), 0.5);
-  transition: width 240ms var(--spring), height 240ms var(--spring), border-radius 240ms var(--spring), background 200ms var(--ease), box-shadow 200ms var(--ease); }
-.sl-thumb .fl { position: absolute; right: 100%; width: 9px; height: 9px; transition: opacity 160ms var(--ease); pointer-events: none; }
-.sl-thumb .fl.t { top: 0; background: radial-gradient(circle at 0 0, transparent 8.4px, var(--ft) 9px); }
-.sl-thumb .fl.b { bottom: 0; background: radial-gradient(circle at 0 100%, transparent 8.4px, var(--fb) 9px); }
-.sl.range .fl { display: none; }
-.sl-thumb .ring { position: absolute; left: 50%; top: 50%; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.85); transform: translate(-50%, -50%) scale(0.6); opacity: 0; transition: transform 320ms var(--ease), opacity 220ms var(--ease); pointer-events: none; }
-.sl-thumb .ring.r1 { width: 58px; height: 58px; }
-.sl-thumb .ring.r2 { width: 84px; height: 84px; }
 
-/* Survol : halo doux autour du jonc */
-.sl:hover .stem, .sl.is-hover .stem { background: linear-gradient(90deg, var(--teal-hi), #5CA593);
-  box-shadow: inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.7), inset -1px -1px 0 rgba(255, 255, 255, 0.3), inset -3px -4px 5px -3px rgba(5, 55, 43, 0.4), 0 0 0 6px rgba(123, 191, 172, 0.22), 0 5px 9px -3px rgba(var(--drop), 0.5); }
-/* Appui : le jonc devient un galet de verre rond, entouré d'ondes */
-.sl.is-press .stem, .sl.drag .sl-thumb.act .stem { width: 34px; height: 34px; border-radius: 50%;
+/* Bulge organique : au repos = jointure fill/capsule ; à l’appui = gonflement du rail */
+.sl-thumb .blob {
+  position: absolute; left: 50%; top: 50%; width: var(--sl-h); height: var(--sl-h);
+  margin: calc(var(--sl-h) / -2) 0 0 calc(var(--sl-h) / -2); border-radius: 50%; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--ft) 80%, #fff), var(--fb) 70%);
+  transform: scale(1.05); opacity: 0.95;
+  transition: transform 320ms var(--spring), width 320ms var(--spring), height 320ms var(--spring), margin 320ms var(--spring), background 240ms var(--ease), opacity 200ms var(--ease), box-shadow 240ms var(--ease);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+/* Capsule mint (repos) — épouse le fill */
+.sl-thumb .stem {
+  position: absolute; left: 50%; top: 50%; width: 14px; height: 36px; transform: translate(-50%, -50%);
+  border-radius: 999px; z-index: 3; pointer-events: none;
+  background: linear-gradient(165deg, color-mix(in srgb, var(--sl-mint) 70%, #fff), var(--sl-mint-deep));
+  box-shadow:
+    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.65),
+    inset -1px -2px 2px rgba(5, 55, 43, 0.22),
+    0 2px 6px -2px rgba(var(--fg), 0.35);
+  transition: width 300ms var(--spring), height 300ms var(--spring), border-radius 300ms var(--spring), background 240ms var(--ease), box-shadow 240ms var(--ease), transform 300ms var(--spring);
+}
+/* Congés : soudure fill → capsule (désactivés en plage) */
+.sl-thumb .fl { position: absolute; z-index: 2; right: calc(50% + 2px); width: 11px; height: 11px; transition: opacity 160ms var(--ease); pointer-events: none; }
+.sl-thumb .fl.t { top: calc(50% - 18px); background: radial-gradient(circle at 0 0, transparent 9.5px, var(--ft) 10px); }
+.sl-thumb .fl.b { bottom: calc(50% - 18px); background: radial-gradient(circle at 0 100%, transparent 9.5px, var(--fb) 10px); }
+.sl.range .fl, .sl.range .blob { display: none; }
+
+/* Variante pipette : bulbe à gauche de la capsule */
+.sl-thumb.pipette .bulb {
+  position: absolute; z-index: 2; left: calc(50% - 28px); top: 50%; width: 22px; height: 22px;
+  margin-top: -11px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--sl-mint) 55%, #fff), var(--sl-mint-deep));
+  box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.7), 0 2px 5px -2px rgba(var(--fg), 0.3);
+  transition: opacity 200ms var(--ease), transform 280ms var(--spring);
+}
+.sl-thumb:not(.pipette) .bulb { display: none; }
+
+.sl-thumb .ring {
+  position: absolute; left: 50%; top: 50%; border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%) scale(0.55); opacity: 0;
+  transition: transform 320ms var(--ease), opacity 220ms var(--ease); pointer-events: none; z-index: 4;
+}
+.sl-thumb .ring.r1 { width: 44px; height: 44px; }
+.sl-thumb .ring.r2 { width: 64px; height: 64px; border-color: rgba(255, 255, 255, 0.45); }
+
+/* Survol */
+.sl:hover .sl-thumb .stem, .sl.is-hover .sl-thumb .stem {
+  transform: translate(-50%, -50%) scale(1.06);
+  box-shadow:
+    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.75),
+    inset -1px -2px 2px rgba(5, 55, 43, 0.22),
+    0 0 0 5px rgba(123, 191, 172, 0.2),
+    0 3px 8px -2px rgba(var(--fg), 0.4);
+}
+.sl:hover .sl-thumb .blob, .sl.is-hover .sl-thumb .blob { transform: scale(1.12); }
+
+/* Appui / drag : bulge organique + perle blanche verre */
+.sl.is-press .sl-thumb .blob,
+.sl.drag .sl-thumb.act .blob {
+  width: 52px; height: 52px; margin: -26px 0 0 -26px;
+  transform: scale(1);
   background:
-    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.95) 0 7%, rgba(255, 255, 255, 0) 16%),
-    radial-gradient(circle at 72% 80%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 42%),
-    radial-gradient(circle at 50% 50%, #F4FBF8 0, #D6ECE4 70%, #BADDD1 100%);
-  box-shadow: inset 0 0 0 5px rgba(123, 191, 172, 0.38), inset 1px 1px 1px #fff, inset -1px -2px 2px rgba(255, 255, 255, 0.85), 0 8px 14px -4px rgba(var(--drop), 0.5); }
-.sl.is-press .fl, .sl.drag .sl-thumb.act .fl { opacity: 0; }
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.55), transparent 42%),
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--ft) 55%, #fff) 0%, color-mix(in srgb, var(--fb) 40%, transparent) 72%, transparent 78%);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.55);
+  opacity: 1;
+}
+.sl.is-press .sl-thumb .stem,
+.sl.drag .sl-thumb.act .stem {
+  width: 28px; height: 28px; border-radius: 50%; transform: translate(-50%, -50%);
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 1) 0 8%, rgba(255, 255, 255, 0) 18%),
+    radial-gradient(circle at 70% 78%, rgba(255, 255, 255, 0.35), transparent 45%),
+    linear-gradient(165deg, #FFFFFF, #F0F4F2 55%, #E4EBE8);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+    inset 1px 2px 3px rgba(255, 255, 255, 0.9),
+    inset -1px -2px 3px rgba(var(--shade), 0.12),
+    0 4px 10px -3px rgba(var(--drop), 0.28);
+}
+.sl.is-press .fl, .sl.drag .sl-thumb.act .fl,
+.sl.is-press .bulb, .sl.drag .sl-thumb.act .bulb { opacity: 0; transform: scale(0.6); }
 .sl.is-press .ring, .sl.drag .sl-thumb.act .ring { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.sl.is-press .ring.r2, .sl.drag .sl-thumb.act .ring.r2 { opacity: 0.5; }
-/* Focus clavier : anneau net autour du jonc */
-.sl-thumb:focus-visible .stem, .sl.is-focus .sl-thumb .stem { outline: 2px solid var(--focus); outline-offset: 3px; }
+.sl.is-press .ring.r2, .sl.drag .sl-thumb.act .ring.r2 { opacity: 0.55; }
+
+/* Focus clavier : anneau blanc (langage verre) + filet focus a11y */
+.sl-thumb:focus-visible .stem, .sl.is-focus .sl-thumb .stem {
+  box-shadow:
+    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.65),
+    0 0 0 2px var(--ground),
+    0 0 0 4px var(--focus);
+}
+.sl-thumb:focus-visible .ring.r1, .sl.is-focus .sl-thumb .ring.r1 {
+  opacity: 1; transform: translate(-50%, -50%) scale(1); border-color: rgba(255, 255, 255, 0.95);
+}
 .sl.dis { opacity: 0.45; pointer-events: none; }
 
+@media (prefers-reduced-motion: reduce) {
+  .sl-thumb .stem, .sl-thumb .blob, .sl-thumb .ring, .sl-fill { transition: none !important; }
+  .sl:hover .sl-thumb .stem, .sl.is-hover .sl-thumb .stem { transform: translate(-50%, -50%); }
+}
+
 /* Bulle de valeur */
-.sl-bub { position: absolute !important; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px) scale(0.85); opacity: 0; pointer-events: none; padding: 5px 10px; --lg-r: 10px; font: 600 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--on-tint); white-space: nowrap; transition: opacity 160ms var(--ease), transform 260ms var(--spring); }
+.sl-bub { position: absolute !important; left: 50%; bottom: calc(100% - 2px); transform: translate(-50%, 6px) scale(0.85); opacity: 0; pointer-events: none; padding: 5px 10px; --lg-r: 10px; font: 600 12px/1 var(--font-mono); font-variant-numeric: tabular-nums; color: var(--on-tint); white-space: nowrap; z-index: 5; transition: opacity 160ms var(--ease), transform 260ms var(--spring); }
 .sl.is-press .sl-bub, .sl.drag .sl-thumb.act .sl-bub, .sl-thumb:focus-visible .sl-bub, .sl.is-focus .sl-bub { opacity: 1; transform: translate(-50%, 0) scale(1); }
 
 /* Paliers */
@@ -241,8 +334,7 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 /* Survol : scale 1.05 sur les petits éléments, plus discret sur les grandes surfaces */
 .tgl { transition: transform 260ms var(--spring); }
 .tgl:hover:not(.dis), .tgl.is-hover { transform: scale(1.05); }
-.sl:hover .sl-thumb .stem, .sl.is-hover .sl-thumb .stem { transform: translate(-50%, -50%) scale(1.06); }
-.sl.is-press .stem, .sl.drag .sl-thumb.act .stem { transform: translate(-50%, -50%); }
+/* hover/press stem transforms : définis dans le bloc .sl ci-dessus */
 .navbar .nb, .tabs-list .tab, .search .sbtn { transition: transform 220ms var(--spring), color 200ms var(--ease), background 200ms var(--ease); }
 .navbar .nb:hover, .tabs-list .tab:hover:not(:disabled), .search .sbtn:hover { transform: scale(1.05); }
 .card, .search, .navbar, .tabs-list, .snack, .tip, .mo, .toast { --hs: 1.02; --as: 0.99; }
