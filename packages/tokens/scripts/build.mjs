@@ -1,12 +1,17 @@
 /**
  * Style Dictionary v4 build: DTCG JSON → CSS custom properties, ESM, d.ts, JSON, Tailwind preset.
  */
+import { readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import StyleDictionary from 'style-dictionary';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
+// Explicit file list — `src/**/*.json` globs are flaky on Windows with SD 4.4.
+const sources = readdirSync(join(root, 'src'))
+  .filter((f) => f.endsWith('.json'))
+  .map((f) => join(root, 'src', f));
 
 const PEBBLE_KEYS = [
   'seafoam',
@@ -252,7 +257,8 @@ export default {
 });
 
 const sd = new StyleDictionary({
-  source: [join(root, 'src/**/*.json')],
+  source: sources,
+  usesDtcg: true,
   platforms: {
     css: {
       transformGroup: 'css',

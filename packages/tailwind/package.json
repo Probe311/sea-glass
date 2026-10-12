@@ -1,7 +1,7 @@
 {
   "name": "@seaglass/tailwind",
   "version": "0.1.0-alpha.0",
-  "description": "Sea Glass Tailwind preset and glass-* utilities (skeleton).",
+  "description": "Sea Glass Tailwind preset and glass-* utilities.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
   "type": "module",
@@ -13,7 +13,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./preset": "./dist/preset.js"
+    "./preset": "./dist/preset.js",
+    "./plugin": "./dist/plugin.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json"
@@ -28,6 +29,9 @@
   },
   "dependencies": {
     "@seaglass/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
   },
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,7 @@
 {
   "name": "@seaglass/react",
   "version": "0.1.0-alpha.0",
-  "description": "Sea Glass React adapters (skeleton — typed, controlled wrappers in a later release).",
+  "description": "Sea Glass React adapters — Glass, List, Dialog, Menu.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
   "type": "module",
@@ -14,19 +14,30 @@
       "import": "./dist/index.js"
     }
   },
+  "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "react": "^18 || ^19"
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
   },
   "peerDependenciesMeta": {
     "react": {
+      "optional": true
+    },
+    "react-dom": {
       "optional": true
     }
   },
   "dependencies": {
     "@seaglass/css": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "publishConfig": {
     "access": "public"

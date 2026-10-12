@@ -55,7 +55,7 @@ seaglass/
 - [ ] **P0 · L** Décision **framework-agnostique** : web components (`<sg-button>`, `<sg-slider>`, `<sg-tabs>`…) pour les composants à comportement ; CSS-only pour les statiques (card, badge, chip simple)
 - [ ] **P0 · L** `@seaglass/react` : réécriture TSX, `forwardRef`, contrôlé + non contrôlé (`value/defaultValue/onChange`) pour Chip, Checkbox, RadioGroup, Tabs, Field, Slider, Segmented ; `name` + input caché pour les formulaires
 - [ ] **P0 · S** Build : Vite library mode / tsup → ESM + CJS + `.d.ts`, CSS minifié, `exports` map, `sideEffects` pour le CSS, tree-shaking
-- [ ] **P1 · M** `@seaglass/tailwind` : preset (couleurs, rayons, durées depuis les tokens) + plugin utilitaires `glass`, `glass-frosted`, `glass-tint-{color}`, `glass-rim`, `glass-glow`, `glass-carved`, `glass-blur-{sm..xl}` (Tailwind v4 : `@theme` + `@utility`)
+- [x] **P1 · M** `@seaglass/tailwind` : preset (couleurs, rayons, durées depuis les tokens) + plugin utilitaires `glass`, `glass-frosted`, `glass-tint-{color}`, `glass-rim`, `glass-glow`, `glass-carved`, `glass-blur-{sm..xl}` (Tailwind v4 : `@theme` + `@utility` — v4 à brancher plus tard)
 - [ ] **P1 · S** Déclarer la cible navigateurs (browserslist : 2 dernières versions + Safari ≥ 16.4) et un tableau de support
 - [ ] **P1 · S** Supprimer la duplication `useSlide` / NavBar, `cls()` ; util `useIndicator` partagé
 - [ ] **P2 · L** Adaptateurs Vue 3 et Svelte (wrappers des web components)
@@ -85,9 +85,9 @@ seaglass/
 - [ ] **P1 · S** Form field (label, help, error, required) générique + Fieldset/Legend
 
 **Overlays**
-- [ ] **P0 · M** Dialog / Modal (focus trap, `inert`, Échap, retour du focus) — base du drawer
+- [x] **P0 · M** Dialog / Modal (focus trap, `inert`, Échap, retour du focus) — base du drawer (`inert` encore à brancher)
 - [ ] **P0 · M** Drawer / Sheet (bas, gauche, droite) — remplace le tiroir de doc (`sec-a.js:47-59`)
-- [ ] **P1 · M** Popover, Menu / Dropdown menu (APG menu button)
+- [x] **P1 · M** Popover, Menu / Dropdown menu (APG menu button) — Menu de base ; Popover plus tard
 - [ ] **P2 · S** Context menu, Command palette (⌘K)
 
 **Navigation**
@@ -96,8 +96,8 @@ seaglass/
 - [ ] **P2 · S** Stepper
 
 **Affichage de données**
-- [ ] **P1 · M** List / ListItem, Table (tri, sélection) sur verre
-- [ ] **P1 · S** Avatar / AvatarGroup, Divider, Kbd, Tag (supprimable)
+- [x] **P1 · M** List / ListItem, Table (tri, sélection) sur verre — List/ListItem ; Table plus tard
+- [x] **P1 · S** Avatar / AvatarGroup, Divider, Kbd, Tag (supprimable) — Divider ; Avatar/Kbd/Tag plus tard
 - [ ] **P1 · S** Accordion / Disclosure
 - [ ] **P2 · M** Carousel, Timeline, Tree view
 
@@ -139,7 +139,7 @@ seaglass/
 ## Phase 6 — Documentation (semaines 4–10)
 
 - [ ] **P0 · L** Site de doc (Astro + MDX, ou VitePress) qui **consomme les packages** — migrer le contenu actuel (Principes, Fondations, Composants, Qualité)
-- [ ] **P0 · M** Storybook 8 : une story par composant × variantes × états, contrôles, addon a11y, thèmes clair/sombre, décor « scène »
+- [x] **P0 · M** Storybook 8 : une story par composant × variantes × états, contrôles, addon a11y, thèmes clair/sombre, décor « scène » — socle `apps/storybook` (Glass/List/Dialog/Menu) ; étendre au reste
 - [ ] **P0 · S** Pages : Installation (CDN, npm, Tailwind), Démarrage rapide, Theming, Tokens (auto-générée), Accessibilité, Support navigateurs, Performance (budget de couches `backdrop-filter`)
 - [ ] **P1 · M** Docs d'API générées (react-docgen-typescript / Custom Elements Manifest)
 - [ ] **P1 · S** Playground (StackBlitz / CodeSandbox templates)
@@ -165,7 +165,7 @@ seaglass/
 - [x] **P0 · XS** `SECURITY.md` (signalement privé)
 - [x] **P0 · S** `CHANGELOG.md` géré par **Changesets** ; **SemVer** strict, `0.x` pendant la bêta, 1.0 après gate a11y + tests visuels
 - [x] **P0 · M** CI GitHub Actions : lint + typecheck + tests unitaires + build sur PR ; tests visuels Playwright ; déploiement preview de la doc (Vercel / Netlify / GitHub Pages) — lint/typecheck/test/build en place ; visuels et preview docs plus tard
-- [x] **P0 · S** Workflow release : Changesets action → PR de version → publication npm avec **provenance** (`npm publish --provenance`, OIDC trusted publishing) — workflow déclenché, **publish npm volontairement inactif**
+- [x] **P0 · S** Workflow release : Changesets action → PR de version → publication npm avec **provenance** (`npm publish --provenance`, OIDC trusted publishing) — version PR active ; `publish` commenté jusqu'à `NPM_TOKEN` + scope réservé (`pnpm release:dry`)
 - [ ] **P0 · S** Réserver le scope npm `@seaglass` (ou alternatif si pris) et le nom de l'org GitHub
 - [x] **P1 · S** `.github/ISSUE_TEMPLATE/` : bug (avec navigateur/OS/thème/reduced-*), feature, nouveau composant (RFC), question → Discussions ; `config.yml`
 - [x] **P1 · XS** `.github/PULL_REQUEST_TEMPLATE.md` : checklist (tests, story, a11y, changeset, captures)

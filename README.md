@@ -10,10 +10,6 @@
 
 > **Alpha.** APIs will move. Do not use in production yet. / **Alpha.** L’API va bouger. Pas pour la production.
 
-Inspired by the viral **Google Glassea** concept circulated by [@ryanvogel](https://x.com/ryanvogel) (and related posts). Sea Glass is an independent, open-source reading of that material — not a Google product, not affiliated with Google.
-
-Inspiration : le concept **Google Glassea** popularisé par [@ryanvogel](https://x.com/ryanvogel). Sea Glass en est une lecture indépendante et libre — ce n’est pas un produit Google.
-
 **Author / auteur :** [Julien Vaissier](https://www.julienvaissier.fr/) ([@Probe311](https://github.com/Probe311)). Licence **MIT**.
 
 ---
@@ -46,11 +42,11 @@ import { initSeaGlassLight } from '@seaglass/css/light';
 initSeaGlassLight(); // pointer rim; no-ops under prefers-reduced-motion
 ```
 
-React / web components / Tailwind adapters are **skeletons** in this release. Use the CSS classes. Tailwind v3:
+React ships `Glass`, `List`, `Dialog`, `Menu` (`@seaglass/react`). Storybook: `pnpm storybook`. Tailwind v3:
 
 ```js
-import seaglass from '@seaglass/tailwind/preset';
-export default { presets: [seaglass] };
+import { preset, plugin } from '@seaglass/tailwind';
+export default { presets: [preset], plugins: [plugin] };
 ```
 
 ### Material
@@ -68,8 +64,8 @@ Fonts: system stack (`Outfit` / `Roboto` if you load them). **No Google Sans** (
 | `@seaglass/tokens`   | DTCG → CSS / JS / JSON         |
 | `@seaglass/css`      | Material + prefixed components |
 | `@seaglass/elements` | Skeleton                       |
-| `@seaglass/react`    | Skeleton                       |
-| `@seaglass/tailwind` | Preset skeleton                |
+| `@seaglass/react`    | Glass, List, Dialog, Menu      |
+| `@seaglass/tailwind` | Preset + `glass-*` plugin      |
 
 Roadmap: [`ROADMAP.md`](ROADMAP.md). Prototype (visual reference only): [`legacy/`](legacy/).
 
@@ -102,7 +98,7 @@ pnpm add github:Probe311/sea-glass
 </div>
 ```
 
-Les adaptateurs React / web components / Tailwind sont des **squelettes**. Les classes CSS fonctionnent dès maintenant.
+React : `Glass`, `List`, `Dialog`, `Menu`. Storybook : `pnpm storybook`. Tailwind : preset + plugin `glass-*`.
 
 ### Matière
 
@@ -126,11 +122,13 @@ packages/css        @seaglass/css
 packages/elements   @seaglass/elements
 packages/react      @seaglass/react
 packages/tailwind   @seaglass/tailwind
+apps/storybook      Storybook 8 (Glass / List / Dialog / Menu)
 legacy/             original documentation site (reference)
 demo/               same prototype, deployed to GitHub Pages
 ```
 
 ```bash
 pnpm install
-pnpm check    # lint, typecheck, build, test
+pnpm check       # lint, typecheck, build, test
+pnpm storybook   # http://localhost:6006
 ```

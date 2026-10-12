@@ -19,13 +19,15 @@
     "node": ">=22"
   },
   "scripts": {
-    "build": "pnpm -r --if-present build",
+    "build": "pnpm -r --filter \"./packages/**\" --if-present build",
     "lint": "eslint . && stylelint \"packages/css/src/**/*.css\" && prettier --check .",
     "lint:fix": "eslint . --fix && stylelint \"packages/css/src/**/*.css\" --fix && prettier --write .",
     "format": "prettier --write .",
     "typecheck": "tsc --build --pretty false",
     "test": "vitest run",
     "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
+    "storybook": "pnpm --filter @seaglass/storybook storybook",
+    "build:storybook": "pnpm --filter @seaglass/storybook build:storybook",
     "release:dry": "node ./scripts/release-dry.mjs",
     "prepare": "husky || true"
   },
@@ -33,6 +35,13 @@
     "*.{js,mjs,cjs,ts,tsx}": "eslint --fix",
     "packages/css/src/**/*.css": "stylelint --fix",
     "*.{js,mjs,cjs,ts,tsx,css,md,json,yml,yaml}": "prettier --write"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "style-dictionary",
+      "@bundled-es-modules/glob"
+    ]
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
