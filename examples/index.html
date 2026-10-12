@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sea Glass — example</title>
+    <link rel="stylesheet" href="../packages/css/dist/seaglass.css" />
+    <link rel="stylesheet" href="../packages/css/dist/reset.css" />
+    <style>
+      main {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+        margin: 48px auto;
+        padding: 0 16px 96px;
+      }
+      h1 {
+        font: 700 32px/40px var(--sg-font-display);
+        margin-bottom: 8px;
+      }
+      p.lead {
+        color: var(--sg-color-ink-2);
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body class="sg-grain">
+    <main>
+      <h1>Sea Glass</h1>
+      <p class="lead">Frosted sea glass · 12 pebbles · pill / circle / squircle.</p>
+      <div class="sg-scene sg-stack">
+        <div class="sg-row">
+          <button class="sg-glass sg-button" data-frosted data-rim data-alive type="button">
+            Neutral
+          </button>
+          <button
+            class="sg-glass sg-button sg-button--primary"
+            data-frosted
+            data-rim
+            data-tint
+            data-glow
+            type="button"
+            style="--sg-glass-tint-rgb: var(--sg-color-seafoam-rgb)"
+          >
+            Primary
+          </button>
+          <button
+            class="sg-glass sg-button sg-button--circle sg-button--sm"
+            data-frosted
+            data-rim
+            type="button"
+            aria-label="Add"
+          >
+            +
+          </button>
+          <button
+            class="sg-glass sg-button sg-button--squircle"
+            data-frosted
+            data-rim
+            type="button"
+          >
+            Squircle
+          </button>
+        </div>
+        <label class="sg-switch">
+          <input type="checkbox" checked />
+          <span class="sg-glass sg-switch__track" data-rim></span>
+          <span class="sg-switch__knob"></span>
+        </label>
+        <div
+          class="sg-glass sg-card"
+          data-frosted
+          data-rim
+          data-tint
+          style="--sg-glass-tint-rgb: var(--sg-color-aqua-rgb); --sg-glass-tint-a: 0.35"
+        >
+          <strong>Aqua card</strong>
+          <span>Named blur, rim, tint — no Unsplash, no Google Sans.</span>
+        </div>
+        <div class="sg-progress sg-progress--lg" style="--sg-progress-f: 0.62">
+          <i class="sg-progress__bar"></i>
+        </div>
+      </div>
+    </main>
+    <script type="module">
+      import { initSeaGlassLight } from '../packages/css/dist/light.js';
+      initSeaGlassLight();
+    </script>
+  </body>
+</html>

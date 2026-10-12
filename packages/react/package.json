@@ -1,54 +1,39 @@
 {
-  "name": "@sea-glass/react",
-  "version": "0.1.0",
-  "description": "Sea Glass React components — glass material UI",
+  "name": "@seaglass/react",
+  "version": "0.1.0-alpha.0",
+  "description": "Sea Glass React adapters (skeleton — typed, controlled wrappers in a later release).",
   "license": "MIT",
+  "author": "Julien Vaissier (Probe311)",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "sideEffects": false,
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "build": "tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18"
+    "react": "^18 || ^19"
   },
-  "devDependencies": {
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "typescript": "^5.6.3"
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "dependencies": {
-    "@sea-glass/css": "0.1.0"
+    "@seaglass/css": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Probe311/sea-glass.git",
     "directory": "packages/react"
-  },
-  "keywords": [
-    "react",
-    "design-system",
-    "glassmorphism",
-    "sea-glass",
-    "ui"
-  ],
-  "publishConfig": {
-    "access": "public"
   }
 }

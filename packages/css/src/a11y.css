@@ -1,0 +1,92 @@
+@layer sg.a11y {
+  @media (prefers-reduced-motion: reduce) {
+    .sg-glass,
+    .sg-button,
+    .sg-chip,
+    .sg-switch,
+    .sg-switch__knob,
+    .sg-check__box,
+    .sg-progress__bar,
+    .sg-tabs__tab,
+    .sg-toast {
+      transition: none;
+      animation: none;
+    }
+
+    .sg-glass[data-alive]:hover,
+    .sg-glass[data-alive]:active,
+    .sg-button:hover,
+    .sg-button:active,
+    .sg-switch:hover {
+      transform: none;
+    }
+
+    .sg-progress--indeterminate .sg-progress__bar {
+      animation: none;
+      transform: translateX(90%);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .sg-glass {
+      --sg-glass-a: var(--sg-glass-alpha-reduce);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+
+    .sg-glass::after,
+    .sg-glass::before {
+      display: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .sg-glass {
+      outline: 1px solid var(--sg-color-outline);
+      --sg-glass-a: max(var(--sg-glass-a), 0.88);
+    }
+
+    .sg-button,
+    .sg-chip,
+    .sg-tabs__tab {
+      color: var(--sg-color-ink);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .sg-glass,
+    .sg-button,
+    .sg-chip,
+    .sg-progress,
+    .sg-card,
+    .sg-badge {
+      border: 1px solid CanvasText;
+      background: Canvas;
+      box-shadow: none;
+      forced-color-adjust: none;
+    }
+
+    .sg-button[aria-pressed='true'],
+    .sg-chip[aria-pressed='true'],
+    .sg-check:has(input:checked) .sg-check__box {
+      background: Highlight;
+      color: HighlightText;
+    }
+
+    .sg-button:focus-visible,
+    .sg-chip:focus-visible,
+    .sg-tabs__tab:focus-visible {
+      outline: 2px solid Highlight;
+    }
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .sg-glass {
+      --sg-glass-a: 0.92;
+    }
+
+    .sg-scene .sg-glass {
+      --sg-glass-a: 0.88;
+    }
+  }
+}

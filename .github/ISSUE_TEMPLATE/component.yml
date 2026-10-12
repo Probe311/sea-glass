@@ -1,0 +1,45 @@
+name: New component
+description: RFC for a component that is not in the library yet.
+title: '[component] '
+labels: ['component']
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: Select, Dialog, Drawer…
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: User need. Link to ROADMAP.md if it is already listed.
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: API sketch
+      description: CSS classes, `data-*`, web component tag, React props (controlled + uncontrolled).
+      value: |
+        - CSS:
+        - `<sg-…>`:
+        - React:
+    validations:
+      required: true
+  - type: checkboxes
+    id: a11y
+    attributes:
+      label: Accessibility plan
+      options:
+        - label: APG pattern identified
+        - label: Keyboard map
+        - label: Names, roles, states
+        - label: Reduced motion / transparency / forced-colors
+        - label: Contrast on glass (on-glass tokens or scrim)
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options: [P0, P1, P2]

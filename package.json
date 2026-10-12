@@ -1,23 +1,53 @@
 {
-  "name": "sea-glass-monorepo",
+  "name": "seaglass",
   "private": true,
-  "version": "0.1.0",
-  "description": "Sea Glass design system monorepo",
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "npm run build -w @sea-glass/react",
-    "typecheck": "npm run typecheck -w @sea-glass/react",
-    "demo": "npx --yes serve demo -p 4173",
-    "check": "node scripts/check.mjs"
-  },
-  "engines": {
-    "node": ">=18"
-  },
+  "version": "0.1.0-alpha.0",
+  "description": "Sea Glass — frosted sea-glass design system (translucency, frost, refraction, rim, glow, grain, tint).",
+  "license": "MIT",
+  "author": "Julien Vaissier (Probe311)",
+  "homepage": "https://github.com/Probe311/sea-glass#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Probe311/sea-glass.git"
   },
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/Probe311/sea-glass/issues"
+  },
+  "type": "module",
+  "packageManager": "pnpm@10.33.3",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "lint": "eslint . && stylelint \"packages/css/src/**/*.css\" && prettier --check .",
+    "lint:fix": "eslint . --fix && stylelint \"packages/css/src/**/*.css\" --fix && prettier --write .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --build --pretty false",
+    "test": "vitest run",
+    "ci": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
+    "release:dry": "node ./scripts/release-dry.mjs",
+    "prepare": "husky || true"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs,ts,tsx}": "eslint --fix",
+    "packages/css/src/**/*.css": "stylelint --fix",
+    "*.{js,mjs,cjs,ts,tsx,css,md,json,yml,yaml}": "prettier --write"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/js": "^9.36.0",
+    "eslint": "^9.36.0",
+    "globals": "^16.4.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.0",
+    "prettier": "^3.6.2",
+    "stylelint": "^16.25.0",
+    "stylelint-config-standard": "^39.0.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0",
+    "vitest": "^3.2.4"
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "button": {
+    "height-sm": { "$type": "dimension", "$value": "40px" },
+    "height-md": { "$type": "dimension", "$value": "48px" },
+    "height-lg": { "$type": "dimension", "$value": "56px" },
+    "pad-sm": { "$type": "dimension", "$value": "18px" },
+    "pad-md": { "$type": "dimension", "$value": "24px" },
+    "pad-lg": { "$type": "dimension", "$value": "32px" }
+  },
+  "chip": {
+    "height": { "$type": "dimension", "$value": "36px" }
+  },
+  "switch": {
+    "width": { "$type": "dimension", "$value": "68px" },
+    "height": { "$type": "dimension", "$value": "40px" },
+    "knob": { "$type": "dimension", "$value": "28px" }
+  },
+  "control": {
+    "size-sm": { "$type": "dimension", "$value": "24px" }
+  }
+}

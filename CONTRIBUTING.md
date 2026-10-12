@@ -1,40 +1,51 @@
 # Contributing to Sea Glass
 
-Thanks for helping grow a sea-glass UI material system for the web.
+Thanks for helping. Please follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## Quick start
+## Setup
+
+- Node 22 (see `.nvmrc`)
+- [pnpm](https://pnpm.io) 10 (`corepack enable`)
 
 ```bash
-npm install
-npm run demo   # open demo/index.html via a static server
-npm run build  # build packages
+pnpm install
+pnpm ci
 ```
 
-## Project layout
+The original prototype lives in `legacy/` and is not linted. New work belongs in `packages/`.
 
-| Path | Role |
-|------|------|
-| `demo/` | Living documentation (React UMD + CSS) |
-| `packages/css` | Design tokens + glass material styles |
-| `packages/react` | React components (`Glass`, controls) |
-| `ROADMAP.md` | Path to Material-class completeness |
+## Scripts
 
-## How to contribute
+| Command          | What                                       |
+| ---------------- | ------------------------------------------ |
+| `pnpm build`     | Style Dictionary + CSS bundle + `tsc`      |
+| `pnpm lint`      | ESLint, Stylelint (`sg-` prefix), Prettier |
+| `pnpm test`      | Vitest                                     |
+| `pnpm changeset` | Record a semver bump                       |
 
-1. Open an issue (bug / feature / docs) before large changes.
-2. Fork, branch from `main` (`feat/…`, `fix/…`, `docs/…`).
-3. Keep diffs small. Prefer extending `Glass` and tokens over one-off styles.
-4. Respect reduced motion, keyboard focus, and contrast (see demo → Qualité).
-5. Open a PR with a short *why* and screenshots when UI changes.
+## Conventions
 
-## Design rules (non-negotiable)
+1. **Tokens first.** Colours, space, time, type, elevation, blur live in `packages/tokens/src` (W3C DTCG). Do not add a magic number in CSS if a token exists — and if it should exist, add it there.
+2. **Prefix.** Public classes are `.sg-*` with BEM modifiers (`.sg-button--primary`). Stylelint enforces this.
+3. **No non-open assets.** No Google Sans, no hotlinked stock photos.
+4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate — see `docs/AUDIT.md`.
+5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged.
+6. **Changesets.** User-facing changes get `pnpm changeset`.
 
-- One light source: top-left.
-- Carved surfaces invert light.
-- Glow color always matches tint.
-- Frost / refraction only over a real scene (photo, gradient, video) — not flat fills.
-- Touch targets ≥ 40px (48px default).
+## Pull requests
 
-## Inspiration
+Use the PR template. One concern per PR. Link the issue.
 
-The visual direction is inspired by the “Google Glassea” / sea-glass-as-MD4 conversation on X ([concept](https://x.com/ryanvogel/status/2108935225334014402)). Sea Glass is an independent open-source implementation, not affiliated with Google.
+## Developer Certificate of Origin (DCO)
+
+This project uses the [DCO](https://developercertificate.org/) instead of a CLA. Sign off every commit:
+
+```bash
+git commit -s -m "feat(css): add sg-alert"
+```
+
+Your `Signed-off-by` certifies the patch is yours to submit under the MIT licence.
+
+## Good first issues
+
+Issues labelled `good first issue` are scoped for a first contribution (once labels are enabled on the GitHub repo).

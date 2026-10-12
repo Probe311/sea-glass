@@ -1,0 +1,51 @@
+/* Optional. Not imported by @seaglass/css — consumers opt in. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--sg-color-ground);
+  color: var(--sg-color-ink);
+  font: var(--sg-text-weight-regular) var(--sg-text-body-lg-size) / 1.55 var(--sg-font-body);
+  min-height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--sg-font-display);
+  text-wrap: balance;
+  letter-spacing: var(--sg-text-tracking-display);
+}
+
+code,
+pre {
+  font-family: var(--sg-font-mono);
+}
+
+:focus-visible {
+  outline: 2px solid var(--sg-color-focus);
+  outline-offset: 3px;
+}

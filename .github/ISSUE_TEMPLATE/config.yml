@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question / discussion
+    url: https://github.com/Probe311/sea-glass/discussions
+    about: Enable GitHub Discussions in repo settings, then ask here instead of opening an issue.
+  - name: Security report
+    url: https://github.com/Probe311/sea-glass/security/advisories/new
+    about: Privately report a vulnerability (see SECURITY.md).

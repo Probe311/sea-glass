@@ -1,0 +1,39 @@
+{
+  "name": "@seaglass/tokens",
+  "version": "0.1.0-alpha.0",
+  "description": "Sea Glass design tokens (W3C DTCG) — CSS custom properties, ESM, JSON.",
+  "license": "MIT",
+  "author": "Julien Vaissier (Probe311)",
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/tokens.d.ts",
+      "import": "./dist/tokens.js"
+    },
+    "./css": "./dist/tokens.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./tailwind": "./dist/tailwind-preset.js"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "test": "vitest run --config ../../vitest.config.ts"
+  },
+  "devDependencies": {
+    "style-dictionary": "^4.4.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Probe311/sea-glass.git",
+    "directory": "packages/tokens"
+  }
+}

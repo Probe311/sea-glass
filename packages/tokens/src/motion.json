@@ -1,0 +1,24 @@
+{
+  "duration": {
+    "fast": { "$type": "duration", "$value": "120ms", "$description": "Press, check, sheen" },
+    "base": { "$type": "duration", "$value": "200ms", "$description": "Hover, shadow, halo" },
+    "slow": { "$type": "duration", "$value": "380ms", "$description": "Switch, tabs, slider" }
+  },
+  "ease": {
+    "standard": {
+      "$type": "cubicBezier",
+      "$value": [0.2, 0, 0, 1]
+    },
+    "spring": {
+      "$type": "cubicBezier",
+      "$value": [0.34, 1.4, 0.5, 1],
+      "$description": "Light overshoot — neutralize under prefers-reduced-motion"
+    }
+  },
+  "motion": {
+    "hover-scale": { "$type": "number", "$value": 1.05 },
+    "press-scale": { "$type": "number", "$value": 0.97 },
+    "surface-hover-scale": { "$type": "number", "$value": 1.02 },
+    "surface-press-scale": { "$type": "number", "$value": 0.99 }
+  }
+}

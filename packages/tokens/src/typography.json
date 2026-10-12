@@ -1,0 +1,43 @@
+{
+  "font": {
+    "display": {
+      "$type": "fontFamily",
+      "$value": ["Outfit", "ui-rounded", "system-ui", "sans-serif"],
+      "$description": "Titles and controls. Google Sans removed (non-open licence). Self-host Outfit if you want the webfont."
+    },
+    "body": {
+      "$type": "fontFamily",
+      "$value": ["Roboto", "system-ui", "-apple-system", "sans-serif"]
+    },
+    "mono": {
+      "$type": "fontFamily",
+      "$value": ["ui-monospace", "Roboto Mono", "Menlo", "monospace"]
+    }
+  },
+  "text": {
+    "display-lg-size": { "$type": "dimension", "$value": "32px" },
+    "display-lg-line": { "$type": "dimension", "$value": "40px" },
+    "display-md-size": { "$type": "dimension", "$value": "28px" },
+    "display-md-line": { "$type": "dimension", "$value": "36px" },
+    "headline-lg-size": { "$type": "dimension", "$value": "24px" },
+    "headline-lg-line": { "$type": "dimension", "$value": "32px" },
+    "headline-sm-size": { "$type": "dimension", "$value": "20px" },
+    "headline-sm-line": { "$type": "dimension", "$value": "28px" },
+    "title-lg-size": { "$type": "dimension", "$value": "22px" },
+    "title-lg-line": { "$type": "dimension", "$value": "28px" },
+    "title-md-size": { "$type": "dimension", "$value": "16px" },
+    "title-md-line": { "$type": "dimension", "$value": "24px" },
+    "body-lg-size": { "$type": "dimension", "$value": "16px" },
+    "body-lg-line": { "$type": "dimension", "$value": "24px" },
+    "body-md-size": { "$type": "dimension", "$value": "14px" },
+    "body-md-line": { "$type": "dimension", "$value": "20px" },
+    "label-md-size": { "$type": "dimension", "$value": "12px" },
+    "label-md-line": { "$type": "dimension", "$value": "16px" },
+    "weight-regular": { "$type": "fontWeight", "$value": 400 },
+    "weight-medium": { "$type": "fontWeight", "$value": 500 },
+    "weight-semibold": { "$type": "fontWeight", "$value": 600 },
+    "weight-bold": { "$type": "fontWeight", "$value": 700 },
+    "tracking-display": { "$type": "dimension", "$value": "-0.012em" },
+    "tracking-label": { "$type": "dimension", "$value": "0.04em" }
+  }
+}

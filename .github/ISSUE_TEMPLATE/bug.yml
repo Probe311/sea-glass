@@ -1,0 +1,61 @@
+name: Bug
+description: Something does not look or behave as documented.
+title: '[bug] '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping polish Sea Glass. Search existing issues first.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      placeholder: Expected vs actual.
+    validations:
+      required: true
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - '@seaglass/css'
+        - '@seaglass/tokens'
+        - '@seaglass/react'
+        - '@seaglass/elements'
+        - '@seaglass/tailwind'
+        - docs / other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      placeholder: 0.1.0-alpha.0
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / OS
+      placeholder: Safari 18 / macOS, Chromium 129 / Windows…
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Theme
+      options: [light, dark, system]
+  - type: checkboxes
+    id: prefs
+    attributes:
+      label: User preferences active?
+      options:
+        - label: prefers-reduced-motion
+        - label: prefers-reduced-transparency
+        - label: prefers-contrast more
+        - label: forced-colors
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      placeholder: Minimal HTML/CSS, CodePen, or steps.
+    validations:
+      required: true

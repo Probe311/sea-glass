@@ -1,32 +1,38 @@
 {
-  "name": "@sea-glass/css",
-  "version": "0.1.0",
-  "description": "Sea Glass design tokens and glass material styles",
+  "name": "@seaglass/css",
+  "version": "0.1.0-alpha.0",
+  "description": "Sea Glass CSS — frosted material (.sg-glass) and prefixed components.",
   "license": "MIT",
+  "author": "Julien Vaissier (Probe311)",
   "type": "module",
-  "main": "./sea-glass.css",
-  "exports": {
-    ".": "./sea-glass.css",
-    "./glass.css": "./glass.css",
-    "./ui.css": "./ui.css",
-    "./sea-glass.css": "./sea-glass.css"
-  },
-  "files": [
-    "*.css"
+  "sideEffects": [
+    "**/*.css"
   ],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": "./dist/seaglass.css",
+    "./seaglass.css": "./dist/seaglass.css",
+    "./reset.css": "./dist/reset.css",
+    "./light": {
+      "types": "./dist/light.d.ts",
+      "import": "./dist/light.js"
+    }
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@seaglass/tokens": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Probe311/sea-glass.git",
     "directory": "packages/css"
-  },
-  "keywords": [
-    "css",
-    "design-system",
-    "glassmorphism",
-    "sea-glass",
-    "tokens"
-  ],
-  "publishConfig": {
-    "access": "public"
   }
 }

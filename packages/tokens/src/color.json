@@ -1,0 +1,250 @@
+{
+  "color": {
+    "seafoam": {
+      "$type": "color",
+      "$value": "#B9E3D6",
+      "$description": "Pebble · Seafoam"
+    },
+    "kelly": {
+      "$type": "color",
+      "$value": "#4FA877",
+      "$description": "Pebble · Kelly"
+    },
+    "citron": {
+      "$type": "color",
+      "$value": "#D8DB9C",
+      "$description": "Pebble · Citron"
+    },
+    "aqua": {
+      "$type": "color",
+      "$value": "#5CC4EC",
+      "$description": "Pebble · Aqua"
+    },
+    "cornflower": {
+      "$type": "color",
+      "$value": "#C3D3F0",
+      "$description": "Pebble · Cornflower"
+    },
+    "cobalt": {
+      "$type": "color",
+      "$value": "#6B8CE3",
+      "$description": "Pebble · Cobalt"
+    },
+    "lavender": {
+      "$type": "color",
+      "$value": "#E4DAE8",
+      "$description": "Pebble · Lavender"
+    },
+    "ruby": {
+      "$type": "color",
+      "$value": "#E07662",
+      "$description": "Pebble · Ruby"
+    },
+    "amber": {
+      "$type": "color",
+      "$value": "#F7C96B",
+      "$description": "Pebble · Amber"
+    },
+    "rootbeer": {
+      "$type": "color",
+      "$value": "#B5866A",
+      "$description": "Pebble · Root beer"
+    },
+    "clear": {
+      "$type": "color",
+      "$value": "#F7F9F7",
+      "$description": "Pebble · Clear"
+    },
+    "mist": {
+      "$type": "color",
+      "$value": "#CDD5D4",
+      "$description": "Pebble · Mist"
+    },
+    "seafoam-ink": {
+      "$type": "color",
+      "$value": "#1D4D41",
+      "$description": "On-pebble ink · Seafoam",
+      "$extensions": { "seaglass": { "dark": "#CFF0E5" } }
+    },
+    "kelly-ink": {
+      "$type": "color",
+      "$value": "#0E2A1D",
+      "$description": "On-pebble ink · Kelly",
+      "$extensions": { "seaglass": { "dark": "#BDEBD0" } }
+    },
+    "citron-ink": {
+      "$type": "color",
+      "$value": "#4A4E0F",
+      "$description": "On-pebble ink · Citron",
+      "$extensions": { "seaglass": { "dark": "#EEF2B8" } }
+    },
+    "aqua-ink": {
+      "$type": "color",
+      "$value": "#05455E",
+      "$description": "On-pebble ink · Aqua",
+      "$extensions": { "seaglass": { "dark": "#C6EDFB" } }
+    },
+    "cornflower-ink": {
+      "$type": "color",
+      "$value": "#243C73",
+      "$description": "On-pebble ink · Cornflower",
+      "$extensions": { "seaglass": { "dark": "#D4E0F7" } }
+    },
+    "cobalt-ink": {
+      "$type": "color",
+      "$value": "#14295F",
+      "$description": "On-pebble ink · Cobalt",
+      "$extensions": { "seaglass": { "dark": "#D5E0FA" } }
+    },
+    "lavender-ink": {
+      "$type": "color",
+      "$value": "#4B3A59",
+      "$description": "On-pebble ink · Lavender",
+      "$extensions": { "seaglass": { "dark": "#EDE4F4" } }
+    },
+    "ruby-ink": {
+      "$type": "color",
+      "$value": "#5E1E12",
+      "$description": "On-pebble ink · Ruby",
+      "$extensions": { "seaglass": { "dark": "#FBD3CB" } }
+    },
+    "amber-ink": {
+      "$type": "color",
+      "$value": "#5A3D03",
+      "$description": "On-pebble ink · Amber",
+      "$extensions": { "seaglass": { "dark": "#FBE3A8" } }
+    },
+    "rootbeer-ink": {
+      "$type": "color",
+      "$value": "#4A2E1C",
+      "$description": "On-pebble ink · Root beer",
+      "$extensions": { "seaglass": { "dark": "#EDD4C4" } }
+    },
+    "clear-ink": {
+      "$type": "color",
+      "$value": "#2B3735",
+      "$description": "On-pebble ink · Clear",
+      "$extensions": { "seaglass": { "dark": "#E4EEEC" } }
+    },
+    "mist-ink": {
+      "$type": "color",
+      "$value": "#36413F",
+      "$description": "On-pebble ink · Mist",
+      "$extensions": { "seaglass": { "dark": "#E2EBEA" } }
+    },
+    "ground": {
+      "$type": "color",
+      "$value": "#F6FAF7",
+      "$description": "Page ground (not the stale #F4F3EE from the old doc export)",
+      "$extensions": { "seaglass": { "dark": "#0F1513" } }
+    },
+    "ground-2": {
+      "$type": "color",
+      "$value": "#EDF3F0",
+      "$extensions": { "seaglass": { "dark": "#161D1B" } }
+    },
+    "ink": {
+      "$type": "color",
+      "$value": "#17262A",
+      "$extensions": { "seaglass": { "dark": "#E8F1EE" } }
+    },
+    "ink-2": {
+      "$type": "color",
+      "$value": "#3E4F52",
+      "$extensions": { "seaglass": { "dark": "#B5C5C1" } }
+    },
+    "ink-3": {
+      "$type": "color",
+      "$value": "#566568",
+      "$extensions": { "seaglass": { "dark": "#93A5A1" } }
+    },
+    "line": {
+      "$type": "color",
+      "$value": "#17262A1F",
+      "$description": "Hairline / outline at 12% of ink",
+      "$extensions": { "seaglass": { "dark": "#E8F1EE24" } }
+    },
+    "focus": {
+      "$type": "color",
+      "$value": "#2F55C4",
+      "$extensions": { "seaglass": { "dark": "#9DB8FF" } }
+    },
+    "drop": {
+      "$type": "color",
+      "$value": "#18403A",
+      "$description": "Cast shadow tint (rgb 24 64 58)",
+      "$extensions": { "seaglass": { "dark": "#000000" } }
+    },
+    "shade": {
+      "$type": "color",
+      "$value": "#225C4E",
+      "$description": "Inner shadow tint (rgb 34 92 78)",
+      "$extensions": { "seaglass": { "dark": "#001410" } }
+    },
+    "on-tint": {
+      "$type": "color",
+      "$value": "#14463A",
+      "$extensions": { "seaglass": { "dark": "#E8F7F1" } }
+    },
+    "teal": {
+      "$type": "color",
+      "$value": "#4F9482",
+      "$extensions": { "seaglass": { "dark": "#7BBFAC" } }
+    },
+    "teal-hi": {
+      "$type": "color",
+      "$value": "#7BBFAC",
+      "$extensions": { "seaglass": { "dark": "#A8DCCB" } }
+    },
+    "teal-deep": {
+      "$type": "color",
+      "$value": "#256B5A",
+      "$description": "Checked control fill (was #256B5A / #308069)"
+    },
+    "teal-deep-hi": {
+      "$type": "color",
+      "$value": "#308069"
+    },
+    "knob-hi": {
+      "$type": "color",
+      "$value": "#D3D9D8"
+    },
+    "knob-lo": {
+      "$type": "color",
+      "$value": "#AFB8B6"
+    },
+    "fill-hi": {
+      "$type": "color",
+      "$value": "#B6E5D6",
+      "$extensions": { "seaglass": { "dark": "#7DCEB4" } }
+    },
+    "fill-lo": {
+      "$type": "color",
+      "$value": "#8CCDB7",
+      "$extensions": { "seaglass": { "dark": "#4DAE94" } }
+    },
+    "danger-strong": {
+      "$type": "color",
+      "$value": "#A4402F",
+      "$description": "Error text on light ground (was hardcoded #A4402F)"
+    },
+    "ok-bg": {
+      "$type": "color",
+      "$value": "#D3EBDD"
+    },
+    "ok-fg": {
+      "$type": "color",
+      "$value": "#12482A"
+    },
+    "ko-bg": {
+      "$type": "color",
+      "$value": "#F9DAD4"
+    },
+    "on-glass": {
+      "$type": "color",
+      "$value": "#17262A",
+      "$description": "Text sitting on glass over a photograph — pair with the opacity floor",
+      "$extensions": { "seaglass": { "dark": "#E8F1EE" } }
+    }
+  }
+}

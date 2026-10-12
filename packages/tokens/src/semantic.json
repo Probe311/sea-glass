@@ -1,0 +1,54 @@
+{
+  "color": {
+    "primary": {
+      "$type": "color",
+      "$value": "{color.kelly}",
+      "$description": "Action / primary controls"
+    },
+    "on-primary": {
+      "$type": "color",
+      "$value": "{color.kelly-ink}"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "{color.kelly}"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "{color.amber}"
+    },
+    "danger": {
+      "$type": "color",
+      "$value": "{color.ruby}"
+    },
+    "info": {
+      "$type": "color",
+      "$value": "{color.aqua}"
+    },
+    "surface": {
+      "$type": "color",
+      "$value": "{color.ground}"
+    },
+    "on-surface": {
+      "$type": "color",
+      "$value": "{color.ink}"
+    },
+    "on-surface-variant": {
+      "$type": "color",
+      "$value": "{color.ink-2}"
+    },
+    "on-surface-muted": {
+      "$type": "color",
+      "$value": "{color.ink-3}"
+    },
+    "outline": {
+      "$type": "color",
+      "$value": "{color.line}"
+    },
+    "accent": {
+      "$type": "color",
+      "$value": "{color.seafoam}",
+      "$description": "Tonal / selected-chip wash"
+    }
+  }
+}

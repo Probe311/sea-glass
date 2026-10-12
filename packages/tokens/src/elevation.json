@@ -1,0 +1,39 @@
+{
+  "elevation": {
+    "0": { "$type": "shadow", "$value": "none" },
+    "1": {
+      "$type": "shadow",
+      "$value": "0 1px 2px rgb(var(--sg-color-drop-rgb) / 0.1)"
+    },
+    "2": {
+      "$type": "shadow",
+      "$value": "0 4px 10px -4px rgb(var(--sg-color-drop-rgb) / 0.22)"
+    },
+    "3": {
+      "$type": "shadow",
+      "$value": "0 1px 2px rgb(var(--sg-color-drop-rgb) / 0.1), 0 10px 22px -14px rgb(var(--sg-color-drop-rgb) / 0.4)"
+    },
+    "4": {
+      "$type": "shadow",
+      "$value": "0 1px 2px rgb(var(--sg-color-drop-rgb) / 0.1), 0 12px 26px -12px rgb(var(--sg-glass-glow-rgb) / 0.6)"
+    },
+    "5": {
+      "$type": "shadow",
+      "$value": "0 16px 40px -16px rgb(var(--sg-color-drop-rgb) / 0.45)"
+    }
+  },
+  "z": {
+    "dropdown": { "$type": "number", "$value": 40 },
+    "sticky": { "$type": "number", "$value": 60 },
+    "overlay": { "$type": "number", "$value": 70 },
+    "modal": { "$type": "number", "$value": 80 },
+    "toast": { "$type": "number", "$value": 90 },
+    "tooltip": { "$type": "number", "$value": 100 }
+  },
+  "breakpoint": {
+    "sm": { "$type": "dimension", "$value": "600px" },
+    "md": { "$type": "dimension", "$value": "905px" },
+    "lg": { "$type": "dimension", "$value": "1240px" },
+    "xl": { "$type": "dimension", "$value": "1440px" }
+  }
+}

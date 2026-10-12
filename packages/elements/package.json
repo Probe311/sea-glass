@@ -1,0 +1,31 @@
+{
+  "name": "@seaglass/elements",
+  "version": "0.1.0-alpha.0",
+  "description": "Sea Glass web components (skeleton — Custom Elements / Lit in a later release).",
+  "license": "MIT",
+  "author": "Julien Vaissier (Probe311)",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@seaglass/css": "workspace:*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Probe311/sea-glass.git",
+    "directory": "packages/elements"
+  }
+}

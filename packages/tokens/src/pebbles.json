@@ -1,0 +1,16 @@
+{
+  "pebble": {
+    "seafoam": { "$type": "other", "$value": { "name": "Seafoam", "seed": 11 } },
+    "kelly": { "$type": "other", "$value": { "name": "Kelly", "seed": 23 } },
+    "citron": { "$type": "other", "$value": { "name": "Citron", "seed": 37 } },
+    "aqua": { "$type": "other", "$value": { "name": "Aqua", "seed": 41 } },
+    "cornflower": { "$type": "other", "$value": { "name": "Cornflower", "seed": 59 } },
+    "cobalt": { "$type": "other", "$value": { "name": "Cobalt", "seed": 67 } },
+    "lavender": { "$type": "other", "$value": { "name": "Lavender", "seed": 73 } },
+    "ruby": { "$type": "other", "$value": { "name": "Ruby", "seed": 89 } },
+    "amber": { "$type": "other", "$value": { "name": "Amber", "seed": 97 } },
+    "rootbeer": { "$type": "other", "$value": { "name": "Root beer", "seed": 103 } },
+    "clear": { "$type": "other", "$value": { "name": "Clear", "seed": 113 } },
+    "mist": { "$type": "other", "$value": { "name": "Mist", "seed": 127 } }
+  }
+}

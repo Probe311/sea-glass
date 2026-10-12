@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+legacy
+pnpm-lock.yaml
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+docs/AUDIT.md
+LICENSE
+ROADMAP.md

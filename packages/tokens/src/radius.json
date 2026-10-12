@@ -1,0 +1,19 @@
+{
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "8px",
+      "$description": "Small controls (checkbox). Documented as xs in the prototype."
+    },
+    "md": { "$type": "dimension", "$value": "12px" },
+    "lg": { "$type": "dimension", "$value": "16px" },
+    "xl": { "$type": "dimension", "$value": "28px" },
+    "pill": { "$type": "dimension", "$value": "999px" },
+    "circle": { "$type": "dimension", "$value": "50%" },
+    "squircle": {
+      "$type": "dimension",
+      "$value": "28px",
+      "$description": "Named squircle. Prefer corner-shape: squircle when supported."
+    }
+  }
+}

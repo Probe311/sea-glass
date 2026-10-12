@@ -1,0 +1,204 @@
+/* Sea Glass material — one light from the top left.
+   Frosted, refractive, alive, rim, tint, glow. Grain is --sg-glass-sparkle. */
+@layer sg.material {
+  @property --sg-mx {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 28%;
+  }
+
+  @property --sg-my {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
+
+  @property --sg-ang {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 140deg;
+  }
+
+  .sg-glass {
+    --sg-glass-radius: var(--sg-radius-xl);
+    --sg-glass-blur: var(--sg-blur-lg);
+    --sg-glass-tint-rgb: 255 255 255;
+    --sg-glass-tint-a: 0.5;
+    --sg-glass-glow-rgb: var(--sg-color-kelly-rgb);
+    --sg-glass-a: var(--sg-glass-alpha-ground);
+    --sg-glass-cs: color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 40%, #fff);
+    --sg-shadow-in:
+      inset 1.5px 1.5px 1.5px -1px rgb(255 255 255 / var(--sg-glass-lit)),
+      inset -1.5px -1.5px 1.5px -1px
+        color-mix(in srgb, var(--sg-glass-cs) var(--sg-glass-caustic-edge), transparent),
+      inset -6px -8px 12px -9px
+        color-mix(in srgb, var(--sg-glass-cs) var(--sg-glass-caustic), transparent),
+      inset 0 -12px 18px -14px rgb(var(--sg-color-shade-rgb) / 0.2);
+    --sg-shadow-out: var(--sg-elevation-3);
+    position: relative;
+    isolation: isolate;
+    border-radius: var(--sg-glass-radius);
+    color: var(--sg-color-ink);
+    background: linear-gradient(
+      160deg,
+      rgb(255 255 255 / calc(var(--sg-glass-a) + 0.16)),
+      rgb(255 255 255 / var(--sg-glass-a)) 62%,
+      rgb(255 255 255 / calc(var(--sg-glass-a) - 0.06))
+    );
+    box-shadow: var(--sg-shadow-in), var(--sg-shadow-out);
+    transition:
+      transform var(--sg-duration-base) var(--sg-ease-spring),
+      box-shadow var(--sg-duration-base) var(--sg-ease-standard),
+      background var(--sg-duration-base) var(--sg-ease-standard),
+      --sg-mx 140ms ease-out,
+      --sg-my 140ms ease-out,
+      --sg-ang 180ms ease-out;
+  }
+
+  .sg-scene .sg-glass {
+    --sg-glass-a: var(--sg-glass-alpha-scene);
+  }
+
+  .sg-scene .sg-glass[data-text] {
+    --sg-glass-a: var(--sg-glass-alpha-text);
+  }
+
+  /* Frost only above a scene — a flat ground does not show blur and it is expensive. */
+  .sg-scene .sg-glass[data-frosted],
+  .sg-glass.sg-glass--over[data-frosted] {
+    -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.6) brightness(1.03);
+    backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.6) brightness(1.03);
+  }
+
+  /* Refraction is Chromium-only and opt-in (html.sg-refract + data-refractive). */
+  .sg-refract .sg-scene .sg-glass[data-refractive],
+  .sg-refract .sg-glass.sg-glass--over[data-refractive] {
+    -webkit-backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.5)) url('#sg-refract') saturate(1.6)
+      brightness(1.04);
+    backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.5)) url('#sg-refract') saturate(1.6)
+      brightness(1.04);
+  }
+
+  .sg-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    background: linear-gradient(
+      var(--sg-ang),
+      rgb(255 255 255 / var(--sg-glass-lit)),
+      rgb(255 255 255 / 0) 30%,
+      rgb(255 255 255 / 0) 62%,
+      color-mix(in srgb, var(--sg-glass-cs) 85%, transparent)
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+
+  .sg-glass[data-rim]::before {
+    opacity: 1;
+  }
+
+  .sg-glass:not([data-rim]) {
+    --sg-shadow-in: inset 0 0 0 0 transparent;
+    --sg-shadow-out: var(--sg-elevation-3);
+  }
+
+  .sg-glass[data-tint] {
+    background:
+      radial-gradient(110% 90% at 14% 0%, rgb(255 255 255 / 0.38), transparent 58%),
+      linear-gradient(
+        165deg,
+        rgb(var(--sg-glass-tint-rgb) / calc(var(--sg-glass-tint-a) + 0.1)),
+        rgb(var(--sg-glass-tint-rgb) / var(--sg-glass-tint-a)) 70%,
+        rgb(var(--sg-glass-tint-rgb) / calc(var(--sg-glass-tint-a) + 0.06))
+      );
+  }
+
+  .sg-glass[data-glow] {
+    --sg-shadow-out: var(--sg-elevation-4);
+  }
+
+  .sg-glass::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    background:
+      radial-gradient(
+        75% 55% at var(--sg-mx) var(--sg-my),
+        var(--sg-glass-spec),
+        rgb(255 255 255 / 0) 62%
+      ),
+      linear-gradient(180deg, var(--sg-glass-sheen), rgb(255 255 255 / 0) 42%);
+    mix-blend-mode: soft-light;
+    opacity: 0.85;
+    transition: opacity var(--sg-duration-base) var(--sg-ease-standard);
+  }
+
+  .sg-glass[data-alive]:hover::after {
+    opacity: 1;
+  }
+
+  .sg-glass[data-alive]:hover {
+    transform: scale(var(--sg-motion-hover-scale));
+  }
+
+  .sg-glass[data-alive]:active {
+    transform: scale(var(--sg-motion-press-scale));
+  }
+
+  .sg-glass.sg-glass--carved {
+    --sg-shadow-in:
+      inset 1.5px 2px 3px -1px var(--sg-glass-carved-lo),
+      inset -1px -1.5px 1px -1px var(--sg-glass-carved-hi);
+    --sg-shadow-out: 0 1px 0 var(--sg-glass-carved-hi);
+  }
+
+  .sg-glass.sg-glass--carved:not([data-tint]) {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / var(--sg-glass-well-a)),
+      rgb(255 255 255 / var(--sg-glass-well-b))
+    );
+  }
+
+  .sg-glass.sg-glass--carved::after {
+    display: none;
+  }
+
+  .sg-glass > :where(*) {
+    position: relative;
+    z-index: 4;
+  }
+
+  .sg-scene {
+    position: relative;
+    padding: var(--sg-space-7);
+    border-radius: var(--sg-radius-lg);
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a6f76 0%, #4fa877 42%, #5cc4ec 70%, #d8db9c 100%);
+  }
+
+  [data-sg-theme='dark'] .sg-scene {
+    background: linear-gradient(160deg, #0e3a3a, #143028 55%, #1d4d41);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-sg-theme='light']) .sg-scene {
+      background: linear-gradient(160deg, #0e3a3a, #143028 55%, #1d4d41);
+    }
+  }
+}

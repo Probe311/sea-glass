@@ -1,0 +1,33 @@
+name: Feature
+description: Propose an enhancement that is not a new component.
+title: '[feat] '
+labels: ['enhancement']
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is painful or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: API sketch, tokens, or CSS. Keep it small.
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Roadmap phase
+      options:
+        - '1 Tokens'
+        - '2 Architecture'
+        - '3 Components'
+        - '4 Accessibility'
+        - '5 Theming'
+        - '6 Documentation'
+        - '7 Tests'
+        - '8 Open source'
+        - '9 Glassea fidelity'
