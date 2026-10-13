@@ -21,10 +21,15 @@
   var store = { v: 0, subs: [] };
   var THEME_KEY = 'sg-theme';
   function bump() { store.v++; store.subs.forEach(function (f) { f(); }); }
+  function applyThemeAttr(mode) {
+    var root = document.documentElement;
+    root.setAttribute('data-theme', mode);
+    root.setAttribute('data-sg-theme', mode); /* tokens package */
+  }
   (function initTheme() {
     try {
       var saved = localStorage.getItem(THEME_KEY);
-      if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+      if (saved === 'light' || saved === 'dark') applyThemeAttr(saved);
     } catch (e) {}
   })();
   SG.isDark = function () {
@@ -34,7 +39,7 @@
   };
   SG.toggleTheme = function () {
     var next = SG.isDark() ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
+    applyThemeAttr(next);
     try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
     bump();
   };

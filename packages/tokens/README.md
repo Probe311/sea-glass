@@ -16,4 +16,4 @@ pnpm add @sea-glass/tokens
 import { tokens, pebbles } from '@sea-glass/tokens';
 ```
 
-Three layers: **primitives** (12 pebbles + inks, neutrals) → **semantic** (`primary`, `surface`, `danger`…) → **component** (`--sg-button-height-md`). Dark values live in `$extensions.seaglass.dark` and are emitted once for `[data-sg-theme="dark"]` plus `prefers-color-scheme`.
+Three layers: **primitives** (12 pebbles + inks, neutrals) → **semantic** (`primary`, `surface`, `danger`…) → **component** (`--sg-button-height-md`). Dark values live in `$extensions.seaglass.dark` and are emitted for `[data-sg-theme]` / `[data-theme]` plus `prefers-color-scheme` (excluded when either attribute is `light`).

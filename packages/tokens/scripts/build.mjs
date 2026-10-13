@@ -158,22 +158,26 @@ StyleDictionary.registerFormat({
       { dark: true },
     );
     const darkBlock = `  color-scheme: dark;\n${dark}`;
+    // data-theme = demo / HTML; data-sg-theme = package API (same values)
     return `/* Sea Glass tokens — generated from W3C DTCG JSON. Do not edit. */
 :root {
   color-scheme: light dark;
 ${light}
 }
 
-[data-sg-theme="light"] {
+[data-sg-theme="light"],
+[data-theme="light"] {
   color-scheme: light;
+${light}
 }
 
-[data-sg-theme="dark"] {
+[data-sg-theme="dark"],
+[data-theme="dark"] {
 ${darkBlock}
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-sg-theme="light"]) {
+  :root:not([data-sg-theme="light"], [data-theme="light"]) {
 ${indent(darkBlock, 2)}
   }
 }
