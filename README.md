@@ -4,22 +4,29 @@
   <img src="assets/logo.svg" alt="Sea Glass." width="320" />
 </p>
 
-[![CI](https://github.com/Probe311/sea-glass/actions/workflows/ci.yml/badge.svg)](https://github.com/Probe311/sea-glass/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-2F55C4.svg)](LICENSE)
-[![Status: alpha](https://img.shields.io/badge/status-alpha-F7C96B.svg)](#status--statut)
-[![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-4FA877.svg)](https://probe311.github.io/sea-glass/)
+<p align="center">
+  <a href="https://github.com/Probe311/sea-glass/actions/workflows/ci.yml"><img src="https://github.com/Probe311/sea-glass/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2F55C4.svg" alt="License: MIT" /></a>
+  <a href="#status"><img src="https://img.shields.io/badge/status-alpha-F7C96B.svg" alt="Status: alpha" /></a>
+  <a href="https://probe311.github.io/sea-glass/"><img src="https://img.shields.io/badge/demo-GitHub%20Pages-4FA877.svg" alt="Demo" /></a>
+</p>
 
-**Sea Glass** is an open, participatory design system whose material is frosted sea glass: **translucency**, **frost (blur)**, **refraction**, **rim light**, **halo / glow**, **grain**, and **tint**. Twelve pebbles, three shapes (pill / circle / squircle), spring interaction.
+> **Alpha.** APIs will move · L’API va bouger. Not for production · Pas pour la production.
 
-**Sea Glass** est un design system open source participatif dont la matière est le verre de mer dépoli : **translucidité**, **flou**, **réfraction**, **reflet de bord**, **halo**, **grain** et **teinte**. Douze galets, trois formes (pilule / cercle / squircle), mouvement à ressorts.
+**Author / auteur :** [Julien Vaissier](https://www.julienvaissier.fr/) ([@Probe311](https://github.com/Probe311)) · **MIT**
 
-> **Alpha.** APIs will move. Do not use in production yet. / **Alpha.** L’API va bouger. Pas pour la production.
-
-**Author / auteur :** [Julien Vaissier](https://www.julienvaissier.fr/) ([@Probe311](https://github.com/Probe311)). Licence **MIT**.
+<!-- GitHub Markdown has no interactive tabs; this horizontal switcher + anchors is the supported pattern. -->
+<p align="center">
+  <a href="#-english"><strong>🇬🇧 English</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#-français"><strong>🇫🇷 Français</strong></a>
+</p>
 
 ---
 
-## English
+## 🇬🇧 English
+
+**Sea Glass** is an open, participatory design system whose material is frosted sea glass: **translucency**, **frost (blur)**, **refraction**, **rim light**, **halo / glow**, **grain**, and **tint**. Twelve pebbles, three shapes (pill / circle / squircle), spring interaction.
 
 ### Install
 
@@ -73,6 +80,8 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 
 ### Status
 
+<a id="status"></a>
+
 | Package              | 0.1.0-alpha                                          |
 | -------------------- | ---------------------------------------------------- |
 | `@seaglass/tokens`   | DTCG → CSS / JS / JSON                               |
@@ -81,15 +90,19 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 | `@seaglass/react`    | ~50 adapters (forms, feedback, nav, data) — React 19 |
 | `@seaglass/tailwind` | Preset + `glass-*` plugin                            |
 
-Demo: [GitHub Pages](https://probe311.github.io/sea-glass/) — version UI via `pnpm sync:version` (`package.json` + React installé) · [`demo/`](demo/). Roadmap: [`ROADMAP.md`](ROADMAP.md).
+Demo: [GitHub Pages](https://probe311.github.io/sea-glass/) — UI version via `pnpm sync:version`. Component status: [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap: [`ROADMAP.md`](ROADMAP.md).
 
 ### Contributing
 
 Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and the [`Code of Conduct`](CODE_OF_CONDUCT.md). DCO: `Signed-off-by` on commits (`git commit -s`).
 
+<p align="right"><a href="#-français">🇫🇷 Français →</a></p>
+
 ---
 
-## Français
+## 🇫🇷 Français
+
+**Sea Glass** est un design system open source participatif dont la matière est le verre de mer dépoli : **translucidité**, **flou**, **réfraction**, **reflet de bord**, **halo**, **grain** et **teinte**. Douze galets, trois formes (pilule / cercle / squircle), mouvement à ressorts.
 
 ### Installer
 
@@ -129,11 +142,13 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 Six attributs sur `.sg-glass` : `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Le flou ne s’applique que sur une scène. La réfraction est opt-in.
 
-Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Roadmap : [`ROADMAP.md`](ROADMAP.md).
+Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue d’avancement : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
 
 ### Statut
 
 Alpha `0.x`. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
+
+<p align="right"><a href="#-english">← 🇬🇧 English</a></p>
 
 ---
 
@@ -153,6 +168,7 @@ demo/               prototype (GitHub Pages)
 ```bash
 pnpm install
 pnpm check        # lint, typecheck, build, test
+pnpm preflight    # typecheck + build + test (pre-push)
 pnpm storybook    # http://localhost:6006
 pnpm build:logo   # assets/ + demo/ wordmarks
 ```
