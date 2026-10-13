@@ -3,7 +3,80 @@ import { Glass } from './Glass.js';
 import { Button } from './Button.js';
 import { cx } from './cx.js';
 
-export type Tone = 'info' | 'success' | 'warning' | 'danger';
+export type Tone = 'info' | 'success' | 'warning' | 'danger' | 'error';
+
+const ALERT_ICONS: Record<string, ReactNode> = {
+  info: (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 10v6M12 7h.01" strokeLinecap="round" />
+    </svg>
+  ),
+  success: (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 12l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  warning: (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <path d="M12 3l9 16H3L12 3z" strokeLinejoin="round" />
+      <path d="M12 10v4M12 16h.01" strokeLinecap="round" />
+    </svg>
+  ),
+  danger: (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
+    </svg>
+  ),
+  error: (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
+    </svg>
+  ),
+};
 
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
   tone?: Tone;
@@ -14,16 +87,20 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   { className, tone = 'info', title, onClose, children, ...rest },
   ref,
 ) {
+  const dataTone = tone === 'error' ? 'error' : tone;
   return (
     <Glass
       ref={ref}
       role="alert"
       className={cx('sg-alert', className)}
-      data-tone={tone}
+      data-tone={dataTone}
       data-tint=""
       frosted
       {...rest}
     >
+      <span className="sg-alert__icon" aria-hidden>
+        {ALERT_ICONS[tone] ?? ALERT_ICONS.info}
+      </span>
       <div>
         {title ? <p className="sg-alert__title">{title}</p> : null}
         {children}
@@ -97,7 +174,18 @@ export function Accordion({ items, type = 'single', className }: AccordionProps)
               }}
             >
               {item.title}
-              <span aria-hidden>{isOpen ? '−' : '+'}</span>
+              <span className="sg-chevron" aria-hidden>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
             </button>
             <div
               id={panelId}
