@@ -24,4 +24,4 @@ This project uses [Changesets](https://github.com/changesets/changesets). Each p
 - Prefixed CSS material (`.sg-glass`) + component layers.
 - `@seaglass/react` (React 19) adapters for the catalog above.
 - `@seaglass/tailwind`: preset + `glass-*` plugin.
-- Legacy prototype kept in `legacy/` as a visual reference.
+- Interactive prototype in `demo/` (GitHub Pages).

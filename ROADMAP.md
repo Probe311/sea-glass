@@ -3,7 +3,7 @@
 Objectif : un design system glassmorphism complet, cohérent et publiable (niveau MUI / Tailwind), **framework-agnostique en premier**, avec adaptateurs React (et plus tard Vue/Svelte) et un plugin Tailwind.
 
 Légende : **P0** indispensable v1 · **P1** important · **P2** confort. Effort : **XS** < 2 h · **S** ½ j · **M** 1–2 j · **L** 3–5 j · **XL** > 1 sem.
-Références → voir [`docs/AUDIT.md`](docs/AUDIT.md). Prototype d’origine → [`legacy/`](legacy/).
+Références → voir [`docs/AUDIT.md`](docs/AUDIT.md). Prototype interactif → [`demo/`](demo/).
 
 Architecture cible proposée :
 ```
@@ -23,7 +23,6 @@ seaglass/
 ## Phase 0 — Mise en place du repo (semaine 1)
 
 - [x] **P0 · XS** `git init`, branche `main`, `.gitignore`, `.editorconfig`, `.nvmrc` (Node LTS)
-- [x] **P0 · XS** Importer le code actuel tel quel dans `legacy/` (référence visuelle) — premier commit
 - [x] **P0 · S** Monorepo pnpm workspaces (+ Turborepo ou Nx facultatif)
 - [x] **P0 · S** Outillage : TypeScript, ESLint, Prettier, Stylelint (règle de préfixe `sg-`), lint-staged + husky
 - [x] **P0 · XS** Conventional Commits + commitlint

@@ -1,7 +1,7 @@
 /** @type {import('stylelint').Config} */
 export default {
   extends: ['stylelint-config-standard'],
-  ignoreFiles: ['legacy/**', '**/dist/**', 'node_modules/**', 'examples/**'],
+  ignoreFiles: ['**/dist/**', 'node_modules/**', 'examples/**'],
   rules: {
     'selector-class-pattern': [
       '^(sg-refract|sg(-[a-z0-9]+)+(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?)$',

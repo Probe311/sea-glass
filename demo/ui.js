@@ -135,11 +135,14 @@
     return h('div', null,
       p.label && h('div', { className: 'sl-head' }, h('span', { id: id }, p.label), h('output', null, text)),
       h('div', { ref: box, className: cls('sl', range && 'range', p.marks && 'marks', drag >= 0 && 'drag', p.disabled && 'dis', p.state && 'is-' + p.state), style: { '--a': a, '--b': b },
-        onPointerDown: down, onPointerMove: move, onPointerUp: function () { setDrag(-1); }, onPointerCancel: function () { setDrag(-1); } },
+        onPointerDown: down, onPointerMove: move,
+        onPointerUp: function () { setDrag(-1); }, onPointerCancel: function () { setDrag(-1); },
+        onPointerLeave: function (e) { if (drag < 0 && e.buttons === 0) return; } },
         h('div', { className: 'sl-rail' }), h('div', { className: 'sl-fill' }), ticks,
         vals.map(function (v, i) {
           var name = range ? (p.label || p['aria-label'] || 'Plage') + (i === 0 ? ', minimum' : ', maximum') : undefined;
-          return h('div', { key: i, className: cls('sl-thumb', drag === i && 'act', p.thumb === 'pipette' && 'pipette'), role: 'slider', tabIndex: p.disabled ? -1 : 0,
+          var forceAct = p.state === 'press' || p.state === 'focus';
+          return h('div', { key: i, className: cls('sl-thumb', (drag === i || forceAct) && 'act', p.thumb === 'pipette' && 'pipette'), role: 'slider', tabIndex: p.disabled ? -1 : 0,
             'aria-valuemin': range && i === 1 ? vals[0] : min, 'aria-valuemax': range && i === 0 ? vals[1] : max, 'aria-valuenow': v, 'aria-valuetext': v + unit,
             'aria-labelledby': !range && p.label ? id : undefined, 'aria-label': range ? name : (p.label ? undefined : p['aria-label']), 'aria-disabled': p.disabled || undefined,
             style: { '--v': frac(v) }, onKeyDown: function (e) { key(e, i); } },

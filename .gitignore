@@ -17,13 +17,8 @@ pack-*.tgz
 docs/storybook
 .cursor/
 demo/seaglass.css
-
-# Video / motion deliverables — local only, never commit or push
+# leftover local video tooling (locked files may remain until IDE releases them)
 media/
-*.mp4
-*.webm
-*.mov
-*.mkv
-*.gif
-**/out/preview-*.png
-**/out/qa-*.png
+sea-glass-intro/
+.media-deleted/
+_trash_*/

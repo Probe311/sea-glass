@@ -12,7 +12,7 @@ pnpm install
 pnpm check
 ```
 
-The original prototype lives in `legacy/` / `demo/` and is not linted as a library. New components belong in `packages/css` + `packages/react`, with a Storybook story when practical. Catalogue: [`packages/react/README.md`](packages/react/README.md).
+The interactive prototype lives in `demo/` (not linted as a library). New components belong in `packages/css` + `packages/react`, with a Storybook story when practical. Catalogue: [`packages/react/README.md`](packages/react/README.md).
 
 ## Scripts
 
@@ -35,7 +35,7 @@ Footers / hero use **`package.json` version** and the **installed React** versio
 2. **Prefix.** Public classes are `.sg-*` with BEM modifiers (`.sg-button--primary`). Stylelint enforces this.
 3. **No non-open assets.** No Google Sans, no hotlinked stock photos.
 4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate — see `docs/AUDIT.md`.
-5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged. Do **not** commit `media/` or video/motion exports (`*.mp4`, `*.webm`, …) — they stay local (see `.gitignore`).
+5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged.
 6. **Changesets.** User-facing changes get `pnpm changeset`.
 
 ## Pull requests

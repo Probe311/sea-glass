@@ -8,7 +8,14 @@
   var NAV = [
     ['Principes', [['matiere', 'Matière']]],
     ['Fondations', [['couleurs', 'Couleurs'], ['typo', 'Typographie'], ['forme', 'Forme et espace'], ['mouvement', 'Mouvement']]],
-    ['Composants', [['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'], ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'], ['navigation', 'Navigation'], ['cartes', 'Cartes et badges'], ['retours', 'Retours'], ['packages', 'Catalogue packages']]],
+    ['Composants', [
+      ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
+      ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
+      ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête et pied'],
+      ['alertes', 'Alertes et bandeaux'], ['accordeon', 'Accordéon'], ['overlays', 'Modale et menu'],
+      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'], ['retours', 'Retours'],
+      ['prefs', 'Préférences'], ['packages', 'Catalogue packages'],
+    ]],
     ['Qualité', [['contraste', 'Contraste'], ['tokens', 'Tokens et code']]]
   ];
   function norm(t) { return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }

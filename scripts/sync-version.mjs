@@ -2,8 +2,7 @@
  * Sync displayed version with package.json (repo / release source of truth)
  * and React with the installed dependency.
  *
- * Writes demo/version.js, pins esm.sh React in demo/index.html,
- * and updates legacy/ footer strings (snapshot kept in sync).
+ * Writes demo/version.js and pins esm.sh React in demo/index.html.
  */
 import { createRequire } from 'node:module';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -60,21 +59,5 @@ patch(join(root, 'demo/index.html'), [
     `const v = window.SG_META?.react || '${react}'`,
   ],
 ]);
-
-const legacyReplacers = [
-  [/h\('div', \{ className: 'foot' \}, '[^']*'\)/g, `h('div', { className: 'foot' }, '${line}')`],
-  [
-    /h\('span', \{ className: 'label' \}, '[^']*'\)/g,
-    `h('span', { className: 'label' }, 'Design system · ${version}')`,
-  ],
-  [
-    /h\('span', null, 'Sea Glass(?: Design System)? · [^']*'\)/g,
-    `h('span', null, 'Sea Glass · ${version}')`,
-  ],
-];
-
-for (const rel of ['legacy/sec-a.js', 'legacy/sec-c.js']) {
-  patch(join(root, rel), legacyReplacers);
-}
 
 console.log(`SG_META → ${line}`);

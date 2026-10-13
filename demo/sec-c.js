@@ -121,12 +121,33 @@
                 h('tbody', null,
                   h('tr', null, h('td', null, 'Seafoam'), h('td', null, 'primary')),
                   h('tr', null, h('td', null, 'Amber'), h('td', null, 'warning'))))))),
-        h(D.Panel, { tag: 'Couverture', cap: '~50 adaptateurs React ; cette section montre le CSS productisé servi avec la démo.' },
-          h('ul', { className: 'stack', style: { margin: 0, paddingLeft: '1.2rem' } },
-            h('li', null, 'Forms · Button, Field, Select, Combobox, Switch, Slider, FileUpload…'),
-            h('li', null, 'Feedback · Alert, Banner, Callout, Accordion, Toast, Tooltip…'),
-            h('li', null, 'Nav · Header, Footer, Sidebar, Breadcrumbs, Pagination, Stepper…'),
-            h('li', null, 'Data · Table, Card, Tile, Hero, Quote, Media, Share, Consent, Theme, Lang')))));
+        h(D.Panel, { scene: true, tag: 'Filet catalogue', cap: 'Tout adaptateur a un aperçu ici ou dans une section dédiée du sommaire.' },
+          h('div', { className: 'sg-scene', style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 12 } },
+            [
+              ['Badge', h('span', { className: 'sg-badge sg-glass' }, 'alpha')],
+              ['Tag', h('span', { className: 'sg-tag sg-glass' }, 'glass')],
+              ['Chip', h('button', { type: 'button', className: 'sg-chip sg-glass', 'aria-pressed': 'true' }, 'Shore')],
+              ['Link', h('a', { className: 'sg-link', href: '#packages' }, 'Lien')],
+              ['Snackbar', h('div', { className: 'sg-snack sg-glass', role: 'status', 'data-frosted': true, 'data-rim': true, style: { padding: '8px 12px', fontSize: 13 } }, 'Galet ajouté')],
+              ['Toast', h('div', { className: 'sg-toast sg-toast--open sg-glass', role: 'status', 'data-open': true, style: { position: 'static', opacity: 1, transform: 'none', padding: '8px 12px', fontSize: 13 } }, 'Collecté')],
+              ['Tooltip', h('span', { className: 'sg-tooltip sg-glass', role: 'tooltip', 'data-frosted': true, 'data-rim': true, style: { position: 'static', display: 'inline-block', padding: '6px 10px', fontSize: 12 } }, 'Aide')],
+              ['Divider', h('hr', { className: 'sg-divider', style: { width: '100%', margin: '8px 0' } })],
+              ['Segmented', h('div', { className: 'sg-segmented sg-glass', role: 'radiogroup', 'data-frosted': true, 'data-rim': true, style: { display: 'inline-flex' } },
+                h('button', { type: 'button', className: 'sg-segmented__btn', role: 'radio', 'aria-checked': 'true' }, 'A'),
+                h('button', { type: 'button', className: 'sg-segmented__btn', role: 'radio', 'aria-checked': 'false' }, 'B'))],
+              ['Media', h('figure', { className: 'sg-media sg-glass', 'data-frosted': true, 'data-rim': true, style: { margin: 0, padding: 8 } },
+                h('div', { className: 'sg-media__frame', style: { aspectRatio: '16/9', background: 'color-mix(in srgb, #fff 20%, transparent)', borderRadius: 8 } }),
+                h('figcaption', { className: 'sg-media__caption', style: { fontSize: 12, marginTop: 6 } }, 'Média'))],
+              ['Form', h('form', { className: 'sg-form' }, h('fieldset', { className: 'sg-form__fieldset' }, h('legend', { className: 'sg-form__legend' }, 'Fieldset'), h('span', { style: { fontSize: 12 } }, 'Legend')))],
+              ['IconBtn', h('button', { type: 'button', className: 'sg-button sg-button--circle sg-button--sm sg-glass', 'aria-label': 'Favori', 'data-frosted': true }, '♥')],
+            ].map(function (item) {
+              return h('div', { key: item[0], style: { display: 'grid', gap: 8, alignContent: 'start' } },
+                h('span', { className: 'label', style: { color: '#fff', fontSize: 12 } }, item[0]),
+                item[1]);
+            })))),
+        h(D.Panel, { tag: 'Carte', cap: 'Sections dédiées + filet ci-dessus = couverture catalogue. Storybook : pnpm storybook.' },
+          h('p', { style: { margin: 0, fontSize: 14, color: 'var(--ink-2)' } },
+            'Adaptateurs React typés dans @seaglass/react. Hors scope volontaire : bloc marque, FranceConnect / ProConnect.')));
   };
 
   /* ---------- Tokens et code ---------- */
@@ -197,7 +218,12 @@
       h(S.Bar, { q: q, setQ: setQ, open: open, onMenu: function () { setOpen(!open); } }),
       h('div', { className: 'shell', id: 'top' },
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
-        h('main', { className: 'main' }, h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields), h(S.Nav), h(S.Cards), h(S.Feedback), h(S.Packages), h(S.Contrast), h(S.Tokens),
+        h('main', { className: 'main' },
+          h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion),
+          h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
+          h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
+          h(S.Cards), h(S.DataDoc), h(S.Feedback), h(S.PrefsDoc), h(S.Packages),
+          h(S.Contrast), h(S.Tokens),
           h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*'))),
       h(Toast));
   }

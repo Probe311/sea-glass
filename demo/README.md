@@ -12,4 +12,4 @@ Prototype visuel (matière + anciennes sections) **plus** une section **Catalogu
 pnpm demo:prepare   # build packages → sync CSS + logos + version dans demo/
 ```
 
-CI Pages exécute `demo:prepare` avant déploiement. Catalogue React typé : [`packages/react`](../packages/react/README.md) · Storybook : `pnpm storybook`. Snapshot figé : [`legacy/`](../legacy/).
+CI Pages exécute `demo:prepare` avant déploiement. Catalogue React typé : [`packages/react`](../packages/react/README.md) · Storybook : `pnpm storybook`.

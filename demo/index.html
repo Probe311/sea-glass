@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="ui.css">
 <link rel="stylesheet" href="seaglass.css">
 <style>
-  /* Package catalog demos — isolate @seaglass/css from legacy .lg tokens */
+  /* Package catalog demos — isolate @seaglass/css from prototype .lg tokens */
   .sg-demo-catalog { --sg-demo-pad: 12px; }
   .sg-demo-catalog .sg-scene {
     padding: 1.25rem;
@@ -58,7 +58,7 @@
   const { createRoot } = await import(`https://esm.sh/react-dom@${v}/client`);
   window.React = React;
   window.ReactDOM = Object.assign({}, ReactDOM, { createRoot });
-  const files = ['core.js', 'ui.js', 'ui2.js', 'sec-a.js', 'sec-b.js', 'sec-c.js'];
+  const files = ['core.js', 'ui.js', 'ui2.js', 'sec-a.js', 'sec-b.js', 'sec-extra.js', 'sec-c.js'];
   for (const src of files) {
     await new Promise((resolve, reject) => {
       const s = document.createElement('script');

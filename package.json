@@ -36,7 +36,7 @@
     "prepare": "husky || true && node ./scripts/sync-version.mjs"
   },
   "lint-staged": {
-    "*.{js,mjs,cjs,ts,tsx}": "eslint --fix",
+    "*.{js,mjs,cjs,ts,tsx}": "eslint --fix --no-warn-ignored",
     "packages/css/src/**/*.css": "stylelint --fix",
     "*.{js,mjs,cjs,ts,tsx,css,md,json,yml,yaml}": "prettier --write"
   },

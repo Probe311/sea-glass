@@ -9,7 +9,7 @@
 [![Status: alpha](https://img.shields.io/badge/status-alpha-F7C96B.svg)](#status--statut)
 [![Demo](https://img.shields.io/badge/demo-GitHub%20Pages-4FA877.svg)](https://probe311.github.io/sea-glass/)
 
-**Sea Glass** is an open, participatory design system whose material is frosted sea glass: **translucency**, **frost (blur)**, **refraction**, **rim light**, **halo / glow**, **grain**, and **tint**. Twelve pebbles, three shapes (pill / circle / squircle), spring motion.
+**Sea Glass** is an open, participatory design system whose material is frosted sea glass: **translucency**, **frost (blur)**, **refraction**, **rim light**, **halo / glow**, **grain**, and **tint**. Twelve pebbles, three shapes (pill / circle / squircle), spring interaction.
 
 **Sea Glass** est un design system open source participatif dont la matière est le verre de mer dépoli : **translucidité**, **flou**, **réfraction**, **reflet de bord**, **halo**, **grain** et **teinte**. Douze galets, trois formes (pilule / cercle / squircle), mouvement à ressorts.
 
@@ -148,7 +148,6 @@ packages/tailwind   @seaglass/tailwind
 apps/storybook      Storybook 10
 assets/             wordmarks + Poppins OFL source
 demo/               prototype (GitHub Pages)
-legacy/             visual reference snapshot
 ```
 
 ```bash
