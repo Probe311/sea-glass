@@ -91,8 +91,8 @@ Colonnes :
 | Accordion         | ✅            | ✅    | ✅ Accordéon       | 🟡 Feedback | ✅                                                       |
 | Tabs              | ✅            | ✅    | ✅ Onglets         | 🟡 Feedback | ✅                                                       |
 | Tooltip           | ✅            | ✅    | ✅                 | —           | 🟡 Hover/focus ; Floating UI / délai / Échap à peaufiner |
-| Snackbar          | ✅            | ✅    | ✅ Retours         | —           | 🟡 File d’attente / API `toast()` à peaufiner            |
-| Toast             | ✅            | ✅    | ✅ Retours         | —           | 🟡 Idem                                                  |
+| Snackbar          | ✅            | ✅    | ✅ Toasts          | —           | 🟡 File d’attente / API `toast()` à peaufiner            |
+| Toast             | ✅            | ✅    | ✅ Toasts          | —           | 🟡 Idem                                                  |
 | Progress          | ✅            | ✅    | ✅ Curseur         | 🟡 Feedback | ✅ Barre ; teintes / tailles                             |
 | Ring (circulaire) | ✅ `.sg-ring` | ❌    | ✅ Curseur (proto) | —           | 🟡 CSS + démo ; pas d’export React                       |
 | Skeleton          | ❌            | ❌    | ❌                 | ❌          | ❌ Roadmap P1                                            |
