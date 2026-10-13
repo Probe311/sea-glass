@@ -1,6 +1,6 @@
 # Catalogue des composants — avancement
 
-État au **2026-10-13** · Sea Glass `0.1.0-alpha` · React 19 · démo **inventaire 100 %** des composants shipping.
+État au **2026-10-13** · Sea Glass `0.1.0-alpha` · React 19 · couverture démo = sections dédiées du sommaire.
 
 Légende :
 

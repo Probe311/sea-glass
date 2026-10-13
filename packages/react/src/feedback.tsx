@@ -20,11 +20,10 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       role="alert"
       className={cx('sg-alert', className)}
       data-tone={tone}
-      rim
+      data-tint=""
       frosted
       {...rest}
     >
-      <span aria-hidden>●</span>
       <div>
         {title ? <p className="sg-alert__title">{title}</p> : null}
         {children}
@@ -33,9 +32,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
         <Button variant="ghost" size="sm" aria-label="Close" onClick={onClose}>
           ×
         </Button>
-      ) : (
-        <span />
-      )}
+      ) : null}
     </Glass>
   );
 });
@@ -61,7 +58,6 @@ export const Callout = forwardRef<HTMLElement, CalloutProps>(function Callout(
       ref={ref}
       as="aside"
       className={cx('sg-callout', highlight && 'sg-callout--highlight', className)}
-      rim
       frosted
       {...rest}
     >
@@ -103,8 +99,13 @@ export function Accordion({ items, type = 'single', className }: AccordionProps)
               {item.title}
               <span aria-hidden>{isOpen ? '−' : '+'}</span>
             </button>
-            <div id={panelId} className="sg-accordion__panel" hidden={!isOpen}>
-              {item.content}
+            <div
+              id={panelId}
+              className={cx('sg-accordion__panel', isOpen && 'sg-accordion__panel--open')}
+              data-open={isOpen || undefined}
+              aria-hidden={!isOpen}
+            >
+              <div className="sg-accordion__panel-inner">{item.content}</div>
             </div>
           </div>
         );

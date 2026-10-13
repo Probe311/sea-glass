@@ -6,7 +6,7 @@ Version UI = `package.json` + React installé (`pnpm sync:version` → `version.
 
 Brand: `logo.svg` / `logo-light.svg` (`pnpm build:logo`). Display type: **Poppins**.
 
-Prototype visuel + sections détaillées + **Inventaire 100 %** (`#packages`) : grille live de tous les composants shipping (CSS `.sg-*` / React).
+Prototype visuel + sections détaillées du sommaire (CSS `.sg-*` / React).
 
 ```bash
 pnpm demo:prepare   # build packages → sync CSS + logos + version dans demo/
