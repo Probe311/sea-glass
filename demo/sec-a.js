@@ -14,7 +14,7 @@
       ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête et pied'],
       ['alertes', 'Alertes et bandeaux'], ['accordeon', 'Accordéon'], ['overlays', 'Modale et menu'],
       ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'], ['retours', 'Retours'],
-      ['prefs', 'Préférences'], ['packages', 'Inventaire 100 %'],
+      ['prefs', 'Préférences'],
     ]],
     ['Qualité', [['contraste', 'Contraste'], ['tokens', 'Tokens et code']]]
   ];

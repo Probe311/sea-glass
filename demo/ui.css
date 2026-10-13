@@ -276,6 +276,9 @@
 .tabs-list .tab { position: relative; z-index: 3; flex: none; height: 40px; padding-inline: 22px; border: 0; background: transparent; border-radius: 999px; font: 600 15px/1 var(--font-display); color: var(--ink-3); cursor: pointer; white-space: nowrap; transition: color 200ms var(--ease); }
 .tabs-list .tab:hover { color: var(--ink); }
 .tabs-list .tab[aria-selected="true"], .tabs-list .tab[aria-checked="true"] { color: var(--on-tint); }
+.scene .tabs-list .tab[aria-selected="true"],
+.scene .tabs-list .tab[aria-checked="true"],
+.scene .navbar .nb[aria-current="page"] { color: var(--on-tint); }
 .tabs-list .tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .tabs-list .tab:disabled { opacity: 0.4; cursor: not-allowed; }
 .tabs-line { position: relative; display: flex; gap: 4px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; max-width: 100%; }

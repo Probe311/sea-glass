@@ -7,10 +7,13 @@
   S.Fields = function () {
     var F = UI.Field;
     return h(D.Section, { id: 'champs', label: 'Composants', title: 'Champs et recherche', lead: 'Le champ est un creux de verre : la matière est enfoncée, la saisie reste sur fond clair. La recherche est un Givre en pilule, pensé pour reposer sur une image.' },
-      h(D.Panel, { tag: 'Champs', cap: 'Repos, survol, focus, erreur et désactivé.' },
-        h('div', { className: 'g2' },
-          h('div', { className: 'stack' }, h(F, { label: 'Nom de la crique', placeholder: 'Crique des Sirènes', help: 'Visible dans ta collection.' }), h(F, { label: 'Survol (forcé)', placeholder: 'Survolé', state: 'hover' }), h(F, { label: 'Focus (forcé)', placeholder: 'Au clavier', state: 'focus' })),
-          h('div', { className: 'stack' }, h(F, { label: 'Profondeur maximale', value: 'abc', invalid: true, help: 'Saisis un nombre en mètres, par exemple 12.' }), h(F, { label: 'Désactivé', value: 'Récif nord', disabled: true })))),
+      h(D.Panel, { tag: 'Champs', cap: 'entrée, survol, focus, erreur et désactivé.' },
+        h('div', { className: 'fields-grid' },
+          h(F, { label: 'Nom de la crique', placeholder: 'Crique des Sirènes', help: 'Visible dans ta collection.' }),
+          h(F, { label: 'Profondeur maximale', value: 'abc', invalid: true, help: 'Saisis un nombre en mètres, par exemple 12.' }),
+          h(F, { label: 'Survol (forcé)', placeholder: 'Survolé', state: 'hover' }),
+          h(F, { label: 'Désactivé', value: 'Récif nord', disabled: true }),
+          h(F, { label: 'Focus (forcé)', placeholder: 'Au clavier', state: 'focus' }))),
       h(D.Panel, { scene: true, tag: 'Recherche', cap: 'Givre sur décor coloré : icônes en encre foncée, focus en anneau blanc.' }, h(UI.Search)),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '52 px (champ) · 58 px (recherche)', 'Zone tactile confortable.'], ['Rayon', '16 px · pilule', ''], ['Étiquette', 'Roboto 500, 13 px, au-dessus', 'Jamais un simple placeholder.'], ['Erreur', 'Teinte ruby + message sous le champ', 'Dire quoi corriger.']] }));
   };
@@ -78,85 +81,6 @@
               h('td', { className: 'ratio' }, r.r.toFixed(2) + ' : 1'), h('td', { className: 'ratio' }, r.min + ' : 1'), h('td', null, h('span', { className: 'res ' + (ok ? 'ok' : 'ko') }, ok ? 'Conforme' : 'À corriger')));
           }))))),
       h(D.Specs, { head: ['Sujet', 'Règle', 'Note'], rows: [['Focus visible', 'Anneau de 2 px décalé de 3 px', 'Cobalt foncé en clair, cobalt clair en sombre.'], ['Cibles tactiles', '40 px minimum, 48 px par défaut', ''], ['Clavier', 'Tab, flèches, Espace, Entrée', 'Onglets et curseur suivent les motifs ARIA.'], ['Mouvement', 'prefers-reduced-motion', 'Transitions, ondes et segment indéterminé neutralisés.']] }));
-  };
-
-  /* ---------- Catalogue @seaglass/* (CSS productisé) ---------- */
-  S.Packages = function () {
-    function cell(name, node, href) {
-      return h('div', { key: name, style: { display: 'grid', gap: 8, alignContent: 'start', minWidth: 0 } },
-        href
-          ? h('a', { className: 'label', href: href, style: { color: '#fff', fontSize: 12, fontWeight: 600 } }, name)
-          : h('span', { className: 'label', style: { color: '#fff', fontSize: 12, fontWeight: 600 } }, name),
-        node);
-    }
-    var inventory = [
-      ['Glass', h('div', { className: 'sg-glass', 'data-frosted': true, 'data-rim': true, style: { padding: '10px 14px', fontSize: 13 } }, 'Surface'), '#matiere'],
-      ['Button', h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary sg-button--sm', 'data-frosted': true }, 'Action'), '#boutons'],
-      ['IconButton', h('button', { type: 'button', className: 'sg-button sg-button--circle sg-button--sm sg-glass', 'aria-label': 'Favori', 'data-frosted': true }, '♥'), '#boutons'],
-      ['Chip', h('button', { type: 'button', className: 'sg-chip sg-glass', 'aria-pressed': 'true' }, 'Shore'), '#puces'],
-      ['Link', h('a', { className: 'sg-link', href: '#packages' }, 'Lien'), '#chrome'],
-      ['SkipLink', h('a', { className: 'sg-skip sg-glass', href: '#packages', style: { position: 'static', transform: 'none' } }, 'Skip'), '#chrome'],
-      ['Badge', h('span', { className: 'sg-badge sg-glass' }, 'alpha'), '#cartes'],
-      ['Tag', h('span', { className: 'sg-tag sg-glass' }, 'glass'), '#cartes'],
-      ['Card', h('div', { className: 'sg-card sg-glass', 'data-frosted': true, 'data-rim': true, style: { padding: 10, fontSize: 13 } }, 'Card'), '#cartes'],
-      ['Tile', h('a', { className: 'sg-tile sg-glass', href: '#donnees', 'data-frosted': true, style: { display: 'block', padding: 10, textDecoration: 'none', fontSize: 13 } }, 'Tile'), '#donnees'],
-      ['Divider', h('hr', { className: 'sg-divider', style: { width: '100%', margin: '8px 0' } }), '#donnees'],
-      ['List', h('ul', { className: 'sg-list sg-glass', style: { listStyle: 'none', margin: 0, padding: 6, fontSize: 12 } }, h('li', { className: 'sg-list__item' }, 'Item')), '#donnees'],
-      ['TextField', h('input', { className: 'sg-field__input', placeholder: 'Field', 'aria-label': 'Field', style: { width: '100%' } }), '#champs'],
-      ['Password', h('input', { type: 'password', className: 'sg-field__input', defaultValue: '••••', 'aria-label': 'Password', style: { width: '100%' } }), '#listes'],
-      ['Search', h('input', { type: 'search', className: 'sg-search__control', placeholder: 'Search', 'aria-label': 'Search', style: { width: '100%' } }), '#champs'],
-      ['Select', h('select', { 'aria-label': 'Select', style: { width: '100%' } }, h('option', null, 'Seafoam')), '#listes'],
-      ['Combobox', h('input', { className: 'sg-combobox__control', placeholder: 'Combo…', 'aria-label': 'Combobox', style: { width: '100%' } }), '#listes'],
-      ['Checkbox', h('label', { className: 'sg-check', style: { color: '#fff', fontSize: 12 } }, h('input', { type: 'checkbox', defaultChecked: true }), h('span', { className: 'sg-check__box sg-glass', 'aria-hidden': true }), ' OK'), '#cases'],
-      ['Radio', h('label', { className: 'sg-check sg-check--radio', style: { color: '#fff', fontSize: 12 } }, h('input', { type: 'radio', name: 'inv', defaultChecked: true }), h('span', { className: 'sg-check__box sg-glass', 'aria-hidden': true }), ' A'), '#cases'],
-      ['Switch', h('span', { className: 'sg-switch' }, h('input', { type: 'checkbox', role: 'switch', defaultChecked: true }), h('span', { className: 'sg-switch__track sg-glass', 'aria-hidden': true }, h('span', { className: 'sg-switch__knob' }))), '#interrupteur'],
-      ['Segmented', h('div', { className: 'sg-segmented sg-glass', role: 'radiogroup', 'data-frosted': true, style: { display: 'inline-flex' } }, h('button', { type: 'button', className: 'sg-segmented__btn', role: 'radio', 'aria-checked': 'true' }, 'A'), h('button', { type: 'button', className: 'sg-segmented__btn', role: 'radio', 'aria-checked': 'false' }, 'B')), null],
-      ['Slider', h('div', { className: 'sg-slider', style: { '--sg-sl-b': 0.45, '--sg-sl-v': 0.45 }, 'aria-hidden': true }, h('div', { className: 'sg-slider__rail' }), h('div', { className: 'sg-slider__fill' }), h('div', { className: 'sg-slider__thumb' }, h('i', { className: 'sg-slider__blob' }), h('i', { className: 'sg-slider__stem' }))), '#curseur'],
-      ['Form', h('form', { className: 'sg-form' }, h('fieldset', { className: 'sg-form__fieldset' }, h('legend', { className: 'sg-form__legend' }, 'Fieldset'))), null],
-      ['FileUpload', h('div', { className: 'sg-upload sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Drop'), '#listes'],
-      ['Alert', h('div', { className: 'sg-alert sg-glass', role: 'alert', 'data-tone': 'info', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Info'), '#alertes'],
-      ['Banner', h('div', { className: 'sg-banner sg-alert sg-glass', role: 'alert', 'data-tone': 'warning', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Banner'), '#alertes'],
-      ['Callout', h('aside', { className: 'sg-callout sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Callout'), '#alertes'],
-      ['Accordion', h('div', { className: 'sg-accordion sg-glass', 'data-frosted': true, style: { fontSize: 12 } }, h('button', { type: 'button', className: 'sg-accordion__trigger', 'aria-expanded': 'false' }, 'Item')), '#accordeon'],
-      ['Tooltip', h('span', { className: 'sg-tooltip sg-glass', role: 'tooltip', 'data-frosted': true, style: { position: 'static', display: 'inline-block', padding: '6px 10px', fontSize: 12 } }, 'Aide'), '#retours'],
-      ['Snackbar', h('div', { className: 'sg-snack sg-glass', role: 'status', 'data-frosted': true, style: { padding: '8px 10px', fontSize: 12 } }, 'Snack'), '#retours'],
-      ['Toast', h('div', { className: 'sg-toast sg-toast--open sg-glass', role: 'status', 'data-open': true, style: { position: 'static', opacity: 1, transform: 'none', padding: '8px 10px', fontSize: 12 } }, 'Toast'), '#retours'],
-      ['Progress', h('div', { className: 'sg-progress sg-glass', role: 'progressbar', 'aria-valuenow': 60, style: { width: '100%' } }, h('div', { className: 'sg-progress__bar', style: { width: '60%' } })), '#curseur'],
-      ['Ring', h('div', { className: 'sg-ring', style: { width: 48, height: 48 }, 'aria-hidden': true, role: 'progressbar', 'aria-valuenow': 64 }, h('span', { style: { fontSize: 11 } }, '64%')), '#curseur'],
-      ['Tabs', h('div', { className: 'sg-tabs sg-glass', role: 'tablist', 'data-frosted': true }, h('button', { type: 'button', className: 'sg-tabs__tab', role: 'tab', 'aria-selected': true }, 'A'), h('button', { type: 'button', className: 'sg-tabs__tab', role: 'tab', 'aria-selected': false }, 'B')), '#onglets'],
-      ['Dialog', h('div', { className: 'sg-dialog sg-glass', 'data-frosted': true, style: { padding: 10, fontSize: 12 } }, 'Dialog'), '#overlays'],
-      ['Menu', h('ul', { className: 'sg-menu sg-glass', role: 'menu', 'data-frosted': true, style: { position: 'static', listStyle: 'none', margin: 0, padding: 4 } }, h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'menuitem' }, 'Item'))), '#overlays'],
-      ['Header', h('div', { className: 'sg-header sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Header'), '#chrome'],
-      ['Footer', h('div', { className: 'sg-footer sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Footer'), '#chrome'],
-      ['Sidebar', h('nav', { className: 'sg-sidebar sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Side'), '#chrome'],
-      ['Nav', h('ul', { className: 'sg-nav', style: { display: 'flex', gap: 8, listStyle: 'none', margin: 0, padding: 0, fontSize: 12 } }, h('li', null, h('a', { href: '#' }, 'Nav'))), '#navigation'],
-      ['Toc', h('ol', { className: 'sg-toc', style: { margin: 0, fontSize: 12 } }, h('li', null, h('a', { href: '#' }, 'Toc'))), '#chrome'],
-      ['Breadcrumbs', h('ol', { className: 'sg-breadcrumbs', style: { display: 'flex', gap: 4, listStyle: 'none', margin: 0, padding: 0, fontSize: 12 } }, h('li', null, 'A / B')), '#chrome'],
-      ['Pagination', h('nav', { className: 'sg-pagination', style: { display: 'flex', gap: 4 } }, h('button', { type: 'button', className: 'sg-pagination__btn', 'aria-current': 'page' }, '1')), '#chrome'],
-      ['Stepper', h('ol', { className: 'sg-stepper', style: { display: 'flex', gap: 6, listStyle: 'none', margin: 0, padding: 0, fontSize: 11 } }, h('li', { className: 'sg-stepper__step', 'data-state': 'current' }, h('span', { className: 'sg-stepper__index' }, '1'), ' Étape')), '#chrome'],
-      ['Lang', h('div', { className: 'sg-lang', style: { display: 'flex', gap: 4 } }, h('button', { type: 'button', className: 'sg-lang__btn', 'aria-pressed': 'true' }, 'FR')), '#prefs'],
-      ['Theme', h('span', { style: { color: '#fff', fontSize: 12 } }, 'ThemeToggle'), '#prefs'],
-      ['Consent', h('div', { className: 'sg-consent sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 11 } }, 'Cookies'), '#prefs'],
-      ['Table', h('table', { className: 'sg-table', style: { fontSize: 11, width: '100%' } }, h('tbody', null, h('tr', null, h('td', null, 'Seafoam')))), '#donnees'],
-      ['Quote', h('blockquote', { className: 'sg-quote sg-glass', 'data-frosted': true, style: { margin: 0, padding: 8, fontSize: 12 } }, 'Quote'), '#donnees'],
-      ['Media', h('figure', { className: 'sg-media sg-glass', 'data-frosted': true, style: { margin: 0, padding: 6 } }, h('div', { className: 'sg-media__frame', style: { aspectRatio: '16/9', background: 'rgba(255,255,255,.2)', borderRadius: 8 } })), '#donnees'],
-      ['Hero', h('div', { className: 'sg-hero sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 12 } }, 'Hero'), '#donnees'],
-      ['Share', h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost sg-button--sm' }, 'Share'), '#donnees'],
-      ['Transcription', h('div', { className: 'sg-transcription sg-glass', 'data-frosted': true, style: { padding: 8, fontSize: 11 } }, 'Transcript'), '#donnees'],
-    ];
-    return h(D.Section, {
-      id: 'packages',
-      label: 'Composants',
-      title: 'Inventaire 100 %',
-      lead: 'Tous les composants livrés (CSS .sg-* / React) ont un aperçu ici, avec lien vers la section détaillée quand elle existe. Hors scope : bloc marque, FranceConnect. Roadmap (Drawer, Skeleton…) : docs/COMPOSANTS.md.',
-    },
-      h('div', { className: 'sg-demo-catalog' },
-        h(D.Panel, { scene: true, tag: 'Inventaire live', cap: inventory.length + ' composants — grille complète @seaglass/css.' },
-          h('div', { className: 'sg-scene', style: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(148px, 1fr))', gap: 14 } },
-            inventory.map(function (item) { return cell(item[0], item[1], item[2]); }))),
-        h(D.Panel, { tag: 'Couverture', cap: 'Storybook : pnpm storybook · docs/COMPOSANTS.md' },
-          h('p', { style: { margin: 0, fontSize: 14, color: 'var(--ink-2)' } },
-            'Sections du sommaire + cette grille = 100 % des composants shipping. Les items roadmap non démarrés (Avatar, Drawer, Date…) ne sont pas listés ici.'))));
   };
 
   /* ---------- Tokens et code ---------- */
@@ -231,7 +155,7 @@
           h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion),
           h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
           h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
-          h(S.Cards), h(S.DataDoc), h(S.Feedback), h(S.PrefsDoc), h(S.Packages),
+          h(S.Cards), h(S.DataDoc), h(S.Feedback), h(S.PrefsDoc),
           h(S.Contrast), h(S.Tokens),
           h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
       h(Toast));
