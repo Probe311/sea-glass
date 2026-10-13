@@ -1,6 +1,6 @@
 {
   "name": "@sea-glass/tailwind",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sea Glass Tailwind preset and glass-* utilities.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@sea-glass/tokens": "workspace:*"
+    "@sea-glass/tokens": "workspace:^"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.19"

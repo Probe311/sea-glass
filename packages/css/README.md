@@ -1,9 +1,15 @@
 # `@sea-glass/css`
 
+[![npm](https://img.shields.io/npm/v/@sea-glass/css.svg)](https://www.npmjs.com/package/@sea-glass/css)
+
 Le matériau Sea Glass (`.sg-glass`) et les composants préfixés `.sg-*`. Consomme `@sea-glass/tokens`.
 
+```bash
+pnpm add @sea-glass/css @sea-glass/tokens
+```
+
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@sea-glass/css/seaglass.css" />
+<link rel="stylesheet" href="https://unpkg.com/@sea-glass/css@0.1.1/dist/seaglass.css" />
 <div class="sg-scene">
   <button class="sg-glass sg-button" data-frosted data-rim type="button">Seafoam</button>
 </div>

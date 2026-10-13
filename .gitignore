@@ -22,3 +22,6 @@ media/
 sea-glass-intro/
 .media-deleted/
 _trash_*/
+# local npm auth (never commit tokens)
+.npmrc.local
+

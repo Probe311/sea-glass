@@ -1,6 +1,6 @@
 {
   "name": "@sea-glass/css",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sea Glass CSS — frosted material (.sg-glass) and prefixed components.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
@@ -25,7 +25,7 @@
     "build": "node ./scripts/build.mjs && tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@sea-glass/tokens": "workspace:*"
+    "@sea-glass/tokens": "workspace:^"
   },
   "publishConfig": {
     "access": "public"
