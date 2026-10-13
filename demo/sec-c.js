@@ -1,6 +1,6 @@
 /* Sea Glass v3 · contenu (3/3) : saisie, navigation, contenu, qualité, application */
 (function () {
-  var SG = window.SG, h = SG.h, Glass = SG.Glass, Icon = SG.Icon, UI = SG.UI, D = SG.Doc, S = SG.S;
+  var SG = window.SG, h = SG.h, Icon = SG.Icon, UI = SG.UI, D = SG.Doc, S = SG.S;
   var useState = React.useState, useEffect = React.useEffect, useRef = React.useRef;
 
   /* ---------- Champs et recherche ---------- */
@@ -34,14 +34,6 @@
           h(Card, { tint: 'aqua' }, h('span', { className: 'label' }, 'Aujourd’hui'), h('h4', null, 'Mer calme'), h('p', null, 'Vent faible de sud-ouest, houle de 0,6 m. Bonne visibilité sur tout le littoral.'), h('div', { className: 'kv' }, h('span', null, 'Marée haute 17:42'), h('span', null, 'Coef. 78'))),
           h(Card, { tint: 'amber' }, h('span', { className: 'label' }, 'Observation'), h('h4', null, 'Anémone des mares'), h('p', null, 'Repérée à marée basse, accrochée à un bloc de granit.'), h('div', { className: 'stage' }, h(B, { tint: 'seafoam' }, 'Rivage'), h(B, { tint: 'amber' }, 'Rare'))))),
       h(D.Panel, { tag: 'Badges', cap: 'Texte en encre du galet : contraste minimum 4,5:1.' }, h(D.Stage, null, [['seafoam', 'Collecté'], ['cobalt', 'Nouveau'], ['amber', 'Rare'], ['ruby', 'Menacé'], ['kelly', 'Vérifié'], ['mist', 'Brouillon']].map(function (b) { return h(B, { key: b[0], tint: b[0] }, b[1]); }))));
-  };
-
-  /* ---------- Toasts ---------- */
-  S.Feedback = function () {
-    return h(D.Section, { id: 'toasts', label: 'Composants', title: 'Toasts', lead: 'Confirmer une action sans bloquer le parcours : snack avec Annuler, ou toast éphémère.' },
-      h(D.Panel, { scene: true },
-        h(UI.Snack, { action: h(UI.Button, { variant: 'primary', size: 'sm' }, 'Annuler') }, 'Galet ajouté à ta collection')),
-      h(D.Panel, { tag: 'Toast' }, h(D.Stage, null, h(UI.Button, { variant: 'primary', onClick: function () { SG.toast('Galet collecté'); } }, 'Afficher un toast'))));
   };
 
   /* ---------- Contraste ---------- */
@@ -146,14 +138,34 @@
         h(D.Code, { text: fmt === 'CSS' ? CSS : fmt === 'React' ? REACT : jsonTokens() })));
   };
 
-  /* ---------- Toast et application ---------- */
+  /* ---------- Toast (alerte haut centre + blur) et application ---------- */
   function Toast() {
     var st = useState({ msg: '', on: false }), s = st[0], set = st[1], t = useRef(0);
     useEffect(function () {
-      function on(e) { set({ msg: e.detail, on: true }); clearTimeout(t.current); t.current = setTimeout(function () { set(function (x) { return { msg: x.msg, on: false }; }); }, 1600); }
-      window.addEventListener('sg-toast', on); return function () { window.removeEventListener('sg-toast', on); };
+      function on(e) {
+        set({ msg: e.detail, on: true });
+        clearTimeout(t.current);
+        t.current = setTimeout(function () { set(function (x) { return { msg: x.msg, on: false }; }); }, 2200);
+      }
+      window.addEventListener('sg-toast', on);
+      return function () { window.removeEventListener('sg-toast', on); };
     }, []);
-    return h(Glass, { className: 'over toast' + (s.on ? ' on' : ''), role: 'status', 'aria-live': 'polite', tint: 'seafoam', tintA: 0.8 }, s.msg);
+    return h(React.Fragment, null,
+      h('div', { className: 'sg-toast-scrim' + (s.on ? ' on' : ''), 'aria-hidden': true }),
+      h('div', {
+        className: 'sg-toast-host' + (s.on ? ' on' : ''),
+        role: 'status',
+        'aria-live': 'polite',
+      },
+        h('div', {
+          className: 'sg-alert sg-glass sg-toast',
+          role: 'alert',
+          'data-tone': 'success',
+          'data-frosted': true,
+          'data-tint': true,
+        },
+          h('span', { className: 'sg-alert__icon', 'aria-hidden': true }, h(Icon, { name: 'success', size: 22 })),
+          h('div', null, h('p', { className: 'sg-alert__title' }, s.msg || ' ')))));
   }
   function App() {
     var qs = useState(''), q = qs[0], setQ = qs[1], os = useState(false), open = os[0], setOpen = os[1];
@@ -166,10 +178,10 @@
       h('div', { className: 'shell', id: 'top' },
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
         h('main', { className: 'main' },
-          h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion),
+          h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
           h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
           h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
-          h(S.Cards), h(S.DataDoc), h(S.Feedback), h(S.PrefsDoc),
+          h(S.Cards), h(S.DataDoc), h(S.PrefsDoc),
           h(S.Contrast), h(S.Tokens),
           h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
       h(Toast));

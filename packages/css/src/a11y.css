@@ -8,7 +8,9 @@
     .sg-check__box,
     .sg-progress__bar,
     .sg-tabs__tab,
-    .sg-toast {
+    .sg-toast,
+    .sg-toast-scrim,
+    .sg-toast-host {
       transition: none;
       animation: none;
     }

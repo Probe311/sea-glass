@@ -50,14 +50,36 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .shell { position: relative; z-index: 1; max-width: 1440px; margin-inline: auto; padding-inline: 0 clamp(16px, 3vw, 48px); display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: clamp(16px, 3vw, 48px); }
 .main { min-width: 0; padding-block: 32px 96px; }
 .side {
+  --side-pad: 14px;
+  --sb-size: 8px;
+  --sb-track: transparent;
+  --sb-thumb: color-mix(in srgb, var(--ink) 18%, transparent);
   position: sticky; top: calc(var(--bar-h) + 12px); align-self: start;
-  height: calc(100vh - var(--bar-h) - 24px); overflow-y: auto; scrollbar-width: thin;
-  margin: 12px 0 12px 12px; padding: 14px 10px 18px;
+  height: calc(100vh - var(--bar-h) - 24px); overflow-y: auto; overflow-x: hidden;
+  scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track);
+  scrollbar-gutter: stable;
+  margin: 12px 0 12px 12px; padding: var(--side-pad) 6px var(--side-pad) var(--side-pad);
   display: flex; flex-direction: column; gap: 10px;
   border-radius: 24px;
   background: color-mix(in srgb, var(--ink) 4.5%, var(--ground));
   border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
   -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2);
+}
+.side::-webkit-scrollbar { width: var(--sb-size); }
+.side::-webkit-scrollbar-track {
+  margin-block: 12px;
+  background: transparent;
+}
+.side::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.side::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--ink) 30%, transparent);
+  background-clip: padding-box;
+  border: 2px solid transparent;
 }
 .side nav { display: grid; gap: 18px; }
 .side .grp { display: grid; gap: 4px; }
@@ -152,8 +174,6 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .g2 > *, .g3 > * { min-width: 0; }
 .fields-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
 @media (max-width: 720px) { .fields-grid { grid-template-columns: 1fr; } }
-.chrome-side-grid { display: grid; gap: 12px; grid-template-columns: minmax(12rem, 14rem) minmax(0, 1fr); }
-@media (max-width: 560px) { .chrome-side-grid { grid-template-columns: 1fr; } }
 /* Curseur : laisser déborder anneaux / perle / bulle (le panel-cap garde ses coins bas arrondis) */
 .panel:has(.sl) { overflow: visible; }
 .panel:has(.sl) .panel-body { overflow: visible; }
@@ -347,6 +367,54 @@ pre.code { margin: 0; padding: 18px; border-radius: 16px; background: color-mix(
 .pebble-item .nm { font: 600 15px var(--font-display); margin-top: 6px; }
 .pebble-item .hx { font: 400 12px var(--font-mono); color: var(--ink-3); }
 
+/* Catalogue icônes Jelly */
+.icon-filter {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px; padding: 0 14px; height: 44px;
+  border-radius: 999px; background: color-mix(in srgb, var(--ink) 5%, var(--ground));
+  color: var(--ink-2);
+}
+.icon-filter input {
+  flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+  color: var(--ink); font: 400 15px var(--font-body);
+}
+.icon-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+}
+.icon-grid--dense {
+  max-height: min(68vh, 720px);
+  overflow: auto;
+  padding-right: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+.icon-tile {
+  display: grid; justify-items: center; gap: 6px;
+  padding: 14px 8px 12px; margin: 0; border: 1px solid var(--line);
+  border-radius: 14px; background: color-mix(in srgb, var(--ink) 3.5%, var(--ground));
+  color: var(--ink); font: inherit; cursor: pointer;
+  transition: background var(--theme-dur) var(--theme-ease), transform 200ms var(--spring), border-color var(--theme-dur) var(--theme-ease);
+}
+.icon-tile:hover {
+  background: color-mix(in srgb, var(--seafoam) 22%, var(--ground));
+  border-color: color-mix(in srgb, var(--seafoam) 45%, transparent);
+  transform: scale(1.02);
+}
+.icon-tile:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.icon-tile__glyph {
+  display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent); color: var(--ink);
+}
+.icon-tile__glyph .ico { display: block; }
+.icon-tile__name {
+  font-size: 11px; font-weight: 500; color: var(--ink);
+  text-align: center; word-break: break-word; line-height: 1.25;
+  max-width: 100%;
+}
+.icon-tile__src { font: 400 10px var(--font-mono); color: var(--ink-3); text-align: center; word-break: break-all; }
+
 footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
 
 .matrix .cell.tall { padding-top: 32px; }
@@ -415,11 +483,16 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .specs td:last-child { padding-right: 16px; }
 .specs tbody tr:hover td { background: color-mix(in srgb, var(--ink) 3.5%, transparent); }
 
-/* Recommandations : deux cartes tonales avec icône */
+/* Recommandations : icônes Jelly (pas de glyphes CSS) */
 .use { border: 0; border-radius: 20px; padding: 20px 22px; gap: 12px; }
-.use b { font: 500 16px var(--font-display); }
-.use b::before { content: "✓"; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-size: 14px; background: #308069; color: #fff; }
-.use.dont b::before { content: "✕"; background: #B23A28; }
+.use b { font: 500 16px var(--font-display); display: flex; align-items: center; gap: 10px; }
+.use__ico {
+  display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+  flex: none; color: #fff;
+}
+.use__ico .ico { width: 14px; height: 14px; }
+.use.do .use__ico { background: #308069; }
+.use.dont .use__ico { background: #B23A28; }
 .use.do { background: color-mix(in srgb, var(--kelly) 16%, var(--ground)); }
 .use.dont { background: color-mix(in srgb, var(--ruby) 14%, var(--ground)); }
 pre.code { border-radius: 16px; border-color: var(--outline); }
