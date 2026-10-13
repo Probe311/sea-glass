@@ -85,21 +85,21 @@ Colonnes :
 
 ## Feedback
 
-| Composant         | CSS           | React | Démo               | Storybook   | Avancement                                               |
-| ----------------- | ------------- | ----- | ------------------ | ----------- | -------------------------------------------------------- |
-| Alert             | ✅            | ✅    | ✅ Alertes         | 🟡 Feedback | ✅ Tons info/success/warning/danger                      |
-| Banner            | ✅            | ✅    | ✅ Alertes         | 🟡 Feedback | ✅                                                       |
-| Callout           | ✅            | ✅    | ✅ Alertes         | 🟡 Feedback | ✅ Mise en avant / exergue                               |
-| Accordion         | ✅            | ✅    | ✅ Accordéon       | 🟡 Feedback | ✅                                                       |
-| Tabs              | ✅            | ✅    | ✅ Onglets         | 🟡 Feedback | ✅                                                       |
-| Tooltip           | ✅            | ✅    | ✅                 | —           | 🟡 Hover/focus ; Floating UI / délai / Échap à peaufiner |
-| Snackbar          | ✅            | ✅    | ✅ Toasts          | —           | 🟡 File d’attente / API `toast()` à peaufiner            |
-| Toast             | ✅            | ✅    | ✅ Toasts          | —           | 🟡 Idem                                                  |
-| Progress          | ✅            | ✅    | ✅ Curseur         | 🟡 Feedback | ✅ Barre ; teintes / tailles                             |
-| Ring (circulaire) | ✅ `.sg-ring` | ❌    | ✅ Curseur (proto) | —           | 🟡 CSS + démo ; pas d’export React                       |
-| Skeleton          | ❌            | ❌    | ❌                 | ❌          | ❌ Roadmap P1                                            |
-| Spinner           | ❌            | ❌    | ❌                 | ❌          | ❌ Roadmap P1                                            |
-| Empty state       | ❌            | ❌    | ❌                 | ❌          | ❌ Roadmap P2                                            |
+| Composant         | CSS           | React | Démo                 | Storybook   | Avancement                                               |
+| ----------------- | ------------- | ----- | -------------------- | ----------- | -------------------------------------------------------- |
+| Alert             | ✅            | ✅    | ✅ Alertes et toasts | 🟡 Feedback | ✅ Tons info/success/warning/danger                      |
+| Banner            | ✅            | ✅    | ✅ Alertes et toasts | 🟡 Feedback | ✅                                                       |
+| Callout           | ✅            | ✅    | ✅ Alertes et toasts | 🟡 Feedback | ✅ Mise en avant / exergue                               |
+| Accordion         | ✅            | ✅    | ✅ Accordéon         | 🟡 Feedback | ✅                                                       |
+| Tabs              | ✅            | ✅    | ✅ Onglets           | 🟡 Feedback | ✅                                                       |
+| Tooltip           | ✅            | ✅    | ✅                   | —           | 🟡 Hover/focus ; Floating UI / délai / Échap à peaufiner |
+| Snackbar          | ✅            | ✅    | ✅ Alertes et toasts | —           | ✅ Snack + action                                        |
+| Toast             | ✅            | ✅    | ✅ Alertes et toasts | —           | ✅ Réutilise Alert · haut centre + blur                  |
+| Progress          | ✅            | ✅    | ✅ Curseur           | 🟡 Feedback | ✅ Barre ; teintes / tailles                             |
+| Ring (circulaire) | ✅ `.sg-ring` | ❌    | ✅ Curseur (proto)   | —           | 🟡 CSS + démo ; pas d’export React                       |
+| Skeleton          | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P1                                            |
+| Spinner           | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P1                                            |
+| Empty state       | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P2                                            |
 
 ---
 

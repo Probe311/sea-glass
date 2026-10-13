@@ -20,20 +20,30 @@
   }
 
   S.Alerts = function () {
+    var UI = SG.UI;
     var items = [
       ['info', 'Information', 'La collecte des galets est ouverte jusqu’à dimanche.'],
       ['warning', 'Attention', 'La transparence réduite est activée sur cet appareil.'],
       ['success', 'Succès', 'Le brouillon a été enregistré.'],
       ['error', 'Erreur', 'Impossible d’enregistrer. Réessaie dans un instant.'],
     ];
-    return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et bandeaux', lead: 'Relayer une information importante sans bloquer le parcours. Quatre tons : info, warning, success, error.' },
-      h(D.Panel, { scene: true },
+    return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et toasts', lead: 'Relayer une information sans bloquer le parcours. Les toasts réutilisent le composant alerte, ancrés en haut au centre, avec un léger flou de l’arrière-plan.' },
+      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error.' },
         scene(items.map(function (it) {
           return h('div', { key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-frosted': true, 'data-tint': true },
             alertIcon(it[0]),
             h('div', null, h('p', { className: 'sg-alert__title' }, it[1]), it[2]));
         }))),
-      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Tons', 'info · warning · success · error', 'danger alias de error'], ['Rôle', 'role="alert"', 'Annoncé aux lecteurs d’écran.'], ['Icône', '.sg-alert__icon', 'Une par ton']] }));
+      h(D.Panel, { scene: true, tag: 'Snack', cap: 'Action Annuler sur la même surface.' },
+        h(UI.Snack, { action: h(UI.Button, { variant: 'primary', size: 'sm' }, 'Annuler') }, 'Galet ajouté à ta collection')),
+      h(D.Panel, { tag: 'Toast', cap: 'CTA → alerte éphémère haut centre + blur.' },
+        h(D.Stage, null, h(UI.Button, { variant: 'primary', onClick: function () { SG.toast('Galet collecté'); } }, 'Afficher un toast'))),
+      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
+        ['Tons', 'info · warning · success · error', 'danger alias de error'],
+        ['Toast', 'sg-alert + scrim blur', 'Haut centre · SG.toast()'],
+        ['Rôle', 'role="alert" / status', 'Annoncé aux lecteurs d’écran.'],
+        ['Icône', '.sg-alert__icon', 'Une par ton'],
+      ] }));
   };
 
   S.AccordionDoc = function () {
@@ -182,17 +192,6 @@
             h('ol', { className: 'sg-breadcrumbs' },
               h('li', null, h('a', { className: 'sg-link', href: '#chrome' }, 'Docs'), ' / '),
               h('li', null, h('span', { 'aria-current': 'page' }, 'Chrome')))),
-        ])),
-      h(D.Panel, { scene: true },
-        scene([
-          h('div', { className: 'chrome-side-grid' },
-            h('nav', { className: 'sg-sidebar sg-glass', 'data-frosted': true },
-              h('div', { className: 'sg-sidebar__label' }, 'Guide'),
-              h('a', { href: '#chrome', 'aria-current': 'page' }, 'Matière'),
-              h('a', { href: '#chrome' }, 'Formes')),
-            h('ol', { className: 'sg-toc' },
-              h('li', null, h('a', { href: '#chrome', 'aria-current': true }, 'Frost')),
-              h('li', null, h('a', { href: '#chrome' }, 'Rim')))),
         ])),
       h(D.Panel, { scene: true },
         scene([

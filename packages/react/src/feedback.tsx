@@ -187,21 +187,38 @@ export const Snackbar = forwardRef<HTMLDivElement, SnackbarProps>(function Snack
   );
 });
 
-export type ToastProps = HTMLAttributes<HTMLDivElement> & { open?: boolean };
+export type ToastProps = HTMLAttributes<HTMLDivElement> & {
+  open?: boolean;
+  tone?: Tone;
+  title?: ReactNode;
+  /** Affiche un léger blur d’arrière-plan derrière le toast */
+  blur?: boolean;
+};
+/** Toast = Alert ancrée en haut au centre (+ scrim blur optionnel). */
 export const Toast = forwardRef<HTMLDivElement, ToastProps>(function Toast(
-  { className, open, children, ...rest },
+  { className, open, tone = 'success', title, blur = true, children, ...rest },
   ref,
 ) {
   return (
-    <Glass
-      ref={ref}
-      className={cx('sg-toast', open && 'sg-toast--open', className)}
-      data-open={open || undefined}
-      role="status"
-      tint="kelly"
-      {...rest}
-    >
-      {children}
-    </Glass>
+    <>
+      {blur ? (
+        <div
+          className={cx('sg-toast-scrim', open && 'sg-toast-scrim--open')}
+          data-open={open || undefined}
+          aria-hidden
+        />
+      ) : null}
+      <Alert
+        ref={ref}
+        className={cx('sg-toast', open && 'sg-toast--open', className)}
+        data-open={open || undefined}
+        role="status"
+        tone={tone}
+        title={title}
+        {...rest}
+      >
+        {children}
+      </Alert>
+    </>
   );
 });

@@ -95,7 +95,7 @@
       return h('div', { style: { width: '100%', minWidth: 0 } }, h(UI.Slider, Object.assign({ value: 45, unit: ' m', 'aria-label': 'Profondeur' }, s)));
     }
     var tones = [['seafoam', 'Seafoam · défaut', 72, undefined], ['aqua', 'Aqua · information', 48, undefined], ['amber', 'Amber · attention', 86, undefined], ['ruby', 'Ruby · critique', 94, undefined]];
-    return h(D.Section, { id: 'curseur', label: 'Composants', title: 'Curseur et progression', lead: 'Le rail est un givre translucide. Le remplissage seafoam et la poignée forment une seule matière : au repos une capsule mint soudée au fill ; à l’appui le rail gonfle (bulge) et la poignée devient une perle de verre blanche. Option pipette : un bulbe à gauche de la capsule.' },
+    return h(D.Section, { id: 'curseur', label: 'Composants', title: 'Curseur et progression', lead: 'Le rail est un givre translucide. Le remplissage seafoam et la poignée forment une seule matière : une capsule mint continue, qui grossit à l’appui sans jamais devenir un carré. Option pipette : un bulbe à gauche de la capsule.' },
       h(D.Sub, { title: 'Variantes' },
         h(D.Panel, { tag: 'Aperçu', cap: 'Glisse, clique sur le rail, ou utilise les flèches, Début, Fin, Page haut et Page bas.' },
           h('div', { className: 'g2' },
@@ -104,7 +104,7 @@
             h(UI.Slider, { label: 'Plage de marée', range: true, value: [20, 70], unit: ' %' }),
             h(UI.Slider, { label: 'Houle', value: 30, min: 0, max: 100, step: 10, marks: true, unit: ' cm' }),
             h(UI.Slider, { label: 'Désactivé', value: 25, unit: ' m', disabled: true })))),
-      h(D.Sub, { title: 'États', text: 'Défaut = capsule mint continue. Appui = bulge + perle blanche. Le focus n’apparaît qu’au clavier.' },
+      h(D.Sub, { title: 'États', text: 'Défaut = capsule mint continue. Appui = même matière, bout un peu plus large. Le focus n’apparaît qu’au clavier.' },
         h(D.Panel, { tag: 'Matrice' }, h(D.Matrix, { tall: true, corner: 'Composant', cols: [['rest', 'Défaut'], ['hover', 'Survol'], ['press', 'Appui'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['s', 'Curseur']], render: cell }))),
       h(D.Sub, { title: 'Progression', text: 'Les barres gardent un rail creusé (sémantique différente du curseur interactif) et le même verre de remplissage. Quatre teintes, trois tailles, tampon, indéterminé et anneau.' },
         h(D.Panel, { tag: 'Barres', cap: 'Le remplissage rebondit légèrement à l’arrivée. Le mode indéterminé n’anime que transform.' },
@@ -124,8 +124,8 @@
         ['Course', 'Bornée par 10 px de chaque côté', 'Alignée sur le centre de la capsule.'],
         ['Repos', 'Capsule 14 × 36 px, mint', 'Congés + blob soudent fill et poignée.'],
         ['Pipette', 'thumb="pipette"', 'Bulbe mint à gauche de la capsule.'],
-        ['Appui', 'Bulge ~52 px + perle blanche 28 px', 'Anneaux blancs ; bulle de valeur.'],
-        ['Plage', 'Deux capsules', 'Sans bulge (lisibilité des deux poignées).'],
+        ['Appui', 'Bout mint ~28 px (pilule)', 'Même matière ; halo soft ; bulle de valeur.'],
+        ['Plage', 'Deux capsules', 'Sans gonflement (lisibilité des deux poignées).'],
         ['Paliers', 'Jusqu’à 20 crans', 'Les crans atteints passent en vert.'],
         ['Clavier', '← → ↑ ↓, Début, Fin, PgUp, PgDn', 'role="slider", aria-valuenow, aria-valuetext.'],
         ['Barre de progression', '10 · 18 · 26 px, rail creusé', 'Remplissage à 2 px du bord ; distinct du curseur.'],

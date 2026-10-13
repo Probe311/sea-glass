@@ -60,7 +60,11 @@
     catch (e) { done(fallbackCopy(text)); }
   };
 
-  SG.Icon = function (p) { return h('svg', { className: 'ico', 'aria-hidden': true, width: p.size, height: p.size }, h('use', { href: '#i-' + p.name })); };
+  SG.Icon = function (p) {
+    var alias = (window.SG_ICON_ALIAS && window.SG_ICON_ALIAS[p.name]) || p.name;
+    return h('svg', { className: 'ico', 'aria-hidden': true, width: p.size, height: p.size },
+      h('use', { href: 'icons/sprite.svg#i-' + alias }));
+  };
 
   /* ---------- Lumière : un seul écouteur pour tout le système ---------- */
   var live = null, last = null, raf = 0;

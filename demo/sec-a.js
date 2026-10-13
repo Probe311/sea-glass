@@ -7,13 +7,13 @@
   /* ---------- Navigation latérale avec suivi de lecture ---------- */
   var NAV = [
     ['Principes', [['matiere', 'Matière']]],
-    ['Fondations', [['couleurs', 'Couleurs'], ['typo', 'Typographie'], ['forme', 'Forme et espace'], ['mouvement', 'Mouvement']]],
+    ['Fondations', [['couleurs', 'Couleurs'], ['typo', 'Typographie'], ['forme', 'Forme et espace'], ['mouvement', 'Mouvement'], ['icones', 'Icônes']]],
     ['Composants', [
       ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
       ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
       ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête et pied'],
-      ['alertes', 'Alertes et bandeaux'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
-      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'], ['toasts', 'Toasts'],
+      ['alertes', 'Alertes et toasts'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
+      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'],
       ['prefs', 'Préférences'],
     ]],
     ['Qualité', [['contraste', 'Contraste'], ['tokens', 'Tokens et code']]]
@@ -210,14 +210,93 @@
   S.Motion = function () {
     var st = useState(false), go = st[0], setGo = st[1];
     var items = [['Rapide', '120 ms', 'Appui, case cochée, reflet', 120], ['Base', '200 ms', 'Survol, ombres, halo', 200], ['Souple', '380 ms', 'Interrupteur, onglets, curseur', 380]];
-    function replay() { setGo(false); setTimeout(function () { setGo(true); }, 40); setTimeout(function () { setGo(false); }, 1500); }
+    useEffect(function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var tOut, tIn;
+      function cycle() {
+        setGo(false);
+        tIn = setTimeout(function () {
+          setGo(true);
+          tOut = setTimeout(cycle, 1800);
+        }, 80);
+      }
+      cycle();
+      return function () { clearTimeout(tIn); clearTimeout(tOut); };
+    }, []);
     return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Aucun clignotement. Tout se calme avec prefers-reduced-motion.' },
       h(D.Panel, { tag: 'Durées', cap: 'cubic-bezier(0.2, 0, 0, 1) · ressort cubic-bezier(0.34, 1.4, 0.5, 1)' },
         h('div', { className: 'g3' }, items.map(function (m) {
           return h(Glass, { key: m[0], className: 'mo' + (go ? ' go' : ''), style: { '--d': m[3] + 'ms' }, alive: false },
             h('b', { style: { fontWeight: 500 } }, m[0] + ' · ' + m[1]), h('span', { style: { fontSize: 12, color: 'var(--ink-3)' } }, m[2]),
             h(Glass, { className: 'track', refractive: false, alive: false, glow: false }, h('span', { className: 'ball' })));
-        })),
-        h('div', null, h(UI.Button, { variant: 'primary', onClick: replay }, 'Rejouer'))));
+        }))));
+  };
+
+  /* ---------- Icônes Jelly ---------- */
+  S.Icons = function () {
+    var catalog = window.SG_ICON_CATALOG || [];
+    var aliases = window.SG_ICON_ALIAS || {};
+    var qs = useState(''), q = qs[0], setQ = qs[1];
+    var nq = q.trim().toLowerCase();
+    var filtered = !nq ? catalog : catalog.filter(function (name) { return name.indexOf(nq) > -1; });
+    var aliasRows = Object.keys(aliases).map(function (k) { return [k, aliases[k]]; });
+    function copyName(name) {
+      SG.copy(name, '« ' + name + ' » copié');
+    }
+    return h(D.Section, { id: 'icones', label: 'Fondations', title: 'Icônes Jelly', lead: 'Font Awesome jelly-regular complet (' + catalog.length + '), factorisé dans demo/icons/jelly. Sprite externe icons/sprite.svg · aliases courts pour la démo (search → magnifying-glass). Clique une tuile pour copier le nom FA.' },
+      h(D.Panel, { tag: 'Catalogue', cap: filtered.length + ' / ' + catalog.length + ' · viewBox 560 · currentColor' },
+        h('label', { className: 'icon-filter' },
+          h(Icon, { name: 'search', size: 18 }),
+          h('input', {
+            type: 'search',
+            value: q,
+            placeholder: 'Filtrer (ex. circle, house…)',
+            'aria-label': 'Filtrer les icônes',
+            onChange: function (e) { setQ(e.target.value); },
+          })),
+        h('div', { className: 'icon-grid icon-grid--dense' }, filtered.map(function (name) {
+          return h('button', {
+            key: name, type: 'button', className: 'icon-tile',
+            onClick: function () { copyName(name); },
+            'aria-label': 'Copier ' + name,
+            title: name,
+          },
+            h('span', { className: 'icon-tile__glyph', 'aria-hidden': true }, h(Icon, { name: name, size: 26 })),
+            h('span', { className: 'icon-tile__name mono' }, name));
+        }))),
+      aliasRows.length ? h(D.Panel, { tag: 'Alias démo', cap: 'Raccourcis SG.Icon → nom FA' },
+        h('div', { className: 'icon-grid' }, aliasRows.map(function (it) {
+          return h('button', {
+            key: it[0], type: 'button', className: 'icon-tile',
+            onClick: function () { copyName(it[0]); },
+            'aria-label': 'Copier ' + it[0],
+          },
+            h('span', { className: 'icon-tile__glyph', 'aria-hidden': true }, h(Icon, { name: it[0], size: 26 })),
+            h('span', { className: 'icon-tile__name mono' }, it[0]),
+            h('span', { className: 'icon-tile__src' }, it[1]));
+        }))) : null,
+      h(D.Sub, { title: 'Utilisation' },
+        h(D.Code, { text: [
+          '/* Démo — alias ou nom FA */',
+          'h(Icon, { name: \'search\', size: 20 })',
+          'h(Icon, { name: \'magnifying-glass\', size: 20 })',
+          '',
+          '/* Sprite externe */',
+          '<svg class="ico" width="20" height="20" aria-hidden="true">',
+          '  <use href="icons/sprite.svg#i-magnifying-glass"></use>',
+          '</svg>',
+          '',
+          '/* Fichier isolé */',
+          '<img src="icons/jelly/magnifying-glass.svg" alt="" width="20" height="20" />',
+          '',
+          'pnpm icons:jelly',
+        ].join('\n') })),
+      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
+        ['API', 'SG.Icon { name, size }', 'alias ou nom FA'],
+        ['Sprite', 'icons/sprite.svg#i-{fa}', catalog.length + ' symboles'],
+        ['Fichiers', 'demo/icons/jelly/{fa}.svg', '365 jelly-regular'],
+        ['Source', 'FA jelly-regular', 'pnpm icons:jelly · SG_JELLY_DIR'],
+        ['Couleur', 'currentColor / fill', 'Hérite de color CSS'],
+      ] }));
   };
 })();

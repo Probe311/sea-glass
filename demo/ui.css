@@ -64,11 +64,8 @@
 .cb input { position: absolute; left: 0; top: 50%; width: 24px; height: 24px; margin: -12px 0 0; opacity: 0; cursor: pointer; z-index: 6; }
 .cb .box { position: relative; width: 24px; height: 24px; flex: none; display: block; --lg-r: 8px; --lg-blur: 4px; --gl: 7px; }
 .cb.radio .box { --lg-r: 50%; }
-.cb .box > .ico,
-.cb .box > .tick-ind { position: absolute; inset: 0; margin: auto; pointer-events: none; z-index: 5; }
-.cb .box > .ico { width: 14px; height: 14px; fill: #fff; filter: drop-shadow(0 1px 1px rgba(0, 50, 40, 0.4)); opacity: 0; transform: scale(0.7); transition: opacity 180ms var(--ease), transform 260ms var(--spring); }
+.cb .box > .ico { position: absolute; inset: 0; margin: auto; pointer-events: none; z-index: 5; width: 14px; height: 14px; fill: #fff; filter: drop-shadow(0 1px 1px rgba(0, 50, 40, 0.4)); opacity: 0; transform: scale(0.7); transition: opacity 180ms var(--ease), transform 260ms var(--spring); }
 .cb.on .box > .ico { opacity: 1; transform: scale(1); }
-.cb .tick-ind { width: 12px; height: 3px; border-radius: 999px; background: #fff; box-shadow: 0 1px 1px rgba(0, 50, 40, 0.35); }
 .cb .dot { position: absolute; z-index: 5; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; transform: scale(0); transition: transform 320ms var(--spring); pointer-events: none; background: #fff; box-shadow: 0 1px 2px rgba(0, 50, 40, 0.55); }
 .cb.on .dot { transform: scale(1); }
 .cb .box { transition: transform 260ms var(--spring), box-shadow 260ms var(--ease), background 200ms var(--ease); }
@@ -114,119 +111,118 @@
   }
 }
 
-/* Fill mint : s’arrête sous le pouce pour une matière continue */
+/* Fill mint : matière unique jusqu’au bout arrondi (sous le thumb) */
 .sl-fill {
   position: absolute; left: 0; top: 16px; height: var(--sl-h);
-  width: calc(10px + (100% - 20px) * var(--b));
+  width: calc(10px + (100% - 20px) * var(--b) + var(--sl-h) / 2);
   border-radius: 999px; overflow: hidden; z-index: 1;
   background: linear-gradient(180deg, var(--ft), var(--fb));
   box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.75), inset 0 -2px 3px -1px rgba(10, 90, 70, 0.22);
 }
 .sl-fill::after { content: ""; position: absolute; left: 8px; right: 10px; top: 2px; height: 7px; border-radius: 999px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0)); }
-.sl.range .sl-fill { left: calc(10px + (100% - 20px) * var(--a)); width: calc((100% - 20px) * (var(--b) - var(--a))); }
+.sl.range .sl-fill {
+  left: calc(10px + (100% - 20px) * var(--a) - var(--sl-h) / 2);
+  width: calc((100% - 20px) * (var(--b) - var(--a)) + var(--sl-h));
+}
 .sl:not(.drag) .sl-fill { transition: width 220ms var(--ease), left 220ms var(--ease); }
 
 .sl-thumb {
   position: absolute; top: 0; left: calc(10px + (100% - 20px) * var(--v));
   width: 44px; height: 52px; margin-left: -22px; outline: none; z-index: 3;
+  background: transparent; border: 0; border-radius: 999px;
 }
 .sl:not(.drag) .sl-thumb { transition: left 220ms var(--ease); }
 .sl-thumb:focus-visible { outline: none !important; }
 
-/* Bulge organique : au repos = jointure fill/capsule ; à l’appui = gonflement du rail */
+/* Capule bout : même matière que le fill (pas de bordure séparée) */
 .sl-thumb .blob {
-  position: absolute; left: 50%; top: 50%; width: var(--sl-h); height: var(--sl-h);
-  margin: calc(var(--sl-h) / -2) 0 0 calc(var(--sl-h) / -2); border-radius: 50%; pointer-events: none; z-index: 1;
-  background: radial-gradient(circle at 40% 35%, color-mix(in srgb, var(--ft) 80%, #fff), var(--fb) 70%);
-  transform: scale(1.05); opacity: 0.95;
-  transition: transform 320ms var(--spring), width 320ms var(--spring), height 320ms var(--spring), margin 320ms var(--spring), background 240ms var(--ease), opacity 200ms var(--ease), box-shadow 240ms var(--ease);
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  position: absolute; left: 50%; top: 50%;
+  width: var(--sl-h); height: var(--sl-h);
+  margin: calc(var(--sl-h) / -2) 0 0 calc(var(--sl-h) / -2);
+  border-radius: 999px; pointer-events: none; z-index: 1;
+  background: linear-gradient(180deg, var(--ft), var(--fb));
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.55);
+  opacity: 1;
+  transition: width 280ms var(--spring), height 280ms var(--spring), margin 280ms var(--spring), box-shadow 220ms var(--ease), opacity 160ms var(--ease);
 }
-/* Capsule mint (repos) — matière continue avec le fill */
 .sl-thumb .stem {
-  position: absolute; left: 50%; top: 50%; width: 15px; height: 34px; transform: translate(-50%, -50%);
+  position: absolute; left: 50%; top: 50%;
+  width: var(--sl-h); height: var(--sl-h);
+  transform: translate(-50%, -50%);
   border-radius: 999px; z-index: 3; pointer-events: none;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--ft) 55%, #fff), var(--fb) 55%, var(--sl-mint-deep));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ft) 70%, #fff), var(--fb) 55%, var(--sl-mint-deep));
   box-shadow:
-    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.7),
-    inset -1px -2px 2px rgba(5, 55, 43, 0.2),
-    0 2px 8px -2px rgba(var(--fg), 0.4);
-  transition: width 300ms var(--spring), height 300ms var(--spring), border-radius 300ms var(--spring), background 240ms var(--ease), box-shadow 240ms var(--ease), transform 300ms var(--spring);
+    inset 1px 1.5px 1px rgba(255, 255, 255, 0.65),
+    inset -1px -1.5px 2px rgba(5, 55, 43, 0.18);
+  transition: width 280ms var(--spring), height 280ms var(--spring), transform 280ms var(--spring), box-shadow 220ms var(--ease), background 200ms var(--ease);
 }
-/* Congés : soudure fill → capsule (désactivés en plage) */
-.sl-thumb .fl { position: absolute; z-index: 2; right: calc(50% + 2px); width: 11px; height: 11px; transition: opacity 160ms var(--ease); pointer-events: none; }
-.sl-thumb .fl.t { top: calc(50% - 18px); background: radial-gradient(circle at 0 0, transparent 9.5px, var(--ft) 10px); }
-.sl-thumb .fl.b { bottom: calc(50% - 18px); background: radial-gradient(circle at 0 100%, transparent 9.5px, var(--fb) 10px); }
-.sl.range .fl, .sl.range .blob { display: none; }
+/* Congés désactivés : la matière est déjà continue via le fill élargi */
+.sl-thumb .fl { display: none; }
+.sl.range .blob { display: none; }
 
 /* Variante pipette : bulbe à gauche de la capsule */
 .sl-thumb.pipette .bulb {
-  position: absolute; z-index: 2; left: calc(50% - 28px); top: 50%; width: 22px; height: 22px;
-  margin-top: -11px; border-radius: 50%; pointer-events: none;
+  position: absolute; z-index: 2; left: calc(50% - 26px); top: 50%; width: 20px; height: 20px;
+  margin-top: -10px; border-radius: 999px; pointer-events: none;
   background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--sl-mint) 55%, #fff), var(--sl-mint-deep));
   box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.7), 0 2px 5px -2px rgba(var(--fg), 0.3);
   transition: opacity 200ms var(--ease), transform 280ms var(--spring);
 }
 .sl-thumb:not(.pipette) .bulb { display: none; }
 
+/* Halo soft (rond) — jamais de carré */
 .sl-thumb .ring {
-  position: absolute; left: 50%; top: 50%; border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -50%) scale(0.55); opacity: 0;
-  transition: transform 320ms var(--ease), opacity 220ms var(--ease); pointer-events: none; z-index: 4;
+  position: absolute; left: 50%; top: 50%; border-radius: 999px;
+  border: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+  transform: translate(-50%, -50%) scale(0.4); opacity: 0;
+  transition: transform 280ms var(--ease), opacity 200ms var(--ease); pointer-events: none; z-index: 0;
 }
-.sl-thumb .ring.r1 { width: 44px; height: 44px; }
-.sl-thumb .ring.r2 { width: 64px; height: 64px; border-color: rgba(255, 255, 255, 0.45); }
+.sl-thumb .ring.r1 { width: 40px; height: 40px; }
+.sl-thumb .ring.r2 { width: 56px; height: 56px; background: radial-gradient(circle, rgba(var(--fg), 0.22) 0%, transparent 72%); }
 
-/* Survol */
+/* Survol : léger grossissement, même matière */
 .sl:hover .sl-thumb .stem, .sl.is-hover .sl-thumb .stem {
-  transform: translate(-50%, -50%) scale(1.06);
+  transform: translate(-50%, -50%) scale(1.08);
   box-shadow:
-    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.75),
-    inset -1px -2px 2px rgba(5, 55, 43, 0.22),
-    0 0 0 5px rgba(123, 191, 172, 0.2),
-    0 3px 8px -2px rgba(var(--fg), 0.4);
+    inset 1px 1.5px 1px rgba(255, 255, 255, 0.7),
+    inset -1px -1.5px 2px rgba(5, 55, 43, 0.2),
+    0 0 0 4px rgba(123, 191, 172, 0.18);
 }
-.sl:hover .sl-thumb .blob, .sl.is-hover .sl-thumb .blob { transform: scale(1.12); }
+.sl:hover .sl-thumb .blob, .sl.is-hover .sl-thumb .blob { transform: none; }
 
-/* Appui / drag : bulge organique + perle blanche verre */
+/* Appui / drag : bout plus large, toujours pilule mint (pas de perle carrée) */
 .sl.is-press .sl-thumb .blob,
 .sl.drag .sl-thumb.act .blob {
-  width: 52px; height: 52px; margin: -26px 0 0 -26px;
-  transform: scale(1);
-  background:
-    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.55), transparent 42%),
-    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--ft) 55%, #fff) 0%, color-mix(in srgb, var(--fb) 40%, transparent) 72%, transparent 78%);
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.55);
+  width: 28px; height: 28px; margin: -14px 0 0 -14px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--ft), var(--fb));
+  box-shadow: inset 0 1.5px 1px rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
 .sl.is-press .sl-thumb .stem,
 .sl.drag .sl-thumb.act .stem {
-  width: 28px; height: 28px; border-radius: 50%; transform: translate(-50%, -50%);
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 1) 0 8%, rgba(255, 255, 255, 0) 18%),
-    radial-gradient(circle at 70% 78%, rgba(255, 255, 255, 0.35), transparent 45%),
-    linear-gradient(165deg, #FFFFFF, #F0F4F2 55%, #E4EBE8);
+  width: 28px; height: 28px; border-radius: 999px; transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--ft) 75%, #fff), var(--fb) 50%, var(--sl-mint-deep));
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
-    inset 1px 2px 3px rgba(255, 255, 255, 0.9),
-    inset -1px -2px 3px rgba(var(--shade), 0.12),
-    0 4px 10px -3px rgba(var(--drop), 0.28);
+    inset 1.5px 2px 2px rgba(255, 255, 255, 0.75),
+    inset -1px -2px 3px rgba(5, 55, 43, 0.22),
+    0 2px 8px -2px rgba(var(--fg), 0.35);
 }
-.sl.is-press .fl, .sl.drag .sl-thumb.act .fl,
 .sl.is-press .bulb, .sl.drag .sl-thumb.act .bulb { opacity: 0; transform: scale(0.6); }
 .sl.is-press .ring, .sl.drag .sl-thumb.act .ring { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.sl.is-press .ring.r2, .sl.drag .sl-thumb.act .ring.r2 { opacity: 0.55; }
+.sl.is-press .ring.r2, .sl.drag .sl-thumb.act .ring.r2 { opacity: 0.7; }
 
-/* Focus clavier : anneau blanc (langage verre) + filet focus a11y */
+/* Focus clavier : anneau rond a11y */
 .sl-thumb:focus-visible .stem, .sl.is-focus .sl-thumb .stem {
   box-shadow:
-    inset 1.5px 1.5px 1px rgba(255, 255, 255, 0.65),
+    inset 1px 1.5px 1px rgba(255, 255, 255, 0.65),
     0 0 0 2px var(--ground),
     0 0 0 4px var(--focus);
 }
 .sl-thumb:focus-visible .ring.r1, .sl.is-focus .sl-thumb .ring.r1 {
-  opacity: 1; transform: translate(-50%, -50%) scale(1); border-color: rgba(255, 255, 255, 0.95);
+  opacity: 1; transform: translate(-50%, -50%) scale(1);
+  background: none; border: 2px solid rgba(255, 255, 255, 0.9);
 }
 .sl.dis { opacity: 0.45; pointer-events: none; }
 
@@ -339,8 +335,26 @@
 }
 .tip { display: inline-block; padding: 8px 14px; --lg-r: 12px; --lg-blur: 10px; --gl: 8px; font-size: 13px; }
 .snack { display: flex; align-items: center; gap: 16px; padding: 8px 8px 8px 22px; --lg-r: 999px; --gl: 12px; font-size: 14px; max-width: 100%; }
-.toast { position: fixed !important; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 80; padding: 12px 22px; --lg-r: 999px; font: 500 14px var(--font-body); color: var(--on-tint); transition: transform 380ms var(--spring), opacity 200ms var(--ease); }
-.toast.on { transform: translate(-50%, 0); opacity: 1; }
+.sg-toast-scrim {
+  position: fixed; inset: 0; z-index: 79; pointer-events: none;
+  opacity: 0; background: color-mix(in srgb, var(--ground) 28%, transparent);
+  backdrop-filter: blur(8px) saturate(1.15);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  transition: opacity 220ms var(--ease);
+}
+.sg-toast-scrim.on { opacity: 1; }
+.sg-toast-host {
+  position: fixed; left: 50%; top: calc(20px + env(safe-area-inset-top, 0px));
+  transform: translate(-50%, -12px); opacity: 0; pointer-events: none; z-index: 80;
+  width: min(420px, calc(100vw - 32px));
+  transition: transform 380ms var(--spring), opacity 200ms var(--ease);
+}
+.sg-toast-host.on { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.sg-toast-host .sg-toast.sg-alert {
+  position: static; left: auto; top: auto; bottom: auto;
+  transform: none; opacity: 1; width: 100%; margin: 0;
+  pointer-events: auto; z-index: auto;
+}
 
 /* ---------- Mouvement et contraste ---------- */
 .mo { padding: 18px; display: grid; gap: 12px; --lg-r: 22px; }
@@ -371,5 +385,5 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 /* hover/press stem transforms : définis dans le bloc .sl ci-dessus */
 .navbar .nb, .tabs-list .tab, .search .sbtn { transition: transform 220ms var(--spring), color 200ms var(--ease), background 200ms var(--ease); }
 .navbar .nb:hover, .tabs-list .tab:hover:not(:disabled), .search .sbtn:hover { transform: scale(1.05); }
-.card, .search, .navbar, .tabs-list, .snack, .tip, .mo, .toast { --hs: 1.02; --as: 0.99; }
+.card, .search, .navbar, .tabs-list, .snack, .tip, .mo { --hs: 1.02; --as: 0.99; }
 .search, .navbar, .tabs-list { --hs: 1.01; --as: 0.995; }

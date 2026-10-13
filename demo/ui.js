@@ -61,7 +61,7 @@
     return h('label', { className: cls('cb', active && 'on', p.disabled && 'dis', p.state && 'is-' + p.state) },
       h('input', { type: 'checkbox', checked: on, disabled: p.disabled, onChange: function (e) { set(e.target.checked); } }),
       h(Glass, { as: 'span', className: cls('box', !active && 'carved'), frosted: false, glow: false, refractive: false, alive: false },
-        ind ? h('span', { className: 'tick-ind', 'aria-hidden': true })
+        ind ? h(Icon, { name: 'minus', size: 14 })
           : on ? h(Icon, { name: 'check', size: 14 }) : null),
       p.children);
   };

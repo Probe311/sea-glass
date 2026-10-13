@@ -89,8 +89,14 @@
       h('tbody', null, p.rows.map(function (r, i) { return h('tr', { key: i }, r.map(function (c, j) { return h('td', { key: j }, c); })); }))));
   };
   D.Usage = function (p) {
-    function box(kind, title, list) { return h('div', { className: 'use ' + kind }, h('b', null, title), h('ul', null, list.map(function (t, i) { return h('li', { key: i }, t); }))); }
-    return h('div', { className: 'usage' }, box('do', 'À faire', p.dos), box('dont', 'À éviter', p.donts));
+    function box(kind, title, icon, list) {
+      return h('div', { className: 'use ' + kind },
+        h('b', null, h('span', { className: 'use__ico', 'aria-hidden': true }, h(Icon, { name: icon, size: 14 })), title),
+        h('ul', null, list.map(function (t, i) { return h('li', { key: i }, t); })));
+    }
+    return h('div', { className: 'usage' },
+      box('do', 'À faire', 'check', p.dos),
+      box('dont', 'À éviter', 'xmark', p.donts));
   };
   /* Matrice : colonnes = états, lignes = variantes ; render(row, col) renvoie le composant */
   D.Matrix = function (p) {
