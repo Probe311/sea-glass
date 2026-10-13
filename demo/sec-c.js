@@ -61,16 +61,32 @@
       return { label: label, fg: hex(fg), bg: hex(bg), r: ratio(fg, bg), min: min };
     }
     var rows = [
-      pair('Texte principal sur le sol', '--ink', null, 1, 4.5), pair('Texte secondaire sur le sol', '--ink-2', null, 1, 4.5), pair('Texte discret sur le sol', '--ink-3', null, 1, 4.5),
-      pair('Bouton principal : seafoam à 62 %', '--on-tint', 'seafoam', 0.62, 4.5), pair('Badge aqua à 62 %', '--aqua-ink', 'aqua', 0.62, 4.5), pair('Badge amber à 62 %', '--amber-ink', 'amber', 0.62, 4.5),
-      pair('Badge kelly à 62 %', '--kelly-ink', 'kelly', 0.62, 4.5), pair('Badge cobalt à 62 %', '--cobalt-ink', 'cobalt', 0.62, 4.5), pair('Anneau de focus sur le sol', '--focus', null, 1, 3)];
-    // Icône blanche du cœur sur ruby à 93 %
-    var heart = { label: 'Cœur : icône blanche sur ruby à 93 %', fg: '#ffffff', bg: hex(blend(rgb(V('--ruby')), ground, 0.93)) };
-    heart.r = ratio(rgb('#ffffff'), rgb(heart.bg)); heart.min = 3; rows.push(heart);
-    // Coche et point : blanc sur le teal profond de la case cochée (deux extrémités du dégradé)
+      pair('Texte principal sur le sol', '--ink', null, 1, 4.5),
+      pair('Texte secondaire sur le sol', '--ink-2', null, 1, 4.5),
+      pair('Texte discret sur le sol', '--ink-3', null, 1, 4.5),
+      pair('Bouton principal : seafoam à 92 %', '--on-tint', 'seafoam', 0.92, 4.5),
+      pair('Badge aqua à 88 %', '--aqua-ink', 'aqua', 0.88, 4.5),
+      pair('Badge amber à 88 %', '--amber-ink', 'amber', 0.88, 4.5),
+      pair('Badge kelly à 88 %', '--kelly-ink', 'kelly', 0.88, 4.5),
+      pair('Badge cobalt à 88 %', '--cobalt-ink', 'cobalt', 0.88, 4.5),
+      pair('Nav active : on-tint sur seafoam 92 %', '--on-tint', 'seafoam', 0.92, 3),
+      pair('Anneau de focus sur le sol', '--focus', null, 1, 3)];
+    var heart = { label: 'Cœur : ruby-ink sur ruby à 100 %', fg: V('--ruby-ink'), bg: hex(blend(rgb(V('--ruby')), ground, 1)) };
+    heart.r = ratio(rgb(heart.fg), rgb(heart.bg)); heart.min = 3; rows.push(heart);
     [['Coche : blanc sur le haut du galet #308069', '#308069'], ['Coche : blanc sur le bas du galet #256B5A', '#256B5A']].forEach(function (t) {
       rows.push({ label: t[0], fg: '#ffffff', bg: t[1], r: ratio([255, 255, 255], rgb(t[1])), min: 3 });
     });
+    [['Alerte info : ink sur aqua 28 %', '--ink', 'aqua', 0.28, 4.5], ['Alerte error : ink sur ruby 28 %', '--ink', 'ruby', 0.28, 4.5]].forEach(function (t) {
+      rows.push(pair(t[0], t[1], t[2], t[3], t[4]));
+    });
+    (function () {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark'
+        || (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      var dlgBg = dark ? blend([18, 28, 26], ground, 0.55) : blend([255, 255, 255], ground, 0.82);
+      var dlg = { label: dark ? 'Dialog démo : ink sur teinte 18 28 26 à 55 %' : 'Dialog démo : ink sur blanc à 82 %', fg: V('--ink'), bg: hex(dlgBg), min: 4.5 };
+      dlg.r = ratio(rgb(dlg.fg), dlgBg);
+      rows.push(dlg);
+    })();
     return h(D.Section, { id: 'contraste', label: 'Qualité', title: 'Contraste mesuré', lead: 'Ratios calculés en direct pour le thème actif, avec l’opacité réelle des teintes mélangées au sol. Le texte vise 4,5:1, les icônes et anneaux 3:1. Sur une photo, vérifie le texte posé sur du Givre au cas par cas.' },
       h(D.Panel, { tag: 'Mesures', cap: 'Change de thème depuis le menu pour comparer.' },
         h('div', { className: 'tscroll' }, h('table', { className: 'ct' },

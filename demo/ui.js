@@ -31,7 +31,7 @@
       as: 'button', type: 'button', innerRef: ref, onPointerDown: down, onClick: p.onClick, disabled: p.disabled || p.state === 'disabled',
       'aria-label': p['aria-label'], 'aria-pressed': pressed, tabIndex: p.tabIndex,
       className: cls('btn', 'shape-' + shape, p.size, v === 'primary' && 'primary', love && 'love', loveOff && 'off', ghost && 'ghost', p.state && 'is-' + p.state),
-      tint: v === 'primary' ? 'seafoam' : (love && !loveOff) ? 'ruby' : undefined, tintA: v === 'primary' ? 0.62 : 0.93,
+      tint: v === 'primary' ? 'seafoam' : (love && !loveOff) ? 'ruby' : undefined, tintA: v === 'primary' ? 0.92 : (love && !loveOff) ? 1 : undefined,
       glow: v === 'primary' || (love && !loveOff), refractive: false, frosted: !ghost, rim: !ghost, alive: !ghost
     }, p.children);
   };
@@ -215,7 +215,7 @@
       return h('button', a, it.icon && h(Icon, { name: it.icon }), it.label);
     });
     var indicator = line ? h('span', { className: 'ind', style: { left: pos.left + 'px', width: pos.width + 'px' }, 'aria-hidden': true })
-      : h(Glass, { as: 'span', className: 'pill', style: { left: pos.left + 'px', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.78, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true });
+      : h(Glass, { as: 'span', className: 'pill', style: { left: pos.left + 'px', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true });
     var common = { role: p.kind === 'radio' ? 'radiogroup' : 'tablist', 'aria-label': p.label, onKeyDown: key };
     if (line) return h('div', Object.assign({ ref: box, className: p.variant === 'doc' ? 'm3tabs' : 'tabs-line' }, common), indicator, buttons);
     return h(Glass, Object.assign({ innerRef: box, className: 'tabs-list', refractive: false, glow: false }, common), indicator, buttons);

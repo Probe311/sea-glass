@@ -35,13 +35,13 @@
       return function () { if (ro) ro.disconnect(); };
     }, []);
     return h(Glass, { as: 'nav', className: 'navbar', innerRef: box, 'aria-label': 'Navigation principale' },
-      h(Glass, { as: 'span', className: 'pill', style: { left: pill.left + 'px', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.78, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true }),
+      h(Glass, { as: 'span', className: 'pill', style: { left: pill.left + 'px', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true }),
       items.map(function (it, i) { return h('button', { key: it[0], type: 'button', className: 'nb', 'aria-current': i === cur ? 'page' : undefined, onClick: function () { set(i); } }, h(Icon, { name: it[0] }), it[1]); }));
   };
 
   C.Card = function (p) { return h(Glass, { as: 'article', className: 'card', tint: p.tint, tintA: 0.4, style: p.style }, p.children); };
   C.Badge = function (p) {
-    return h(Glass, { as: 'span', className: 'badge', tint: p.tint, tintA: 0.62, refractive: false, alive: false, glow: false, style: { color: p.tint ? 'var(--' + p.tint + '-ink)' : undefined } }, p.dot && h('i'), p.children);
+    return h(Glass, { as: 'span', className: 'badge', tint: p.tint, tintA: 0.88, refractive: false, alive: false, glow: false, style: { color: p.tint ? 'var(--' + p.tint + '-ink)' : undefined } }, p.dot && h('i'), p.children);
   };
   C.Tip = function (p) { return h(Glass, { className: 'tip', role: 'tooltip', alive: false }, p.children); };
   C.Snack = function (p) { return h(Glass, { className: 'snack', tint: 'seafoam', tintA: 0.55 }, h('span', null, p.children), p.action); };

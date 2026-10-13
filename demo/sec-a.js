@@ -49,7 +49,14 @@
         h('img', { className: 'brand-logo', src: SG.isDark() ? 'logo-light.svg' : 'logo.svg', alt: 'Sea Glass.', width: 148, height: 31 })),
       h('label', { className: 'gsearch' }, h(Icon, { name: 'search' }),
         h('input', { type: 'search', placeholder: 'Rechercher', 'aria-label': 'Rechercher dans le sommaire', value: p.q, onChange: function (e) { p.setQ(e.target.value); }, onKeyDown: go })),
-      h('button', { type: 'button', className: 'ib', onClick: SG.toggleTheme, 'aria-label': SG.isDark() ? 'Passer en thème clair' : 'Passer en thème sombre', title: SG.isDark() ? 'Thème clair' : 'Thème sombre' }, h(Icon, { name: SG.isDark() ? 'sun' : 'moon' })));
+      h('button', {
+        type: 'button',
+        className: 'theme-toggle ib-only',
+        onClick: SG.toggleTheme,
+        'aria-label': 'Changer le thème',
+        title: 'Changer le thème',
+        'aria-pressed': SG.isDark(),
+      }, h(Icon, { name: SG.isDark() ? 'moon' : 'sun' })));
   };
   /* Tiroir de navigation : permanent sur grand écran, modal sur mobile */
   S.Side = function (p) {

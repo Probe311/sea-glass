@@ -69,8 +69,10 @@
     --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
     --lit-a: 0.6; --ce: 40%; --cc: 30%;
     --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
-    --on-tint: #E8F7F1; --teal: #7BBFAC; --teal-hi: #A8DCCB;
-    --seafoam-ink: #CFF0E5; --kelly-ink: #BDEBD0; --aqua-ink: #C6EDFB; --cobalt-ink: #D5E0FA; --amber-ink: #FBE3A8; --ruby-ink: #FBD3CB;
+    /* Encre sombre sur galets teintés (contraste ≥ 4,5:1) ; texte sol = --ink clair */
+    --on-tint: #14463A; --teal: #7BBFAC; --teal-hi: #A8DCCB;
+    --seafoam-ink: #1D4D41; --kelly-ink: #062014; --aqua-ink: #033040; --cobalt-ink: #061230;
+    --amber-ink: #5A3D03; --ruby-ink: #5E1E12; --citron-ink: #4A4E0F; --lavender-ink: #4B3A59;
     --tex: 0.1;
   }
 }
@@ -82,8 +84,9 @@
   --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
   --lit-a: 0.6; --ce: 40%; --cc: 30%;
   --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
-  --on-tint: #E8F7F1; --teal: #7BBFAC; --teal-hi: #A8DCCB;
-  --seafoam-ink: #CFF0E5; --kelly-ink: #BDEBD0; --aqua-ink: #C6EDFB; --cobalt-ink: #D5E0FA; --amber-ink: #FBE3A8; --ruby-ink: #FBD3CB;
+  --on-tint: #14463A; --teal: #7BBFAC; --teal-hi: #A8DCCB;
+  --seafoam-ink: #1D4D41; --kelly-ink: #062014; --aqua-ink: #033040; --cobalt-ink: #061230;
+  --amber-ink: #5A3D03; --ruby-ink: #5E1E12; --citron-ink: #4A4E0F; --lavender-ink: #4B3A59;
   --tex: 0.1;
 }
 
