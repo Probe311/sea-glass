@@ -1,10 +1,10 @@
-# `@seaglass/react`
+# `@sea-glass/react`
 
-Adaptateurs React 19 pour Sea Glass. Importer `@seaglass/css` une fois dans l’app.
+Adaptateurs React 19 pour Sea Glass. Importer `@sea-glass/css` une fois dans l’app.
 
 ```tsx
-import '@seaglass/css';
-import { Glass, Button, TextField, Alert, Header, Table } from '@seaglass/react';
+import '@sea-glass/css';
+import { Glass, Button, TextField, Alert, Header, Table } from '@sea-glass/react';
 ```
 
 Peer : `react` / `react-dom` `^19`.

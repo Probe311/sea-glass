@@ -119,8 +119,8 @@
     '.lg[data-tint]       { /* --tint: r g b ; --tint-a: opacité */ }',
     '.lg[data-glow]       { /* --glow: r g b ; lumière diffuse sous l’objet */ }'].join('\n');
   var REACT = [
-    "import '@seaglass/css';",
-    "import { Glass, Button, Alert, Header } from '@seaglass/react';",
+    "import '@sea-glass/css';",
+    "import { Glass, Button, Alert, Header } from '@sea-glass/react';",
     '',
     '<Glass tint="aqua" frosted rim style={{ padding: 24 }}>',
     '  <h4>Mer calme</h4>',

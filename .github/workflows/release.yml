@@ -23,16 +23,14 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-      - name: Version PR (Changesets)
+      - name: Version or publish (Changesets)
         uses: changesets/action@v1
         with:
           title: 'chore: version packages'
           commit: 'chore: version packages'
-          createGithubReleases: false
-          # When ready: set NPM_TOKEN, then
-          # publish: pnpm exec changeset publish --provenance
+          createGithubReleases: true
+          publish: pnpm exec changeset publish --provenance
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Publish readiness
-        run: pnpm release:dry
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

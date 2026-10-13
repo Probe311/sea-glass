@@ -1,5 +1,5 @@
 {
-  "name": "@seaglass/elements",
+  "name": "@sea-glass/elements",
   "version": "0.1.0-alpha.0",
   "description": "Sea Glass web components (skeleton — Custom Elements / Lit in a later release).",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@seaglass/css": "workspace:*"
+    "@sea-glass/css": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

@@ -1,9 +1,9 @@
 ---
-'@seaglass/tokens': minor
-'@seaglass/css': minor
-'@seaglass/elements': minor
-'@seaglass/react': minor
-'@seaglass/tailwind': minor
+'@sea-glass/tokens': minor
+'@sea-glass/css': minor
+'@sea-glass/elements': minor
+'@sea-glass/react': minor
+'@sea-glass/tailwind': minor
 ---
 
 Initial alpha: W3C DTCG tokens, prefixed CSS material, and package skeletons.

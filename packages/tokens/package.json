@@ -1,5 +1,5 @@
 {
-  "name": "@seaglass/tokens",
+  "name": "@sea-glass/tokens",
   "version": "0.1.0-alpha.0",
   "description": "Sea Glass design tokens (W3C DTCG) — CSS custom properties, ESM, JSON.",
   "license": "MIT",

@@ -10,7 +10,7 @@ import {
   Slider,
   Switch,
   TextField,
-} from '@seaglass/react';
+} from '@sea-glass/react';
 
 const meta: Meta = {
   title: 'Forms/Overview',

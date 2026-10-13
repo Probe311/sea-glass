@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Accordion, Alert, Banner, Callout, Progress, Tabs } from '@seaglass/react';
+import { Accordion, Alert, Banner, Callout, Progress, Tabs } from '@sea-glass/react';
 
 const meta: Meta = {
   title: 'Feedback/Overview',

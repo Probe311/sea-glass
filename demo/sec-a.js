@@ -79,7 +79,7 @@
       h('span', { className: 'label' }, 'Design system · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')),
       h('h1', null,
         h('img', { className: 'hero-logo', src: SG.isDark() ? 'logo-light.svg' : 'logo.svg', alt: 'Sea Glass.' })),
-      h('p', { className: 'lead' }, 'Un système d’interface en verre de mer : des galets mats et laiteux, éclairés par une seule lumière venue du haut à gauche. Six propriétés de matière, un modèle de lumière, douze couleurs et une cinquantaine d’adaptateurs React dans @seaglass/react (cette démo reste le prototype visuel).'),
+      h('p', { className: 'lead' }, 'Un système d’interface en verre de mer : des galets mats et laiteux, éclairés par une seule lumière venue du haut à gauche. Six propriétés de matière, un modèle de lumière, douze couleurs et une cinquantaine d’adaptateurs React dans @sea-glass/react (cette démo reste le prototype visuel).'),
       h('div', { className: 'hero-pebbles', 'aria-hidden': true }, SG.PEBBLES.map(function (p) { return h(SG.Pebble, { key: p.key, name: p.name, color: p.key, seed: p.seed }); })),
       h('div', { className: 'meta' },
         [['6', 'propriétés de matière'], ['12', 'couleurs'], ['~50', 'composants React'], ['2', 'thèmes']].map(function (m) { return h('div', { key: m[1] }, h('b', null, m[0]), h('span', null, m[1])); })));

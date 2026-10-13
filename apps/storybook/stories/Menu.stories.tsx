@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Menu, MenuItem } from '@seaglass/react';
+import { Menu, MenuItem } from '@sea-glass/react';
 
 const meta: Meta<typeof Menu> = {
   title: 'Overlay/Menu',

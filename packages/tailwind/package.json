@@ -1,5 +1,5 @@
 {
-  "name": "@seaglass/tailwind",
+  "name": "@sea-glass/tailwind",
   "version": "0.1.0-alpha.0",
   "description": "Sea Glass Tailwind preset and glass-* utilities.",
   "license": "MIT",
@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "@seaglass/tokens": "workspace:*"
+    "@sea-glass/tokens": "workspace:*"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.19"

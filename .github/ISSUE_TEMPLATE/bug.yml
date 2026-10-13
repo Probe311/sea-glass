@@ -18,11 +18,11 @@ body:
     attributes:
       label: Package
       options:
-        - '@seaglass/css'
-        - '@seaglass/tokens'
-        - '@seaglass/react'
-        - '@seaglass/elements'
-        - '@seaglass/tailwind'
+        - '@sea-glass/css'
+        - '@sea-glass/tokens'
+        - '@sea-glass/react'
+        - '@sea-glass/elements'
+        - '@sea-glass/tailwind'
         - docs / other
     validations:
       required: true

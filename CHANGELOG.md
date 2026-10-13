@@ -4,7 +4,7 @@ This project uses [Changesets](https://github.com/changesets/changesets). Each p
 
 ## Unreleased
 
-### `@seaglass/react` / `@seaglass/css`
+### `@sea-glass/react` / `@sea-glass/css`
 
 - Large React catalog: Button, forms (Field, Select, Combobox, Switch…), Alert/Banner/Callout, Accordion, Table, Header/Footer/Sidebar, Breadcrumbs, Pagination, Stepper, Hero, Tile, Consent, ThemeToggle, LangSwitcher, etc.
 - Matching `.sg-*` CSS for the new surfaces.
@@ -17,11 +17,11 @@ This project uses [Changesets](https://github.com/changesets/changesets). Each p
 - Demo loads React 19 via esm.sh (no UMD).
 - Wordmarks + Poppins for Hn; Storybook 10; toolchain bumped to latest stable peers.
 
-### `@seaglass/*` — 0.1.0-alpha.0
+### `@sea-glass/*` — 0.1.0-alpha.0
 
 - Monorepo (pnpm workspaces).
 - W3C DTCG tokens (Style Dictionary v5): 12 pebbles, space / duration / type / elevation / z-index / blur.
 - Prefixed CSS material (`.sg-glass`) + component layers.
-- `@seaglass/react` (React 19) adapters for the catalog above.
-- `@seaglass/tailwind`: preset + `glass-*` plugin.
+- `@sea-glass/react` (React 19) adapters for the catalog above.
+- `@sea-glass/tailwind`: preset + `glass-*` plugin.
 - Interactive prototype in `demo/` (GitHub Pages).

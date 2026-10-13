@@ -12,8 +12,8 @@ for (const dir of packages) {
 }
 console.log(`
 Enable npm publish:
-  1. Reserve scope @seaglass on npm (or rename).
-  2. Add NPM_TOKEN secret, or configure trusted publishing (OIDC).
-  3. In .github/workflows/release.yml, set publish: true on changesets/action
-     (or run \`pnpm exec changeset publish --provenance\`).
+  1. npm login as sea-glass (scope @sea-glass).
+  2. Add GitHub secret NPM_TOKEN (granular, publish @sea-glass/*).
+  3. Merge Version PR from changesets/action, or run:
+     pnpm exec changeset version && pnpm exec changeset publish --provenance
 `);

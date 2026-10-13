@@ -1,10 +1,10 @@
-# `@seaglass/tailwind`
+# `@sea-glass/tailwind`
 
-Tailwind preset (colours, radii, durations from `@seaglass/tokens`) and, later, `glass-*` utilities.
+Tailwind preset (colours, radii, durations from `@sea-glass/tokens`) and, later, `glass-*` utilities.
 
 ```js
 // tailwind.config.js
-import seaglass from '@seaglass/tailwind/preset';
+import seaglass from '@sea-glass/tailwind/preset';
 
 export default { presets: [seaglass] };
 ```

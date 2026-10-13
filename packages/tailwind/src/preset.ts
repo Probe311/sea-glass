@@ -15,7 +15,7 @@ const pebbles = [
 
 const colors = Object.fromEntries(pebbles.map((key) => [key, `var(--sg-color-${key})`]));
 
-/** Tailwind v3 preset. Pair with `@seaglass/css` (or just the token sheet). */
+/** Tailwind v3 preset. Pair with `@sea-glass/css` (or just the token sheet). */
 export default {
   theme: {
     extend: {

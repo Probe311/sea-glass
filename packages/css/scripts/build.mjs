@@ -8,7 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const src = join(root, 'src');
 const dist = join(root, 'dist');
 
-const tokensCss = await readFile(require.resolve('@seaglass/tokens/css'), 'utf8');
+const tokensCss = await readFile(require.resolve('@sea-glass/tokens/css'), 'utf8');
 const sheets = ['material.css', 'components.css', 'utilities.css', 'a11y.css'];
 const parts = await Promise.all(sheets.map((f) => readFile(join(src, f), 'utf8')));
 const reset = await readFile(join(src, 'reset.css'), 'utf8');
@@ -29,4 +29,4 @@ ${parts.join('\n\n')}
 await mkdir(dist, { recursive: true });
 await writeFile(join(dist, 'seaglass.css'), bundled);
 await writeFile(join(dist, 'reset.css'), reset);
-console.log('@seaglass/css: wrote dist/seaglass.css');
+console.log('@sea-glass/css: wrote dist/seaglass.css');

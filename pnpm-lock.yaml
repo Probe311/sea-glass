@@ -59,10 +59,10 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@seaglass/css':
+      '@sea-glass/css':
         specifier: workspace:*
         version: link:../../packages/css
-      '@seaglass/react':
+      '@sea-glass/react':
         specifier: workspace:*
         version: link:../../packages/react
       react:
@@ -99,21 +99,19 @@ importers:
 
   packages/css:
     dependencies:
-      '@seaglass/tokens':
+      '@sea-glass/tokens':
         specifier: workspace:*
         version: link:../tokens
 
   packages/elements:
     dependencies:
-      '@seaglass/css':
+      '@sea-glass/css':
         specifier: workspace:*
         version: link:../css
 
-  packages/icons: {}
-
   packages/react:
     dependencies:
-      '@seaglass/css':
+      '@sea-glass/css':
         specifier: workspace:*
         version: link:../css
     devDependencies:
@@ -132,7 +130,7 @@ importers:
 
   packages/tailwind:
     dependencies:
-      '@seaglass/tokens':
+      '@sea-glass/tokens':
         specifier: workspace:*
         version: link:../tokens
     devDependencies:

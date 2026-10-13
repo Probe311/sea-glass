@@ -5,7 +5,7 @@ type PluginApi = {
 /**
  * Tailwind plugin: `glass`, `glass-frosted`, `glass-rim`, `glass-glow`,
  * `glass-carved`, `glass-blur-{sm|md|lg|xl}`, `glass-tint-{pebble}`.
- * Pair with `@seaglass/css` (or token sheet) so variables resolve.
+ * Pair with `@sea-glass/css` (or token sheet) so variables resolve.
  */
 export function seaGlassPlugin({ addUtilities }: PluginApi): void {
   const blurs = {
@@ -79,7 +79,7 @@ export function seaGlassPlugin({ addUtilities }: PluginApi): void {
   addUtilities(utilities);
 }
 
-/** Drop-in for `plugins: [plugin]` from `@seaglass/tailwind`. */
+/** Drop-in for `plugins: [plugin]` from `@sea-glass/tailwind`. */
 export default function plugin(api: PluginApi): void {
   seaGlassPlugin(api);
 }
