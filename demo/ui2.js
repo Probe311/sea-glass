@@ -41,7 +41,17 @@
 
   C.Card = function (p) { return h(Glass, { as: 'article', className: 'card', tint: p.tint, tintA: 0.4, style: p.style }, p.children); };
   C.Badge = function (p) {
-    return h(Glass, { as: 'span', className: 'badge', tint: p.tint, tintA: 0.88, refractive: false, alive: false, glow: false, style: { color: p.tint ? 'var(--' + p.tint + '-ink)' : undefined } }, p.dot && h('i'), p.children);
+    return h(Glass, {
+      as: 'span',
+      className: 'badge',
+      tint: p.tint,
+      tintA: 0.92,
+      refractive: false,
+      alive: false,
+      glow: false,
+      frosted: false,
+      style: { color: p.tint ? 'var(--' + p.tint + '-ink)' : undefined },
+    }, p.children);
   };
   C.Tip = function (p) { return h(Glass, { className: 'tip', role: 'tooltip', alive: false }, p.children); };
   C.Snack = function (p) { return h(Glass, { className: 'snack', tint: 'seafoam', tintA: 0.55 }, h('span', null, p.children), p.action); };
@@ -70,7 +80,7 @@
   D.Panel = function (p) {
     return h('div', { className: cls('panel', p.scene && 'scene') },
       h('div', { className: 'panel-body' }, p.children),
-      (p.cap || p.tag) && h('div', { className: 'panel-cap' }, h('b', null, p.tag), h('span', null, p.cap)));
+      !p.scene && (p.cap || p.tag) && h('div', { className: 'panel-cap' }, h('b', null, p.tag), h('span', null, p.cap)));
   };
   D.Stage = function (p) { return h('div', { className: cls('stage', p.col && 'col', p.center && 'center'), style: p.style }, p.children); };
   D.Specs = function (p) {

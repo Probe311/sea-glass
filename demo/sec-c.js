@@ -28,22 +28,20 @@
   /* ---------- Cartes et badges ---------- */
   S.Cards = function () {
     var Card = UI.Card, B = UI.Badge;
-    return h(D.Section, { id: 'cartes', label: 'Composants', title: 'Cartes et badges', lead: 'La carte est un Givre au rayon de 28 px, teintée par la couleur de son contenu. Les badges sont de petites pilules teintées avec leur encre.' },
-      h(D.Panel, { scene: true, tag: 'Cartes', cap: 'Teinte aqua pour l’information, amber pour les observations rares.' },
+    return h(D.Section, { id: 'cartes', label: 'Composants', title: 'Cartes et badges', lead: 'La carte est un Givre au rayon de 28 px, teintée par la couleur de son contenu. Les badges sont de petites pilules plates teintées avec leur encre.' },
+      h(D.Panel, { scene: true },
         h('div', { className: 'g2' },
-          h(Card, { tint: 'aqua' }, h('span', { className: 'label', style: { color: 'inherit', opacity: .75 } }, 'Aujourd’hui'), h('h4', null, 'Mer calme'), h('p', null, 'Vent faible de sud-ouest, houle de 0,6 m. Bonne visibilité sur tout le littoral.'), h('div', { className: 'kv' }, h('span', null, 'Marée haute 17:42'), h('span', null, 'Coef. 78'))),
-          h(Card, { tint: 'amber' }, h('span', { className: 'label', style: { color: 'inherit', opacity: .75 } }, 'Observation'), h('h4', null, 'Anémone des mares'), h('p', null, 'Repérée à marée basse, accrochée à un bloc de granit.'), h('div', { className: 'stage' }, h(B, { tint: 'seafoam', dot: true }, 'Rivage'), h(B, { tint: 'amber', dot: true }, 'Rare'))))),
-      h(D.Panel, { tag: 'Badges', cap: 'Texte en encre du galet : contraste minimum 4,5:1.' }, h(D.Stage, null, [['seafoam', 'Collecté'], ['cobalt', 'Nouveau'], ['amber', 'Rare'], ['ruby', 'Menacé'], ['kelly', 'Vérifié'], ['mist', 'Brouillon']].map(function (b) { return h(B, { key: b[0], tint: b[0], dot: true }, b[1]); }))));
+          h(Card, { tint: 'aqua' }, h('span', { className: 'label' }, 'Aujourd’hui'), h('h4', null, 'Mer calme'), h('p', null, 'Vent faible de sud-ouest, houle de 0,6 m. Bonne visibilité sur tout le littoral.'), h('div', { className: 'kv' }, h('span', null, 'Marée haute 17:42'), h('span', null, 'Coef. 78'))),
+          h(Card, { tint: 'amber' }, h('span', { className: 'label' }, 'Observation'), h('h4', null, 'Anémone des mares'), h('p', null, 'Repérée à marée basse, accrochée à un bloc de granit.'), h('div', { className: 'stage' }, h(B, { tint: 'seafoam' }, 'Rivage'), h(B, { tint: 'amber' }, 'Rare'))))),
+      h(D.Panel, { tag: 'Badges', cap: 'Texte en encre du galet : contraste minimum 4,5:1.' }, h(D.Stage, null, [['seafoam', 'Collecté'], ['cobalt', 'Nouveau'], ['amber', 'Rare'], ['ruby', 'Menacé'], ['kelly', 'Vérifié'], ['mist', 'Brouillon']].map(function (b) { return h(B, { key: b[0], tint: b[0] }, b[1]); }))));
   };
 
-  /* ---------- Retours ---------- */
+  /* ---------- Toasts ---------- */
   S.Feedback = function () {
-    return h(D.Section, { id: 'retours', label: 'Composants', title: 'Retours', lead: 'Info-bulle et notification confirment une action sans interrompre. Les deux sont des Givre.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'La notification propose toujours d’annuler.' },
-        h('div', { className: 'g2' },
-          h(D.Stage, { col: true }, h('span', { className: 'label', style: { color: 'var(--ink)' } }, 'Info-bulle'), h('div', null, h(UI.Tip, null, 'Ajouter à la collection'))),
-          h(D.Stage, { col: true }, h('span', { className: 'label', style: { color: 'var(--ink)' } }, 'Notification'), h(UI.Snack, { action: h(UI.Button, { variant: 'primary', size: 'sm' }, 'Annuler') }, 'Galet ajouté à ta collection')))),
-      h(D.Panel, { tag: 'Toast' }, h(D.Stage, null, h(UI.Button, { variant: 'primary', onClick: function () { SG.toast('Galet collecté'); } }, 'Afficher une notification'))));
+    return h(D.Section, { id: 'toasts', label: 'Composants', title: 'Toasts', lead: 'Confirmer une action sans bloquer le parcours : snack avec Annuler, ou toast éphémère.' },
+      h(D.Panel, { scene: true },
+        h(UI.Snack, { action: h(UI.Button, { variant: 'primary', size: 'sm' }, 'Annuler') }, 'Galet ajouté à ta collection')),
+      h(D.Panel, { tag: 'Toast' }, h(D.Stage, null, h(UI.Button, { variant: 'primary', onClick: function () { SG.toast('Galet collecté'); } }, 'Afficher un toast'))));
   };
 
   /* ---------- Contraste ---------- */

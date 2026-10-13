@@ -81,8 +81,23 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 }
 .theme-toggle.ib-only { padding: 0; width: 44px; height: 44px; justify-content: center; background: transparent; }
 .theme-toggle.ib-only svg { padding: 10px; width: 20px; height: 20px; }
-.prefs-block { display: grid; gap: 10px; color: var(--ink); }
+.prefs-row { display: flex; flex-wrap: wrap; gap: 28px 40px; align-items: start; }
+.prefs-block { display: grid; gap: 10px; color: var(--ink); width: max-content; max-width: 100%; }
 .prefs-label { font: 600 13px var(--font-display); color: var(--ink); }
+.theme-switch {
+  display: inline-flex; align-items: center; width: 64px; height: 36px; padding: 0; border: 0;
+  border-radius: 999px; background: color-mix(in srgb, var(--ink) 12%, transparent);
+  cursor: pointer; position: relative;
+}
+.theme-switch__track { display: block; width: 100%; height: 100%; position: relative; }
+.theme-switch__thumb {
+  position: absolute; top: 3px; left: 3px; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: color-mix(in srgb, var(--seafoam) 88%, transparent); color: var(--on-tint);
+  transition: transform 280ms var(--spring);
+}
+.theme-switch--dark .theme-switch__thumb { transform: translateX(28px); }
+.theme-switch__thumb svg, .theme-switch__thumb .ico { width: 16px; height: 16px; }
 .scrim { display: none; }
 @media (max-width: 980px) {
   .menu-btn { display: inline-grid; }
@@ -161,6 +176,32 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .scene .sg-lang__btn[aria-pressed="true"],
 .scene .sg-button--primary {
   color: var(--on-tint);
+}
+.scene .sg-hero__subtitle,
+.scene .sg-media__caption,
+.scene .sg-quote footer,
+.scene .sg-list__meta,
+.scene .sg-transcription p,
+.scene .sg-tile,
+.scene .card .label,
+.scene .card p {
+  color: inherit;
+  opacity: 0.9;
+}
+.scene .sg-dialog-demo {
+  color: #17262a;
+}
+:root[data-theme="dark"] .scene .sg-dialog-demo {
+  color: #eaf6f2;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .scene .sg-dialog-demo {
+    color: #eaf6f2;
+  }
+}
+.scene .sg-media {
+  margin-inline: 0;
+  width: 100%;
 }
 :root[data-theme="dark"] .scene .lg,
 :root[data-theme="dark"] .scene .sg-alert,

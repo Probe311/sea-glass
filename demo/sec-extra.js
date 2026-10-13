@@ -15,16 +15,24 @@
       h('path', { d: 'M7 10l5 5 5-5', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })));
   }
 
+  /* Jelly-style FA solid glyphs (circle-info / triangle-exclamation / circle-check / circle-xmark) */
   function alertIcon(tone) {
-    var paths = {
-      info: 'M12 8h.01M11 12h1v4h1M12 3a9 9 0 100 18 9 9 0 000-18z',
-      warning: 'M12 9v4m0 4h.01M10.3 4.3L2.8 17.5A2 2 0 004.5 20h15a2 2 0 001.7-2.5L13.7 4.3a2 2 0 00-3.4 0z',
-      success: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
-      error: 'M12 8v4m0 4h.01M12 3a9 9 0 100 18 9 9 0 000-18z',
+    var glyphs = {
+      info: [
+        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm.75 14.25h-1.5v-6h1.5zm0-8h-1.5v-1.5h1.5z', fill: 'currentColor' }),
+      ],
+      warning: [
+        h('path', { key: 'b', d: 'M12.9 3.1a1.5 1.5 0 0 0-1.8 0L1.4 18.2A1.5 1.5 0 0 0 2.7 20.5h18.6a1.5 1.5 0 0 0 1.3-2.3zM12 9.2a.9.9 0 0 1 .9.9v3.8a.9.9 0 1 1-1.8 0V10.1a.9.9 0 0 1 .9-.9zm0 8.3a1.1 1.1 0 1 1 1.1-1.1A1.1 1.1 0 0 1 12 17.5z', fill: 'currentColor' }),
+      ],
+      success: [
+        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4.3 7.7-5.2 5.2a1 1 0 0 1-1.4 0l-2.3-2.3a1 1 0 1 1 1.4-1.4l1.6 1.6 4.5-4.5a1 1 0 0 1 1.4 1.4z', fill: 'currentColor' }),
+      ],
+      error: [
+        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.5 12.1a1 1 0 0 1-1.4 1.4L12 13.4l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1-2.1-2.1a1 1 0 0 1 1.4-1.4l2.1 2.1 2.1-2.1a1 1 0 0 1 1.4 1.4L13.4 12z', fill: 'currentColor' }),
+      ],
     };
     return h('span', { className: 'sg-alert__icon', 'aria-hidden': true },
-      h('svg', { viewBox: '0 0 24 24', width: 22, height: 22 },
-        h('path', { d: paths[tone], fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })));
+      h('svg', { viewBox: '0 0 24 24', width: 22, height: 22, focusable: 'false' }, glyphs[tone] || glyphs.info));
   }
 
   S.Alerts = function () {
@@ -35,7 +43,7 @@
       ['error', 'Erreur', 'Impossible d’enregistrer. Réessaie dans un instant.'],
     ];
     return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et bandeaux', lead: 'Relayer une information importante sans bloquer le parcours. Quatre tons : info, warning, success, error.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Alert — .sg-alert + data-tone.' },
+      h(D.Panel, { scene: true },
         scene(items.map(function (it) {
           return h('div', { key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-frosted': true, 'data-tint': true },
             alertIcon(it[0]),
@@ -52,7 +60,7 @@
       { t: 'Quand utiliser un accordéon ?', b: 'Pour regrouper du contenu secondaire sans allonger la page.' },
     ];
     return h(D.Section, { id: 'accordeon', label: 'Composants', title: 'Accordéon', lead: 'Masquer ou révéler du contenu textuel. Un panneau ouvert à la fois dans cet aperçu.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu' },
+      h(D.Panel, { scene: true },
         scene([
           h('div', { className: 'sg-accordion sg-glass', 'data-frosted': true },
             items.map(function (item, i) {
@@ -72,31 +80,22 @@
   };
 
   S.OverlaysDoc = function () {
-    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale et menu', lead: 'Dialog pour une action bloquante ; Menu pour des actions contextuelles.' },
-      h(D.Panel, { scene: true, tag: 'Modale', cap: 'Aperçu figé — .sg-dialog lisible sur verre opaque.' },
-        scene([
-          h('div', { className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-frosted': true, 'data-tint': true },
-            h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
-            h('div', { className: 'sg-dialog__body' }, 'Cette action est irréversible. Le fichier ne pourra pas être récupéré.'),
-            h('div', { className: 'sg-dialog__footer' },
-              h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost' }, 'Annuler'),
-              h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary', 'data-frosted': true }, 'Supprimer'))),
-        ])),
-      h(D.Panel, { scene: true, tag: 'Menu', cap: 'Menu contextuel ouvert.' },
-        scene([
-          h('div', { className: 'sg-menu-wrap', style: { position: 'relative' } },
-            h('ul', { className: 'sg-menu sg-menu--open sg-glass', role: 'menu', 'data-open': true, 'data-frosted': true, style: { position: 'static', minWidth: 180, margin: 0, listStyle: 'none' } },
-              h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'menuitem' }, 'Copier')),
-              h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'menuitem' }, 'Partager')),
-              h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'menuitem' }, 'Supprimer')))),
-        ])),
-      h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @seaglass/react'], ['Menu', 'menu / menuitem', 'APG menu button']] }));
+    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Aperçu figé, lisible sur verre opaque.' },
+      h(D.Panel, { scene: true },
+        h('div', { className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-frosted': true, 'data-tint': true },
+          h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
+          h('div', { className: 'sg-dialog__body' }, 'Cette action est irréversible. Le fichier ne pourra pas être récupéré.'),
+          h('div', { className: 'sg-dialog__footer' },
+            h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost' }, 'Annuler'),
+            h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary', 'data-frosted': true }, 'Supprimer')))),
+      h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @seaglass/react']] }));
   };
 
   S.SelectDoc = function () {
     var opts = ['Seafoam', 'Kelly', 'Aqua', 'Cobalt', 'Amber'];
     var q = useState(''), query = q[0], setQuery = q[1];
     var o = useState(false), open = o[0], setOpen = o[1];
+    var skipBlur = React.useRef(false);
     var filtered = opts.filter(function (x) { return x.toLowerCase().indexOf(query.toLowerCase()) !== -1; });
     useEffect(function () {
       if (!open) return;
@@ -104,12 +103,26 @@
       document.addEventListener('keydown', onKey);
       return function () { document.removeEventListener('keydown', onKey); };
     }, [open]);
+    function toggleOpen(e) {
+      if (e) e.preventDefault();
+      skipBlur.current = true;
+      setOpen(!open);
+      setTimeout(function () { skipBlur.current = false; }, 0);
+    }
     return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes déroulantes', lead: 'Combobox filtrable custom (chevron animé), champ mot de passe, dépôt de fichiers.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu' },
+      h(D.Panel, { scene: true },
         scene([
           h('div', { className: 'sg-combobox' },
             h('label', null, 'Galet'),
-            h('div', { className: 'sg-glass sg-combobox__shell', 'data-carved': true, 'data-open': open || undefined },
+            h('div', {
+              className: 'sg-glass sg-combobox__shell',
+              'data-carved': true,
+              'data-open': open || undefined,
+              onMouseDown: function (e) {
+                if (e.target.closest && e.target.closest('.sg-combobox__control')) return;
+                toggleOpen(e);
+              },
+            },
               h('input', {
                 className: 'sg-combobox__control',
                 role: 'combobox',
@@ -119,10 +132,27 @@
                 'aria-label': 'Galet',
                 value: query,
                 onChange: function (e) { setQuery(e.target.value); setOpen(true); },
-                onFocus: function () { setOpen(true); },
-                onBlur: function () { setTimeout(function () { setOpen(false); }, 120); },
+                onMouseDown: function (e) {
+                  if (open) {
+                    e.preventDefault();
+                    setOpen(false);
+                    e.currentTarget.blur();
+                  }
+                },
+                onFocus: function () { if (!skipBlur.current && !open) setOpen(true); },
+                onBlur: function () {
+                  setTimeout(function () {
+                    if (!skipBlur.current) setOpen(false);
+                  }, 120);
+                },
               }),
-              chevron(open)),
+              h('button', {
+                type: 'button',
+                className: 'sg-combobox__toggle',
+                'aria-label': open ? 'Fermer la liste' : 'Ouvrir la liste',
+                tabIndex: -1,
+                onMouseDown: toggleOpen,
+              }, chevron(open))),
             h('ul', {
               className: 'sg-combobox__list sg-glass' + (open && filtered.length ? ' sg-combobox__list--open' : ''),
               role: 'listbox',
@@ -151,7 +181,7 @@
 
   S.ChromeDoc = function () {
     return h(D.Section, { id: 'chrome', label: 'Composants', title: 'En-tête, pied et navigation', lead: 'Identification du site, navigation principale, latérale, fil d’Ariane, pagination et étapes.' },
-      h(D.Panel, { scene: true, tag: 'En-tête', cap: 'Header, breadcrumbs, skip.' },
+      h(D.Panel, { scene: true },
         scene([
           h('a', { className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, 'Aller au contenu'),
           h('header', { className: 'sg-header sg-glass', 'data-frosted': true },
@@ -164,7 +194,7 @@
               h('li', null, h('a', { className: 'sg-link', href: '#chrome' }, 'Docs'), ' / '),
               h('li', null, h('span', { 'aria-current': 'page' }, 'Chrome')))),
         ])),
-      h(D.Panel, { scene: true, tag: 'Latéral', cap: 'Sidebar et sommaire.' },
+      h(D.Panel, { scene: true },
         scene([
           h('div', { className: 'chrome-side-grid' },
             h('nav', { className: 'sg-sidebar sg-glass', 'data-frosted': true },
@@ -175,7 +205,7 @@
               h('li', null, h('a', { href: '#chrome', 'aria-current': true }, 'Frost')),
               h('li', null, h('a', { href: '#chrome' }, 'Rim')))),
         ])),
-      h(D.Panel, { scene: true, tag: 'Pied', cap: 'Stepper, pagination, footer.' },
+      h(D.Panel, { scene: true },
         scene([
           h('ol', { className: 'sg-stepper' },
             h('li', { className: 'sg-stepper__step', 'data-state': 'done' }, h('span', { className: 'sg-stepper__index' }, '1'), ' Tokens'),
@@ -197,7 +227,7 @@
 
   S.DataDoc = function () {
     return h(D.Section, { id: 'donnees', label: 'Composants', title: 'Données et contenu', lead: 'Tableaux, listes, tuiles, citation, média, hero et transcription.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu' },
+      h(D.Panel, { scene: true },
         scene([
           h('section', { className: 'sg-hero sg-glass', 'data-frosted': true },
             h('div', { className: 'sg-hero__copy' },
@@ -236,8 +266,8 @@
     var lang = useState('FR'), L = lang[0], setL = lang[1];
     var dark = SG.isDark();
     return h(D.Section, { id: 'prefs', label: 'Composants', title: 'Préférences', lead: 'Thème clair/sombre et choix de langue.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu' },
-        scene([
+      h(D.Panel, { scene: true },
+        h('div', { className: 'prefs-row' },
           h('div', { className: 'prefs-block' },
             h('span', { className: 'prefs-label' }, 'Langue'),
             h('div', { className: 'sg-lang sg-glass', role: 'group', 'aria-label': 'Langue', 'data-frosted': true },
@@ -245,15 +275,16 @@
               h('button', { type: 'button', className: 'sg-lang__btn', 'aria-pressed': L === 'FR', onClick: function () { setL('FR'); } }, 'FR'),
               h('button', { type: 'button', className: 'sg-lang__btn', 'aria-pressed': L === 'EN', onClick: function () { setL('EN'); } }, 'EN'))),
           h('div', { className: 'prefs-block' },
-            h('span', { className: 'prefs-label' }, 'Changer le thème'),
+            h('span', { className: 'prefs-label', id: 'theme-label' }, 'Changer le thème'),
             h('button', {
               type: 'button',
-              className: 'theme-toggle',
+              className: 'theme-switch' + (dark ? ' theme-switch--dark' : ''),
               onClick: SG.toggleTheme,
-              'aria-label': 'Changer le thème',
+              'aria-labelledby': 'theme-label',
               'aria-pressed': dark,
-            }, h(Icon, { name: dark ? 'moon' : 'sun' }), h('span', null, 'Changer le thème'))),
-        ])),
-      h(D.Specs, { head: ['Composant', 'Classe'], rows: [['Lang', '.sg-lang'], ['Theme', '.theme-toggle']] }));
+            },
+              h('span', { className: 'theme-switch__track', 'aria-hidden': true },
+                h('span', { className: 'theme-switch__thumb' }, h(Icon, { name: dark ? 'moon' : 'sun' }))))))),
+      h(D.Specs, { head: ['Composant', 'Classe'], rows: [['Lang', '.sg-lang'], ['Theme', '.theme-switch']] }));
   };
 })();

@@ -329,8 +329,12 @@
 .card h4 { font: 600 22px/28px var(--font-display); }
 .card p { font-size: 14px; line-height: 20px; opacity: 0.88; }
 .card .kv { display: flex; justify-content: space-between; font-size: 13px; padding-top: 12px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
-.badge { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding-inline: 12px; --lg-r: 999px; --lg-blur: 6px; --gl: 6px; font: 500 12px/1 var(--font-body); white-space: nowrap; }
-.badge i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge {
+  display: inline-flex; align-items: center; height: 28px; padding-inline: 12px;
+  --lg-r: 999px; --lg-blur: 0; --gl: 0; --tint-a: 0.92;
+  font: 600 12px/1 var(--font-display); letter-spacing: 0.02em; white-space: nowrap;
+  box-shadow: none;
+}
 .tip { display: inline-block; padding: 8px 14px; --lg-r: 12px; --lg-blur: 10px; --gl: 8px; font-size: 13px; }
 .snack { display: flex; align-items: center; gap: 16px; padding: 8px 8px 8px 22px; --lg-r: 999px; --gl: 12px; font-size: 14px; max-width: 100%; }
 .toast { position: fixed !important; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); opacity: 0; pointer-events: none; z-index: 80; padding: 12px 22px; --lg-r: 999px; font: 500 14px var(--font-body); color: var(--on-tint); transition: transform 380ms var(--spring), opacity 200ms var(--ease); }

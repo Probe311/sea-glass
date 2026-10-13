@@ -12,8 +12,8 @@
       ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
       ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
       ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête et pied'],
-      ['alertes', 'Alertes et bandeaux'], ['accordeon', 'Accordéon'], ['overlays', 'Modale et menu'],
-      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'], ['retours', 'Retours'],
+      ['alertes', 'Alertes et bandeaux'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
+      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'], ['toasts', 'Toasts'],
       ['prefs', 'Préférences'],
     ]],
     ['Qualité', [['contraste', 'Contraste'], ['tokens', 'Tokens et code']]]

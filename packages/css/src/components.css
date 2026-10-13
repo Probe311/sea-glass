@@ -1061,11 +1061,17 @@
   .sg-alert__icon {
     display: grid;
     place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-top: 2px;
+    width: 1.375rem;
+    height: 1.375rem;
+    margin-top: 0.15em;
     color: inherit;
-    opacity: 0.92;
+    flex: none;
+  }
+
+  .sg-alert__icon svg {
+    display: block;
+    width: 1.375rem;
+    height: 1.375rem;
   }
 
   .sg-alert__title,
@@ -1212,6 +1218,34 @@
 
   .sg-combobox__shell .sg-combobox__control {
     padding-inline-end: 44px;
+  }
+
+  .sg-combobox__toggle {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--sg-color-ink-2);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .sg-combobox__toggle .sg-chevron {
+    position: static;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .sg-combobox__toggle .sg-chevron--open,
+  .sg-combobox__shell[data-open] .sg-combobox__toggle .sg-chevron {
+    transform: rotate(180deg);
   }
 
   .sg-chevron {
@@ -1601,6 +1635,8 @@
     --sg-glass-radius: var(--sg-radius-lg);
     display: grid;
     gap: var(--sg-space-3);
+    width: 100%;
+    margin-inline: 0;
     padding: var(--sg-media-pad);
     overflow: hidden;
   }
@@ -1629,16 +1665,27 @@
     position: relative;
     width: min(100%, 28rem);
     margin-inline: auto;
-    --sg-glass-tint-a: 0.55;
+    --sg-glass-tint-a: 0.92;
     --sg-glass-tint-rgb: 18 28 26;
-    color: var(--sg-color-ink);
+    color: #eaf6f2;
     transform: none;
     opacity: 1;
   }
 
+  .sg-dialog-demo .sg-dialog__title,
+  .sg-dialog-demo .sg-dialog__body,
+  .sg-dialog-demo .sg-button--ghost {
+    color: inherit;
+  }
+
   :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo {
-    --sg-glass-tint-rgb: 255 255 255;
-    --sg-glass-tint-a: 0.82;
+    --sg-glass-tint-rgb: 247 249 247;
+    --sg-glass-tint-a: 0.96;
+    color: #17262a;
+  }
+
+  :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo .sg-button--ghost {
+    color: #17262a;
   }
 
   .sg-media figcaption,
@@ -1717,7 +1764,9 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 4px;
-    min-width: 8.5rem;
+    width: auto;
+    min-width: 7.5rem;
+    max-width: max-content;
     gap: 0;
   }
 

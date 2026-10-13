@@ -5,75 +5,46 @@ import { cx } from './cx.js';
 
 export type Tone = 'info' | 'success' | 'warning' | 'danger' | 'error';
 
+/* Jelly-style FA solids: circle-info, triangle-exclamation, circle-check, circle-xmark */
 const ALERT_ICONS: Record<string, ReactNode> = {
   info: (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 10v6M12 7h.01" strokeLinecap="round" />
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm.75 14.25h-1.5v-6h1.5zm0-8h-1.5v-1.5h1.5z"
+      />
     </svg>
   ),
   success: (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M8 12l3 3 5-5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4.3 7.7-5.2 5.2a1 1 0 0 1-1.4 0l-2.3-2.3a1 1 0 1 1 1.4-1.4l1.6 1.6 4.5-4.5a1 1 0 0 1 1.4 1.4z"
+      />
     </svg>
   ),
   warning: (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <path d="M12 3l9 16H3L12 3z" strokeLinejoin="round" />
-      <path d="M12 10v4M12 16h.01" strokeLinecap="round" />
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12.9 3.1a1.5 1.5 0 0 0-1.8 0L1.4 18.2A1.5 1.5 0 0 0 2.7 20.5h18.6a1.5 1.5 0 0 0 1.3-2.3zM12 9.2a.9.9 0 0 1 .9.9v3.8a.9.9 0 1 1-1.8 0V10.1a.9.9 0 0 1 .9-.9zm0 8.3a1.1 1.1 0 1 1 1.1-1.1A1.1 1.1 0 0 1 12 17.5z"
+      />
     </svg>
   ),
   danger: (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.5 12.1a1 1 0 0 1-1.4 1.4L12 13.4l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1-2.1-2.1a1 1 0 0 1 1.4-1.4l2.1 2.1 2.1-2.1a1 1 0 0 1 1.4 1.4L13.4 12z"
+      />
     </svg>
   ),
   error: (
-    <svg
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M15 9l-6 6M9 9l6 6" strokeLinecap="round" />
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden>
+      <path
+        fill="currentColor"
+        d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.5 12.1a1 1 0 0 1-1.4 1.4L12 13.4l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1-2.1-2.1a1 1 0 0 1 1.4-1.4l2.1 2.1 2.1-2.1a1 1 0 0 1 1.4 1.4L13.4 12z"
+      />
     </svg>
   ),
 };
