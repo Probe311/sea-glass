@@ -189,16 +189,17 @@
     padding: var(--sg-space-7);
     border-radius: var(--sg-radius-lg);
     overflow: hidden;
-    background: linear-gradient(135deg, #1a6f76 0%, #4fa877 42%, #5cc4ec 70%, #d8db9c 100%);
+    background: color-mix(in srgb, var(--sg-color-seafoam) 18%, var(--sg-color-ground));
   }
 
-  [data-sg-theme='dark'] .sg-scene {
-    background: linear-gradient(160deg, #0e3a3a, #143028 55%, #1d4d41);
+  [data-sg-theme='dark'] .sg-scene,
+  [data-theme='dark'] .sg-scene {
+    background: color-mix(in srgb, var(--sg-color-seafoam) 10%, var(--sg-color-ground));
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-sg-theme='light']) .sg-scene {
-      background: linear-gradient(160deg, #0e3a3a, #143028 55%, #1d4d41);
+    :root:not([data-sg-theme='light'], [data-theme='light']) .sg-scene {
+      background: color-mix(in srgb, var(--sg-color-seafoam) 10%, var(--sg-color-ground));
     }
   }
 }

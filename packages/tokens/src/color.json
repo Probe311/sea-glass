@@ -134,14 +134,14 @@
     },
     "ground": {
       "$type": "color",
-      "$value": "#F6FAF7",
-      "$description": "Page ground (not the stale #F4F3EE from the old doc export)",
-      "$extensions": { "seaglass": { "dark": "#0F1513" } }
+      "$value": "#F6F5EE",
+      "$description": "Page ground (warm cream)",
+      "$extensions": { "seaglass": { "dark": "#14130F" } }
     },
     "ground-2": {
       "$type": "color",
-      "$value": "#EDF3F0",
-      "$extensions": { "seaglass": { "dark": "#161D1B" } }
+      "$value": "#ECEBE3",
+      "$extensions": { "seaglass": { "dark": "#1C1B17" } }
     },
     "ink": {
       "$type": "color",

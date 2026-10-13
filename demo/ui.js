@@ -61,7 +61,8 @@
     return h('label', { className: cls('cb', active && 'on', p.disabled && 'dis', p.state && 'is-' + p.state) },
       h('input', { type: 'checkbox', checked: on, disabled: p.disabled, onChange: function (e) { set(e.target.checked); } }),
       h(Glass, { as: 'span', className: cls('box', !active && 'carved'), frosted: false, glow: false, refractive: false, alive: false },
-        h('svg', { viewBox: '0 0 24 24', 'aria-hidden': true }, ind ? h('path', { d: 'M7 12h10', style: { fill: 'none', stroke: '#fff', strokeWidth: 3, strokeLinecap: 'round' } }) : h('path', { className: 'tick', d: 'M6.5 12.5l3.6 3.6 7.4-8' }))),
+        ind ? h('span', { className: 'tick-ind', 'aria-hidden': true })
+          : on ? h(Icon, { name: 'check', size: 14 }) : null),
       p.children);
   };
 
