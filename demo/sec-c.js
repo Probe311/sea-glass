@@ -233,7 +233,7 @@
           h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
           h(S.Cards), h(S.DataDoc), h(S.Feedback), h(S.PrefsDoc), h(S.Packages),
           h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*'))),
+          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));
