@@ -3,8 +3,9 @@
   var SG = window.SG, h = SG.h, D = SG.Doc, S = SG.S, Icon = SG.Icon;
   var useState = React.useState, useEffect = React.useEffect;
 
+  /* Stack only — Panel scene:true already provides the wash (no nested dark/light scene). */
   function scene(children) {
-    return h('div', { className: 'sg-scene stack', style: { gap: 14 } }, children);
+    return h('div', { className: 'stack', style: { gap: 14 } }, children);
   }
 
   function chevron(open) {

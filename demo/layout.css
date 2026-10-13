@@ -195,7 +195,8 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 }
 .panel-cap b { color: var(--ink); font-weight: 600; }
 .scene { border-radius: 24px; padding: 28px; overflow: hidden; }
-.scene .lg { color: #10302A; }
+/* Encre sombre sur wash clair — hérite de --ink ; jamais forcer du blanc en light */
+.scene .lg,
 .scene .sg-alert,
 .scene .sg-dialog-demo,
 .scene .sg-accordion,
@@ -213,8 +214,16 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .scene .sg-upload,
 .scene .sg-lang,
 .scene .prefs-block,
-.scene .sg-menu {
-  color: #10302A;
+.scene .sg-menu,
+.scene .sg-password,
+.scene .sg-field,
+.scene .ico {
+  color: var(--ink, #17262a);
+}
+.scene svg,
+.scene .ico {
+  fill: currentColor;
+  color: inherit;
 }
 .scene .sg-sidebar a[aria-current="page"],
 .scene .sg-toc a[aria-current="true"],
@@ -237,9 +246,10 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .scene .sg-dialog-demo {
   color: #17262a;
 }
-.scene .sg-combobox__control::placeholder {
-  color: #10302A;
-  opacity: 0.78;
+.scene .sg-combobox__control::placeholder,
+.scene .sg-field__input::placeholder {
+  color: var(--ink-2, #3e4f52);
+  opacity: 0.9;
 }
 .scene .sg-dialog-demo .sg-dialog-demo__danger,
 .scene .sg-dialog-demo__danger {

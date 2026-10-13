@@ -108,7 +108,9 @@ describe('generated CSS (after build)', () => {
     expect(css).toContain('--sg-color-citron-ink:');
     expect(css).toContain('#EEF2B8');
     expect(css).toContain('[data-sg-theme="dark"]');
-    expect(css).toContain(':root:not([data-sg-theme="light"])');
+    expect(css).toContain('[data-theme="dark"]');
+    expect(css).toContain('[data-theme="light"]');
+    expect(css).toContain(':root:not([data-sg-theme="light"], [data-theme="light"])');
     expect(css).not.toContain('Google Sans');
   });
 

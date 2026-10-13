@@ -309,7 +309,8 @@
     backdrop-filter: blur(8px) saturate(1.2);
   }
 
-  [data-sg-theme='dark'] .sg-slider__rail {
+  [data-sg-theme='dark'] .sg-slider__rail,
+  [data-theme='dark'] .sg-slider__rail {
     background: color-mix(in srgb, white 8%, #0c1a18 70%);
     border-color: rgb(255 255 255 / 0.22);
     box-shadow:
@@ -689,12 +690,13 @@
     font-weight: var(--sg-text-weight-medium);
   }
 
-  [data-sg-theme='dark'] .sg-field__help--error {
+  [data-sg-theme='dark'] .sg-field__help--error,
+  [data-theme='dark'] .sg-field__help--error {
     color: var(--sg-color-ruby);
   }
 
   @media (prefers-color-scheme: dark) {
-    :root:not([data-sg-theme='light']) .sg-field__help--error {
+    :root:not([data-sg-theme='light'], [data-theme='light']) .sg-field__help--error {
       color: var(--sg-color-ruby);
     }
   }
