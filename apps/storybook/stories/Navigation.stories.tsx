@@ -27,7 +27,7 @@ export const Chrome: Story = {
       />
       <div style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 16 }}>
         <Sidebar
-          label="Guide"
+          label="Docs"
           items={[
             { href: '#', label: 'Material', current: true },
             { href: '#', label: 'Forms' },
