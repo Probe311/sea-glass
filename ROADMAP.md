@@ -9,11 +9,11 @@ Architecture cible proposée :
 ```
 seaglass/
 ├─ packages/
-│  ├─ tokens/        @seaglass/tokens   (DTCG JSON → CSS vars, JS, JSON, Tailwind preset)
-│  ├─ css/           @seaglass/css      (matériau .sg-glass + composants CSS-only, couches @layer)
-│  ├─ elements/      @seaglass/elements (web components légers, ex. Lit ou vanilla Custom Elements)
-│  ├─ react/         @seaglass/react    (wrappers typés, contrôlés/non contrôlés)
-│  └─ tailwind/      @seaglass/tailwind (preset + plugin : utilitaires glass-*)
+│  ├─ tokens/        @sea-glass/tokens   (DTCG JSON → CSS vars, JS, JSON, Tailwind preset)
+│  ├─ css/           @sea-glass/css      (matériau .sg-glass + composants CSS-only, couches @layer)
+│  ├─ elements/      @sea-glass/elements (web components légers, ex. Lit ou vanilla Custom Elements)
+│  ├─ react/         @sea-glass/react    (wrappers typés, contrôlés/non contrôlés)
+│  └─ tailwind/      @sea-glass/tailwind (preset + plugin : utilitaires glass-*)
 ├─ apps/docs/        site de doc (Astro/Vite) + Storybook
 └─ .github/          CI, templates
 ```
@@ -45,16 +45,16 @@ seaglass/
 
 ## Phase 2 — Architecture & build (semaines 2–4)
 
-- [x] **P0 · M** **CSS d'abord** : `@seaglass/css` avec `@layer sg.reset, sg.tokens, sg.material, sg.components, sg.utilities` ; aucun reset global imposé (sortir `layout.css:2-11` dans un `reset.css` optionnel)
+- [x] **P0 · M** **CSS d'abord** : `@sea-glass/css` avec `@layer sg.reset, sg.tokens, sg.material, sg.components, sg.utilities` ; aucun reset global imposé (sortir `layout.css:2-11` dans un `reset.css` optionnel)
 - [x] **P0 · M** Préfixer toutes les classes : `.lg`→`.sg-glass`, `.btn`→`.sg-button`, `.pg`→`.sg-progress`… ; modificateurs en `data-*` ou `.sg-button--primary` (choisir **une** convention) ; corriger collision `.pg.lg`
 - [x] **P0 · S** États uniformes : `[aria-pressed]`, `[aria-checked]`, `[aria-invalid]`, `:disabled`/`[aria-disabled]`, `:focus-visible` ; démo d'états via `data-sg-force-state` réservé à la doc
 - [x] **P0 · S** Tailles uniformes `sm | md | lg` pour tous les contrôles
 - [x] **P0 · M** Matériau : défauts **sobres** (`frosted` seulement si `.sg-over`/scène, `refractive` opt-in), `@supports (backdrop-filter: url(#x))` au lieu de l'UA sniffing (`index.html:12`), filtre SVG injecté à la demande
 - [x] **P0 · S** Moteur « lumière au pointeur » (`core.js:53-82`) en module ESM autonome, opt-in (`initSeaGlassLight()`), désactivé en reduced-motion
 - [ ] **P0 · L** Décision **framework-agnostique** : web components (`<sg-button>`, `<sg-slider>`, `<sg-tabs>`…) pour les composants à comportement ; CSS-only pour les statiques (card, badge, chip simple)
-- [x] **P0 · L** `@seaglass/react` : réécriture TSX, `forwardRef`, contrôlé + non contrôlé (`value/defaultValue/onChange`) pour Chip, Checkbox, Tabs, Field, Slider, Segmented (+ Alert, Table, Accordion, Header/Footer…) ; RadioGroup / `name` form à peaufiner
+- [x] **P0 · L** `@sea-glass/react` : réécriture TSX, `forwardRef`, contrôlé + non contrôlé (`value/defaultValue/onChange`) pour Chip, Checkbox, Tabs, Field, Slider, Segmented (+ Alert, Table, Accordion, Header/Footer…) ; RadioGroup / `name` form à peaufiner
 - [ ] **P0 · S** Build : Vite library mode / tsup → ESM + CJS + `.d.ts`, CSS minifié, `exports` map, `sideEffects` pour le CSS, tree-shaking
-- [x] **P1 · M** `@seaglass/tailwind` : preset (couleurs, rayons, durées depuis les tokens) + plugin utilitaires `glass`, `glass-frosted`, `glass-tint-{color}`, `glass-rim`, `glass-glow`, `glass-carved`, `glass-blur-{sm..xl}` (Tailwind v4 : `@theme` + `@utility` — v4 à brancher plus tard)
+- [x] **P1 · M** `@sea-glass/tailwind` : preset (couleurs, rayons, durées depuis les tokens) + plugin utilitaires `glass`, `glass-frosted`, `glass-tint-{color}`, `glass-rim`, `glass-glow`, `glass-carved`, `glass-blur-{sm..xl}` (Tailwind v4 : `@theme` + `@utility` — v4 à brancher plus tard)
 - [ ] **P1 · S** Déclarer la cible navigateurs (browserslist : 2 dernières versions + Safari ≥ 16.4) et un tableau de support
 - [ ] **P1 · S** Supprimer la duplication `useSlide` / NavBar, `cls()` ; util `useIndicator` partagé
 - [ ] **P2 · L** Adaptateurs Vue 3 et Svelte (wrappers des web components)
@@ -165,7 +165,7 @@ seaglass/
 - [x] **P0 · S** `CHANGELOG.md` géré par **Changesets** ; **SemVer** strict, `0.x` pendant la bêta, 1.0 après gate a11y + tests visuels
 - [x] **P0 · M** CI GitHub Actions : lint + typecheck + tests unitaires + build sur PR ; tests visuels Playwright ; déploiement preview de la doc (Vercel / Netlify / GitHub Pages) — lint/typecheck/test/build en place ; visuels et preview docs plus tard
 - [x] **P0 · S** Workflow release : Changesets action → PR de version → publication npm avec **provenance** (`npm publish --provenance`, OIDC trusted publishing) — version PR active ; `publish` commenté jusqu'à `NPM_TOKEN` + scope réservé (`pnpm release:dry`)
-- [ ] **P0 · S** Réserver le scope npm `@seaglass` (ou alternatif si pris) et le nom de l'org GitHub
+- [ ] **P0 · S** Réserver le scope npm `@sea-glass` (ou alternatif si pris) et le nom de l'org GitHub
 - [x] **P1 · S** `.github/ISSUE_TEMPLATE/` : bug (avec navigateur/OS/thème/reduced-*), feature, nouveau composant (RFC), question → Discussions ; `config.yml`
 - [x] **P1 · XS** `.github/PULL_REQUEST_TEMPLATE.md` : checklist (tests, story, a11y, changeset, captures)
 - [x] **P1 · XS** `CODEOWNERS`, labels, protection de branche `main`, Dependabot / Renovate — CODEOWNERS + Dependabot dans le repo ; labels et protection de branche à activer dans les réglages GitHub
@@ -180,8 +180,8 @@ seaglass/
 
 | Version | Contenu | Estimation |
 |---|---|---|
-| **0.1.0** | Repo, tokens DTCG, `@seaglass/css` préfixé, matériau + 8 composants existants en CSS, CI | ~3 sem. |
-| **0.2.0** | `@seaglass/react` contrôlé, web components des contrôles interactifs, Storybook | +3 sem. |
+| **0.1.0** | Repo, tokens DTCG, `@sea-glass/css` préfixé, matériau + 8 composants existants en CSS, CI | ~3 sem. |
+| **0.2.0** | `@sea-glass/react` contrôlé, web components des contrôles interactifs, Storybook | +3 sem. |
 | **0.3.0** | Préférences a11y complètes, theming, tests visuels, preset Tailwind | +2–3 sem. |
 | **0.5.0** | Composants manquants P0/P1 (Select, Dialog, Drawer, Menu, Popover, Alert, Table, Accordion…) | +4–6 sem. |
 | **1.0.0** | Gate : WCAG 2.2 AA audité, couverture visuelle, doc complète, API gelée | +2 sem. |

@@ -1,5 +1,5 @@
 {
-  "name": "@seaglass/storybook",
+  "name": "@sea-glass/storybook",
   "private": true,
   "version": "0.1.0-alpha.0",
   "type": "module",
@@ -9,8 +9,8 @@
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
-    "@seaglass/css": "workspace:*",
-    "@seaglass/react": "workspace:*",
+    "@sea-glass/css": "workspace:*",
+    "@sea-glass/react": "workspace:*",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },

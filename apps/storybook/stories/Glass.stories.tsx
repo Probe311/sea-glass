@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Glass } from '@seaglass/react';
+import { Glass } from '@sea-glass/react';
 
 const meta: Meta<typeof Glass> = {
   title: 'Surface/Glass',

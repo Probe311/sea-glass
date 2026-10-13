@@ -31,10 +31,10 @@
 ### Install
 
 ```bash
-pnpm add @seaglass/css @seaglass/tokens
+pnpm add @sea-glass/css @sea-glass/tokens
 ```
 
-Packages are not on npm yet (reserve the `@seaglass` scope). Until the first publish:
+Scope npm : `@sea-glass` (compte [sea-glass](https://www.npmjs.com/~sea-glass)). Fallback git :
 
 ```bash
 pnpm add github:Probe311/sea-glass
@@ -43,21 +43,21 @@ pnpm add github:Probe311/sea-glass
 ### Minimal CSS
 
 ```html
-<link rel="stylesheet" href="./node_modules/@seaglass/css/dist/seaglass.css" />
+<link rel="stylesheet" href="./node_modules/@sea-glass/css/dist/seaglass.css" />
 <div class="sg-scene">
   <button class="sg-glass sg-button" data-frosted data-rim type="button">Seafoam</button>
 </div>
 ```
 
 ```js
-import { initSeaGlassLight } from '@seaglass/css/light';
+import { initSeaGlassLight } from '@sea-glass/css/light';
 initSeaGlassLight(); // pointer rim; no-ops under prefers-reduced-motion
 ```
 
-React 19 (`@seaglass/react`): `Glass` + Button, Field, Select, Alert, Table, Header, Footer… — full list in [`packages/react/README.md`](packages/react/README.md). Storybook 10: `pnpm storybook`. Tailwind v3:
+React 19 (`@sea-glass/react`): `Glass` + Button, Field, Select, Alert, Table, Header, Footer… — full list in [`packages/react/README.md`](packages/react/README.md). Storybook 10: `pnpm storybook`. Tailwind v3:
 
 ```js
-import { preset, plugin } from '@seaglass/tailwind';
+import { preset, plugin } from '@sea-glass/tailwind';
 export default { presets: [preset], plugins: [plugin] };
 ```
 
@@ -82,13 +82,13 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 
 <a id="status"></a>
 
-| Package              | 0.1.0-alpha                                          |
-| -------------------- | ---------------------------------------------------- |
-| `@seaglass/tokens`   | DTCG → CSS / JS / JSON                               |
-| `@seaglass/css`      | Material + prefixed components                       |
-| `@seaglass/elements` | Skeleton                                             |
-| `@seaglass/react`    | ~50 adapters (forms, feedback, nav, data) — React 19 |
-| `@seaglass/tailwind` | Preset + `glass-*` plugin                            |
+| Package               | 0.1.0-alpha                                          |
+| --------------------- | ---------------------------------------------------- |
+| `@sea-glass/tokens`   | DTCG → CSS / JS / JSON                               |
+| `@sea-glass/css`      | Material + prefixed components                       |
+| `@sea-glass/elements` | Skeleton                                             |
+| `@sea-glass/react`    | ~50 adapters (forms, feedback, nav, data) — React 19 |
+| `@sea-glass/tailwind` | Preset + `glass-*` plugin                            |
 
 Demo: [GitHub Pages](https://probe311.github.io/sea-glass/) — UI version via `pnpm sync:version`. Component status: [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap: [`ROADMAP.md`](ROADMAP.md).
 
@@ -107,10 +107,10 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and the [`Code of Conduct`](COD
 ### Installer
 
 ```bash
-pnpm add @seaglass/css @seaglass/tokens
+pnpm add @sea-glass/css @sea-glass/tokens
 ```
 
-Les packages ne sont pas encore sur npm (réserver `@seaglass`). En attendant :
+Scope npm : `@sea-glass` (compte [sea-glass](https://www.npmjs.com/~sea-glass)). Fallback git :
 
 ```bash
 pnpm add github:Probe311/sea-glass
@@ -119,13 +119,13 @@ pnpm add github:Probe311/sea-glass
 ### CSS minimal
 
 ```html
-<link rel="stylesheet" href="./node_modules/@seaglass/css/dist/seaglass.css" />
+<link rel="stylesheet" href="./node_modules/@sea-glass/css/dist/seaglass.css" />
 <div class="sg-scene">
   <button class="sg-glass sg-button" data-frosted data-rim type="button">Seafoam</button>
 </div>
 ```
 
-React 19 (`@seaglass/react`) : catalogue formulaires / feedback / nav / data — voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`. Version UI = `package.json` (`pnpm sync:version`).
+React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data — voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`. Version UI = `package.json` (`pnpm sync:version`).
 
 ### Marque et typo
 
@@ -155,11 +155,11 @@ Alpha `0.x`. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
 ## Monorepo
 
 ```
-packages/tokens     @seaglass/tokens
-packages/css        @seaglass/css
-packages/elements   @seaglass/elements
-packages/react      @seaglass/react
-packages/tailwind   @seaglass/tailwind
+packages/tokens     @sea-glass/tokens
+packages/css        @sea-glass/css
+packages/elements   @sea-glass/elements
+packages/react      @sea-glass/react
+packages/tailwind   @sea-glass/tailwind
 apps/storybook      Storybook 10
 assets/             wordmarks + Poppins OFL source
 demo/               prototype (GitHub Pages)

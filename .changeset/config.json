@@ -4,11 +4,11 @@
   "commit": false,
   "fixed": [
     [
-      "@seaglass/tokens",
-      "@seaglass/css",
-      "@seaglass/elements",
-      "@seaglass/react",
-      "@seaglass/tailwind"
+      "@sea-glass/tokens",
+      "@sea-glass/css",
+      "@sea-glass/elements",
+      "@sea-glass/react",
+      "@sea-glass/tailwind"
     ]
   ],
   "linked": [],

@@ -14,8 +14,8 @@ Légende :
 
 Colonnes :
 
-- **CSS** : classes `.sg-*` dans `@seaglass/css`
-- **React** : export typé dans `@seaglass/react`
+- **CSS** : classes `.sg-*` dans `@sea-glass/css`
+- **React** : export typé dans `@sea-glass/react`
 - **Démo** : section ou aperçu sur [GitHub Pages](https://probe311.github.io/sea-glass/)
 - **Storybook** : story dédiée ou overview (`pnpm storybook`)
 

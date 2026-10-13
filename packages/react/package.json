@@ -1,5 +1,5 @@
 {
-  "name": "@seaglass/react",
+  "name": "@sea-glass/react",
   "version": "0.1.0-alpha.0",
   "description": "Sea Glass React adapters — Glass surfaces + DS components.",
   "license": "MIT",
@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "@seaglass/css": "workspace:*"
+    "@sea-glass/css": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^19.3.0",

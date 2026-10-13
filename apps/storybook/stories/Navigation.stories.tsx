@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Breadcrumbs, Footer, Header, Pagination, Sidebar, Stepper, Toc } from '@seaglass/react';
+import { Breadcrumbs, Footer, Header, Pagination, Sidebar, Stepper, Toc } from '@sea-glass/react';
 
 const meta: Meta = {
   title: 'Navigation/Overview',

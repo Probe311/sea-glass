@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react';
-import '@seaglass/css';
+import '@sea-glass/css';
 
 const preview: Preview = {
   parameters: {

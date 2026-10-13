@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-describe('@seaglass/css', () => {
+describe('@sea-glass/css', () => {
   it('ships a bundled sheet with sg- prefix and no legacy collisions', () => {
     const css = readFileSync(join(root, 'dist/seaglass.css'), 'utf8');
     expect(css).toContain('.sg-glass');

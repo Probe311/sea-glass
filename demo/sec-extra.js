@@ -88,7 +88,7 @@
           h('div', { className: 'sg-dialog__footer' },
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost' }, 'Annuler'),
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary', 'data-frosted': true }, 'Supprimer')))),
-      h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @seaglass/react']] }));
+      h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @sea-glass/react']] }));
   };
 
   S.SelectDoc = function () {

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Badge, Card, FileUpload, Hero, Quote, Table, Tag, Tile } from '@seaglass/react';
+import { Badge, Card, FileUpload, Hero, Quote, Table, Tag, Tile } from '@sea-glass/react';
 
 const meta: Meta = {
   title: 'Data/Overview',

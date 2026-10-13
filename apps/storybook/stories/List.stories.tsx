@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Divider, List, ListItem } from '@seaglass/react';
+import { Divider, List, ListItem } from '@sea-glass/react';
 
 const meta: Meta<typeof List> = {
   title: 'Data/List',

@@ -280,4 +280,4 @@ const sd = new StyleDictionary({
 
 await sd.hasInitialized;
 await sd.buildAllPlatforms();
-console.log('@seaglass/tokens: built dist/');
+console.log('@sea-glass/tokens: built dist/');

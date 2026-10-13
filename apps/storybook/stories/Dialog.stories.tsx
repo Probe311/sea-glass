@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Dialog } from '@seaglass/react';
+import { Dialog } from '@sea-glass/react';
 
 const meta: Meta<typeof Dialog> = {
   title: 'Overlay/Dialog',

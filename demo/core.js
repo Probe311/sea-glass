@@ -19,13 +19,25 @@
 
   /* ---------- Thème ---------- */
   var store = { v: 0, subs: [] };
+  var THEME_KEY = 'sg-theme';
   function bump() { store.v++; store.subs.forEach(function (f) { f(); }); }
+  (function initTheme() {
+    try {
+      var saved = localStorage.getItem(THEME_KEY);
+      if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+    } catch (e) {}
+  })();
   SG.isDark = function () {
     var a = document.documentElement.getAttribute('data-theme');
     if (a) return a === 'dark';
     return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   };
-  SG.toggleTheme = function () { document.documentElement.setAttribute('data-theme', SG.isDark() ? 'light' : 'dark'); bump(); };
+  SG.toggleTheme = function () {
+    var next = SG.isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+    bump();
+  };
   SG.useTheme = function () {
     return React.useSyncExternalStore(
       function (cb) { store.subs.push(cb); return function () { store.subs = store.subs.filter(function (f) { return f !== cb; }); }; },
