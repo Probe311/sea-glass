@@ -59,7 +59,7 @@
   };
 
   S.SelectDoc = function () {
-    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes déroulantes', lead: 'Select natif sur verre, Combobox filtrable, champ mot de passe avec affichage.' },
+    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes déroulantes', lead: 'Select natif sur verre, Combobox filtrable, champ mot de passe avec affichage, dépôt de fichiers.' },
       h(D.Panel, { scene: true, tag: 'Aperçu' },
         scene([
           h('div', { className: 'sg-field sg-select' },
@@ -69,6 +69,13 @@
                 h('option', { value: 'seafoam' }, 'Seafoam'),
                 h('option', { value: 'kelly' }, 'Kelly'),
                 h('option', { value: 'aqua' }, 'Aqua')))),
+          h('div', { className: 'sg-combobox' },
+            h('label', null, 'Combobox'),
+            h('div', { className: 'sg-glass', 'data-carved': true },
+              h('input', { className: 'sg-combobox__control', role: 'combobox', 'aria-expanded': 'false', 'aria-autocomplete': 'list', placeholder: 'Filtrer un galet…', 'aria-label': 'Combobox' })),
+            h('ul', { className: 'sg-combobox__list sg-glass', role: 'listbox', 'data-frosted': true, 'data-rim': true, style: { marginTop: 6, listStyle: 'none', padding: 6 } },
+              h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'option' }, 'Seafoam')),
+              h('li', null, h('button', { type: 'button', className: 'sg-menu__item', role: 'option' }, 'Kelly')))),
           h('div', { className: 'sg-field sg-password' },
             h('label', null, 'Mot de passe'),
             h('div', { className: 'sg-glass sg-password', 'data-carved': true, style: { position: 'relative' } },
@@ -77,7 +84,7 @@
             h('label', null, 'Dépose un fichier ou parcourir'),
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost sg-button--sm' }, 'Parcourir')),
         ])),
-      h(D.Specs, { head: ['Composant', 'Classe', 'Note'], rows: [['Select', '.sg-select', 'Native'], ['Password', '.sg-password', 'Toggle show/hide côté React'], ['Upload', '.sg-upload', 'Dropzone']] }));
+      h(D.Specs, { head: ['Composant', 'Classe', 'Note'], rows: [['Select', '.sg-select', 'Native'], ['Combobox', '.sg-combobox', 'Filtre local'], ['Password', '.sg-password', 'Toggle show/hide côté React'], ['Upload', '.sg-upload', 'Dropzone']] }));
   };
 
   S.ChromeDoc = function () {
@@ -121,7 +128,7 @@
   };
 
   S.DataDoc = function () {
-    return h(D.Section, { id: 'donnees', label: 'Composants', title: 'Données et contenu', lead: 'Tableaux, listes, tuiles, citation, média, hero et partage.' },
+    return h(D.Section, { id: 'donnees', label: 'Composants', title: 'Données et contenu', lead: 'Tableaux, listes, tuiles, citation, média, hero, partage et transcription.' },
       h(D.Panel, { scene: true, tag: 'Aperçu' },
         scene([
           h('section', { className: 'sg-hero sg-glass', 'data-frosted': true, 'data-rim': true, style: { padding: 20 } },
@@ -133,6 +140,12 @@
           h('blockquote', { className: 'sg-quote sg-glass', 'data-frosted': true, 'data-rim': true, style: { margin: 0, padding: 16 } },
             'La translucidité avant la décoration.',
             h('footer', { className: 'sg-quote__cite' }, '— Sea Glass')),
+          h('figure', { className: 'sg-media sg-glass', 'data-frosted': true, 'data-rim': true, style: { margin: 0, padding: 12 } },
+            h('div', { className: 'sg-media__frame', style: { aspectRatio: '16/9', borderRadius: 12, background: 'linear-gradient(135deg, rgba(255,255,255,.25), rgba(0,0,0,.15))' } }),
+            h('figcaption', { className: 'sg-media__caption' }, 'Contenu média')),
+          h('div', { className: 'sg-transcription sg-glass', 'data-frosted': true, 'data-rim': true, style: { padding: 12, fontSize: 14 } },
+            h('strong', null, 'Transcription'),
+            h('p', { style: { margin: '8px 0 0' } }, 'Texte alternatif pour un média audio ou vidéo.')),
           h('div', { className: 'sg-table-wrap sg-glass', 'data-frosted': true, 'data-rim': true },
             h('table', { className: 'sg-table' },
               h('thead', null, h('tr', null, h('th', null, 'Galet'), h('th', null, 'Rôle'))),
@@ -141,11 +154,12 @@
                 h('tr', null, h('td', null, 'Amber'), h('td', null, 'warning'))))),
           h('ul', { className: 'sg-list sg-glass', 'data-frosted': true, 'data-rim': true, style: { listStyle: 'none', margin: 0, padding: 8 } },
             h('li', { className: 'sg-list__item' }, h('div', { className: 'sg-list__body' }, h('div', { className: 'sg-list__label' }, 'Liste'), h('div', { className: 'sg-list__meta' }, 'Item sur verre')))),
+          h('hr', { className: 'sg-divider' }),
           h('div', { className: 'sg-share', style: { display: 'flex', gap: 8 } },
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost sg-button--sm' }, 'Copier le lien'),
             h('a', { className: 'sg-button sg-glass sg-button--ghost sg-button--sm', href: '#' }, 'Partager')),
         ])),
-      h(D.Specs, { head: ['Composant', 'Classe'], rows: [['Table', '.sg-table'], ['List', '.sg-list'], ['Tile', '.sg-tile'], ['Quote', '.sg-quote'], ['Hero', '.sg-hero'], ['Share', '.sg-share']] }));
+      h(D.Specs, { head: ['Composant', 'Classe'], rows: [['Table', '.sg-table'], ['List', '.sg-list'], ['Tile', '.sg-tile'], ['Quote', '.sg-quote'], ['Media', '.sg-media'], ['Transcription', '.sg-transcription'], ['Hero', '.sg-hero'], ['Share', '.sg-share'], ['Divider', '.sg-divider']] }));
   };
 
   S.PrefsDoc = function () {

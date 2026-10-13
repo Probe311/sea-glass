@@ -3,7 +3,7 @@
 Objectif : un design system glassmorphism complet, cohérent et publiable (niveau MUI / Tailwind), **framework-agnostique en premier**, avec adaptateurs React (et plus tard Vue/Svelte) et un plugin Tailwind.
 
 Légende : **P0** indispensable v1 · **P1** important · **P2** confort. Effort : **XS** < 2 h · **S** ½ j · **M** 1–2 j · **L** 3–5 j · **XL** > 1 sem.
-Références → voir [`docs/AUDIT.md`](docs/AUDIT.md). Prototype interactif → [`demo/`](demo/).
+Références → voir [`docs/AUDIT.md`](docs/AUDIT.md). Avancement composants → [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Prototype interactif → [`demo/`](demo/).
 
 Architecture cible proposée :
 ```
