@@ -64,9 +64,11 @@
 .cb input { position: absolute; left: 0; top: 50%; width: 24px; height: 24px; margin: -12px 0 0; opacity: 0; cursor: pointer; z-index: 6; }
 .cb .box { position: relative; width: 24px; height: 24px; flex: none; display: block; --lg-r: 8px; --lg-blur: 4px; --gl: 7px; }
 .cb.radio .box { --lg-r: 50%; }
-.cb .box > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5; }
-.cb .tick { fill: none; stroke: #fff; filter: drop-shadow(0 1px 1px rgba(0, 50, 40, 0.4)); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 18; stroke-dashoffset: 18; transition: stroke-dashoffset 260ms var(--ease) 60ms; }
-.cb.on .tick { stroke-dashoffset: 0; }
+.cb .box > .ico,
+.cb .box > .tick-ind { position: absolute; inset: 0; margin: auto; pointer-events: none; z-index: 5; }
+.cb .box > .ico { width: 14px; height: 14px; fill: #fff; filter: drop-shadow(0 1px 1px rgba(0, 50, 40, 0.4)); opacity: 0; transform: scale(0.7); transition: opacity 180ms var(--ease), transform 260ms var(--spring); }
+.cb.on .box > .ico { opacity: 1; transform: scale(1); }
+.cb .tick-ind { width: 12px; height: 3px; border-radius: 999px; background: #fff; box-shadow: 0 1px 1px rgba(0, 50, 40, 0.35); }
 .cb .dot { position: absolute; z-index: 5; left: 50%; top: 50%; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; transform: scale(0); transition: transform 320ms var(--spring); pointer-events: none; background: #fff; box-shadow: 0 1px 2px rgba(0, 50, 40, 0.55); }
 .cb.on .dot { transform: scale(1); }
 .cb .box { transition: transform 260ms var(--spring), box-shadow 260ms var(--ease), background 200ms var(--ease); }

@@ -11,28 +11,12 @@
     return h('span', {
       className: 'sg-chevron' + (open ? ' sg-chevron--open' : ''),
       'aria-hidden': true,
-    }, h('svg', { viewBox: '0 0 24 24', width: 18, height: 18, focusable: 'false' },
-      h('path', { d: 'M7 10l5 5 5-5', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })));
+    }, h(Icon, { name: 'chevron', size: 18 }));
   }
 
-  /* Jelly-style FA solid glyphs (circle-info / triangle-exclamation / circle-check / circle-xmark) */
   function alertIcon(tone) {
-    var glyphs = {
-      info: [
-        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm.75 14.25h-1.5v-6h1.5zm0-8h-1.5v-1.5h1.5z', fill: 'currentColor' }),
-      ],
-      warning: [
-        h('path', { key: 'b', d: 'M12.9 3.1a1.5 1.5 0 0 0-1.8 0L1.4 18.2A1.5 1.5 0 0 0 2.7 20.5h18.6a1.5 1.5 0 0 0 1.3-2.3zM12 9.2a.9.9 0 0 1 .9.9v3.8a.9.9 0 1 1-1.8 0V10.1a.9.9 0 0 1 .9-.9zm0 8.3a1.1 1.1 0 1 1 1.1-1.1A1.1 1.1 0 0 1 12 17.5z', fill: 'currentColor' }),
-      ],
-      success: [
-        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm4.3 7.7-5.2 5.2a1 1 0 0 1-1.4 0l-2.3-2.3a1 1 0 1 1 1.4-1.4l1.6 1.6 4.5-4.5a1 1 0 0 1 1.4 1.4z', fill: 'currentColor' }),
-      ],
-      error: [
-        h('path', { key: 'b', d: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm3.5 12.1a1 1 0 0 1-1.4 1.4L12 13.4l-2.1 2.1a1 1 0 0 1-1.4-1.4l2.1-2.1-2.1-2.1a1 1 0 0 1 1.4-1.4l2.1 2.1 2.1-2.1a1 1 0 0 1 1.4 1.4L13.4 12z', fill: 'currentColor' }),
-      ],
-    };
     return h('span', { className: 'sg-alert__icon', 'aria-hidden': true },
-      h('svg', { viewBox: '0 0 24 24', width: 22, height: 22, focusable: 'false' }, glyphs[tone] || glyphs.info));
+      h(Icon, { name: tone === 'danger' ? 'error' : tone, size: 22 }));
   }
 
   S.Alerts = function () {
@@ -87,7 +71,12 @@
           h('div', { className: 'sg-dialog__body' }, 'Cette action est irréversible. Le fichier ne pourra pas être récupéré.'),
           h('div', { className: 'sg-dialog__footer' },
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost' }, 'Annuler'),
-            h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary', 'data-frosted': true }, 'Supprimer')))),
+            h('button', {
+              type: 'button',
+              className: 'sg-button sg-glass sg-button--primary sg-dialog-demo__danger',
+              'data-frosted': true,
+              'data-tint': true,
+            }, 'Supprimer')))),
       h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @sea-glass/react']] }));
   };
 
@@ -240,10 +229,7 @@
             h('footer', null, '— Sea Glass')),
           h('figure', { className: 'sg-media sg-glass', 'data-frosted': true },
             h('div', { className: 'sg-media__frame', 'aria-hidden': true },
-              h('svg', { className: 'sg-media__icon', viewBox: '0 0 24 24', width: 40, height: 40 },
-                h('path', { d: 'M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.6 }),
-                h('circle', { cx: 9, cy: 10, r: 1.6, fill: 'currentColor' }),
-                h('path', { d: 'M3 16l5-5 3 3 4-4 6 6', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }))),
+              h('span', { className: 'sg-media__icon' }, h(Icon, { name: 'image', size: 40 }))),
             h('figcaption', { className: 'sg-media__caption' }, 'Contenu média')),
           h('div', { className: 'sg-transcription sg-glass', 'data-frosted': true },
             h('strong', null, 'Transcription'),

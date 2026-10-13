@@ -16,8 +16,8 @@
   --font-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
 
   /* Sol et encre */
-  --ground: #F6FAF7;
-  --ground-2: #EDF3F0;
+  --ground: #F6F5EE;
+  --ground-2: #ECEBE3;
   --ink: #17262A;
   --ink-2: #3E4F52;
   --ink-3: #566568;
@@ -58,12 +58,14 @@
   --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 28px; --r-pill: 999px;
   --ease: cubic-bezier(0.2, 0, 0, 1);
   --spring: cubic-bezier(0.34, 1.4, 0.5, 1);
-  --tex: 0.32;
+  --theme-dur: 220ms;
+  --theme-ease: var(--ease);
+  --tex: 0;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --ground: #0F1513; --ground-2: #161D1B;
+    --ground: #14130F; --ground-2: #1C1B17;
     --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
     --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
     --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
@@ -73,12 +75,12 @@
     --on-tint: #14463A; --teal: #7BBFAC; --teal-hi: #A8DCCB;
     --seafoam-ink: #1D4D41; --kelly-ink: #062014; --aqua-ink: #033040; --cobalt-ink: #061230;
     --amber-ink: #5A3D03; --ruby-ink: #5E1E12; --citron-ink: #4A4E0F; --lavender-ink: #4B3A59;
-    --tex: 0.1;
+    --tex: 0;
   }
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --ground: #0F1513; --ground-2: #161D1B;
+  --ground: #14130F; --ground-2: #1C1B17;
   --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
   --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
   --ga: 0.08; --ga-scene: 0.12; --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
@@ -87,7 +89,7 @@
   --on-tint: #14463A; --teal: #7BBFAC; --teal-hi: #A8DCCB;
   --seafoam-ink: #1D4D41; --kelly-ink: #062014; --aqua-ink: #033040; --cobalt-ink: #061230;
   --amber-ink: #5A3D03; --ruby-ink: #5E1E12; --citron-ink: #4A4E0F; --lavender-ink: #4B3A59;
-  --tex: 0.1;
+  --tex: 0;
 }
 
 /* ================= Le matériau ================= */

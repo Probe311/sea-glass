@@ -100,7 +100,7 @@
   /* ---------- Tokens et code ---------- */
   var CSS = [
     '/* Sea Glass v4 · tokens (clair) */', ':root {',
-    '  --ground: #F4F3EE;  --ink: #17262A;  --ink-2: #3E4F52;  --ink-3: #566568;  --focus: #2F55C4;',
+    '  --ground: #F6F5EE;  --ink: #17262A;  --ink-2: #3E4F52;  --ink-3: #566568;  --focus: #2F55C4;',
     '  --seafoam: #B9E3D6;  --kelly: #4FA877;  --citron: #D8DB9C;  --aqua: #5CC4EC;',
     '  --cornflower: #C3D3F0;  --cobalt: #6B8CE3;  --lavender: #E4DAE8;  --ruby: #E07662;',
     '  --amber: #F7C96B;  --rootbeer: #B5866A;  --clear: #F7F9F7;  --mist: #CDD5D4;',

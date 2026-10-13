@@ -56,8 +56,8 @@ describe('Sea Glass tokens (source of truth)', () => {
   it('keeps prototype hex values for the pebbles', () => {
     expect(color.seafoam.$value).toBe('#B9E3D6');
     expect(color.kelly.$value).toBe('#4FA877');
-    expect(color.ground.$value).toBe('#F6FAF7');
-    expect(color.ground.$extensions.seaglass.dark).toBe('#0F1513');
+    expect(color.ground.$value).toBe('#F6F5EE');
+    expect(color.ground.$extensions.seaglass.dark).toBe('#14130F');
   });
 
   it('defines dark inks for every pebble, including the six that were missing', () => {
@@ -66,7 +66,7 @@ describe('Sea Glass tokens (source of truth)', () => {
     }
     for (const key of DARK_INKS_ADDED) {
       const dark = color[`${key}-ink`].$extensions.seaglass.dark;
-      expect(contrast(dark, '#0F1513')).toBeGreaterThanOrEqual(4.5);
+      expect(contrast(dark, '#14130F')).toBeGreaterThanOrEqual(4.5);
     }
   });
 
