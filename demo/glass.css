@@ -11,7 +11,7 @@
 @property --ang { syntax: '<angle>'; inherits: false; initial-value: 140deg; }
 
 :root {
-  --font-display: 'Google Sans', 'Outfit', system-ui, sans-serif;
+  --font-display: 'Poppins', 'Outfit', ui-rounded, system-ui, sans-serif;
   --font-body: 'Roboto', system-ui, -apple-system, sans-serif;
   --font-mono: 'Roboto Mono', ui-monospace, Menlo, monospace;
 

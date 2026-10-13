@@ -55,17 +55,17 @@
             return h('div', { className: 'grp', key: g[0] }, h('span', { className: 'gl' }, g[0]),
               g[1].map(function (l) { return h('a', { key: l[0], href: '#' + l[0], onClick: p.onClose, 'aria-current': cur === l[0] ? 'true' : undefined }, l[1]); }));
           }) : h('p', { className: 'none' }, 'Aucun résultat pour « ' + p.q + ' ».')),
-        h('div', { className: 'foot' }, 'Version 5.0 · React 18')));
+        h('div', { className: 'foot' }, '0.1.0-alpha.0 · React 19.3.0')));
   };
 
   S.Hero = function () {
     return h('header', { className: 'doc-hero' },
-      h('span', { className: 'label' }, 'Design system · version 5.0'),
+      h('span', { className: 'label' }, 'Design system · 0.1.0-alpha.0'),
       h('h1', null, 'Sea Glass'),
-      h('p', { className: 'lead' }, 'Un système d’interface en verre de mer : des galets mats et laiteux, éclairés par une seule lumière venue du haut à gauche. Six propriétés de matière, un modèle de lumière, douze couleurs et treize composants documentés, utilisables en React sans dépendance.'),
+      h('p', { className: 'lead' }, 'Un système d’interface en verre de mer : des galets mats et laiteux, éclairés par une seule lumière venue du haut à gauche. Six propriétés de matière, un modèle de lumière, douze couleurs et une cinquantaine d’adaptateurs React dans @seaglass/react (snapshot legacy).'),
       h('div', { className: 'hero-pebbles', 'aria-hidden': true }, SG.PEBBLES.map(function (p) { return h(SG.Pebble, { key: p.key, name: p.name, color: p.key, seed: p.seed }); })),
       h('div', { className: 'meta' },
-        [['6', 'propriétés de matière'], ['12', 'couleurs'], ['13', 'composants'], ['2', 'thèmes']].map(function (m) { return h('div', { key: m[1] }, h('b', null, m[0]), h('span', null, m[1])); })));
+        [['6', 'propriétés de matière'], ['12', 'couleurs'], ['~50', 'composants React'], ['2', 'thèmes']].map(function (m) { return h('div', { key: m[1] }, h('b', null, m[0]), h('span', null, m[1])); })));
   };
 
   /* ---------- Matière ---------- */

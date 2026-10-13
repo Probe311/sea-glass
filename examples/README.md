@@ -1,5 +1,7 @@
 # Examples
 
+Exemples CSS minimaux. Catalogue React : [`packages/react/README.md`](../packages/react/README.md) · Storybook : `pnpm storybook`.
+
 ```bash
 pnpm build
 python3 -m http.server 4173 --directory ..

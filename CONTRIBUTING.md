@@ -12,17 +12,22 @@ pnpm install
 pnpm check
 ```
 
-The original prototype lives in `legacy/` and is not linted. New work belongs in `packages/`.
+The original prototype lives in `legacy/` / `demo/` and is not linted as a library. New components belong in `packages/css` + `packages/react`, with a Storybook story when practical. Catalogue: [`packages/react/README.md`](packages/react/README.md).
 
 ## Scripts
 
-| Command          | What                                       |
-| ---------------- | ------------------------------------------ |
-| `pnpm build`     | Style Dictionary + CSS bundle + `tsc`      |
-| `pnpm lint`      | ESLint, Stylelint (`sg-` prefix), Prettier |
-| `pnpm test`      | Vitest                                     |
-| `pnpm check`     | lint + typecheck + build + test            |
-| `pnpm changeset` | Record a semver bump                       |
+| Command             | What                                         |
+| ------------------- | -------------------------------------------- |
+| `pnpm build`        | Style Dictionary + CSS bundle + `tsc`        |
+| `pnpm lint`         | ESLint 10, Stylelint, Prettier               |
+| `pnpm test`         | Vitest 5                                     |
+| `pnpm check`        | lint + typecheck + build + test              |
+| `pnpm storybook`    | Storybook 10                                 |
+| `pnpm build:logo`   | Wordmarks → `assets/` + `demo/`              |
+| `pnpm sync:version` | UI version ← `package.json` + React installé |
+| `pnpm changeset`    | Record a semver bump                         |
+
+Footers / hero use **`package.json` version** and the **installed React** version (`pnpm sync:version`, also on `prepare`). Never hardcode “5.0 · React 18”.
 
 ## Conventions
 
@@ -30,7 +35,7 @@ The original prototype lives in `legacy/` and is not linted. New work belongs in
 2. **Prefix.** Public classes are `.sg-*` with BEM modifiers (`.sg-button--primary`). Stylelint enforces this.
 3. **No non-open assets.** No Google Sans, no hotlinked stock photos.
 4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate — see `docs/AUDIT.md`.
-5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged.
+5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged. Do **not** commit `media/` or video/motion exports (`*.mp4`, `*.webm`, …) — they stay local (see `.gitignore`).
 6. **Changesets.** User-facing changes get `pnpm changeset`.
 
 ## Pull requests

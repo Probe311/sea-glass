@@ -1,12 +1,24 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Sea Glass Design System</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="glass.css">
 <link rel="stylesheet" href="layout.css">
 <link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="seaglass.css">
+<style>
+  /* Package catalog demos — isolate @seaglass/css from legacy .lg tokens */
+  .sg-demo-catalog { --sg-demo-pad: 12px; }
+  .sg-demo-catalog .sg-scene {
+    padding: 1.25rem;
+    border-radius: 20px;
+    background: linear-gradient(160deg, #7ec8c0 0%, #3a8f9a 45%, #1e4d5c 100%);
+  }
+  .sg-demo-catalog .stack { display: grid; gap: 12px; }
+  .sg-demo-catalog .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+</style>
 <script>
   try {
     if (/Chrome\//.test(navigator.userAgent) && CSS.supports('backdrop-filter', 'url(#sg-refract)')) document.documentElement.classList.add('sg-refract');
@@ -38,13 +50,24 @@
 
 <div id="root"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
-<script src="core.js"></script>
-<script src="ui.js"></script>
-<script src="ui2.js"></script>
-<script src="sec-a.js"></script>
-<script src="sec-b.js"></script>
-<script src="sec-c.js"></script>
+<script src="version.js"></script>
+<script type="module">
+  const v = window.SG_META?.react || '19.3.0';
+  const React = (await import(`https://esm.sh/react@${v}`)).default;
+  const ReactDOM = (await import(`https://esm.sh/react-dom@${v}`)).default;
+  const { createRoot } = await import(`https://esm.sh/react-dom@${v}/client`);
+  window.React = React;
+  window.ReactDOM = Object.assign({}, ReactDOM, { createRoot });
+  const files = ['core.js', 'ui.js', 'ui2.js', 'sec-a.js', 'sec-b.js', 'sec-c.js'];
+  for (const src of files) {
+    await new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = () => reject(new Error('Failed to load ' + src));
+      document.body.appendChild(s);
+    });
+  }
+</script>
 
 </body></html>

@@ -142,7 +142,7 @@
       h('div', { className: 'shell', id: 'top' },
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
         h('main', { className: 'main' }, h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields), h(S.Nav), h(S.Cards), h(S.Feedback), h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' }, h('span', null, 'Sea Glass Design System · v5.0'), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow.')))),
+          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · 0.1.0-alpha.0'), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow.')))),
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));

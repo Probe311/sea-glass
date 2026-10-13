@@ -1,6 +1,6 @@
 # Legacy prototype / Prototype d’origine
 
-Snapshot of the original Sea Glass documentation site (React 18 UMD via CDN, `React.createElement`). Kept as a **visual reference** only. It is not part of the published packages.
+Snapshot of the original Sea Glass documentation site (`React.createElement`). Kept as a **visual reference** only. Footer version strings are kept in sync with `package.json` / installed React via `pnpm sync:version`. Not part of the published packages.
 
 Copie du site de documentation d’origine. **Référence visuelle** uniquement — hors packages publiés.
 

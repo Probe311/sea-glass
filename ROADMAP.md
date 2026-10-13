@@ -41,7 +41,7 @@ seaglass/
 - [x] **P0 · XS** Supprimer variables mortes (`--gl`, `.lg-gloss`, prop `gloss`)
 - [x] **P1 · S** Compléter les 6 encres sombres manquantes (citron, cornflower, lavender, rootbeer, clear, mist)
 - [x] **P1 · M** Remplacer les ~30 hex en dur par des tokens (knob, fills slider/progress, teal profond #308069/#256B5A, `#A4402F`…)
-- [x] **P1 · S** Polices : retirer Google Sans (licence), garder Outfit/Roboto en self-host (`@fontsource`) ou fallback système ; documenter comment brancher sa propre fonte
+- [x] **P1 · S** Polices : retirer Google Sans (licence) ; **Poppins** Bold pour Hn / wordmark (OFL), Roboto pour le corps ; documenter `@fontsource/poppins` + logos `assets/logo*.svg`
 - [ ] **P2 · S** Générer automatiquement la page « Tokens » de la doc depuis le JSON (fin des écarts doc/code, `sec-c.js:84-115`)
 
 ## Phase 2 — Architecture & build (semaines 2–4)
@@ -53,7 +53,7 @@ seaglass/
 - [x] **P0 · M** Matériau : défauts **sobres** (`frosted` seulement si `.sg-over`/scène, `refractive` opt-in), `@supports (backdrop-filter: url(#x))` au lieu de l'UA sniffing (`index.html:12`), filtre SVG injecté à la demande
 - [x] **P0 · S** Moteur « lumière au pointeur » (`core.js:53-82`) en module ESM autonome, opt-in (`initSeaGlassLight()`), désactivé en reduced-motion
 - [ ] **P0 · L** Décision **framework-agnostique** : web components (`<sg-button>`, `<sg-slider>`, `<sg-tabs>`…) pour les composants à comportement ; CSS-only pour les statiques (card, badge, chip simple)
-- [ ] **P0 · L** `@seaglass/react` : réécriture TSX, `forwardRef`, contrôlé + non contrôlé (`value/defaultValue/onChange`) pour Chip, Checkbox, RadioGroup, Tabs, Field, Slider, Segmented ; `name` + input caché pour les formulaires
+- [x] **P0 · L** `@seaglass/react` : réécriture TSX, `forwardRef`, contrôlé + non contrôlé (`value/defaultValue/onChange`) pour Chip, Checkbox, Tabs, Field, Slider, Segmented (+ Alert, Table, Accordion, Header/Footer…) ; RadioGroup / `name` form à peaufiner
 - [ ] **P0 · S** Build : Vite library mode / tsup → ESM + CJS + `.d.ts`, CSS minifié, `exports` map, `sideEffects` pour le CSS, tree-shaking
 - [x] **P1 · M** `@seaglass/tailwind` : preset (couleurs, rayons, durées depuis les tokens) + plugin utilitaires `glass`, `glass-frosted`, `glass-tint-{color}`, `glass-rim`, `glass-glow`, `glass-carved`, `glass-blur-{sm..xl}` (Tailwind v4 : `@theme` + `@utility` — v4 à brancher plus tard)
 - [ ] **P1 · S** Déclarer la cible navigateurs (browserslist : 2 dernières versions + Safari ≥ 16.4) et un tableau de support
@@ -64,25 +64,25 @@ seaglass/
 ## Phase 3 — Composants (semaines 3–10)
 
 ### 3a. Remise à niveau des existants
-- [ ] **P0 · S** Button : `type` libre (submit), `href` (rendu `<a>`), `loading`, `startIcon/endIcon`, `fullWidth` ; variantes `filled | tonal | outlined | ghost` (+ `love` → exemple de recette, pas une variante cœur)
-- [ ] **P0 · S** IconButton séparé (aria-label obligatoire en TS)
-- [ ] **P0 · S** Checkbox : contrôlé, vrai `indeterminate` (`input.indeterminate`)
-- [ ] **P0 · S** Field → `TextField` : types, `required`, préfixe/suffixe, compteur, `Textarea`
-- [ ] **P0 · S** Search, NavBar : paramétrables (items, labels, slots) ; NavBar en liens
-- [ ] **P1 · S** Tabs : contrôlé, activation manuelle optionnelle, onglets désactivés sautés, vertical
-- [ ] **P1 · S** Slider : vertical, RTL, `name`, formateur de valeur ; Ring indéterminé
-- [ ] **P1 · S** Tooltip réel (déclencheur, positionnement Floating UI / CSS anchor positioning, délai, Échap)
-- [ ] **P1 · S** Snackbar/Toast : file d'attente, durée, action, `role="status"`/`alert`, API `toast()` agnostique
+- [x] **P0 · S** Button : `type` libre (submit), `startIcon/endIcon`, `fullWidth` ; variantes `primary | ghost | default` (+ `href` / `loading` / filled|tonal|outlined à peaufiner)
+- [x] **P0 · S** IconButton séparé (aria-label obligatoire en TS)
+- [x] **P0 · S** Checkbox : contrôlé, vrai `indeterminate` (`input.indeterminate`)
+- [x] **P0 · S** Field → `TextField` : types, multiline/`Textarea`, help/error ; préfixe/suffixe/compteur à peaufiner
+- [x] **P0 · S** Search paramétrable ; Nav / Header en liens (NavBar legacy à retirer)
+- [x] **P1 · S** Tabs : contrôlé, onglets désactivés ; vertical / activation manuelle à peaufiner
+- [x] **P1 · S** Slider : base + label/unit ; vertical/RTL/Ring à peaufiner
+- [x] **P1 · S** Tooltip (hover/focus) ; Floating UI / délai / Échap à peaufiner
+- [x] **P1 · S** Snackbar/Toast : surface + action ; file d'attente / API `toast()` à peaufiner
 
 ### 3b. Manquants vs MUI / Tailwind UI
 **Saisie**
-- [ ] **P0 · M** Select (listbox APG)
-- [ ] **P1 · L** Combobox / Autocomplete
-- [ ] **P1 · S** Switch avec label intégré, Radio card / Checkbox card
+- [x] **P0 · M** Select (native + verre) — listbox APG à peaufiner
+- [x] **P1 · L** Combobox / Autocomplete (filtre local)
+- [x] **P1 · S** Switch avec label intégré, Radio / Checkbox
 - [ ] **P1 · M** Number input / stepper, OTP / PIN input
 - [ ] **P2 · L** Date picker, time picker
-- [ ] **P2 · M** File upload / dropzone, Rating, Color picker (galets)
-- [ ] **P1 · S** Form field (label, help, error, required) générique + Fieldset/Legend
+- [x] **P2 · M** File upload / dropzone — Rating, Color picker (galets) plus tard
+- [x] **P1 · S** Form field (label, help, error) + Fieldset/Legend (`Form`)
 
 **Overlays**
 - [x] **P0 · M** Dialog / Modal (focus trap, `inert`, Échap, retour du focus) — base du drawer (`inert` encore à brancher)
@@ -91,23 +91,23 @@ seaglass/
 - [ ] **P2 · S** Context menu, Command palette (⌘K)
 
 **Navigation**
-- [ ] **P1 · S** App bar / Top bar, Navigation rail, Bottom navigation (NavBar), Sidebar
-- [ ] **P1 · S** Breadcrumbs, Pagination, Link
-- [ ] **P2 · S** Stepper
+- [x] **P1 · S** Header (app bar), Sidebar, Nav ; Navigation rail / Bottom nav à peaufiner
+- [x] **P1 · S** Breadcrumbs, Pagination, Link (+ SkipLink)
+- [x] **P2 · S** Stepper
 
 **Affichage de données**
-- [x] **P1 · M** List / ListItem, Table (tri, sélection) sur verre — List/ListItem ; Table plus tard
-- [x] **P1 · S** Avatar / AvatarGroup, Divider, Kbd, Tag (supprimable) — Divider ; Avatar/Kbd/Tag plus tard
-- [ ] **P1 · S** Accordion / Disclosure
+- [x] **P1 · M** List / ListItem, Table (tri) sur verre — sélection multi à peaufiner
+- [x] **P1 · S** Divider, Tag (supprimable), Badge, Chip — Avatar/Kbd plus tard
+- [x] **P1 · S** Accordion / Disclosure
 - [ ] **P2 · M** Carousel, Timeline, Tree view
 
 **Retours**
-- [ ] **P1 · S** Alert / Banner (info/success/warning/danger)
+- [x] **P1 · S** Alert / Banner / Callout (info/success/warning/danger)
 - [ ] **P1 · S** Skeleton, Spinner (indéterminé circulaire)
 - [ ] **P2 · S** Empty state
 
 **Layout / utilitaires**
-- [ ] **P1 · S** Surface / Paper (= `Glass` public documenté), Stack, Grid, Container, Scene (décor de fond fourni : dégradés « mer » sans image externe)
+- [x] **P1 · S** Surface / Paper (= `Glass` public), Card, Tile, Hero, Quote, Media — Stack/Grid/Container/Scene à peaufiner
 - [ ] **P2 · S** VisuallyHidden, Portal, FocusTrap exposés
 
 ## Phase 4 — Accessibilité (en continu, gate avant v1)
@@ -139,7 +139,7 @@ seaglass/
 ## Phase 6 — Documentation (semaines 4–10)
 
 - [ ] **P0 · L** Site de doc (Astro + MDX, ou VitePress) qui **consomme les packages** — migrer le contenu actuel (Principes, Fondations, Composants, Qualité)
-- [x] **P0 · M** Storybook 8 : une story par composant × variantes × états, contrôles, addon a11y, thèmes clair/sombre, décor « scène » — socle `apps/storybook` (Glass/List/Dialog/Menu) ; étendre au reste
+- [x] **P0 · M** Storybook 10 : socle Glass/List/Dialog/Menu + overviews Forms/Feedback/Navigation/Data ; thèmes clair/sombre, décor scène — stories unitaires × variantes à densifier
 - [ ] **P0 · S** Pages : Installation (CDN, npm, Tailwind), Démarrage rapide, Theming, Tokens (auto-générée), Accessibilité, Support navigateurs, Performance (budget de couches `backdrop-filter`)
 - [ ] **P1 · M** Docs d'API générées (react-docgen-typescript / Custom Elements Manifest)
 - [ ] **P1 · S** Playground (StackBlitz / CodeSandbox templates)

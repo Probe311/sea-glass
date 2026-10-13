@@ -80,6 +80,55 @@
       h(D.Specs, { head: ['Sujet', 'Règle', 'Note'], rows: [['Focus visible', 'Anneau de 2 px décalé de 3 px', 'Cobalt foncé en clair, cobalt clair en sombre.'], ['Cibles tactiles', '40 px minimum, 48 px par défaut', ''], ['Clavier', 'Tab, flèches, Espace, Entrée', 'Onglets et curseur suivent les motifs ARIA.'], ['Mouvement', 'prefers-reduced-motion', 'Transitions, ondes et segment indéterminé neutralisés.']] }));
   };
 
+  /* ---------- Catalogue @seaglass/* (CSS productisé) ---------- */
+  S.Packages = function () {
+    return h(D.Section, {
+      id: 'packages',
+      label: 'Composants',
+      title: 'Catalogue packages',
+      lead: 'Aperçu live de `@seaglass/css` (classes `.sg-*`). Les adaptateurs React typés vivent dans `@seaglass/react` — voir Storybook (`pnpm storybook`) et packages/react/README.md. Hors scope : bloc marque, FranceConnect.',
+    },
+      h('div', { className: 'sg-demo-catalog' },
+        h(D.Panel, { scene: true, tag: 'Actions & feedback', cap: 'Button, Alert, Badge, Tag, Progress — matière .sg-glass.' },
+          h('div', { className: 'sg-scene stack' },
+            h('div', { className: 'row' },
+              h('button', { type: 'button', className: 'sg-button sg-glass sg-button--primary', 'data-frosted': true, 'data-rim': true }, 'Primary'),
+              h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost', 'data-frosted': true }, 'Ghost'),
+              h('span', { className: 'sg-badge sg-glass' }, 'alpha'),
+              h('span', { className: 'sg-tag sg-glass' }, 'seafoam')),
+            h('div', { className: 'sg-alert sg-glass', role: 'alert', 'data-tone': 'info', 'data-frosted': true, 'data-rim': true },
+              h('span', { 'aria-hidden': true }, '●'),
+              h('div', null, h('p', { className: 'sg-alert__title' }, 'Info'), 'Catalogue branché sur seaglass.css.')),
+            h('div', { className: 'sg-progress sg-glass', role: 'progressbar', 'aria-valuenow': 64, 'aria-valuemin': 0, 'aria-valuemax': 100 },
+              h('div', { className: 'sg-progress__bar', style: { width: '64%' } })))),
+        h(D.Panel, { scene: true, tag: 'Formulaires & data', cap: 'Field, Switch, Tabs, Table — même préfixe .sg-.' },
+          h('div', { className: 'sg-scene stack' },
+            h('div', { className: 'sg-field' },
+              h('label', null, 'Crique'),
+              h('div', { className: 'sg-glass', 'data-carved': true },
+                h('input', { className: 'sg-field__input', placeholder: 'Sirènes', 'aria-label': 'Crique' }))),
+            h('label', { className: 'sg-switch', style: { display: 'inline-flex', alignItems: 'center', gap: 12, color: 'var(--sg-color-on-surface, #fff)' } },
+              h('span', { className: 'sg-switch' },
+                h('input', { type: 'checkbox', role: 'switch', defaultChecked: true }),
+                h('span', { className: 'sg-switch__track sg-glass', 'aria-hidden': true }, h('span', { className: 'sg-switch__knob' }))),
+              'Alive'),
+            h('div', { className: 'sg-tabs sg-glass', role: 'tablist', 'data-frosted': true, 'data-rim': true },
+              h('button', { type: 'button', className: 'sg-tabs__tab', role: 'tab', 'aria-selected': true }, 'Material'),
+              h('button', { type: 'button', className: 'sg-tabs__tab', role: 'tab', 'aria-selected': false }, 'Motion')),
+            h('div', { className: 'sg-table-wrap sg-glass', 'data-frosted': true, 'data-rim': true },
+              h('table', { className: 'sg-table' },
+                h('thead', null, h('tr', null, h('th', null, 'Galet'), h('th', null, 'Rôle'))),
+                h('tbody', null,
+                  h('tr', null, h('td', null, 'Seafoam'), h('td', null, 'primary')),
+                  h('tr', null, h('td', null, 'Amber'), h('td', null, 'warning'))))))),
+        h(D.Panel, { tag: 'Couverture', cap: '~50 adaptateurs React ; cette section montre le CSS productisé servi avec la démo.' },
+          h('ul', { className: 'stack', style: { margin: 0, paddingLeft: '1.2rem' } },
+            h('li', null, 'Forms · Button, Field, Select, Combobox, Switch, Slider, FileUpload…'),
+            h('li', null, 'Feedback · Alert, Banner, Callout, Accordion, Toast, Tooltip…'),
+            h('li', null, 'Nav · Header, Footer, Sidebar, Breadcrumbs, Pagination, Stepper…'),
+            h('li', null, 'Data · Table, Card, Tile, Hero, Quote, Media, Share, Consent, Theme, Lang')))));
+  };
+
   /* ---------- Tokens et code ---------- */
   var CSS = [
     '/* Sea Glass v4 · tokens (clair) */', ':root {',
@@ -102,11 +151,18 @@
     '.lg[data-tint]       { /* --tint: r g b ; --tint-a: opacité */ }',
     '.lg[data-glow]       { /* --glow: r g b ; lumière diffuse sous l’objet */ }'].join('\n');
   var REACT = [
-    '// Un seul composant pour tous les blocs et éléments', 'import { Glass } from "./glass";', '',
-    '<Glass tint="aqua" style={{ "--lg-r": "28px" }}>', '  <h4>Mer calme</h4>', '</Glass>', '',
-    '// Six booléens, vrais par défaut', '<Glass frosted refractive alive rim glow tint="seafoam" />',
-    '<Glass refractive={false} glow={false} />   // petit contrôle, plus léger', '',
-    '// Props : as, tint, tintA, glowColor, innerRef. Classes : carved (creux), over (flou sur décor)'].join('\n');
+    "import '@seaglass/css';",
+    "import { Glass, Button, Alert, Header } from '@seaglass/react';",
+    '',
+    '<Glass tint="aqua" frosted rim style={{ padding: 24 }}>',
+    '  <h4>Mer calme</h4>',
+    '</Glass>',
+    '',
+    '<Button variant="primary">Seafoam</Button>',
+    '<Alert tone="info" title="Info">Rim light follows the pointer.</Alert>',
+    '',
+    '// Catalogue : packages/react/README.md · Storybook : pnpm storybook',
+  ].join('\n');
   function jsonTokens() {
     var o = { color: {}, material: { glassOnGround: 0.74, glassOnScene: 0.26, blur: 14, radius: 28, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
       motion: { fast: '120ms', base: '200ms', soft: '380ms', ease: 'cubic-bezier(0.2,0,0,1)', spring: 'cubic-bezier(0.34,1.4,0.5,1)' }, theme: SG.isDark() ? 'dark' : 'light' };
@@ -141,8 +197,8 @@
       h(S.Bar, { q: q, setQ: setQ, open: open, onMenu: function () { setOpen(!open); } }),
       h('div', { className: 'shell', id: 'top' },
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
-        h('main', { className: 'main' }, h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields), h(S.Nav), h(S.Cards), h(S.Feedback), h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' }, h('span', null, 'Sea Glass Design System · v5.0'), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow.')))),
+        h('main', { className: 'main' }, h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields), h(S.Nav), h(S.Cards), h(S.Feedback), h(S.Packages), h(S.Contrast), h(S.Tokens),
+          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*'))),
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));

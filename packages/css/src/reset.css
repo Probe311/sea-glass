@@ -36,8 +36,31 @@ h2,
 h3,
 h4 {
   font-family: var(--sg-font-display);
+  font-weight: var(--sg-text-weight-bold);
   text-wrap: balance;
   letter-spacing: var(--sg-text-tracking-display);
+}
+
+h1 {
+  font-size: var(--sg-text-display-lg-size);
+  line-height: var(--sg-text-display-lg-line);
+}
+
+h2 {
+  font-size: var(--sg-text-headline-lg-size);
+  line-height: var(--sg-text-headline-lg-line);
+}
+
+h3 {
+  font-size: var(--sg-text-title-lg-size);
+  line-height: var(--sg-text-title-lg-line);
+  font-weight: var(--sg-text-weight-semibold);
+}
+
+h4 {
+  font-size: var(--sg-text-title-md-size);
+  line-height: var(--sg-text-title-md-line);
+  font-weight: var(--sg-text-weight-semibold);
 }
 
 code,

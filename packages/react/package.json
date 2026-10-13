@@ -1,7 +1,7 @@
 {
   "name": "@seaglass/react",
   "version": "0.1.0-alpha.0",
-  "description": "Sea Glass React adapters — Glass, List, Dialog, Menu.",
+  "description": "Sea Glass React adapters — Glass surfaces + DS components.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
   "type": "module",
@@ -19,8 +19,8 @@
     "build": "tsc -p tsconfig.json"
   },
   "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react": "^19",
+    "react-dom": "^19"
   },
   "peerDependenciesMeta": {
     "react": {
@@ -34,10 +34,10 @@
     "@seaglass/css": "workspace:*"
   },
   "devDependencies": {
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "publishConfig": {
     "access": "public"

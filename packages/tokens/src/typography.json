@@ -2,8 +2,8 @@
   "font": {
     "display": {
       "$type": "fontFamily",
-      "$value": ["Outfit", "ui-rounded", "system-ui", "sans-serif"],
-      "$description": "Titles and controls. Google Sans removed (non-open licence). Self-host Outfit if you want the webfont."
+      "$value": ["Poppins", "Outfit", "ui-rounded", "system-ui", "sans-serif"],
+      "$description": "Hn / wordmark. Match: geometric rounded sans, single-story a, soft terminals (Refractive-like). Poppins Bold OFL — self-host via @fontsource/poppins."
     },
     "body": {
       "$type": "fontFamily",

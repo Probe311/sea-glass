@@ -15,3 +15,15 @@ coverage
 .pnpm-store
 pack-*.tgz
 docs/storybook
+.cursor/
+demo/seaglass.css
+
+# Video / motion deliverables — local only, never commit or push
+media/
+*.mp4
+*.webm
+*.mov
+*.mkv
+*.gif
+**/out/preview-*.png
+**/out/qa-*.png

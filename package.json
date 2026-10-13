@@ -28,8 +28,12 @@
     "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
     "storybook": "pnpm --filter @seaglass/storybook storybook",
     "build:storybook": "pnpm --filter @seaglass/storybook build:storybook",
+    "build:logo": "node ./scripts/build-logo.mjs",
+    "sync:version": "node ./scripts/sync-version.mjs",
+    "sync:demo": "node ./scripts/sync-demo.mjs",
+    "demo:prepare": "pnpm build && pnpm sync:version && pnpm sync:demo",
     "release:dry": "node ./scripts/release-dry.mjs",
-    "prepare": "husky || true"
+    "prepare": "husky || true && node ./scripts/sync-version.mjs"
   },
   "lint-staged": {
     "*.{js,mjs,cjs,ts,tsx}": "eslint --fix",
@@ -44,19 +48,21 @@
     ]
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.7",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@eslint/js": "^9.36.0",
-    "eslint": "^9.36.0",
-    "globals": "^16.4.0",
+    "@changesets/cli": "^3.0.3",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@eslint/js": "^10.0.1",
+    "@fontsource/poppins": "^5.3.0",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
     "husky": "^9.1.7",
-    "lint-staged": "^16.2.0",
-    "prettier": "^3.6.2",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.0",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.44.0",
-    "vitest": "^3.2.4"
+    "lint-staged": "^17.6.0",
+    "opentype.js": "^2.0.0",
+    "prettier": "^3.9.10",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.4"
   }
 }
