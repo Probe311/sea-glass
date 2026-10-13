@@ -11,12 +11,12 @@
     ['Composants', [
       ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
       ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
-      ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête et pied'],
+      ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête, pied et navigation'],
       ['alertes', 'Alertes et toasts'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
       ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'],
       ['prefs', 'Préférences'],
     ]],
-    ['Qualité', [['contraste', 'Contraste'], ['tokens', 'Tokens et code']]]
+    ['Qualité', [['contraste', 'Contraste mesuré'], ['tokens', 'Tokens et code']]]
   ];
   function norm(t) { return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
   function useSpy() {

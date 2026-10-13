@@ -151,14 +151,20 @@
       return function () { window.removeEventListener('sg-toast', on); };
     }, []);
     return h(React.Fragment, null,
-      h('div', { className: 'sg-toast-scrim' + (s.on ? ' on' : ''), 'aria-hidden': true }),
       h('div', {
-        className: 'sg-toast-host' + (s.on ? ' on' : ''),
+        className: 'sg-toast-scrim' + (s.on ? ' sg-toast-scrim--open' : ''),
+        'data-open': s.on || undefined,
+        'aria-hidden': true,
+      }),
+      h('div', {
+        className: 'sg-toast-host' + (s.on ? ' sg-toast-host--open' : ''),
+        'data-open': s.on || undefined,
         role: 'status',
         'aria-live': 'polite',
       },
         h('div', {
-          className: 'sg-alert sg-glass sg-toast',
+          className: 'sg-alert sg-glass sg-toast' + (s.on ? ' sg-toast--open' : ''),
+          'data-open': s.on || undefined,
           role: 'alert',
           'data-tone': 'success',
           'data-frosted': true,

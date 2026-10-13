@@ -333,31 +333,15 @@
   font: 600 12px/1 var(--font-display); letter-spacing: 0.02em; white-space: nowrap;
   box-shadow: none;
 }
-.tip { display: inline-block; padding: 8px 14px; --lg-r: 12px; --lg-blur: 10px; --gl: 8px; font-size: 13px; }
-.snack { display: flex; align-items: center; gap: 16px; padding: 8px 8px 8px 22px; --lg-r: 999px; --gl: 12px; font-size: 14px; max-width: 100%; }
-.sg-toast-scrim {
-  position: fixed; inset: 0; z-index: 79; pointer-events: none;
-  opacity: 0; background: color-mix(in srgb, var(--ground) 28%, transparent);
-  backdrop-filter: blur(8px) saturate(1.15);
-  -webkit-backdrop-filter: blur(8px) saturate(1.15);
-  transition: opacity 220ms var(--ease);
-}
-.sg-toast-scrim.on { opacity: 1; }
-.sg-toast-host {
-  position: fixed; left: 50%; top: calc(20px + env(safe-area-inset-top, 0px));
-  transform: translate(-50%, -12px); opacity: 0; pointer-events: none; z-index: 80;
-  width: min(420px, calc(100vw - 32px));
-  transition: transform 380ms var(--spring), opacity 200ms var(--ease);
-}
-.sg-toast-host.on { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
-.sg-toast-host .sg-toast.sg-alert {
-  position: static; left: auto; top: auto; bottom: auto;
-  transform: none; opacity: 1; width: 100%; margin: 0;
-  pointer-events: auto; z-index: auto;
+/* Snack : bridge .snack (Glass démo) → métriques .sg-snack package */
+.snack {
+  display: flex; align-items: center; gap: 16px;
+  padding: 8px 8px 8px 22px; --lg-r: 999px; --gl: 12px;
+  font-size: 14px; max-width: 100%;
 }
 
 /* ---------- Mouvement et contraste ---------- */
-.mo { padding: 18px; display: grid; gap: 12px; --lg-r: 22px; }
+.mo { padding: 18px; display: grid; gap: 12px; --lg-r: 16px; }
 .mo .track { height: 42px; position: relative; --lg-r: 999px; --lg-blur: 4px; }
 .mo .ball { position: absolute; z-index: 4; top: 5px; left: 5px; width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle at 62% 68%, var(--teal-hi), var(--teal) 78%); box-shadow: inset 2px 3px 4px rgba(5, 55, 43, 0.45), 0 1px 1px rgba(255, 255, 255, 0.6); transition: transform var(--d, 200ms) var(--ease); }
 .mo.go .ball { transform: translateX(var(--dist, 170px)); }
@@ -385,5 +369,5 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 /* hover/press stem transforms : définis dans le bloc .sl ci-dessus */
 .navbar .nb, .tabs-list .tab, .search .sbtn { transition: transform 220ms var(--spring), color 200ms var(--ease), background 200ms var(--ease); }
 .navbar .nb:hover, .tabs-list .tab:hover:not(:disabled), .search .sbtn:hover { transform: scale(1.05); }
-.card, .search, .navbar, .tabs-list, .snack, .tip, .mo { --hs: 1.02; --as: 0.99; }
+.card, .search, .navbar, .tabs-list, .snack, .mo { --hs: 1.02; --as: 0.99; }
 .search, .navbar, .tabs-list { --hs: 1.01; --as: 0.995; }

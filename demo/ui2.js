@@ -53,8 +53,10 @@
       style: { color: p.tint ? 'var(--' + p.tint + '-ink)' : undefined },
     }, p.children);
   };
-  C.Tip = function (p) { return h(Glass, { className: 'tip', role: 'tooltip', alive: false }, p.children); };
-  C.Snack = function (p) { return h(Glass, { className: 'snack', tint: 'seafoam', tintA: 0.55 }, h('span', null, p.children), p.action); };
+  C.Snack = function (p) {
+    return h(Glass, { className: 'sg-snack snack', tint: 'seafoam', tintA: 0.55 },
+      h('span', null, p.children), p.action);
+  };
 
   /* ---------- Helpers de documentation ---------- */
   var D = (SG.Doc = {});
@@ -78,9 +80,12 @@
   };
   D.Sub = function (p) { return h('div', { className: 'sub' }, p.title && h('h3', null, p.title), p.text && h('p', null, p.text), p.children); };
   D.Panel = function (p) {
-    return h('div', { className: cls('panel', p.scene && 'scene') },
+    /* scene + sg-scene : wash démo + frost/alpha package sur .sg-glass enfants */
+    return h('div', { className: cls('panel', p.scene && 'scene', p.scene && 'sg-scene') },
       h('div', { className: 'panel-body' }, p.children),
-      !p.scene && (p.cap || p.tag) && h('div', { className: 'panel-cap' }, h('b', null, p.tag), h('span', null, p.cap)));
+      (p.cap || p.tag) && h('div', { className: 'panel-cap' },
+        p.tag && h('b', null, p.tag),
+        p.cap && h('span', null, p.cap)));
   };
   D.Stage = function (p) { return h('div', { className: cls('stage', p.col && 'col', p.center && 'center'), style: p.style }, p.children); };
   D.Specs = function (p) {

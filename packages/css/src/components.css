@@ -1708,7 +1708,7 @@
     margin-inline: auto;
     --sg-glass-tint-a: 0.92;
     --sg-glass-tint-rgb: 18 28 26;
-    color: #eaf6f2;
+    color: var(--sg-color-ink);
     transform: none;
     opacity: 1;
   }
@@ -1722,11 +1722,11 @@
   :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo {
     --sg-glass-tint-rgb: 247 249 247;
     --sg-glass-tint-a: 0.96;
-    color: #17262a;
+    color: var(--sg-color-ink);
   }
 
   :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo .sg-button--ghost {
-    color: #17262a;
+    color: var(--sg-color-ink);
   }
 
   .sg-media figcaption,
