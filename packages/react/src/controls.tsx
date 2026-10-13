@@ -85,9 +85,10 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
       Home: min,
       End: max,
     };
-    if (!(e.key in delta)) return;
+    const next = delta[e.key];
+    if (next === undefined) return;
     e.preventDefault();
-    commit(snap(delta[e.key], min, max, step));
+    commit(snap(next, min, max, step));
   }
 
   const style = {

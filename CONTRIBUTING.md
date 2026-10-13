@@ -22,6 +22,7 @@ The interactive prototype lives in `demo/` (not linted as a library). New compon
 | `pnpm lint`         | ESLint 10, Stylelint, Prettier               |
 | `pnpm test`         | Vitest 5                                     |
 | `pnpm check`        | lint + typecheck + build + test              |
+| `pnpm preflight`    | typecheck + build + test (hook pre-push)     |
 | `pnpm storybook`    | Storybook 10                                 |
 | `pnpm build:logo`   | Wordmarks → `assets/` + `demo/`              |
 | `pnpm sync:version` | UI version ← `package.json` + React installé |
@@ -35,7 +36,7 @@ Footers / hero use **`package.json` version** and the **installed React** versio
 2. **Prefix.** Public classes are `.sg-*` with BEM modifiers (`.sg-button--primary`). Stylelint enforces this.
 3. **No non-open assets.** No Google Sans, no hotlinked stock photos.
 4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate — see `docs/AUDIT.md`.
-5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky runs commitlint + lint-staged.
+5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky: `pre-commit` (lint-staged) + `pre-push` (`pnpm preflight`). `main` is protected (no force-push / deletion; CI required on PRs).
 6. **Changesets.** User-facing changes get `pnpm changeset`.
 
 ## Pull requests

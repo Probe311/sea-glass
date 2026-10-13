@@ -26,6 +26,8 @@
     "typecheck": "tsc --build --pretty false",
     "test": "vitest run",
     "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm test",
+    "preflight": "pnpm typecheck && pnpm build && pnpm test",
+    "preflight:full": "pnpm check",
     "storybook": "pnpm --filter @seaglass/storybook storybook",
     "build:storybook": "pnpm --filter @seaglass/storybook build:storybook",
     "build:logo": "node ./scripts/build-logo.mjs",
