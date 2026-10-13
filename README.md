@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/Probe311/sea-glass/actions/workflows/ci.yml"><img src="https://github.com/Probe311/sea-glass/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://www.npmjs.com/package/@sea-glass/css"><img src="https://img.shields.io/npm/v/@sea-glass/css.svg?color=4FA877" alt="npm @sea-glass/css" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-2F55C4.svg" alt="License: MIT" /></a>
   <a href="#status"><img src="https://img.shields.io/badge/status-alpha-F7C96B.svg" alt="Status: alpha" /></a>
   <a href="https://probe311.github.io/sea-glass/"><img src="https://img.shields.io/badge/demo-GitHub%20Pages-4FA877.svg" alt="Demo" /></a>
@@ -30,15 +31,25 @@
 
 ### Install
 
+Packages are on **npm** under the [`@sea-glass`](https://www.npmjs.com/org/sea-glass) / [`@sea-glass/*`](https://www.npmjs.com/search?q=%40sea-glass) scope (latest **0.1.1**). New packages may show `0.0.0-stage` briefly while npm finishes review.
+
 ```bash
 pnpm add @sea-glass/css @sea-glass/tokens
+# optional
+pnpm add @sea-glass/react        # peer: react@^19
+pnpm add @sea-glass/tailwind     # peer: tailwindcss@^3.4 || ^4
+pnpm add @sea-glass/elements     # skeleton
 ```
 
-Scope npm : `@sea-glass` (compte [sea-glass](https://www.npmjs.com/~sea-glass)). Fallback git :
+| Package               | npm                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `@sea-glass/tokens`   | [npmjs.com/package/@sea-glass/tokens](https://www.npmjs.com/package/@sea-glass/tokens)     |
+| `@sea-glass/css`      | [npmjs.com/package/@sea-glass/css](https://www.npmjs.com/package/@sea-glass/css)           |
+| `@sea-glass/react`    | [npmjs.com/package/@sea-glass/react](https://www.npmjs.com/package/@sea-glass/react)       |
+| `@sea-glass/tailwind` | [npmjs.com/package/@sea-glass/tailwind](https://www.npmjs.com/package/@sea-glass/tailwind) |
+| `@sea-glass/elements` | [npmjs.com/package/@sea-glass/elements](https://www.npmjs.com/package/@sea-glass/elements) |
 
-```bash
-pnpm add github:Probe311/sea-glass
-```
+Git fallback (monorepo): `pnpm add github:Probe311/sea-glass`
 
 ### Minimal CSS
 
@@ -82,7 +93,7 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 
 <a id="status"></a>
 
-| Package               | 0.1.0-alpha                                          |
+| Package               | npm `0.1.1`                                          |
 | --------------------- | ---------------------------------------------------- |
 | `@sea-glass/tokens`   | DTCG → CSS / JS / JSON                               |
 | `@sea-glass/css`      | Material + prefixed components                       |
@@ -106,15 +117,25 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and the [`Code of Conduct`](COD
 
 ### Installer
 
+Packages sur **npm** sous le scope [`@sea-glass`](https://www.npmjs.com/search?q=%40sea-glass) (dernière version **0.1.1**). npm peut afficher brièvement `0.0.0-stage` le temps de la revue des nouveaux packages.
+
 ```bash
 pnpm add @sea-glass/css @sea-glass/tokens
+# optionnel
+pnpm add @sea-glass/react        # peer: react@^19
+pnpm add @sea-glass/tailwind     # peer: tailwindcss@^3.4 || ^4
+pnpm add @sea-glass/elements     # squelette
 ```
 
-Scope npm : `@sea-glass` (compte [sea-glass](https://www.npmjs.com/~sea-glass)). Fallback git :
+| Package               | npm                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| `@sea-glass/tokens`   | [npmjs.com/package/@sea-glass/tokens](https://www.npmjs.com/package/@sea-glass/tokens)     |
+| `@sea-glass/css`      | [npmjs.com/package/@sea-glass/css](https://www.npmjs.com/package/@sea-glass/css)           |
+| `@sea-glass/react`    | [npmjs.com/package/@sea-glass/react](https://www.npmjs.com/package/@sea-glass/react)       |
+| `@sea-glass/tailwind` | [npmjs.com/package/@sea-glass/tailwind](https://www.npmjs.com/package/@sea-glass/tailwind) |
+| `@sea-glass/elements` | [npmjs.com/package/@sea-glass/elements](https://www.npmjs.com/package/@sea-glass/elements) |
 
-```bash
-pnpm add github:Probe311/sea-glass
-```
+Fallback git : `pnpm add github:Probe311/sea-glass`
 
 ### CSS minimal
 
@@ -125,7 +146,7 @@ pnpm add github:Probe311/sea-glass
 </div>
 ```
 
-React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data — voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`. Version UI = `package.json` (`pnpm sync:version`).
+React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data — voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`.
 
 ### Marque et typo
 
@@ -146,7 +167,7 @@ Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue d’ava
 
 ### Statut
 
-Alpha `0.x`. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
+Alpha **npm 0.1.1**. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
 
 <p align="right"><a href="#-english">← 🇬🇧 English</a></p>
 

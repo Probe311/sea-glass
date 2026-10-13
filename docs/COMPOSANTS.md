@@ -1,6 +1,8 @@
 # Catalogue des composants — avancement
 
-État au **2026-10-13** · Sea Glass `0.1.0-alpha` · React 19 · couverture démo = sections dédiées du sommaire.
+État au **2026-10-13** · Sea Glass **npm `@sea-glass/*` 0.1.1** · React 19 · couverture démo = sections dédiées du sommaire.
+
+Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
 Légende :
 

@@ -100,19 +100,19 @@ importers:
   packages/css:
     dependencies:
       '@sea-glass/tokens':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../tokens
 
   packages/elements:
     dependencies:
       '@sea-glass/css':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../css
 
   packages/react:
     dependencies:
       '@sea-glass/css':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../css
     devDependencies:
       '@types/react':
@@ -131,7 +131,7 @@ importers:
   packages/tailwind:
     dependencies:
       '@sea-glass/tokens':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../tokens
     devDependencies:
       tailwindcss:

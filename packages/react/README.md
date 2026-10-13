@@ -1,13 +1,19 @@
 # `@sea-glass/react`
 
+[![npm](https://img.shields.io/npm/v/@sea-glass/react.svg)](https://www.npmjs.com/package/@sea-glass/react)
+
 Adaptateurs React 19 pour Sea Glass. Importer `@sea-glass/css` une fois dans l’app.
+
+```bash
+pnpm add @sea-glass/react @sea-glass/css
+```
 
 ```tsx
 import '@sea-glass/css';
 import { Glass, Button, TextField, Alert, Header, Table } from '@sea-glass/react';
 ```
 
-Peer : `react` / `react-dom` `^19`.
+Peer : `react` / `react-dom` `^19`. npm **0.1.1**.
 
 ## Catalogue
 
