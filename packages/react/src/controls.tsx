@@ -140,8 +140,6 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
           onKeyDown={onKeyDown}
         >
           <i className="sg-slider__blob" aria-hidden />
-          <i className="sg-slider__fillet sg-slider__fillet--t" aria-hidden />
-          <i className="sg-slider__fillet sg-slider__fillet--b" aria-hidden />
           <i className="sg-slider__stem" aria-hidden />
           <i className="sg-slider__ring sg-slider__ring--2" aria-hidden />
           <i className="sg-slider__ring sg-slider__ring--1" aria-hidden />

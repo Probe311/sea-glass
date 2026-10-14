@@ -74,18 +74,21 @@ export default { presets: [preset], plugins: [plugin] };
 
 ### Brand & type
 
-| Asset                                            | Use                           |
-| ------------------------------------------------ | ----------------------------- |
-| [`assets/logo.svg`](assets/logo.svg)             | Wordmark on light backgrounds |
-| [`assets/logo-light.svg`](assets/logo-light.svg) | Wordmark on dark backgrounds  |
+| Asset                                            | Use                             |
+| ------------------------------------------------ | ------------------------------- |
+| [`assets/logo.svg`](assets/logo.svg)             | Wordmark on light backgrounds   |
+| [`assets/logo-light.svg`](assets/logo-light.svg) | Wordmark on dark backgrounds    |
+| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon — Cobalt disc `#6B8CE3` |
 
-Both are outlined Poppins Bold + Cobalt period (`#6B8CE3`). Regenerate with `pnpm build:logo`.
+Wordmarks are outlined Poppins Bold + Cobalt period. Regenerate with `pnpm build:logo`.
 
 **Display / Hn:** [Poppins](https://fonts.google.com/specimen/Poppins) (OFL) — geometric rounded sans, single-story `a`. Load `@fontsource/poppins/700.css` or the Google Fonts CSS used by the demo. Fallback: Outfit. **Body:** Roboto. **No Google Sans.**
 
 ### Material
 
-**Jelly formula** on `.sg-glass`: diagonal tint (135°), volume insets, monochrome grain (`noise.svg` at `--sg-glass-sparkle` ≈ 8 %), neutral table drop, frost `blur(16px) saturate(1.4)`, press wash ≈ 40 % white. Six composable `data-*` flags: `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Frost applies only on `.sg-scene` / `.sg-glass--over`. Refraction is opt-in. `data-glow` is an optional accent — not the default shadow. `data-tint` sets `color` to the pebble’s `*-ink` so icons inherit via `currentColor`.
+**Jelly formula** on `.sg-glass`: diagonal tint (135°), volume insets, monochrome grain (`noise.svg` ≈ 8 %), neutral table drop (lueur), frost `blur(16px) saturate(1.4)`, press wash ≈ 40 % white. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Frost is always on for surfaces in `.sg-scene` / `.sg-glass--over`. Refraction is opt-in. `data-glow` is a rare tinted halo — not the default drop. `data-tint` sets `color` to the pebble’s `*-ink` so icons inherit via `currentColor` (encre).
+
+Demo Fabrication stack: bordure → teinte → réfraction → givre (grain) → lueur (ombre table) → encre.
 
 Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber, Root beer, Clear, Mist.
 
@@ -150,10 +153,11 @@ React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data �
 
 ### Marque et typo
 
-| Fichier                                          | Usage         |
-| ------------------------------------------------ | ------------- |
-| [`assets/logo.svg`](assets/logo.svg)             | Fonds clairs  |
-| [`assets/logo-light.svg`](assets/logo-light.svg) | Fonds sombres |
+| Fichier                                          | Usage                             |
+| ------------------------------------------------ | --------------------------------- |
+| [`assets/logo.svg`](assets/logo.svg)             | Fonds clairs                      |
+| [`assets/logo-light.svg`](assets/logo-light.svg) | Fonds sombres                     |
+| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon — disque Cobalt `#6B8CE3` |
 
 Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
@@ -161,9 +165,11 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 ### Matière
 
-**Formule gelée** sur `.sg-glass` : dégradé diagonal 135°, volume inset, grain monochrome (`noise.svg`, sparkle ≈ 8 %), ombre table neutre, frost `blur(16px) saturate(1.4)`, overlay actif ≈ 40 % blanc. Six attributs : `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Le flou ne s’applique que sur une scène. La réfraction est opt-in. `data-glow` est un accent optionnel — plus le drop standard. `data-tint` applique l’encre du galet (`*-ink`) ; les icônes suivent via `currentColor`.
+**Formule gelée** sur `.sg-glass` : dégradé 135°, grain (`noise.svg` ≈ 8 %), ombre table neutre (lueur), frost `blur(16px) saturate(1.4)`, overlay actif ≈ 40 % blanc. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Le dépoli est toujours actif sur `.sg-scene`. La réfraction est opt-in. `data-glow` = halo teinté rare, pas le drop. `data-tint` → encre `*-ink` ; icônes en `currentColor`.
 
-Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue d’avancement : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
+Stack Fabrication (démo) : bordure → teinte → réfraction → givre → lueur → encre.
+
+Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
 
 ### Statut
 

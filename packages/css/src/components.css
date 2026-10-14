@@ -403,11 +403,6 @@
       opacity 160ms var(--sg-ease-standard);
   }
 
-  /* Congés legacy désactivés — matière continue via le fill élargi */
-  .sg-slider__fillet {
-    display: none;
-  }
-
   .sg-slider--range .sg-slider__blob {
     display: none;
   }
@@ -494,11 +489,6 @@
       inset 1.5px 2px 2px rgb(255 255 255 / 0.75),
       inset -1px -2px 3px rgb(5 55 43 / 0.22),
       0 2px 8px -2px rgb(var(--sg-fill-glow-rgb) / 0.35);
-  }
-
-  .sg-slider[data-state='press'] .sg-slider__fillet,
-  .sg-slider[data-dragging] .sg-slider__thumb[data-active] .sg-slider__fillet {
-    opacity: 0;
   }
 
   .sg-slider[data-state='press'] .sg-slider__ring,

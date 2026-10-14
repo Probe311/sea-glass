@@ -387,7 +387,6 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   padding: 8px 0;
 }
 .fab-pebble {
-  --gl: 13px;
   width: min(88%, 220px);
   height: 52px;
   padding-inline: 28px;
@@ -409,9 +408,11 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .fab-pebble:active { transform: scale(0.97); }
 /* Nu : même matériau Glass, juste plus transparent — pas d’override d’ombre table */
 .fab-pebble--naked {
-  opacity: 0.7;
+  opacity: 0.92;
+  color: transparent;
 }
 .fab-pebble--no-sparkle::after { opacity: 0 !important; }
+.fab-pebble--no-ink { color: transparent; }
 .fab-list {
   list-style: none;
   margin: 0;
@@ -477,7 +478,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .shape-radii__name { font-weight: 500; margin-top: 8px; color: var(--ink); }
 .shape-radii__desc { color: var(--ink-2); }
-.shape-radii__swatch { width: 100%; --sh-out: none; }
+.shape-radii__swatch { width: 100%; }
 
 /* Slider thumb still uses .blob as a flat mint disc (styles in ui.css). */
 .blob { position: relative; }
@@ -497,6 +498,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   rotate: var(--br);
   will-change: border-radius, transform;
   animation: blob-morph var(--bd, 9s) ease-in-out var(--bl, 0s) infinite alternate;
+  /* Lueur = ombre table neutre (pas halo teinté) */
+  box-shadow: var(--table-drop, 0 14px 0 -4px rgb(0 0 0 / 0.06), 0 18px 24px -10px rgb(0 0 0 / 0.12));
 }
 .pebble-blob__layer {
   position: absolute;
@@ -561,9 +564,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .pebble-blob__glow {
   z-index: 6;
-  box-shadow:
-    0 2px 4px -1px color-mix(in srgb, var(--bc) 28%, transparent),
-    0 12px 16px -8px color-mix(in srgb, var(--bc) 48%, transparent);
+  /* Halo teinté optionnel — off par défaut (Fabrication 1A) */
+  box-shadow: none;
 }
 :root[data-theme="dark"] .pebble-blob {
   --pebble-tint-mix: 78%;

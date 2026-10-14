@@ -7,6 +7,10 @@
   function scene(children) {
     return h('div', { className: 'stack' }, children);
   }
+  /* Matière sujet : bordure + dépoli + réfraction (+ teinte optionnelle). Givre = grain CSS .sg-glass. */
+  function glassAttrs(extra) {
+    return Object.assign({ 'data-frosted': true, 'data-rim': true, 'data-refractive': true }, extra || {});
+  }
 
   function chevron(open) {
     return h('span', {
@@ -31,7 +35,7 @@
     return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et toasts', lead: 'Relayer une information sans bloquer le parcours. Les toasts réutilisent le composant alerte, ancrés en haut au centre, avec un léger flou de l’arrière-plan.' },
       h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error.' },
         scene(items.map(function (it) {
-          return h('div', { key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-frosted': true, 'data-tint': true },
+          return h('div', Object.assign({ key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-tint': true }, glassAttrs()),
             alertIcon(it[0]),
             h('div', null, h('p', { className: 'sg-alert__title' }, it[1]), it[2]));
         }))),
@@ -57,7 +61,7 @@
     return h(D.Section, { id: 'accordeon', label: 'Composants', title: 'Accordéon', lead: 'Masquer ou révéler du contenu textuel. Un panneau ouvert à la fois dans cet aperçu.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Un panneau ouvert à la fois · aria-expanded.' },
         scene([
-          h('div', { className: 'sg-accordion sg-glass', 'data-frosted': true },
+          h('div', Object.assign({ className: 'sg-accordion sg-glass' }, glassAttrs()),
             items.map(function (item, i) {
               var isOpen = open === i;
               return h('div', { className: 'sg-accordion__item', key: item.t },
@@ -77,17 +81,16 @@
   S.OverlaysDoc = function () {
     return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Aperçu figé, lisible sur verre opaque.' },
       h(D.Panel, { scene: true, tag: 'Dialog', cap: 'Aperçu figé · role="dialog" · focus trap côté React.' },
-        h('div', { className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-frosted': true, 'data-tint': true },
+        h('div', Object.assign({ className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-tint': true }, glassAttrs()),
           h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
           h('div', { className: 'sg-dialog__body' }, 'Cette action est irréversible. Le fichier ne pourra pas être récupéré.'),
           h('div', { className: 'sg-dialog__footer' },
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost' }, 'Annuler'),
-            h('button', {
+            h('button', Object.assign({
               type: 'button',
               className: 'sg-button sg-glass sg-button--primary sg-dialog-demo__danger',
-              'data-frosted': true,
               'data-tint': true,
-            }, 'Supprimer')))),
+            }, glassAttrs()), 'Supprimer')))),
       h(D.Specs, { head: ['Composant', 'Rôle', 'Note'], rows: [['Dialog', 'dialog + aria-modal', 'Focus trap côté @sea-glass/react']] }));
   };
 
@@ -153,12 +156,11 @@
                 tabIndex: -1,
                 onMouseDown: toggleOpen,
               }, chevron(open))),
-            h('ul', {
+            h('ul', Object.assign({
               className: 'sg-combobox__list sg-glass' + (open && filtered.length ? ' sg-combobox__list--open' : ''),
               role: 'listbox',
               'data-open': open && filtered.length ? true : undefined,
-              'data-frosted': true,
-            },
+            }, glassAttrs()),
               filtered.map(function (name) {
                 return h('li', { key: name },
                   h('button', {
@@ -170,9 +172,9 @@
               }))),
           h('div', { className: 'sg-field sg-password' },
             h('label', null, 'Mot de passe'),
-            h('div', { className: 'sg-glass sg-password', 'data-carved': true, style: { position: 'relative' } },
+            h('div', { className: 'sg-glass sg-password', 'data-carved': true, 'data-rim': true, style: { position: 'relative' } },
               h('input', { type: 'password', className: 'sg-field__input', defaultValue: '••••••••', 'aria-label': 'Mot de passe' }))),
-          h('div', { className: 'sg-upload sg-glass', 'data-frosted': true },
+          h('div', Object.assign({ className: 'sg-upload sg-glass' }, glassAttrs()),
             h('label', null, 'Dépose un fichier ou parcourir'),
             h('button', { type: 'button', className: 'sg-button sg-glass sg-button--ghost sg-button--sm' }, 'Parcourir')),
         ])),
@@ -183,8 +185,8 @@
     return h(D.Section, { id: 'chrome', label: 'Composants', title: 'Chrome de page', lead: 'Cadre de page : skip link, en-tête, fil d’Ariane, stepper, pagination et pied — distinct de la barre de navigation mobile.' },
       h(D.Panel, { scene: true, tag: 'Header', cap: 'Skip link, marque, nav, fil d’Ariane.' },
         scene([
-          h('a', { className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, 'Aller au contenu'),
-          h('header', { className: 'sg-header sg-glass', 'data-frosted': true },
+          h('a', Object.assign({ className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, glassAttrs()), 'Aller au contenu'),
+          h('header', Object.assign({ className: 'sg-header sg-glass' }, glassAttrs()),
             h('a', { className: 'sg-header__brand', href: '#chrome' }, 'Sea Glass.'),
             h('ul', { className: 'sg-header__nav' },
               h('li', null, h('a', { href: '#chrome', 'aria-current': 'page' }, 'Docs')),
@@ -205,7 +207,7 @@
             h('button', { type: 'button', className: 'sg-pagination__btn', 'aria-current': 'page' }, '1'),
             h('button', { type: 'button', className: 'sg-pagination__btn' }, '2'),
             h('button', { type: 'button', className: 'sg-pagination__btn' }, 'Suiv')),
-          h('footer', { className: 'sg-footer sg-glass', 'data-frosted': true },
+          h('footer', Object.assign({ className: 'sg-footer sg-glass' }, glassAttrs()),
             h('div', null, 'Sea Glass · MIT'),
             h('ul', { className: 'sg-nav' },
               h('li', null, h('a', { href: '#chrome' }, 'GitHub')),
@@ -216,31 +218,32 @@
 
   S.DataDoc = function () {
     return h(D.Section, { id: 'donnees', label: 'Composants', title: 'Données et contenu', lead: 'Tableaux, listes, tuiles, citation, média, hero et transcription.' },
-      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Hero, tuile, citation, média, table, liste.' },
+      h(D.Panel, { scene: true, tag: 'Zone d’expression', cap: 'Hero plein verre · message fort.' },
+        h('section', Object.assign({ className: 'sg-hero sg-glass' }, glassAttrs()),
+          h('div', { className: 'sg-hero__copy' },
+            h('h3', { className: 'sg-hero__title' }, 'Zone d’expression'),
+            h('p', { className: 'sg-hero__subtitle' }, 'Message fort sur verre.')))),
+      h(D.Panel, { scene: true, tag: 'Contenu', cap: 'Tuile, citation, média, table, liste.' },
         scene([
-          h('section', { className: 'sg-hero sg-glass', 'data-frosted': true },
-            h('div', { className: 'sg-hero__copy' },
-              h('h3', { className: 'sg-hero__title' }, 'Zone d’expression'),
-              h('p', { className: 'sg-hero__subtitle' }, 'Message fort sur verre.'))),
-          h('a', { className: 'sg-tile sg-glass', href: '#donnees', 'data-frosted': true },
+          h('a', Object.assign({ className: 'sg-tile sg-glass', href: '#donnees' }, glassAttrs()),
             h('h3', { className: 'sg-tile__title' }, 'Tuile'), 'Redirige vers un contenu.'),
-          h('blockquote', { className: 'sg-quote sg-glass', 'data-frosted': true },
+          h('blockquote', Object.assign({ className: 'sg-quote sg-glass' }, glassAttrs()),
             'La translucidité avant la décoration.',
             h('footer', null, '— Sea Glass')),
-          h('figure', { className: 'sg-media sg-glass', 'data-frosted': true },
+          h('figure', Object.assign({ className: 'sg-media sg-glass' }, glassAttrs()),
             h('div', { className: 'sg-media__frame', 'aria-hidden': true },
               h('span', { className: 'sg-media__icon' }, h(Icon, { name: 'image', size: 40 }))),
             h('figcaption', { className: 'sg-media__caption' }, 'Contenu média')),
-          h('div', { className: 'sg-transcription sg-glass', 'data-frosted': true },
+          h('div', Object.assign({ className: 'sg-transcription sg-glass' }, glassAttrs()),
             h('strong', null, 'Transcription'),
             h('p', null, 'Texte alternatif pour un média audio ou vidéo.')),
-          h('div', { className: 'sg-table-wrap sg-glass', 'data-frosted': true },
+          h('div', Object.assign({ className: 'sg-table-wrap sg-glass' }, glassAttrs()),
             h('table', { className: 'sg-table' },
               h('thead', null, h('tr', null, h('th', null, 'Galet'), h('th', null, 'Rôle'))),
               h('tbody', null,
                 h('tr', null, h('td', null, 'Seafoam'), h('td', null, 'primary')),
                 h('tr', null, h('td', null, 'Amber'), h('td', null, 'warning'))))),
-          h('ul', { className: 'sg-list sg-glass', 'data-frosted': true },
+          h('ul', Object.assign({ className: 'sg-list sg-glass' }, glassAttrs()),
             h('li', { className: 'sg-list__item' }, h('div', { className: 'sg-list__body' }, h('div', { className: 'sg-list__label' }, 'Liste'), h('div', { className: 'sg-list__meta' }, 'Item sur verre')))),
           h('hr', { className: 'sg-divider' }),
         ])),
@@ -256,7 +259,7 @@
         h('div', { className: 'prefs-row' },
           h('div', { className: 'prefs-block' },
             h('span', { className: 'prefs-label' }, 'Langue'),
-            h('div', { className: 'sg-lang sg-glass', role: 'group', 'aria-label': 'Langue', 'data-frosted': true },
+            h('div', Object.assign({ className: 'sg-lang sg-glass', role: 'group', 'aria-label': 'Langue' }, glassAttrs()),
               h('span', { className: 'sg-lang__pill', style: { transform: L === 'FR' ? 'translateX(0)' : 'translateX(100%)' }, 'aria-hidden': true }),
               h('button', { type: 'button', className: 'sg-lang__btn', 'aria-pressed': L === 'FR', onClick: function () { setL('FR'); } }, 'FR'),
               h('button', { type: 'button', className: 'sg-lang__btn', 'aria-pressed': L === 'EN', onClick: function () { setL('EN'); } }, 'EN'))),

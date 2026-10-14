@@ -25,12 +25,12 @@ Colonnes :
 
 ## Surface & matière
 
-Formule gelée partagée (`.sg-glass` / `.lg`) : dégradé 135°, grain `noise.svg`, volume inset, ombre table neutre, frost blur 16 / sat 1.4, press blanc ~40 %. `data-tint` → `color: var(--*-ink)` ; icônes en `currentColor` (sauf coche blanche sur teal profond). `data-glow` = accent rare, pas le drop par défaut.
+Formule gelée partagée (`.sg-glass`) : dégradé 135°, grain `noise.svg`, volume inset, ombre table neutre (lueur), frost blur 16 / sat 1.4, press blanc ~40 %. `data-tint` → `color: var(--*-ink)` (encre) ; icônes en `currentColor` (sauf coche blanche sur teal profond). `data-glow` = halo teinté rare, pas le drop. Sur scène, `data-frosted` est toujours actif. Stack Fabrication (démo) : bordure → teinte → réfraction → givre → lueur → encre.
 
-| Composant       | CSS            | React | Démo       | Storybook        | Avancement                        |
-| --------------- | -------------- | ----- | ---------- | ---------------- | --------------------------------- |
-| Glass (surface) | ✅             | ✅    | ✅ Matière | ✅ Surface/Glass | ✅ Base du système                |
-| Scene / décor   | ✅ `.sg-scene` | —     | ✅         | 🟡 décor preview | 🟡 Pas de composant React `Scene` |
+| Composant       | CSS            | React | Démo           | Storybook        | Avancement                        |
+| --------------- | -------------- | ----- | -------------- | ---------------- | --------------------------------- |
+| Glass (surface) | ✅             | ✅    | ✅ Fabrication | ✅ Surface/Glass | ✅ Base du système                |
+| Scene / décor   | ✅ `.sg-scene` | —     | ✅             | 🟡 décor preview | 🟡 Pas de composant React `Scene` |
 
 ---
 

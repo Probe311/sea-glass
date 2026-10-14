@@ -98,12 +98,12 @@
 
   /* ---------- Fabrication ---------- */
   var FAB_LAYERS = [
-    { k: 'rim', t: 'Liseré', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
-    { k: 'tint', t: 'Teinte', role: 'tint + gelée 135°', note: 'Plein du galet : clair TL → saturé BR + encre *-ink.' },
+    { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
+    { k: 'tint', t: 'Teinte', role: 'tint + gelée 135°', note: 'Plein du galet : clair TL → saturé BR.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
-    { k: 'frosted', t: 'Dépoli', role: 'data-frosted', note: 'blur(16px) saturate(1.4) — seulement sur scène.' },
-    { k: 'glow', t: 'Éclat', role: 'data-glow', note: 'Halo teinté optionnel — pas l’ombre table par défaut.' },
-    { k: 'sparkle', t: 'Scintillement', role: 'grain / --sparkle', note: 'Tuile noise.svg en overlay (~8 % clair).' },
+    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle', note: 'Tuile noise.svg en overlay (~8 % clair).' },
+    { k: 'shadow', t: 'Lueur', role: '--sh-out / --table-drop', note: 'Ombre table neutre — pas de halo teinté.' },
+    { k: 'ink', t: 'Encre', role: 'currentColor / *-ink', note: 'Libellé et icône liés à l’encre du tint.' },
   ];
   function FabricateDemo() {
     var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
@@ -148,9 +148,9 @@
       rim: step >= 1,
       tint: step >= 2,
       refractive: step >= 3,
-      frosted: step >= 4,
-      glow: step >= 5,
-      sparkle: step >= 6,
+      sparkle: step >= 4,
+      shadow: step >= 5,
+      ink: step >= 6,
     };
 
     function jump(i, e) {
@@ -158,6 +158,14 @@
       setStep(i + 1);
       SG.ripple(e.currentTarget, e);
     }
+
+    var style = {
+      '--lg-r': '999px',
+      '--lg-blur': '8px',
+      '--sh-out': on.shadow ? 'var(--table-drop)' : 'none',
+    };
+    if (!on.sparkle) style['--sparkle'] = 0;
+    if (!on.tint) { style['--glass-a'] = 0.88; style['--tint-a'] = 0.12; }
 
     return h('div', { className: 'fab', ref: rootRef },
       h('div', { className: 'fab-stage', 'aria-hidden': true },
@@ -167,21 +175,18 @@
           innerRef: ctaRef,
           className: 'fab-pebble'
             + (step === 0 ? ' fab-pebble--naked' : '')
-            + (on.sparkle ? '' : ' fab-pebble--no-sparkle'),
-          frosted: on.frosted,
+            + (on.sparkle ? '' : ' fab-pebble--no-sparkle')
+            + (on.ink ? '' : ' fab-pebble--no-ink'),
+          frosted: true,
           refractive: on.refractive,
           rim: on.rim,
-          glow: on.glow,
+          glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
           tintA: on.tint ? 0.92 : undefined,
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
-          style: Object.assign(
-            { '--lg-r': '999px', '--lg-blur': '8px' },
-            on.sparkle ? {} : { '--sparkle': 0 },
-            on.tint ? {} : { '--glass-a': 0.55, '--tint-a': 0.2 }
-          ),
-        }, 'Collecter')),
+          style: style,
+        }, on.ink ? [h(Icon, { key: 'i', name: 'plus' }), 'Collecter'] : null)),
       h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
         FAB_LAYERS.map(function (layer, i) {
           var active = step > i;
@@ -205,28 +210,28 @@
       id: 'fabrication',
       label: 'Principes',
       title: 'Fabrication',
-      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une forme nue, puis on empile liseré, teinte, réfraction, dépoli, éclat et scintillement jusqu’à la gelée posée sur la table.',
+      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile bordure, teinte, réfraction, givre (grain), lueur (ombre table) et encre jusqu’à la gelée posée sur la table. Le dépoli (blur) est toujours actif sur scène.',
     },
       h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — boucle automatique.', scene: true },
         h(FabricateDemo)),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([
-        ['Ombre table', 'elevation-3 neutre', 'Posé sur la table — pas de halo teinté par défaut.'],
+        ['Dépoli', 'data-frosted', 'Toujours ON sur scène — hors liste d’étapes.'],
         ['Alpha sol', '~0.88 clair · 0.08 sombre', 'Objets posés hors scène.'],
         ['Alpha scène', '~0.26 / 0.12', 'Verre au-dessus d’un décor coloré.'],
       ]) }),
       h(D.Usage, {
         dos: [
-          'Garder l’ombre table neutre pour les objets posés.',
+          'Garder la lueur (ombre table) neutre pour les objets posés.',
           'Lier texte et icônes à l’encre du tint (currentColor).',
-          'Réserver data-glow aux accents rares.',
-          'Prévoir un décor coloré derrière le dépoli.',
+          'Réserver data-glow aux accents rares (hors stack par défaut).',
+          'Prévoir un décor coloré derrière le dépoli de scène.',
         ],
         donts: [
-          'Remplacer l’ombre table par un halo teinté sur chaque bouton.',
+          'Remplacer la lueur table par un halo teinté sur chaque bouton.',
           'Forcer une couleur d’icône qui ignore le parent teinté.',
-          'Mélanger un éclat d’une couleur et une teinte d’une autre.',
+          'Omettre le givre (grain) sur une surface sujet.',
           'Utiliser un verre très transparent sur un fond uni : il disparaît.',
         ],
       }));
@@ -284,7 +289,8 @@
               tint: 'seafoam',
               tintA: 0.92,
               rim: true,
-              refractive: false,
+              refractive: true,
+              frosted: true,
               glow: false,
               alive: false,
             }),

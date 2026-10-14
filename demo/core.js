@@ -143,7 +143,7 @@
     if (props.tint) { st['--tint'] = RGB[props.tint] || props.tint; st['--glow'] = RGB[props.tint] || props.tint; if (props.tintA !== undefined) st['--tint-a'] = props.tintA; }
     if (props.glowColor) st['--glow'] = RGB[props.glowColor] || props.glowColor;
 
-    var skip = { as: 1, frosted: 1, refractive: 1, alive: 1, rim: 1, tint: 1, tintA: 1, glow: 1, glowColor: 1, gloss: 1, className: 1, style: 1, children: 1, innerRef: 1 };
+    var skip = { as: 1, frosted: 1, refractive: 1, alive: 1, rim: 1, tint: 1, tintA: 1, glow: 1, glowColor: 1, className: 1, style: 1, children: 1, innerRef: 1 };
     var rest = {};
     Object.keys(props).forEach(function (k) { if (!skip[k]) rest[k] = props[k]; });
     rest.className = 'lg ' + (props.className || '');

@@ -31,7 +31,7 @@
       as: 'button', type: 'button', innerRef: ref,
       className: cls('chip', 'shape-' + (p.shape || 'pill'), p.state && 'is-' + p.state),
       'aria-pressed': on, disabled: p.disabled,
-      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: false, refractive: false, rim: true, alive: true,
+      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: false, refractive: true, frosted: true, rim: true, alive: true,
       onPointerDown: function (e) { if (!p.disabled) SG.ripple(ref.current, e); },
       onClick: function () { set(!on); },
     },
@@ -213,7 +213,7 @@
       : h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pos.left + 'px,0,0)', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true });
     var common = { role: p.kind === 'radio' ? 'radiogroup' : 'tablist', 'aria-label': p.label, onKeyDown: key };
     if (line) return h('div', Object.assign({ ref: box, className: p.variant === 'doc' ? 'm3tabs' : 'tabs-line' }, common), indicator, buttons);
-    return h(Glass, Object.assign({ innerRef: box, className: 'tabs-list', refractive: false, glow: false }, common), indicator, buttons);
+    return h(Glass, Object.assign({ innerRef: box, className: 'tabs-list', refractive: true, frosted: true, rim: true, glow: false }, common), indicator, buttons);
   }
 
   C.Tabs = function (p) {

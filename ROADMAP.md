@@ -3,7 +3,7 @@
 Objectif : un design system glassmorphism complet, cohérent et publiable (niveau MUI / Tailwind), **framework-agnostique en premier**, avec adaptateurs React (et plus tard Vue/Svelte) et un plugin Tailwind.
 
 Légende : **P0** indispensable v1 · **P1** important · **P2** confort. Effort : **XS** < 2 h · **S** ½ j · **M** 1–2 j · **L** 3–5 j · **XL** > 1 sem.
-Références → voir [`docs/AUDIT.md`](docs/AUDIT.md). Avancement composants → [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Prototype interactif → [`demo/`](demo/).
+Avancement composants → [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Prototype interactif → [`demo/`](demo/).
 
 Architecture cible proposée :
 ```
@@ -118,7 +118,7 @@ seaglass/
 - [x] **P0 · S** `prefers-reduced-motion` complet : ressorts → durées courtes sans overshoot, `scroll-behavior`, reflet au pointeur, blobs
 - [ ] **P0 · M** Contraste sur verre : tokens `on-glass`, opacité plancher sur `.scene` quand du texte est posé, ou scrim local ; outil de vérification dans la doc (échantillonnage de l'arrière-plan)
 - [ ] **P0 · S** Focus visible propre à chaque composant (ne plus dépendre du reset de doc) ; anneau double (clair + foncé) pour verre sur photo à la place du `#fff` en dur
-- [ ] **P1 · M** Corriger ARIA listés dans `AUDIT.md` §6.3 (checkbox mixed, tooltip, snack, drawer, navbar, tabs disabled, ring `aria-hidden`)
+- [ ] **P1 · M** Corriger ARIA connus (checkbox mixed, tooltip, snack, drawer, navbar, tabs disabled, ring `aria-hidden`)
 - [ ] **P1 · S** `lang`, structure HTML valide de la doc (`index.html:1-9`)
 - [ ] **P1 · M** Tests automatiques axe-core (Storybook a11y addon + Playwright `@axe-core/playwright`)
 - [ ] **P1 · M** Tests manuels lecteurs d'écran (VoiceOver macOS/iOS, NVDA, TalkBack) — checklist par composant

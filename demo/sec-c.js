@@ -103,13 +103,13 @@
     '  --lg-r: 28px;        /* 8 à 12 contrôles, 16 panneaux, 28 cartes, 999 pilules */',
     '  --ease: cubic-bezier(.2,0,0,1);  --spring: cubic-bezier(.34,1.4,.5,1);', '}',
     '/* sombre : --ground #0B1513, --ink #E8F1EE, --ga .08, --ga-scene .12, --teal #7BBFAC */', '',
-    '/* Les six propriétés, en attributs */',
-    '.scene .lg[data-frosted], .lg.over[data-frosted] { backdrop-filter: blur(var(--lg-blur)) saturate(1.6); }',
-    '.sg-refract .scene .lg[data-refractive] { backdrop-filter: blur(calc(var(--lg-blur) * .5)) url(#sg-refract) saturate(1.6); } /* Chromium */',
-    '.lg[data-alive]      { /* reflet qui suit le pointeur (--mx, --my), ressort au survol */ }',
-    '.lg[data-rim]        { /* liseré d’arête, angle --ang qui suit le pointeur */ }',
-    '.lg[data-tint]       { /* --tint: r g b ; --tint-a: opacité */ }',
-    '.lg[data-glow]       { /* --glow: r g b ; lumière diffuse sous l’objet */ }'].join('\n');
+    '/* Attributs matière (.sg-glass) — frost toujours sur .sg-scene */',
+    '.sg-scene .sg-glass[data-frosted], .sg-glass.sg-glass--over[data-frosted] { backdrop-filter: blur(16px) saturate(1.4); }',
+    '.sg-refract .sg-scene .sg-glass[data-refractive] { backdrop-filter: blur(8px) url(#sg-refract) saturate(1.4); } /* Chromium */',
+    '.sg-glass[data-alive]      { /* reflet pointeur (--mx, --my), ressort au survol */ }',
+    '.sg-glass[data-rim]        { /* bordure / liseré d’arête */ }',
+    '.sg-glass[data-tint]       { /* --tint + encre *-ink via currentColor */ }',
+    '.sg-glass[data-glow]       { /* halo teinté optionnel — pas l’ombre table */ }'].join('\n');
   var REACT = [
     "import '@sea-glass/css';",
     "import { Glass, Button, Alert, Header } from '@sea-glass/react';",
@@ -189,7 +189,7 @@
           h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
           h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
           h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
+          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')))),
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));

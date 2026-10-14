@@ -4,9 +4,12 @@ Live: [probe311.github.io/sea-glass](https://probe311.github.io/sea-glass/).
 
 Version UI = `package.json` + React installé (`pnpm sync:version` → `version.js`). Chargement React via esm.sh (pas d’UMD en React 19). Pages déploie ce dossier.
 
-Brand: `logo.svg` / `logo-light.svg` (`pnpm build:logo`). Display type: **Poppins**.
+| Asset            | Rôle                                      |
+| ---------------- | ----------------------------------------- |
+| `logo.svg` / `logo-light.svg` | Wordmarks (`pnpm build:logo`) |
+| `favicon.svg`    | Favicon — disque Cobalt `#6B8CE3`         |
 
-Prototype visuel + sections détaillées du sommaire (CSS `.sg-*` / React).
+Display type: **Poppins**. Prototype visuel + sections du sommaire (CSS `.sg-*` / React). Footer page : `Sea Glass · version` uniquement.
 
 ```bash
 pnpm demo:prepare   # build packages → sync CSS + logos + version dans demo/
