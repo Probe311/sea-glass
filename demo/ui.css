@@ -237,16 +237,48 @@
 .sl-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 14px; font-weight: 500; margin-bottom: 2px; }
 .sl-head output { font: 13px var(--font-mono); color: var(--ink-2); font-variant-numeric: tabular-nums; }
 
-/* ---------- Progression ---------- */
-.pg { --h: 18px; --f: 0.6; --buf: 0; position: relative; height: var(--h); border-radius: 999px; overflow: hidden; background: var(--well); box-shadow: var(--carved); }
+/* ---------- Progression : rail frosted (comme curseur), fill jelly sans glow ---------- */
+.pg {
+  --h: 18px; --f: 0.6; --buf: 0;
+  position: relative; height: var(--h); border-radius: 999px; overflow: hidden;
+  background: color-mix(in srgb, #fff 72%, var(--ground-2));
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(var(--shade), 0.06);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
+}
+:root[data-theme="dark"] .pg {
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  border-color: color-mix(in srgb, #fff 12%, transparent);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.25);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pg {
+    background: color-mix(in srgb, var(--ink) 12%, transparent);
+    border-color: color-mix(in srgb, #fff 12%, transparent);
+    box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.25);
+  }
+}
 .pg.sm { --h: 10px; }
 .pg.lg { --h: 26px; }
-.pg b { position: absolute; left: 2px; top: 2px; bottom: 2px; width: calc((100% - 4px) * var(--buf)); border-radius: 999px; background: color-mix(in srgb, var(--fb) 40%, transparent); transition: width 420ms var(--ease); }
-.pg i { position: absolute; left: 2px; top: 2px; bottom: 2px; width: calc((100% - 4px) * var(--f)); border-radius: 999px;
-  background: linear-gradient(180deg, var(--ft), var(--fb));
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.85), inset 0 -2px 3px -1px rgba(10, 90, 70, 0.28), 0 0 10px rgba(var(--fg), 0.4);
-  transition: width 420ms var(--spring); }
-.pg i::after { content: ""; position: absolute; left: 20%; right: 8px; top: 12%; height: 34%; border-radius: 999px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); }
+.pg b {
+  position: absolute; left: 2px; top: 2px; bottom: 2px;
+  width: calc((100% - 4px) * var(--buf)); border-radius: 999px;
+  background: color-mix(in srgb, var(--fb) 28%, transparent);
+  transition: width 420ms var(--ease);
+}
+.pg i {
+  position: absolute; left: 2px; top: 2px; bottom: 2px;
+  width: calc((100% - 4px) * var(--f)); border-radius: 999px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--ft) 70%, #fff), var(--fb) 55%, color-mix(in srgb, var(--fb) 88%, #000));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.65), inset 0 -1px 2px -1px rgba(10, 90, 70, 0.2);
+  transition: width 420ms var(--spring);
+}
+.pg i::after {
+  content: ""; position: absolute; left: 18%; right: 10px; top: 14%; height: 32%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
 .pg.t-aqua { --ft: #9ADBF4; --fb: #5CC4EC; --fg: 92, 196, 236; }
 .pg.t-amber { --ft: #FADA95; --fb: #F2B845; --fg: 247, 201, 107; }
 .pg.t-ruby { --ft: #F2A99B; --fb: #E07662; --fg: 224, 118, 98; }
@@ -260,15 +292,19 @@
 .ring { position: relative; width: var(--sz, 72px); height: var(--sz, 72px); display: grid; place-items: center; flex: none; }
 .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
 .ring circle { fill: none; }
-.ring .trk-s { stroke: var(--c-lo); stroke-width: 4.6; opacity: 0.5; }
-.ring .trk { stroke: rgb(255 255 255 / var(--well-b)); stroke-width: 3.6; }
-.ring .val { stroke-width: 3.6; filter: drop-shadow(0 1px 2px rgba(var(--fg), 0.55)); transition: stroke-dasharray 420ms var(--spring); }
+.ring .trk-s { stroke: color-mix(in srgb, var(--ink) 14%, transparent); stroke-width: 4.2; }
+.ring .trk { stroke: color-mix(in srgb, #fff 55%, var(--ground-2)); stroke-width: 3.4; }
+.ring .val { stroke-width: 3.4; filter: none; transition: stroke-dasharray 420ms var(--spring); }
 .ring span { position: relative; font: 600 15px var(--font-display); font-variant-numeric: tabular-nums; }
 
 /* ---------- Onglets et segmenté ---------- */
 .tabs-list { --lg-r: 999px; --lg-blur: 8px; --gl: 10px; display: inline-flex; padding: 4px; gap: 2px; position: relative; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
 .tabs-list::-webkit-scrollbar { display: none; }
-.tabs-list .pill { position: absolute; z-index: 1; top: 4px; bottom: 4px; left: 4px; --lg-r: 999px; --lg-blur: 0px; --gl: 9px; transition: left 420ms var(--spring), width 420ms var(--spring); }
+.tabs-list .pill {
+  position: absolute; z-index: 1; top: 4px; bottom: 4px; left: 4px;
+  --lg-r: 999px; --lg-blur: 0px; --gl: 9px; --sh-out: none;
+  transition: left 420ms var(--spring), width 420ms var(--spring);
+}
 .tabs-list .tab { position: relative; z-index: 3; flex: none; height: 40px; padding-inline: 22px; border: 0; background: transparent; border-radius: 999px; font: 600 15px/1 var(--font-display); color: var(--ink-3); cursor: pointer; white-space: nowrap; transition: color 200ms var(--ease); }
 .tabs-list .tab:hover { color: var(--ink); }
 .tabs-list .tab[aria-selected="true"], .tabs-list .tab[aria-checked="true"] { color: var(--seafoam-ink); }
@@ -287,32 +323,67 @@
 .tabs-line .ind { position: absolute; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: linear-gradient(90deg, var(--teal-hi), var(--teal)); transition: left 420ms var(--spring), width 420ms var(--spring); }
 .tab-panel { padding-top: 16px; font-size: 14px; color: var(--ink-2); outline: none; }
 
-/* ---------- Champ, recherche, navigation ---------- */
+/* ---------- Champ, recherche, navigation : même surface verre posée ---------- */
 .field { display: grid; gap: 6px; }
 .field > label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
 .shell-in { position: relative; }
-.shell-in > .lg { position: absolute !important; inset: 0; z-index: 0; --lg-r: 16px; --lg-blur: 8px; pointer-events: none; }
-.shell-in > input { position: relative; z-index: 4; display: block; width: 100%; height: 52px; padding-inline: 18px; border: 0; border-radius: 16px; background: transparent; font: 400 16px var(--font-body); color: var(--ink); }
+.shell-in > .lg {
+  position: absolute !important; inset: 0; z-index: 0;
+  --lg-r: 16px; --lg-blur: 12px; --gl: 10px;
+  pointer-events: none;
+}
+.shell-in > input {
+  position: relative; z-index: 4; display: block; width: 100%; height: 52px;
+  padding-inline: 18px; border: 0; border-radius: 16px; background: transparent;
+  font: 400 16px var(--font-body); color: var(--ink);
+}
 .shell-in > input::placeholder { color: var(--ink-3); }
 .shell-in:hover > .lg, .shell-in.is-hover > .lg { outline: 4px solid rgba(79, 148, 130, 0.14); }
-.shell-in:focus-within > .lg, .shell-in.is-focus > .lg { outline: 2px solid var(--focus); outline-offset: 3px; }
+.shell-in:focus-within > .lg, .shell-in.is-focus > .lg {
+  outline: 2px solid var(--focus); outline-offset: 3px;
+}
 .shell-in.dis { opacity: 0.5; }
 .shell-in.dis > input { cursor: not-allowed; }
 .help { font-size: 12px; color: var(--ink-3); }
 .help.err { color: var(--ruby); font-weight: 500; }
 :root:not([data-theme="dark"]) .help.err { color: #A4402F; }
-.search { --lg-r: 999px; --lg-blur: 16px; --gl: 14px; display: flex; align-items: center; gap: 8px; height: 58px; padding-inline: 20px 8px; }
-.search input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; font: 400 16px var(--font-body); color: inherit; outline: none !important; box-shadow: none !important; }
+.search {
+  --lg-r: 999px; --lg-blur: 12px; --gl: 12px;
+  display: flex; align-items: center; gap: 8px; height: 58px; padding-inline: 20px 8px;
+}
+.search input {
+  flex: 1; min-width: 0; height: 100%; border: 0; background: transparent;
+  font: 400 16px var(--font-body); color: inherit; outline: none !important; box-shadow: none !important;
+}
 .search input::placeholder { color: inherit; opacity: 0.7; }
-.search .sbtn { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 0; background: transparent; color: inherit; cursor: pointer; transition: background 200ms var(--ease); }
+.search .sbtn {
+  display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%;
+  border: 0; background: transparent; color: inherit; cursor: pointer;
+  transition: background 200ms var(--ease);
+}
 .search .sbtn:hover { background: rgba(255, 255, 255, 0.4); }
-.search:focus-within { outline: 2px solid #fff; outline-offset: 3px; }
-.navbar { --lg-r: 999px; --lg-blur: 16px; --gl: 12px; position: relative; display: flex; gap: 4px; padding: 6px; width: 100%; max-width: 420px; margin-inline: auto; }
-.navbar .pill { position: absolute; z-index: 1; top: 6px; bottom: 6px; left: 6px; --lg-r: 999px; --lg-blur: 0px; transition: left 420ms var(--spring), width 420ms var(--spring); }
-.navbar .nb { position: relative; z-index: 3; flex: 1; min-width: 0; display: grid; justify-items: center; gap: 2px; padding: 8px 4px; border: 0; border-radius: 999px; background: transparent; color: inherit; font: 500 12px var(--font-body); cursor: pointer; }
+.search:focus-within { outline: 2px solid var(--focus); outline-offset: 3px; }
+.navbar {
+  --lg-r: 999px; --lg-blur: 12px; --gl: 12px;
+  position: relative; display: flex; gap: 4px; padding: 6px;
+  width: 100%; max-width: 420px; margin-inline: auto;
+}
+.navbar .pill {
+  position: absolute; z-index: 1; top: 6px; bottom: 6px; left: 6px;
+  --lg-r: 999px; --lg-blur: 0px; --sh-out: none;
+  transition: left 420ms var(--spring), width 420ms var(--spring);
+}
+.navbar .nb {
+  position: relative; z-index: 3; flex: 1; min-width: 0;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 8px; border: 0; border-radius: 999px; background: transparent;
+  color: inherit; font: 500 12px var(--font-body); cursor: pointer;
+}
+.navbar .nb .ico { width: 16px; height: 16px; flex: none; }
+.navbar .nb:not([aria-current="page"]) .ico { display: none; }
 .navbar .nb[aria-current="page"] { color: var(--seafoam-ink); }
 :root[data-theme="dark"] .scene .navbar .nb[aria-current="page"] { color: var(--seafoam-ink); }
-.navbar .nb:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.navbar .nb:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 
 /* ---------- Carte, badge, info-bulle, notification ---------- */
 .card { padding: 24px; display: grid; gap: 10px; --lg-r: 28px; --gl: 22px; min-width: 0; }
@@ -433,8 +504,17 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 
 .tabs-list .tab:focus-visible, .tabs-line .tab:focus-visible { outline-offset: -2px; }
 
-/* Case et radio : le coché est un galet de teal profond, la coche est blanche (contraste 4,7:1 minimum) */
-.cb.on .box { background: linear-gradient(165deg, #308069, #256B5A); --sh-out: 0 5px 10px -5px rgba(37, 107, 90, 0.7); }
+/* Case et radio : teal profond → icône / point blanc (currentColor des glyphes Galet) */
+.cb.on .box {
+  color: #fff;
+  background: linear-gradient(165deg, #308069, #256B5A);
+  --sh-in: none;
+  --sh-out: 0 5px 10px -5px rgba(37, 107, 90, 0.7);
+  --sparkle: 0;
+}
+.cb.on .box::after { display: none; }
+.cb.on .box > .ico,
+.cb.on .box > .ico path { fill: #fff; color: #fff; }
 .cb .box.carved { --sh-in: inset 0 0 0 1.5px color-mix(in srgb, var(--ink-3) 62%, transparent), inset 1.5px 2px 3px -1px var(--c-lo); }
 
 /* Survol : scale 1.05 sur les petits éléments, plus discret sur les grandes surfaces */
@@ -443,5 +523,5 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 /* hover/press stem transforms : définis dans le bloc .sl ci-dessus */
 .navbar .nb, .tabs-list .tab, .search .sbtn { transition: transform 220ms var(--spring), color 200ms var(--ease), background 200ms var(--ease); }
 .navbar .nb:hover, .tabs-list .tab:hover:not(:disabled), .search .sbtn:hover { transform: scale(1.05); }
-.card, .search, .navbar, .tabs-list, .snack, .mo { --hs: 1.02; --as: 0.99; }
+.card, .search, .navbar, .tabs-list, .snack { --hs: 1.02; --as: 0.99; }
 .search, .navbar, .tabs-list { --hs: 1.01; --as: 0.995; }

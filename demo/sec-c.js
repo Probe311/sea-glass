@@ -6,7 +6,7 @@
   /* ---------- Champs et recherche ---------- */
   S.Fields = function () {
     var F = UI.Field;
-    return h(D.Section, { id: 'champs', label: 'Composants', title: 'Champs et recherche', lead: 'Le champ est un creux de verre : la matière est enfoncée, la saisie reste sur fond clair. La recherche est un Givre en pilule, pensé pour reposer sur une image.' },
+    return h(D.Section, { id: 'champs', label: 'Composants', title: 'Champs et recherche', lead: 'Champ et recherche partagent la même surface verre posée (comme un bouton au repos). Le champ est un rectangle 16 px ; la recherche reste une pilule plus haute, prête à reposer sur une image.' },
       h(D.Panel, { tag: 'Champs', cap: 'entrée, survol, focus, erreur et désactivé.' },
         h('div', { className: 'fields-grid' },
           h(F, { label: 'Nom de la crique', placeholder: 'Crique des Sirènes', help: 'Visible dans ta collection.' }),
@@ -20,9 +20,9 @@
 
   /* ---------- Navigation ---------- */
   S.Nav = function () {
-    return h(D.Section, { id: 'navigation', label: 'Composants', title: 'Navigation', lead: 'La barre de navigation est un Givre en pilule. L’entrée active est un galet seafoam qui glisse d’un item à l’autre.' },
+    return h(D.Section, { id: 'navigation', label: 'Composants', title: 'Navigation', lead: 'La barre est un Givre en pilule. L’entrée active est un galet seafoam sans ombre portée : icône à gauche du libellé, visible seulement sur l’actif.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Quatre destinations au maximum.' }, h(UI.NavBar)),
-      h(D.Usage, { dos: ['Quatre entrées au plus, avec icône et libellé.', 'Placer la barre sur une image ou un dégradé.'], donts: ['Cacher les libellés.', 'Placer la barre sur un fond uni : le Givre n’aurait aucun effet.'] }));
+      h(D.Usage, { dos: ['Quatre entrées au plus.', 'Icône uniquement sur l’item actif, à gauche du libellé.', 'Placer la barre sur une image ou un dégradé.'], donts: ['Cacher les libellés.', 'Empiler icône au-dessus du texte.', 'Ombre portée sur le galet actif.'] }));
   };
 
   /* ---------- Cartes et badges ---------- */

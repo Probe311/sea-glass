@@ -136,7 +136,7 @@
             h(UI.Slider, { label: 'Désactivé', value: 25, unit: ' m', disabled: true })))),
       h(D.Sub, { title: 'États', text: 'Défaut = capsule mint continue. Appui = même matière, bout un peu plus large. Le focus n’apparaît qu’au clavier.' },
         h(D.Panel, { tag: 'Matrice', cap: 'Curseur · capsule mint continue.' }, h(D.Matrix, { tall: true, corner: 'Composant', cols: [['rest', 'Défaut'], ['hover', 'Survol'], ['press', 'Appui'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['s', 'Curseur']], render: cell }))),
-      h(D.Sub, { title: 'Progression', text: 'Les barres gardent un rail creusé (sémantique différente du curseur interactif) et le même verre de remplissage. Quatre teintes, trois tailles, tampon, indéterminé et anneau.' },
+      h(D.Sub, { title: 'Progression', text: 'Rail frosted léger (même famille que le curseur) et remplissage jelly sans halo. Quatre teintes, trois tailles, tampon, indéterminé et anneau.' },
         h(D.Panel, { tag: 'Barres', cap: 'Le remplissage rebondit légèrement à l’arrivée. Le mode indéterminé n’anime que transform.' },
           h('div', { className: 'g2' },
             h(UI.Progress, { label: 'Collection', value: 60, showValue: true }),
@@ -158,8 +158,8 @@
         ['Plage', 'Deux capsules', 'Sans gonflement (lisibilité des deux poignées).'],
         ['Paliers', 'Jusqu’à 20 crans', 'Les crans atteints passent en vert.'],
         ['Clavier', '← → ↑ ↓, Début, Fin, PgUp, PgDn', 'role="slider", aria-valuenow, aria-valuetext.'],
-        ['Barre de progression', '10 · 18 · 26 px, rail creusé', 'Remplissage à 2 px du bord ; distinct du curseur.'],
-        ['Anneau', '72 px par défaut', 'SVG, trait de 3,6 unités, valeur au centre.']] }),
+        ['Barre de progression', '10 · 18 · 26 px, rail frosted', 'Fill jelly 135° ; pas de glow externe.'],
+        ['Anneau', '72 px par défaut', 'SVG, trait de 3,4 unités, valeur au centre.']] }),
       h(D.Usage, { dos: ['Afficher la valeur courante dans l’en-tête et dans la bulle.', 'Utiliser les paliers quand les valeurs sont peu nombreuses.', 'Réserver le mode indéterminé aux durées inconnues.'], donts: ['Employer un curseur pour une valeur à saisir précisément : prévois un champ.', 'Mélanger plusieurs teintes de progression sur la même vue.', 'Animer la largeur d’une barre indéterminée : seul transform est animé.'] }));
   };
 

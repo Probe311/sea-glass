@@ -457,9 +457,9 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 
 /* Galets palette / hero : même stack matière que Button (tint, volume, grain, rim, glow) */
 .pebble-blob {
-  --pebble-tint-mix: 78%;
-  --pebble-lit: 0.85;
-  --pebble-sparkle: 0.32;
+  --pebble-tint-mix: 86%;
+  --pebble-lit: 0.9;
+  --pebble-sparkle: 0.28;
   --pebble-sheen: rgb(255 255 255 / 0.22);
   --pebble-cs: color-mix(in srgb, var(--bc) 40%, #fff);
   position: relative;
@@ -539,17 +539,17 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     0 12px 16px -8px color-mix(in srgb, var(--bc) 48%, transparent);
 }
 :root[data-theme="dark"] .pebble-blob {
-  --pebble-tint-mix: 70%;
-  --pebble-lit: 0.6;
-  --pebble-sparkle: 0.1;
-  --pebble-sheen: rgb(255 255 255 / 0.08);
+  --pebble-tint-mix: 78%;
+  --pebble-lit: 0.65;
+  --pebble-sparkle: 0.12;
+  --pebble-sheen: rgb(255 255 255 / 0.1);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pebble-blob {
-    --pebble-tint-mix: 70%;
-    --pebble-lit: 0.6;
-    --pebble-sparkle: 0.1;
-    --pebble-sheen: rgb(255 255 255 / 0.08);
+    --pebble-tint-mix: 78%;
+    --pebble-lit: 0.65;
+    --pebble-sparkle: 0.12;
+    --pebble-sheen: rgb(255 255 255 / 0.1);
   }
 }
 @keyframes blob-morph {
