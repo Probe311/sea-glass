@@ -49,10 +49,10 @@
       var shape = row === 'pill' ? 'pill' : 'rect', s = col === 'hover' ? { state: 'hover' } : col === 'focus' ? { state: 'focus' } : col === 'dis' ? { disabled: true } : {};
       return h(C, Object.assign({ shape: shape, defaultPressed: col === 'sel', tabIndex: -1 }, s), row === 'pill' ? 'Givré' : 'Tide pool');
     }
-    return h(D.Section, { id: 'puces', label: 'Composants', title: 'Puces', lead: 'La pilule sert aux filtres cumulables : une coche apparaît quand elle est active. Le rectangle arrondi sert aux options.' },
-      h(D.Panel, { tag: 'Aperçu', cap: 'Clique pour activer ou désactiver.' }, h(D.Stage, null, h(C, { defaultPressed: true }, 'Givré'), h(C, null, 'Mare'), h(C, { shape: 'rect' }, 'Tide pool'), h(C, { shape: 'rect', defaultPressed: true }, 'Récif'))),
-      h(D.Panel, { tag: 'États', cap: 'Pilule et rectangle · coche à l’activation.' }, h(D.Matrix, { corner: 'Forme', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['sel', 'Sélectionnée'], ['focus', 'Focus'], ['dis', 'Désactivée']], rows: [['pill', 'Pilule'], ['rect', 'Rectangle']], render: cell })),
-      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '36 px', 'Texte Roboto 500, 14 px.'], ['Rayon', '999 px ou 12 px', 'Pilule ou rectangle.'], ['Sélection', 'Teinte seafoam + coche 16 px', 'Le padding gauche se réduit de 6 px.']] }));
+    return h(D.Section, { id: 'puces', label: 'Composants', title: 'Puces', lead: 'La puce filtre ou choisit une option. Deux formes : pilule pour les filtres cumulables (coche à l’activation), rectangle arrondi pour les options.' },
+      h(D.Panel, { tag: 'Aperçu', cap: 'Puces · clique pour activer ou désactiver.' }, h(D.Stage, null, h(C, { defaultPressed: true }, 'Givré'), h(C, null, 'Mare'), h(C, { shape: 'rect' }, 'Tide pool'), h(C, { shape: 'rect', defaultPressed: true }, 'Récif'))),
+      h(D.Panel, { tag: 'États', cap: 'Forme pilule et forme rectangle · coche à l’activation.' }, h(D.Matrix, { corner: 'Forme', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['sel', 'Sélectionnée'], ['focus', 'Focus'], ['dis', 'Désactivée']], rows: [['pill', 'Forme pilule'], ['rect', 'Forme rectangle']], render: cell })),
+      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '36 px', 'Texte Roboto 500, 14 px.'], ['Formes', 'pilule 999 px · rectangle 12 px', 'Deux shapes du composant Puce.'], ['Sélection', 'Teinte seafoam + coche 16 px', 'Le padding gauche se réduit de 6 px.']] }));
   };
 
   /* ---------- Interrupteur ---------- */

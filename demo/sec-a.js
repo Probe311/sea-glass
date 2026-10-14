@@ -11,7 +11,7 @@
     ['Composants', [
       ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
       ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
-      ['listes', 'Listes déroulantes'], ['navigation', 'Navigation'], ['chrome', 'En-tête, pied et navigation'],
+      ['listes', 'Listes et saisie avancée'], ['navigation', 'Navigation'], ['chrome', 'Chrome de page'],
       ['alertes', 'Alertes et toasts'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
       ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'],
       ['prefs', 'Préférences'],
@@ -265,27 +265,41 @@
 
   /* ---------- Mouvement ---------- */
   S.Motion = function () {
-    var st = useState(false), go = st[0], setGo = st[1];
-    var items = [['Rapide', '120 ms', 'Appui, case cochée, reflet', 120], ['Base', '200 ms', 'Survol, ombres, halo', 200], ['Souple', '380 ms', 'Interrupteur, onglets, curseur', 380]];
+    var goSt = useState(false), go = goSt[0], setGo = goSt[1];
+    var items = [
+      ['Rapide', '120 ms', 'Appui, case cochée, reflet', 120],
+      ['Base', '200 ms', 'Survol, ombres, halo', 200],
+      ['Souple', '380 ms', 'Interrupteur, onglets, curseur', 380],
+    ];
     useEffect(function () {
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var tOut, tIn;
-      function cycle() {
-        setGo(false);
-        tIn = setTimeout(function () {
-          setGo(true);
-          tOut = setTimeout(cycle, 1800);
-        }, 80);
+      /* Hold assez long pour que la bille à 380 ms finisse avant le demi-tour. */
+      var SLOWEST = 380, HOLD = 720, t;
+      var on = false;
+      function tick() {
+        on = !on;
+        setGo(on);
+        t = setTimeout(tick, SLOWEST + HOLD);
       }
-      cycle();
-      return function () { clearTimeout(tIn); clearTimeout(tOut); };
+      t = setTimeout(tick, 400);
+      return function () { clearTimeout(t); };
     }, []);
-    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Aucun clignotement. Tout se calme avec prefers-reduced-motion.' },
-      h(D.Panel, { tag: 'Durées', cap: 'cubic-bezier(0.2, 0, 0, 1) · ressort cubic-bezier(0.34, 1.4, 0.5, 1)' },
+    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Trois durées distinctes (120 · 200 · 380 ms). Tout se calme avec prefers-reduced-motion.' },
+      h(D.Panel, { tag: 'Durées', cap: 'ease standard · trois vitesses de trajet visibles côte à côte' },
         h('div', { className: 'g3' }, items.map(function (m) {
-          return h(Glass, { key: m[0], className: 'mo' + (go ? ' go' : ''), style: { '--d': m[3] + 'ms' }, alive: false },
-            h('b', { style: { fontWeight: 500 } }, m[0] + ' · ' + m[1]), h('span', { style: { fontSize: 12, color: 'var(--ink-3)' } }, m[2]),
-            h(Glass, { className: 'track', refractive: false, alive: false, glow: false }, h('span', { className: 'ball' })));
+          return h(Glass, {
+            key: m[0],
+            className: 'mo' + (go ? ' is-go' : ''),
+            style: { '--d': m[3] + 'ms' },
+            rim: true,
+            frosted: false,
+            refractive: false,
+            glow: false,
+            alive: false,
+          },
+            h('b', { className: 'mo__title' }, m[0] + ' · ' + m[1]),
+            h('span', { className: 'mo__hint' }, m[2]),
+            h('div', { className: 'mo-track' }, h('span', { className: 'mo-ball' })));
         }))));
   };
 
