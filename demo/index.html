@@ -1,6 +1,7 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><script>(function(){try{var r=document.documentElement,t=localStorage.getItem('sg-theme');function set(m){r.setAttribute('data-theme',m);r.setAttribute('data-sg-theme',m)}if(t==='light'||t==='dark')set(t);else if(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)set('dark');}catch(e){}})()</script><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}:root[data-theme=dark]{color-scheme:dark}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#F6F5EE;color:#17262A}:root[data-theme=dark] body{background:#14130F;color:#E8F1EE}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Sea Glass Design System</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
@@ -35,11 +36,12 @@
   const { createRoot } = await import(`https://esm.sh/react-dom@${v}/client`);
   window.React = React;
   window.ReactDOM = Object.assign({}, ReactDOM, { createRoot });
+  const bust = encodeURIComponent(window.SG_META?.line || window.SG_META?.version || v);
   const files = ['core.js', 'ui.js', 'ui2.js', 'sec-a.js', 'sec-b.js', 'sec-extra.js', 'sec-c.js'];
   for (const src of files) {
     await new Promise((resolve, reject) => {
       const s = document.createElement('script');
-      s.src = src;
+      s.src = src + '?v=' + bust;
       s.onload = resolve;
       s.onerror = () => reject(new Error('Failed to load ' + src));
       document.body.appendChild(s);

@@ -179,19 +179,22 @@
       function esc(e) { if (e.key === 'Escape') setOpen(false); }
       document.addEventListener('keydown', esc); return function () { document.removeEventListener('keydown', esc); };
     }, []);
+    var ver = (window.SG_META && window.SG_META.version) || '0.2.0';
+    var main = h('main', { className: 'main' },
+      h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
+      h(S.AccordionDoc), h(S.Alerts), h(S.Buttons), h(S.Cards), h(S.Checks), h(S.Fields),
+      h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
+      h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
+      h(S.Contrast), h(S.Tokens),
+      h('footer', { className: 'end' },
+        h('span', null, 'Sea Glass · ' + ver),
+        h('span', null, 'Matière : bordure, teinte, réfraction, givre, lueur, encre · packages .sg-*')));
+    var shell = h('div', { className: 'shell', id: 'top' },
+      h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
+      main);
     return h(React.Fragment, null,
       h(S.Bar, { q: q, setQ: setQ, open: open, onMenu: function () { setOpen(!open); } }),
-      h('div', { className: 'shell', id: 'top' },
-        h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
-        h('main', { className: 'main' },
-          h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
-          h(S.AccordionDoc), h(S.Alerts), h(S.Buttons), h(S.Cards), h(S.Checks), h(S.Fields),
-          h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
-          h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
-          h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' },
-            h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.2.0')),
-            h('span', null, 'Matière : bordure, teinte, réfraction, givre, lueur, encre · packages .sg-*')))),
+      shell,
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));
