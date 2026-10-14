@@ -185,9 +185,9 @@
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
         h('main', { className: 'main' },
           h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
-          h(S.Buttons), h(S.Bullets), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
-          h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
-          h(S.Cards), h(S.DataDoc), h(S.PrefsDoc),
+          h(S.AccordionDoc), h(S.Alerts), h(S.Buttons), h(S.Cards), h(S.Checks), h(S.Fields),
+          h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
+          h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
           h(S.Contrast), h(S.Tokens),
           h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
       h(Toast));
