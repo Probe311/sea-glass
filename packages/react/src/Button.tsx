@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from 'react';
 import { cx } from './cx.js';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -6,6 +6,8 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: 'sm' | 'md' | 'lg';
   shape?: 'pill' | 'squircle' | 'circle';
   glass?: boolean;
+  /** Pebble tint; primary defaults to seafoam */
+  tint?: string;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
   fullWidth?: boolean;
@@ -18,15 +20,28 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     size = 'md',
     shape = 'pill',
     glass = true,
+    tint,
     startIcon,
     endIcon,
     fullWidth,
     children,
     type = 'button',
+    style,
     ...rest
   },
   ref,
 ) {
+  const pebble = tint ?? (variant === 'primary' ? 'seafoam' : undefined);
+  const nextStyle = (
+    pebble || fullWidth
+      ? ({
+          ...style,
+          ...(fullWidth ? { width: '100%' } : null),
+          ...(pebble ? { ['--sg-glass-tint-rgb']: `var(--sg-color-${pebble}-rgb)` } : null),
+        } as CSSProperties)
+      : style
+  ) as CSSProperties | undefined;
+
   return (
     <button
       ref={ref}
@@ -42,7 +57,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         shape === 'circle' && 'sg-button--circle',
         className,
       )}
-      style={fullWidth ? { width: '100%' } : undefined}
+      data-tint={pebble}
+      style={nextStyle}
       {...rest}
     >
       {startIcon}

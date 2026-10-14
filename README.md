@@ -85,7 +85,7 @@ Both are outlined Poppins Bold + Cobalt period (`#6B8CE3`). Regenerate with `pnp
 
 ### Material
 
-Six composable `data-*` flags on `.sg-glass`: `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Frost applies only on `.sg-scene` / `.sg-glass--over`. Refraction is opt-in.
+**Jelly formula** on `.sg-glass`: diagonal tint (135°), volume insets, monochrome grain (`noise.svg` at `--sg-glass-sparkle` ≈ 8 %), neutral table drop, frost `blur(16px) saturate(1.4)`, press wash ≈ 40 % white. Six composable `data-*` flags: `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Frost applies only on `.sg-scene` / `.sg-glass--over`. Refraction is opt-in. `data-glow` is an optional accent — not the default shadow. `data-tint` sets `color` to the pebble’s `*-ink` so icons inherit via `currentColor`.
 
 Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber, Root beer, Clear, Mist.
 
@@ -161,7 +161,7 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 ### Matière
 
-Six attributs sur `.sg-glass` : `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Le flou ne s’applique que sur une scène. La réfraction est opt-in.
+**Formule gelée** sur `.sg-glass` : dégradé diagonal 135°, volume inset, grain monochrome (`noise.svg`, sparkle ≈ 8 %), ombre table neutre, frost `blur(16px) saturate(1.4)`, overlay actif ≈ 40 % blanc. Six attributs : `frosted`, `refractive`, `alive`, `rim`, `tint`, `glow`. Le flou ne s’applique que sur une scène. La réfraction est opt-in. `data-glow` est un accent optionnel — plus le drop standard. `data-tint` applique l’encre du galet (`*-ink`) ; les icônes suivent via `currentColor`.
 
 Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue d’avancement : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
 

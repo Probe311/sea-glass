@@ -122,7 +122,7 @@
     if (on(props.refractive)) rest['data-refractive'] = '';
     if (on(props.alive)) rest['data-alive'] = '';
     if (on(props.rim)) rest['data-rim'] = '';
-    if (props.tint) rest['data-tint'] = '';
+    if (props.tint) rest['data-tint'] = props.tint;
     if (on(props.glow)) rest['data-glow'] = '';
     return h.apply(null, [as, rest].concat(React.Children.toArray(props.children)));
   };

@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes, type ReactNode } from 'react';
+import { forwardRef, type CSSProperties, type HTMLAttributes, type ReactNode } from 'react';
 import { Glass } from './Glass.js';
 import { cx } from './cx.js';
 
@@ -33,17 +33,29 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
 export type ChipProps = HTMLAttributes<HTMLButtonElement> & {
   pressed?: boolean;
   glass?: boolean;
+  tint?: string;
 };
 export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
-  { className, pressed, glass = true, ...rest },
+  { className, pressed, glass = true, tint, style, ...rest },
   ref,
 ) {
+  const pebble = pressed ? (tint ?? 'seafoam') : tint;
+  const nextStyle = (
+    pebble
+      ? ({
+          ...style,
+          ['--sg-glass-tint-rgb']: `var(--sg-color-${pebble}-rgb)`,
+        } as CSSProperties)
+      : style
+  ) as CSSProperties | undefined;
   return (
     <button
       ref={ref}
       type="button"
       className={cx('sg-chip', glass && 'sg-glass', className)}
       aria-pressed={pressed}
+      data-tint={pebble}
+      style={nextStyle}
       {...rest}
     />
   );

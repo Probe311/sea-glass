@@ -2,82 +2,72 @@
   "blur": {
     "sm": { "$type": "dimension", "$value": "4px" },
     "md": { "$type": "dimension", "$value": "8px" },
-    "lg": { "$type": "dimension", "$value": "12px" },
-    "xl": { "$type": "dimension", "$value": "20px" }
+    "lg": { "$type": "dimension", "$value": "16px" }
   },
   "glass": {
     "alpha-ground": {
       "$type": "number",
-      "$value": 0.74,
-      "$description": "Translucency on a flat ground",
-      "$extensions": { "seaglass": { "dark": 0.08 } }
+      "$value": { "light": 0.88, "dark": 0.08 }
     },
     "alpha-scene": {
       "$type": "number",
-      "$value": 0.26,
-      "$description": "Translucency over a coloured scene",
-      "$extensions": { "seaglass": { "dark": 0.12 } }
+      "$value": { "light": 0.26, "dark": 0.12 }
     },
     "alpha-text": {
       "$type": "number",
-      "$value": 0.88,
-      "$description": "Opacity floor when text sits on glass over a photograph"
-    },
-    "alpha-reduce": {
-      "$type": "number",
-      "$value": 0.96,
-      "$description": "Opaque fallback for prefers-reduced-transparency"
-    },
-    "lit": {
-      "$type": "number",
-      "$value": 0.95,
-      "$extensions": { "seaglass": { "dark": 0.6 } }
-    },
-    "caustic-edge": {
-      "$type": "dimension",
-      "$value": "70%",
-      "$extensions": { "seaglass": { "dark": "40%" } }
-    },
-    "caustic": {
-      "$type": "dimension",
-      "$value": "55%",
-      "$extensions": { "seaglass": { "dark": "30%" } }
+      "$value": { "light": 0.82, "dark": 0.18 }
     },
     "spec": {
       "$type": "color",
-      "$value": "#FFFFFF80",
-      "$extensions": { "seaglass": { "dark": "#FFFFFF3D" } }
+      "$value": {
+        "light": "rgba(255, 255, 255, 0.5)",
+        "dark": "rgba(255, 255, 255, 0.24)"
+      }
     },
     "sheen": {
       "$type": "color",
-      "$value": "#FFFFFF38",
-      "$extensions": { "seaglass": { "dark": "#FFFFFF14" } }
+      "$value": {
+        "light": "rgba(255, 255, 255, 0.22)",
+        "dark": "rgba(255, 255, 255, 0.08)"
+      }
     },
-    "sparkle": {
+    "lit": {
       "$type": "number",
-      "$value": 0.32,
-      "$description": "Film grain opacity",
-      "$extensions": { "seaglass": { "dark": 0.1 } }
+      "$value": { "light": 0.95, "dark": 0.6 }
     },
-    "well-a": {
+    "caustic-edge": {
       "$type": "number",
-      "$value": 0.5,
-      "$extensions": { "seaglass": { "dark": 0.05 } }
+      "$value": { "light": 0.7, "dark": 0.4 }
     },
-    "well-b": {
+    "caustic": {
       "$type": "number",
-      "$value": 0.85,
-      "$extensions": { "seaglass": { "dark": 0.1 } }
+      "$value": { "light": 0.55, "dark": 0.3 }
     },
     "carved-lo": {
       "$type": "color",
-      "$value": "#225C4E5C",
-      "$extensions": { "seaglass": { "dark": "#0000008C" } }
+      "$value": {
+        "light": "rgba(34, 92, 78, 0.36)",
+        "dark": "rgba(0, 0, 0, 0.55)"
+      }
     },
     "carved-hi": {
       "$type": "color",
-      "$value": "#FFFFFFF2",
-      "$extensions": { "seaglass": { "dark": "#FFFFFF24" } }
+      "$value": {
+        "light": "rgba(255, 255, 255, 0.95)",
+        "dark": "rgba(255, 255, 255, 0.14)"
+      }
+    },
+    "well-a": {
+      "$type": "number",
+      "$value": { "light": 0.5, "dark": 0.05 }
+    },
+    "well-b": {
+      "$type": "number",
+      "$value": { "light": 0.85, "dark": 0.1 }
+    },
+    "sparkle": {
+      "$type": "number",
+      "$value": { "light": 0.08, "dark": 0.04 }
     }
   }
 }

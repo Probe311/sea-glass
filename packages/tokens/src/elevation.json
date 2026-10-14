@@ -11,12 +11,13 @@
     },
     "3": {
       "$type": "shadow",
-      "$value": "0 1px 2px rgb(var(--sg-color-drop-rgb) / 0.1), 0 10px 22px -14px rgb(var(--sg-color-drop-rgb) / 0.4)"
+      "$value": "0 14px 0 -4px rgb(0 0 0 / 0.06), 0 18px 24px -10px rgb(0 0 0 / 0.12)"
     },
     "4": {
       "$type": "shadow",
       "$value": "0 1px 2px rgb(var(--sg-color-drop-rgb) / 0.1), 0 12px 26px -12px rgb(var(--sg-glass-glow-rgb) / 0.6)"
     },
+
     "5": {
       "$type": "shadow",
       "$value": "0 16px 40px -16px rgb(var(--sg-color-drop-rgb) / 0.45)"

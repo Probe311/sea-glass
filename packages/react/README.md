@@ -29,6 +29,8 @@ Peer : `react` / `react-dom` `^19`. npm **0.1.1**.
 | Données / contenu | `Table`, `Quote`, `Media`, `Hero`, `Share`                                                                                               |
 | Chrome            | `LangSwitcher`, `ThemeToggle`, `ConsentBanner`                                                                                           |
 
+`Glass` / `Button` / `Chip` : `tint` (galet) fixe `data-tint` et l’encre `*-ink` pour le texte et les icônes (`currentColor`). `glow` est optionnel — l’ombre table neutre est le défaut.
+
 Hors scope volontaire (identité / auth État) : bloc marque, FranceConnect / ProConnect.
 
 Stories : `pnpm storybook` depuis la racine du monorepo.

@@ -1,10 +1,11 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const repo = join(root, '../..');
 const src = join(root, 'src');
 const dist = join(root, 'dist');
 
@@ -29,4 +30,5 @@ ${parts.join('\n\n')}
 await mkdir(dist, { recursive: true });
 await writeFile(join(dist, 'seaglass.css'), bundled);
 await writeFile(join(dist, 'reset.css'), reset);
-console.log('@sea-glass/css: wrote dist/seaglass.css');
+await copyFile(join(repo, 'assets/noise.svg'), join(dist, 'noise.svg'));
+console.log('@sea-glass/css: wrote dist/seaglass.css + noise.svg');

@@ -19,7 +19,7 @@ if (!existsSync(cssSrc)) {
 copyFileSync(cssSrc, cssDst);
 console.log('sync-demo: wrote demo/seaglass.css');
 
-for (const name of ['logo.svg', 'logo-light.svg']) {
+for (const name of ['logo.svg', 'logo-light.svg', 'noise.svg']) {
   const from = join(root, 'assets', name);
   const to = join(root, 'demo', name);
   if (existsSync(from)) {
