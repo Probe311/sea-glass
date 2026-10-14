@@ -40,7 +40,8 @@ Formule gelée partagée (`.sg-glass` / `.lg`) : dégradé 135°, grain `noise.s
 | ---------- | ----------- | ----- | ---------- | ----------------- | ------------------------------------------------------------ |
 | Button     | ✅          | ✅    | ✅ Boutons | 🟡 Forms overview | 🟡 Manque `href`, `loading`, variantes filled/tonal/outlined |
 | IconButton | ✅ (circle) | ✅    | ✅         | 🟡                | ✅ Aria-label obligatoire                                    |
-| Chip       | ✅          | ✅    | ✅ Puces   | 🟡                | ✅                                                           |
+| Chip       | ✅          | ✅    | ✅ Pilules | 🟡                | ✅                                                           |
+| Listes doc | démo        | —     | ✅ Puces   | —                 | ✅ Puces / chiffrées / cochées (hors `.sg-list`)             |
 | Link       | ✅          | ✅    | ✅         | —                 | ✅                                                           |
 | SkipLink   | ✅          | ✅    | ✅         | —                 | ✅                                                           |
 

@@ -2,7 +2,7 @@ import { forwardRef, useId, useState, type HTMLAttributes, type ReactNode } from
 import { Glass } from './Glass.js';
 import { Button } from './Button.js';
 import { cx } from './cx.js';
-import { JELLY_ALERT_ICONS } from './jelly-icons.js';
+import { GALET_ALERT_ICONS } from './galet-icons.js';
 
 export type Tone = 'info' | 'success' | 'warning' | 'danger' | 'error';
 
@@ -35,7 +35,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       {...rest}
     >
       <span className="sg-alert__icon" aria-hidden>
-        {JELLY_ALERT_ICONS[tone] ?? JELLY_ALERT_ICONS.info}
+        {GALET_ALERT_ICONS[tone] ?? GALET_ALERT_ICONS.info}
       </span>
       <div>
         {title ? <p className="sg-alert__title">{title}</p> : null}

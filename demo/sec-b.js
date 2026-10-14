@@ -42,17 +42,47 @@
       h(D.Usage, { dos: ['Un seul bouton principal par vue.', 'Un libellé court qui annonce l’action.', 'Réserver la forme cercle aux icônes seules, avec un aria-label.'], donts: ['Mettre deux boutons teintés côte à côte.', 'Utiliser le cœur pour autre chose qu’un favori.', 'Réduire la hauteur sous 40 px.'] }));
   };
 
-  /* ---------- Puces ---------- */
+  /* ---------- Puces (listes) ---------- */
+  S.Bullets = function () {
+    return h(D.Section, { id: 'puces', label: 'Composants', title: 'Puces', lead: 'Listes de contenu : puces, chiffres et coches. HTML sémantique (ul / ol), style Sea Glass — distinct des lignes interactives .sg-list.' },
+      h(D.Panel, { tag: 'Aperçu', cap: 'Trois motifs côte à côte.' },
+        h('div', { className: 'doc-lists' },
+          h('div', { className: 'doc-list-block' },
+            h('b', { className: 'doc-list-block__title' }, 'Puces'),
+            h('ul', { className: 'doc-list doc-list--bullet' },
+              h('li', null, 'Galets mats et laiteux'),
+              h('li', null, 'Une seule lumière en haut à gauche'),
+              h('li', null, 'Ombre table neutre'))),
+          h('div', { className: 'doc-list-block' },
+            h('b', { className: 'doc-list-block__title' }, 'Chiffrées'),
+            h('ol', { className: 'doc-list doc-list--number' },
+              h('li', null, 'Poser la forme'),
+              h('li', null, 'Ajouter la teinte'),
+              h('li', null, 'Affiner le liseré'))),
+          h('div', { className: 'doc-list-block' },
+            h('b', { className: 'doc-list-block__title' }, 'Cochées'),
+            h('ul', { className: 'doc-list doc-list--check' },
+              h('li', null, h(Icon, { name: 'check', size: 14 }), 'Contraste mesuré'),
+              h('li', null, h(Icon, { name: 'check', size: 14 }), 'prefers-reduced-motion'),
+              h('li', null, h(Icon, { name: 'check', size: 14 }), 'Encres *-ink'))))),
+      h(D.Specs, { head: ['Motif', 'Markup', 'Repère'], rows: [
+        ['Puces', 'ul.doc-list--bullet', 'Disque seafoam 6 px'],
+        ['Chiffrées', 'ol.doc-list--number', 'Cercle 22 px, Poppins 600'],
+        ['Cochées', 'ul.doc-list--check', 'Icône Galet check 14 px'],
+      ] }));
+  };
+
+  /* ---------- Pilules (chips) ---------- */
   S.Chips = function () {
     var C = UI.Chip;
     function cell(row, col) {
       var shape = row === 'pill' ? 'pill' : 'rect', s = col === 'hover' ? { state: 'hover' } : col === 'focus' ? { state: 'focus' } : col === 'dis' ? { disabled: true } : {};
       return h(C, Object.assign({ shape: shape, defaultPressed: col === 'sel', tabIndex: -1 }, s), row === 'pill' ? 'Givré' : 'Tide pool');
     }
-    return h(D.Section, { id: 'puces', label: 'Composants', title: 'Puces', lead: 'La puce filtre ou choisit une option. Deux formes : pilule pour les filtres cumulables (coche à l’activation), rectangle arrondi pour les options.' },
-      h(D.Panel, { tag: 'Aperçu', cap: 'Puces · clique pour activer ou désactiver.' }, h(D.Stage, null, h(C, { defaultPressed: true }, 'Givré'), h(C, null, 'Mare'), h(C, { shape: 'rect' }, 'Tide pool'), h(C, { shape: 'rect', defaultPressed: true }, 'Récif'))),
+    return h(D.Section, { id: 'pilules', label: 'Composants', title: 'Pilules', lead: 'La pilule filtre ou choisit une option. Deux formes : pilule pour les filtres cumulables (coche à l’activation), rectangle arrondi pour les options.' },
+      h(D.Panel, { tag: 'Aperçu', cap: 'Pilules · clique pour activer ou désactiver.' }, h(D.Stage, null, h(C, { defaultPressed: true }, 'Givré'), h(C, null, 'Mare'), h(C, { shape: 'rect' }, 'Tide pool'), h(C, { shape: 'rect', defaultPressed: true }, 'Récif'))),
       h(D.Panel, { tag: 'États', cap: 'Forme pilule et forme rectangle · coche à l’activation.' }, h(D.Matrix, { corner: 'Forme', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['sel', 'Sélectionnée'], ['focus', 'Focus'], ['dis', 'Désactivée']], rows: [['pill', 'Forme pilule'], ['rect', 'Forme rectangle']], render: cell })),
-      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '36 px', 'Texte Roboto 500, 14 px.'], ['Formes', 'pilule 999 px · rectangle 12 px', 'Deux shapes du composant Puce.'], ['Sélection', 'Teinte seafoam + coche 16 px', 'Le padding gauche se réduit de 6 px.']] }));
+      h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '36 px', 'Texte Roboto 500, 14 px.'], ['Formes', 'pilule 999 px · rectangle 12 px', 'Deux shapes du composant Chip.'], ['Sélection', 'Teinte seafoam + coche 16 px', 'Le padding gauche se réduit de 6 px.']] }));
   };
 
   /* ---------- Interrupteur ---------- */

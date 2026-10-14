@@ -146,8 +146,24 @@
   }
   SG.Pebble = function (p) {
     var s = useMemo(function () { return blobRadii(p.seed); }, [p.seed]);
-    return h('div', { className: 'blob', role: 'img', 'aria-label': p.name,
-      style: { '--bc': 'var(--' + p.color + ')', '--ba': s.a, '--bb': s.b, '--br': s.rot + 'deg', '--bd': s.dur + 's', '--bl': s.delay + 's' } },
-      h('span', { className: 'blob-hi' }));
+    return h('div', {
+      className: 'pebble-blob',
+      role: 'img',
+      'aria-label': p.name,
+      style: {
+        '--bc': 'var(--' + p.color + ')',
+        '--ba': s.a,
+        '--bb': s.b,
+        '--br': s.rot + 'deg',
+        '--bd': s.dur + 's',
+        '--bl': s.delay + 's',
+      },
+    },
+      h('span', { className: 'pebble-blob__layer pebble-blob__frost', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__refract', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__alive', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__rim', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__tint', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__glow', 'aria-hidden': true }));
   };
 })();
