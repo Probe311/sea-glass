@@ -163,11 +163,11 @@
 
     var style = {
       '--lg-r': '999px',
-      '--lg-blur': '8px',
+      '--lg-blur': '16px',
       '--sh-out': on.shadow ? 'var(--table-drop)' : 'none',
     };
     if (!on.sparkle) style['--sparkle'] = 0;
-    if (!on.tint) { style['--glass-a'] = 0.88; style['--tint-a'] = 0.12; }
+    /* Scene glass alpha (--ga-scene) — never force opaque 0.88 */
 
     return h('div', { className: 'fab', ref: rootRef },
       h('div', { className: 'fab-stage' },
@@ -185,7 +185,7 @@
           glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
-          tintA: on.tint ? 0.92 : undefined,
+          tintA: on.tint ? 0.55 : undefined,
           'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
@@ -291,7 +291,7 @@
               className: 'shape-radii__swatch',
               style: { height: 96, '--lg-r': r[1] + 'px' },
               tint: 'seafoam',
-              tintA: 0.92,
+              tintA: 0.55,
               rim: true,
               refractive: true,
               frosted: true,

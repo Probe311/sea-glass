@@ -75,14 +75,21 @@
 .sl { --a: 0; --b: 0.4; --sl-h: 20px; position: relative; height: 52px; cursor: pointer; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
 .sl.marks { height: 70px; }
 
-/* Rail vide : givre translucide (clair) / auge glass (sombre) — pas le modèle creusé des barres */
+/* Rail vide : givre translucide + grain (clair) / auge glass (sombre) */
 .sl-rail {
   position: absolute; left: 0; right: 0; top: 16px; height: var(--sl-h); border-radius: 999px;
-  background: color-mix(in srgb, #fff 72%, var(--ground-2));
+  background: color-mix(in srgb, #fff 55%, transparent);
   border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(var(--shade), 0.06), 0 1px 2px rgba(var(--drop), 0.06);
   -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
   transition: box-shadow 280ms var(--ease);
+  overflow: hidden;
+}
+.sl-rail::after {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: url(noise.svg) center / 128px 128px repeat;
+  mix-blend-mode: overlay; opacity: 0.06;
 }
 :root[data-theme="dark"] .sl-rail {
   background: color-mix(in srgb, #fff 8%, #0c1a18 70%, var(--ground-2));
@@ -239,9 +246,9 @@
 
 /* ---------- Progression : rail frosted (comme curseur), fill jelly sans glow ---------- */
 .pg {
-  --h: 18px; --f: 0.6; --buf: 0;
+  --h: 18px; --f: 0.6; --buf: 0; --lg-r: 999px; --lg-blur: 8px;
   position: relative; height: var(--h); border-radius: 999px; overflow: hidden;
-  background: color-mix(in srgb, #fff 72%, var(--ground-2));
+  background: color-mix(in srgb, #fff 55%, transparent);
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(var(--shade), 0.06);
   -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
@@ -514,12 +521,11 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 /* Case et radio : teal profond → icône / point blanc (currentColor des glyphes Galet) */
 .cb.on .box {
   color: #fff;
-  background: linear-gradient(165deg, #308069, #256B5A);
+  background: linear-gradient(165deg, rgb(48 128 105 / 0.82), rgb(37 107 90 / 0.88));
   --sh-in: none;
   --sh-out: 0 5px 10px -5px rgba(37, 107, 90, 0.7);
-  --sparkle: 0;
+  --sparkle: 0.06;
 }
-.cb.on .box::after { display: none; }
 .cb.on .box > .ico,
 .cb.on .box > .ico path { fill: #fff; color: #fff; }
 .cb .box.carved { --sh-in: inset 0 0 0 1.5px color-mix(in srgb, var(--ink-3) 62%, transparent), inset 1.5px 2px 3px -1px var(--c-lo); }

@@ -168,6 +168,8 @@
           role: 'alert',
           'data-tone': 'success',
           'data-frosted': true,
+          'data-rim': true,
+          'data-refractive': true,
           'data-tint': true,
         },
           h('span', { className: 'sg-alert__icon', 'aria-hidden': true }, h(Icon, { name: 'success', size: 22 })),

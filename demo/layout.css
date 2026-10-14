@@ -196,14 +196,20 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .panel:has(.sl) { overflow: visible; }
 .panel:has(.sl) .panel-body { overflow: visible; }
 
-/* Panneau : aperçu + légende */
+/* Panneau : aperçu + légende — bordure seule, pas de fond opaque sur body */
 .panel {
   --panel-r: 24px;
   border: 1px solid var(--line); border-radius: var(--panel-r);
-  background: color-mix(in srgb, var(--ground-2) 52%, transparent);
+  background: transparent;
   overflow: hidden; min-width: 0;
 }
-.panel-body { padding: clamp(20px, 3vw, 32px); display: grid; gap: 22px; min-width: 0; }
+.panel-body {
+  padding: clamp(20px, 3vw, 32px);
+  display: grid;
+  gap: 22px;
+  min-width: 0;
+  background: transparent;
+}
 .panel-cap {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px;
   padding: 12px 20px; border-top: 1px solid var(--line);
@@ -419,9 +425,19 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .fab-pebble:hover { transform: scale(1.05); }
 .fab-pebble:active { transform: scale(0.97); }
-/* Nu : même matériau Glass, juste plus transparent — pas d’override d’ombre table */
+/* Teinte translucide : laisse passer frost / décor (pas un plein opaque 0.92) */
+.fab-pebble[data-tint] {
+  background:
+    linear-gradient(var(--press, transparent), var(--press, transparent)),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, rgb(var(--tint)) 42%, transparent),
+      rgb(var(--tint) / var(--tint-a, 0.55)) 52%,
+      color-mix(in srgb, rgb(var(--tint)) 58%, transparent)
+    );
+}
+/* Nu : verre scène, pas de forçage opaque */
 .fab-pebble--naked {
-  opacity: 0.92;
   color: transparent;
 }
 .fab-pebble--no-sparkle::after { opacity: 0 !important; }
@@ -656,8 +672,9 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .m3tabs .ind { position: absolute; bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--teal); transition: left 320ms var(--ease), width 320ms var(--ease); }
 :root:not([data-theme="dark"]) .m3tabs .ind { background: #256B5A; }
 
-/* Panneaux : cartes contour Material */
-.panel { --panel-r: 16px; border-radius: var(--panel-r); border-color: var(--outline); background: var(--ground); }
+/* Panneaux : cartes contour Material — body sans fond */
+.panel { --panel-r: 16px; border-radius: var(--panel-r); border-color: var(--outline); background: transparent; }
+.panel-body { background: transparent; }
 .panel-cap {
   background: var(--surf); border-top-color: var(--line);
   border-radius: 0 0 var(--panel-r) var(--panel-r); color: var(--ink-2);
@@ -696,13 +713,13 @@ footer.end { border-top-color: var(--outline); }
 .panel.sg-scene,
 .panel.scene.sg-scene {
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--ground-2) 52%, transparent);
+  background: transparent;
   padding: 0;
   border-radius: var(--panel-r);
 }
 .panel.scene .panel-body,
 .panel.sg-scene .panel-body {
-  background: none;
+  background: transparent;
   padding: clamp(20px, 3vw, 32px);
 }
 .panel.scene .panel-cap,

@@ -61,7 +61,8 @@
     --sg-glass-a: var(--sg-glass-alpha-text);
   }
 
-  /* Frost only above a scene — a flat ground does not show blur and it is expensive. */
+  /* Frosted: scène ou surface .sg-glass--over (blur coûteux hors décor). */
+  .sg-glass[data-frosted],
   .sg-scene .sg-glass[data-frosted],
   .sg-glass.sg-glass--over[data-frosted] {
     -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.4);
@@ -105,15 +106,15 @@
     opacity: 1;
   }
 
-  /* Tint: diagonal jelly — light TL → pebble → slightly darker BR */
+  /* Tint: gelée diagonale translucide — TL → galet → BR */
   .sg-glass[data-tint] {
     background:
       linear-gradient(var(--sg-glass-press), var(--sg-glass-press)),
       linear-gradient(
         135deg,
-        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 55%, #fff),
+        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 42%, transparent),
         rgb(var(--sg-glass-tint-rgb) / var(--sg-glass-tint-a)) 52%,
-        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 88%, #000)
+        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 58%, transparent)
       );
   }
 
@@ -184,11 +185,13 @@
     opacity: var(--sg-glass-sparkle);
   }
 
+  /* Creux : ombre inset + grain un peu plus léger */
   .sg-glass.sg-glass--carved {
     --sg-shadow-in:
       inset 1.5px 2px 3px -1px var(--sg-glass-carved-lo),
       inset -1px -1.5px 1px -1px var(--sg-glass-carved-hi);
     --sg-shadow-out: 0 1px 0 var(--sg-glass-carved-hi);
+    --sg-glass-sparkle: 0.05;
   }
 
   .sg-glass.sg-glass--carved:not([data-tint]) {
@@ -197,10 +200,6 @@
       rgb(255 255 255 / var(--sg-glass-well-a)),
       rgb(255 255 255 / var(--sg-glass-well-b))
     );
-  }
-
-  .sg-glass.sg-glass--carved::after {
-    display: none;
   }
 
   .sg-glass[data-alive]:hover {

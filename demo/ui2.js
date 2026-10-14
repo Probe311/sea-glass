@@ -10,11 +10,12 @@
       h('label', { htmlFor: id }, p.label),
       h('div', { className: cls('shell-in', p.disabled && 'dis', p.state && 'is-' + p.state) },
         h(Glass, {
-          className: 'field-shell',
+          className: 'field-shell carved',
           'aria-hidden': true,
-          refractive: false,
+          refractive: true,
           glow: false,
-          frosted: false,
+          frosted: true,
+          rim: true,
           alive: false,
           tint: p.invalid ? 'ruby' : undefined,
           tintA: p.invalid ? 0.35 : undefined,
@@ -44,7 +45,7 @@
       return function () { if (ro) ro.disconnect(); };
     }, []);
     return h(Glass, { as: 'nav', className: 'navbar', innerRef: box, 'aria-label': 'Navigation principale', rim: true, frosted: true, refractive: true, glow: false },
-      h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pill.left + 'px,0,0)', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, rim: true, 'aria-hidden': true }),
+      h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pill.left + 'px,0,0)', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.55, frosted: true, refractive: true, alive: false, glow: false, rim: true, 'aria-hidden': true }),
       items.map(function (it, i) { return h('button', { key: it[0], type: 'button', className: 'nb', 'aria-current': i === cur ? 'page' : undefined, onClick: function () { set(i); } }, h(Icon, { name: it[0] }), it[1]); }));
   };
 
@@ -66,7 +67,7 @@
       as: 'span',
       className: 'badge',
       tint: p.tint,
-      tintA: 0.92,
+      tintA: 0.55,
       rim: true,
       refractive: true,
       frosted: true,

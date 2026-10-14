@@ -115,8 +115,10 @@
 }
 .scene .lg { --glass-a: var(--ga-scene); }
 
-/* 1 · frosted */
-.scene .lg[data-frosted], .lg.over[data-frosted] {
+/* 1 · frosted — tous les Glass data-frosted (scène ou surface .over) */
+.lg[data-frosted],
+.scene .lg[data-frosted],
+.lg.over[data-frosted] {
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(1.4);
   backdrop-filter: blur(var(--lg-blur)) saturate(1.4);
 }
@@ -134,14 +136,14 @@
 }
 .lg[data-rim]::before { opacity: 1; }
 
-/* 5 · tint : gelée diagonale + encre du galet */
+/* 5 · tint : gelée diagonale translucide + encre du galet */
 .lg[data-tint] {
   background:
     linear-gradient(var(--press), var(--press)),
     linear-gradient(135deg,
-      color-mix(in srgb, rgb(var(--tint)) 55%, #fff),
+      color-mix(in srgb, rgb(var(--tint)) 42%, transparent),
       rgb(var(--tint) / var(--tint-a)) 52%,
-      color-mix(in srgb, rgb(var(--tint)) 88%, #000));
+      color-mix(in srgb, rgb(var(--tint)) 58%, transparent));
 }
 .lg[data-tint="seafoam"] { color: var(--seafoam-ink); }
 .lg[data-tint="kelly"] { color: var(--kelly-ink); }
@@ -176,10 +178,15 @@
   --sh-in: inset 0 2px 1px rgb(255 255 255 / 0.55), inset 0 -2px 4px rgb(0 0 0 / 0.05);
 }
 
-/* Creux */
-.lg.carved { --sh-in: inset 1.5px 2px 3px -1px var(--c-lo), inset -1px -1.5px 1px -1px var(--c-hi); --sh-out: 0 1px 0 var(--c-hi); }
-.lg.carved:not([data-tint]) { background: var(--well); }
-.lg.carved::after { display: none; }
+/* Creux — garde le grain (givre), sparkle un peu plus léger */
+.lg.carved {
+  --sh-in: inset 1.5px 2px 3px -1px var(--c-lo), inset -1px -1.5px 1px -1px var(--c-hi);
+  --sh-out: 0 1px 0 var(--c-hi);
+  --sparkle: 0.05;
+}
+.lg.carved:not([data-tint]) {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0.72));
+}
 
 .lg > :where(*) { position: relative; z-index: 4; }
 

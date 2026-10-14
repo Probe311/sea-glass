@@ -117,15 +117,14 @@
         scene([
           h('div', { className: 'sg-combobox' },
             h('label', null, 'Galet'),
-            h('div', {
-              className: 'sg-glass sg-combobox__shell',
-              'data-carved': true,
+            h('div', Object.assign({
+              className: 'sg-glass sg-glass--carved sg-combobox__shell',
               'data-open': open || undefined,
               onMouseDown: function (e) {
                 if (e.target.closest && e.target.closest('.sg-combobox__control')) return;
                 toggleOpen(e);
               },
-            },
+            }, glassAttrs()),
               h('input', {
                 className: 'sg-combobox__control',
                 role: 'combobox',
@@ -172,7 +171,7 @@
               }))),
           h('div', { className: 'sg-field sg-password' },
             h('label', null, 'Mot de passe'),
-            h('div', { className: 'sg-glass sg-password', 'data-carved': true, 'data-rim': true, style: { position: 'relative' } },
+            h('div', Object.assign({ className: 'sg-glass sg-glass--carved sg-password', style: { position: 'relative' } }, glassAttrs()),
               h('input', { type: 'password', className: 'sg-field__input', defaultValue: '••••••••', 'aria-label': 'Mot de passe' }))),
           h('div', Object.assign({ className: 'sg-upload sg-glass' }, glassAttrs()),
             h('label', null, 'Dépose un fichier ou parcourir'),
