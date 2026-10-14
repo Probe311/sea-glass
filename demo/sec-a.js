@@ -9,12 +9,23 @@
     ['Principes', [['fabrication', 'Fabrication']]],
     ['Fondations', [['couleurs', 'Couleurs'], ['typo', 'Typographie'], ['forme', 'Forme et espace'], ['mouvement', 'Mouvement'], ['icones', 'Icônes']]],
     ['Composants', [
-      ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
-      ['curseur', 'Curseur et progression'], ['onglets', 'Onglets'], ['champs', 'Champs et recherche'],
-      ['listes', 'Listes et saisie avancée'], ['navigation', 'Navigation'], ['chrome', 'Chrome de page'],
-      ['alertes', 'Alertes et toasts'], ['accordeon', 'Accordéon'], ['overlays', 'Modale'],
-      ['cartes', 'Cartes et badges'], ['donnees', 'Données et contenu'],
+      ['accordeon', 'Accordéon'],
+      ['alertes', 'Alertes et toasts'],
+      ['boutons', 'Boutons'],
+      ['cartes', 'Cartes et badges'],
+      ['cases', 'Cases et radios'],
+      ['champs', 'Champs et recherche'],
+      ['chrome', 'Chrome de page'],
+      ['curseur', 'Curseur et progression'],
+      ['donnees', 'Données et contenu'],
+      ['interrupteur', 'Interrupteur'],
+      ['listes', 'Listes'],
+      ['overlays', 'Modale'],
+      ['navigation', 'Navigation'],
+      ['onglets', 'Onglets'],
       ['prefs', 'Préférences'],
+      ['puces', 'Puces'],
+      ['saisie', 'Saisie avancée'],
     ]],
     ['Qualité', [['contraste', 'Contraste mesuré'], ['tokens', 'Tokens et code']]]
   ];
@@ -265,45 +276,33 @@
 
   /* ---------- Mouvement ---------- */
   S.Motion = function () {
-    var goSt = useState(false), go = goSt[0], setGo = goSt[1];
-    var items = [
-      ['Rapide', '120 ms', 'Appui, case cochée, reflet', 120],
-      ['Base', '200 ms', 'Survol, ombres, halo', 200],
-      ['Souple', '380 ms', 'Interrupteur, onglets, curseur', 380],
+    var tracks = [
+      { label: 'Rapide', token: '120ms', hint: 'Appui, case cochée, reflet', cycle: '1.4s', ease: 'var(--ease)', anim: 'mo-track' },
+      { label: 'Base', token: '200ms', hint: 'Survol, ombres, halo', cycle: '2.2s', ease: 'var(--ease)', anim: 'mo-track' },
+      { label: 'Souple', token: '380ms', hint: 'Interrupteur, onglets, curseur', cycle: '3.4s', ease: 'var(--ease)', anim: 'mo-track' },
+      { label: 'Spring', token: 'spring', hint: 'Poignée, galet d’onglet, rebond', cycle: '2.8s', ease: 'ease-in-out', anim: 'mo-track-spring' },
     ];
-    useEffect(function () {
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      /* Hold assez long pour que la bille à 380 ms finisse avant le demi-tour. */
-      var SLOWEST = 380, HOLD = 720, t;
-      var on = false;
-      function tick() {
-        on = !on;
-        setGo(on);
-        t = setTimeout(tick, SLOWEST + HOLD);
-      }
-      t = setTimeout(tick, 400);
-      return function () { clearTimeout(t); };
-    }, []);
-    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Trois durées distinctes (120 · 200 · 380 ms). Tout se calme avec prefers-reduced-motion.' },
-      h(D.Panel, { tag: 'Durées', cap: 'ease standard · trois vitesses de trajet visibles côte à côte' },
-        h('div', { className: 'g3' }, items.map(function (m) {
-          return h(Glass, {
-            key: m[0],
-            className: 'mo' + (go ? ' is-go' : ''),
-            style: { '--d': m[3] + 'ms' },
-            rim: true,
-            frosted: false,
-            refractive: false,
-            glow: false,
-            alive: false,
-          },
-            h('b', { className: 'mo__title' }, m[0] + ' · ' + m[1]),
-            h('span', { className: 'mo__hint' }, m[2]),
-            h('div', { className: 'mo-track' }, h('span', { className: 'mo-ball' })));
+    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Trois durées (120 · 200 · 380 ms) et un spring. Tout se calme avec prefers-reduced-motion.' },
+      h(D.Panel, { tag: 'Durées', cap: 'cubic-bezier(0.2, 0, 0, 1) · spring · pistes sans carte' },
+        h('div', { className: 'mo-list' }, tracks.map(function (t) {
+          return h('div', { key: t.token, className: 'mo' },
+            h('div', { className: 'mo__head' },
+              h('b', { className: 'mo__title' }, t.label),
+              h('span', { className: 'mo__token mono' }, t.token)),
+            h('span', { className: 'mo__hint' }, t.hint),
+            h('div', { className: 'mo-track' },
+              h('span', {
+                className: 'mo-ball',
+                style: { animation: t.anim + ' ' + t.cycle + ' ' + t.ease + ' infinite' },
+                'aria-hidden': true,
+              },
+                h('span', { className: 'mo-ball__frost' }),
+                h('span', { className: 'mo-ball__tint' }),
+                h('span', { className: 'mo-ball__rim' }))));
         }))));
   };
 
-  /* ---------- Icônes Jelly ---------- */
+  /* ---------- Icônes Galet ---------- */
   S.Icons = function () {
     var catalog = window.SG_ICON_CATALOG || [];
     var aliases = window.SG_ICON_ALIAS || {};
@@ -314,7 +313,7 @@
     function copyName(name) {
       SG.copy(name, '« ' + name + ' » copié');
     }
-    return h(D.Section, { id: 'icones', label: 'Fondations', title: 'Icônes Jelly', lead: 'Font Awesome jelly-regular complet (' + catalog.length + '), factorisé dans demo/icons/jelly. Sprite externe icons/sprite.svg · aliases courts pour la démo (search → magnifying-glass). Clique une tuile pour copier le nom FA.' },
+    return h(D.Section, { id: 'icones', label: 'Fondations', title: 'Icônes Galet', lead: 'Jeu Galet complet (' + catalog.length + '), dans demo/icons/galet. Sprite externe icons/sprite.svg · aliases courts pour la démo (search → magnifying-glass). Clique une tuile pour copier le nom.' },
       h(D.Panel, { tag: 'Catalogue', cap: filtered.length + ' / ' + catalog.length + ' · viewBox 560 · currentColor' },
         h('label', { className: 'icon-filter' },
           h(Icon, { name: 'search', size: 18 }),
@@ -335,7 +334,7 @@
             h('span', { className: 'icon-tile__glyph', 'aria-hidden': true }, h(Icon, { name: name, size: 26 })),
             h('span', { className: 'icon-tile__name mono' }, name));
         }))),
-      aliasRows.length ? h(D.Panel, { tag: 'Alias démo', cap: 'Raccourcis SG.Icon → nom FA' },
+      aliasRows.length ? h(D.Panel, { tag: 'Alias démo', cap: 'Raccourcis SG.Icon → nom Galet' },
         h('div', { className: 'icon-grid' }, aliasRows.map(function (it) {
           return h('button', {
             key: it[0], type: 'button', className: 'icon-tile',
@@ -348,7 +347,7 @@
         }))) : null,
       h(D.Sub, { title: 'Utilisation' },
         h(D.Code, { text: [
-          '/* Démo — alias ou nom FA */',
+          '/* Démo — alias ou nom Galet */',
           'h(Icon, { name: \'search\', size: 20 })',
           'h(Icon, { name: \'magnifying-glass\', size: 20 })',
           '',
@@ -358,15 +357,15 @@
           '</svg>',
           '',
           '/* Fichier isolé */',
-          '<img src="icons/jelly/magnifying-glass.svg" alt="" width="20" height="20" />',
+          '<img src="icons/galet/magnifying-glass.svg" alt="" width="20" height="20" />',
           '',
-          'pnpm icons:jelly',
+          'pnpm icons:galet',
         ].join('\n') })),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
-        ['API', 'SG.Icon { name, size }', 'alias ou nom FA'],
-        ['Sprite', 'icons/sprite.svg#i-{fa}', catalog.length + ' symboles'],
-        ['Fichiers', 'demo/icons/jelly/{fa}.svg', '365 jelly-regular'],
-        ['Source', 'FA jelly-regular', 'pnpm icons:jelly · SG_JELLY_DIR'],
+        ['API', 'SG.Icon { name, size }', 'alias ou nom Galet'],
+        ['Sprite', 'icons/sprite.svg#i-{name}', catalog.length + ' symboles'],
+        ['Fichiers', 'demo/icons/galet/{name}.svg', '365 glyphes'],
+        ['Regen', 'pnpm icons:galet', 'SG_GALET_DIR optionnel'],
         ['Couleur', 'currentColor / fill', 'Hérite de color CSS'],
       ] }));
   };

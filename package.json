@@ -34,7 +34,7 @@
     "sync:version": "node ./scripts/sync-version.mjs",
     "sync:demo": "node ./scripts/sync-demo.mjs",
     "demo:prepare": "pnpm build && pnpm sync:version && pnpm sync:demo",
-    "icons:jelly": "node ./scripts/inject-jelly-sprite.mjs",
+    "icons:galet": "node ./scripts/inject-galet-sprite.mjs",
     "release:dry": "node ./scripts/release-dry.mjs",
     "prepare": "husky || true && node ./scripts/sync-version.mjs"
   },

@@ -109,7 +109,7 @@
       setOpen(!open);
       setTimeout(function () { skipBlur.current = false; }, 0);
     }
-    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes et saisie avancée', lead: 'Combobox filtrable (chevron animé), champ mot de passe et dépôt de fichiers — au-delà du champ texte simple.' },
+    return h(D.Section, { id: 'saisie', label: 'Composants', title: 'Saisie avancée', lead: 'Combobox filtrable (chevron animé), champ mot de passe et dépôt de fichiers — au-delà du champ texte simple.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Combobox, mot de passe, dépôt de fichiers.' },
         scene([
           h('div', { className: 'sg-combobox' },

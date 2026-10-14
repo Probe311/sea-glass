@@ -41,6 +41,7 @@ Formule gelée partagée (`.sg-glass` / `.lg`) : dégradé 135°, grain `noise.s
 | Button     | ✅          | ✅    | ✅ Boutons | 🟡 Forms overview | 🟡 Manque `href`, `loading`, variantes filled/tonal/outlined |
 | IconButton | ✅ (circle) | ✅    | ✅         | 🟡                | ✅ Aria-label obligatoire                                    |
 | Chip       | ✅          | ✅    | ✅ Puces   | 🟡                | ✅                                                           |
+| Listes doc | démo        | —     | ✅ Listes  | —                 | ✅ À puces / chiffrées / cochées (hors `.sg-list`)           |
 | Link       | ✅          | ✅    | ✅         | —                 | ✅                                                           |
 | SkipLink   | ✅          | ✅    | ✅         | —                 | ✅                                                           |
 

@@ -6,7 +6,7 @@
   /* ---------- Champs et recherche ---------- */
   S.Fields = function () {
     var F = UI.Field;
-    return h(D.Section, { id: 'champs', label: 'Composants', title: 'Champs et recherche', lead: 'Le champ est un creux de verre : la matière est enfoncée, la saisie reste sur fond clair. La recherche est un Givre en pilule, pensé pour reposer sur une image.' },
+    return h(D.Section, { id: 'champs', label: 'Composants', title: 'Champs et recherche', lead: 'Champ et recherche partagent la même surface verre posée (comme un bouton au repos). Le champ est un rectangle 16 px ; la recherche reste une pilule plus haute, prête à reposer sur une image.' },
       h(D.Panel, { tag: 'Champs', cap: 'entrée, survol, focus, erreur et désactivé.' },
         h('div', { className: 'fields-grid' },
           h(F, { label: 'Nom de la crique', placeholder: 'Crique des Sirènes', help: 'Visible dans ta collection.' }),
@@ -20,9 +20,9 @@
 
   /* ---------- Navigation ---------- */
   S.Nav = function () {
-    return h(D.Section, { id: 'navigation', label: 'Composants', title: 'Navigation', lead: 'La barre de navigation est un Givre en pilule. L’entrée active est un galet seafoam qui glisse d’un item à l’autre.' },
+    return h(D.Section, { id: 'navigation', label: 'Composants', title: 'Navigation', lead: 'La barre est un Givre en pilule. L’entrée active est un galet seafoam sans ombre portée : icône à gauche du libellé, visible seulement sur l’actif.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Quatre destinations au maximum.' }, h(UI.NavBar)),
-      h(D.Usage, { dos: ['Quatre entrées au plus, avec icône et libellé.', 'Placer la barre sur une image ou un dégradé.'], donts: ['Cacher les libellés.', 'Placer la barre sur un fond uni : le Givre n’aurait aucun effet.'] }));
+      h(D.Usage, { dos: ['Quatre entrées au plus.', 'Icône uniquement sur l’item actif, à gauche du libellé.', 'Placer la barre sur une image ou un dégradé.'], donts: ['Cacher les libellés.', 'Empiler icône au-dessus du texte.', 'Ombre portée sur le galet actif.'] }));
   };
 
   /* ---------- Cartes et badges ---------- */
@@ -185,9 +185,9 @@
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
         h('main', { className: 'main' },
           h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
-          h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
-          h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
-          h(S.Cards), h(S.DataDoc), h(S.PrefsDoc),
+          h(S.AccordionDoc), h(S.Alerts), h(S.Buttons), h(S.Cards), h(S.Checks), h(S.Fields),
+          h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
+          h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
           h(S.Contrast), h(S.Tokens),
           h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')), h('span', null, 'Matière : frosted, refractive, alive, rim, tint, glow · packages .sg-*')))),
       h(Toast));

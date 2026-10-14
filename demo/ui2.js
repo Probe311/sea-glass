@@ -9,7 +9,16 @@
     return h('div', { className: 'field' },
       h('label', { htmlFor: id }, p.label),
       h('div', { className: cls('shell-in', p.disabled && 'dis', p.state && 'is-' + p.state) },
-        h(Glass, { className: 'carved', 'aria-hidden': true, refractive: false, glow: !!p.invalid, tint: p.invalid ? 'ruby' : undefined, tintA: 0.28, alive: false }),
+        h(Glass, {
+          className: 'field-shell',
+          'aria-hidden': true,
+          refractive: false,
+          glow: false,
+          frosted: false,
+          alive: false,
+          tint: p.invalid ? 'ruby' : undefined,
+          tintA: p.invalid ? 0.35 : undefined,
+        }),
         h('input', { id: id, type: 'text', placeholder: p.placeholder, defaultValue: p.value, disabled: p.disabled, 'aria-invalid': p.invalid ? 'true' : undefined, 'aria-describedby': p.help ? id + 'h' : undefined })),
       p.help && h('span', { id: id + 'h', className: cls('help', p.invalid && 'err') }, p.help));
   };
