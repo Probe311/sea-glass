@@ -109,7 +109,7 @@
       setOpen(!open);
       setTimeout(function () { skipBlur.current = false; }, 0);
     }
-    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes déroulantes', lead: 'Combobox filtrable custom (chevron animé), champ mot de passe, dépôt de fichiers.' },
+    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes et saisie avancée', lead: 'Combobox filtrable (chevron animé), champ mot de passe et dépôt de fichiers — au-delà du champ texte simple.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Combobox, mot de passe, dépôt de fichiers.' },
         scene([
           h('div', { className: 'sg-combobox' },
@@ -180,7 +180,7 @@
   };
 
   S.ChromeDoc = function () {
-    return h(D.Section, { id: 'chrome', label: 'Composants', title: 'En-tête, pied et navigation', lead: 'Identification du site, navigation principale, latérale, fil d’Ariane, pagination et étapes.' },
+    return h(D.Section, { id: 'chrome', label: 'Composants', title: 'Chrome de page', lead: 'Cadre de page : skip link, en-tête, fil d’Ariane, stepper, pagination et pied — distinct de la barre de navigation mobile.' },
       h(D.Panel, { scene: true, tag: 'Header', cap: 'Skip link, marque, nav, fil d’Ariane.' },
         scene([
           h('a', { className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, 'Aller au contenu'),

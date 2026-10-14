@@ -333,10 +333,41 @@
 }
 
 /* ---------- Mouvement et contraste ---------- */
-.mo { padding: 18px; display: grid; gap: 12px; --lg-r: 16px; }
-.mo .track { height: 42px; position: relative; --lg-r: 999px; --lg-blur: 4px; }
-.mo .ball { position: absolute; z-index: 4; top: 5px; left: 5px; width: 32px; height: 32px; border-radius: 50%; background: radial-gradient(circle at 62% 68%, var(--teal-hi), var(--teal) 78%); box-shadow: inset 2px 3px 4px rgba(5, 55, 43, 0.45), 0 1px 1px rgba(255, 255, 255, 0.6); transition: transform var(--d, 200ms) var(--ease); }
-.mo.go .ball { transform: translateX(var(--dist, 170px)); }
+/* Mouvement : cartes parent = verre rimmé ; trajet = --d (120 / 200 / 380) */
+.mo {
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+  --lg-r: 16px;
+  --dist: 170px;
+}
+.mo__title { font-weight: 500; color: var(--ink); }
+.mo__hint { font-size: 12px; color: var(--ink-2); }
+.mo-track {
+  position: relative;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--well);
+  box-shadow: var(--carved);
+  overflow: hidden;
+}
+.mo-ball {
+  position: absolute;
+  z-index: 4;
+  top: 5px;
+  left: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 62% 68%, var(--teal-hi), var(--teal) 78%);
+  box-shadow: inset 2px 3px 4px rgba(5, 55, 43, 0.45), 0 1px 1px rgba(255, 255, 255, 0.6);
+  transform: translateX(0);
+  transition: transform var(--d, 200ms) var(--ease);
+}
+.mo.is-go .mo-ball { transform: translateX(var(--dist)); }
+@media (prefers-reduced-motion: reduce) {
+  .mo-ball { transition: none !important; }
+}
 table.ct { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
 table.ct th { text-align: left; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; padding: 0 16px 10px 0; }
 table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vertical-align: middle; }
