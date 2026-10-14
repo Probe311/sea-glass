@@ -365,48 +365,28 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   gap: clamp(28px, 4vw, 48px);
   grid-template-columns: minmax(0, 1.15fr) minmax(160px, 0.85fr);
   align-items: center;
-  min-height: 320px;
+  min-height: 280px;
 }
 @media (max-width: 720px) {
   .fab { grid-template-columns: 1fr; min-height: 0; }
 }
 .fab-stage {
-  position: relative;
   display: grid;
   place-items: center;
-  min-height: 300px;
-  padding: 28px;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.fab-grid {
-  position: absolute;
-  inset: 12%;
-  border-radius: 50%;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
-  background-size: 18px 18px;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 72%);
-  mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 72%);
-  pointer-events: none;
+  min-height: 260px;
+  padding: 8px 0;
 }
 .fab-pebble {
-  position: relative;
-  z-index: 1;
-  width: min(72%, 260px);
+  width: min(70%, 240px);
   aspect-ratio: 1.18 / 1;
   transition:
     background 500ms var(--ease),
     box-shadow 500ms var(--ease),
-    opacity 500ms var(--ease),
-    filter 500ms var(--ease);
+    opacity 500ms var(--ease);
 }
+/* Nu : même matériau Glass, juste plus transparent — pas d’override d’ombre table */
 .fab-pebble--naked {
-  --sh-in: inset 0 0 0 0 transparent;
-  --sh-out: none;
-  opacity: 0.55;
-  background: rgb(255 255 255 / 0.08) !important;
+  opacity: 0.7;
 }
 .fab-pebble--no-sparkle::after { opacity: 0 !important; }
 .fab-list {
@@ -443,6 +423,24 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 @media (prefers-reduced-motion: reduce) {
   .fab-pebble, .fab-item, .fab-dot { transition: none; }
 }
+
+/* Forme : libellés lisibles en light (plus de blanc sur fond clair) */
+.shape-radii {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-items: start;
+}
+.shape-radii__item {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--ink);
+  align-content: start;
+}
+.shape-radii__name { font-weight: 500; color: var(--ink); }
+.shape-radii__desc { color: var(--ink-2); }
+.shape-radii__swatch { width: 100%; }
 
 /* Blobs : patates arrondies, animées doucement par morphing du border-radius */
 .blob { position: relative; aspect-ratio: 1.12 / 1; background: linear-gradient(160deg, color-mix(in srgb, var(--bc) 86%, #fff), var(--bc) 55%, color-mix(in srgb, var(--bc) 90%, #000));

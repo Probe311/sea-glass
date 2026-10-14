@@ -138,8 +138,7 @@
     };
 
     return h('div', { className: 'fab', ref: rootRef },
-      h('div', { className: 'fab-stage scene sg-scene', 'aria-hidden': true },
-        h('div', { className: 'fab-grid' }),
+      h('div', { className: 'fab-stage', 'aria-hidden': true },
         h(Glass, {
           className: 'fab-pebble'
             + (step === 0 ? ' fab-pebble--naked' : '')
@@ -150,11 +149,11 @@
           glow: on.glow,
           alive: false,
           tint: on.tint ? 'seafoam' : undefined,
-          tintA: on.tint ? 0.72 : undefined,
+          tintA: on.tint ? 0.92 : undefined,
           style: Object.assign(
-            { '--lg-r': FAB_BLOB },
+            { '--lg-r': FAB_BLOB, '--lg-blur': '8px' },
             on.sparkle ? {} : { '--sparkle': 0 },
-            on.tint ? {} : { '--glass-a': 0.14 }
+            on.tint ? {} : { '--glass-a': 0.55, '--tint-a': 0.2 }
           ),
         })),
       h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
@@ -245,9 +244,21 @@
     var radii = [['xs', 8, 'Petits éléments'], ['md', 12, 'Puces rectangulaires, info-bulles'], ['lg', 16, 'Champs, panneaux'], ['xl', 28, 'Cartes'], ['pill', 999, 'Boutons, onglets, interrupteur']];
     var sp = [4, 8, 12, 16, 24, 32, 48, 72];
     return h(D.Section, { id: 'forme', label: 'Fondations', title: 'Forme et espace', lead: 'Grille de 4 px, paddings en multiples de 8. Aucun angle vif : les contrôles sont des pilules, des rectangles très arrondis ou des cercles.' },
-      h(D.Panel, { scene: true, tag: 'Rayons', cap: 'Un rayon par rôle, jamais de coin droit.' },
-        h('div', { style: { display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', alignItems: 'start' } }, radii.map(function (r) {
-          return h('div', { key: r[0], style: { display: 'grid', gap: 6, fontSize: 13, color: '#fff', textShadow: '0 1px 6px rgba(0,30,26,.55)', alignContent: 'start' } }, h(Glass, { style: { height: 96, '--lg-r': r[1] + 'px', '--gl': '16px' }, tint: 'seafoam', tintA: 0.4, refractive: false }), h('b', { style: { fontWeight: 500 } }, r[0] + ' · ' + (r[1] === 999 ? 'pilule' : r[1] + ' px')), h('span', null, r[2]));
+      h(D.Panel, { tag: 'Rayons', cap: 'Un rayon par rôle, jamais de coin droit.' },
+        h('div', { className: 'shape-radii' }, radii.map(function (r) {
+          return h('div', { key: r[0], className: 'shape-radii__item' },
+            h(Glass, {
+              className: 'shape-radii__swatch',
+              style: { height: 96, '--lg-r': r[1] + 'px' },
+              tint: 'seafoam',
+              tintA: 0.92,
+              rim: true,
+              refractive: false,
+              glow: false,
+              alive: false,
+            }),
+            h('b', { className: 'shape-radii__name' }, r[0] + ' · ' + (r[1] === 999 ? 'pilule' : r[1] + ' px')),
+            h('span', { className: 'shape-radii__desc' }, r[2]));
         }))),
       h(D.Sub, { title: 'Espacement' }, h(D.Specs, { head: ['Token', 'Valeur', 'Échelle'], rows: sp.map(function (s, i) { return ['--s' + (i + 1), s + ' px', h('i', { style: { display: 'block', height: 12, width: s * 2, borderRadius: 6, background: 'var(--seafoam)', boxShadow: 'inset 0 1px 1px rgba(255,255,255,.8)' } })]; }) })));
   };
