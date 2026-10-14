@@ -381,22 +381,35 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   .fab { grid-template-columns: 1fr; min-height: 0; }
 }
 .fab-stage {
+  position: relative;
   display: grid;
   place-items: center;
-  min-height: 260px;
-  padding: 8px 0;
+  min-height: 280px;
+  padding: 24px 16px;
+  border-radius: 20px;
+  /* Décor local (pas le panel) : lit frost / réfraction / givre */
+  background:
+    radial-gradient(120% 80% at 18% 22%, color-mix(in srgb, var(--aqua) 35%, transparent), transparent 55%),
+    radial-gradient(90% 70% at 88% 78%, color-mix(in srgb, var(--seafoam) 42%, transparent), transparent 58%),
+    radial-gradient(70% 60% at 55% 40%, color-mix(in srgb, var(--cobalt) 18%, transparent), transparent 62%),
+    color-mix(in srgb, var(--ground-2) 40%, var(--ground));
+  overflow: hidden;
 }
 .fab-pebble {
-  width: min(88%, 220px);
-  height: 52px;
-  padding-inline: 28px;
+  --gl: 13px;
+  position: relative;
+  z-index: 1;
+  width: min(92%, 260px);
+  height: 56px;
+  padding-inline: 32px;
   border: 0;
   cursor: pointer;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font: 600 16px/1 var(--font-display);
+  gap: 8px;
+  font: 600 18px/1 var(--font-display);
   color: var(--ink);
   transition:
     background 500ms var(--ease),
@@ -427,9 +440,13 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   gap: 14px;
   font: 500 18px/1.2 var(--font-display);
   color: color-mix(in srgb, var(--ink) 28%, transparent);
-  transition: color 400ms var(--ease);
+  transition: color 400ms var(--ease), opacity 400ms var(--ease);
 }
 .fab-item.is-on { color: var(--ink); }
+.fab-item.is-current {
+  color: var(--ink);
+  font-weight: 600;
+}
 .fab-step {
   display: flex;
   align-items: center;
@@ -451,12 +468,20 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--ink) 22%, transparent);
   background: transparent;
-  transition: background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease);
+  transition: background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease), transform 400ms var(--spring);
 }
 .fab-item.is-on .fab-dot {
   border-color: color-mix(in srgb, var(--seafoam) 70%, var(--seafoam-ink));
   background: color-mix(in srgb, var(--seafoam) 88%, transparent);
   box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.55);
+}
+.fab-item.is-current .fab-dot {
+  transform: scale(1.2);
+  border-color: var(--seafoam-ink);
+  background: var(--seafoam);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.55),
+    0 0 0 3px color-mix(in srgb, var(--seafoam) 45%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
   .fab-pebble, .fab-item, .fab-dot { transition: none; }
@@ -664,31 +689,33 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 pre.code { border-radius: 16px; border-color: var(--outline); }
 footer.end { border-top-color: var(--outline); }
 
-/* Scène : wash seafoam (package .scene/.sg-scene apporte aussi le wash ; panel annule le padding) */
-.panel.scene {
-  border: 0;
-  background: color-mix(in srgb, var(--seafoam) 18%, var(--ground));
+/* Scène : même chrome que Couleurs (bordure grise, pas de wash mint).
+   .scene / .sg-scene restent pour frost/alpha enfants — pas pour peindre le panel.
+   Spécificité > packages .sg-scene { background seafoam… }. */
+.panel.scene,
+.panel.sg-scene,
+.panel.scene.sg-scene {
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ground-2) 52%, transparent);
   padding: 0;
+  border-radius: var(--panel-r);
 }
-:root[data-theme="dark"] .panel.scene {
-  background: color-mix(in srgb, var(--seafoam) 10%, var(--ground));
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .panel.scene {
-    background: color-mix(in srgb, var(--seafoam) 10%, var(--ground));
-  }
-}
-.panel.scene .panel-body {
+.panel.scene .panel-body,
+.panel.sg-scene .panel-body {
   background: none;
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(20px, 3vw, 32px);
 }
-.panel.scene .panel-cap {
+.panel.scene .panel-cap,
+.panel.sg-scene .panel-cap {
   background: color-mix(in srgb, var(--ink) 4%, var(--ground));
-  border: 0; border-top: 1px solid var(--line);
-  padding: 10px clamp(20px, 3vw, 32px) 14px; color: var(--ink-2);
+  border: 0;
+  border-top: 1px solid var(--line);
+  padding: 12px 20px;
+  color: var(--ink-2);
   border-radius: 0 0 var(--panel-r) var(--panel-r);
 }
-.panel.scene .panel-cap b { color: var(--ink); }
+.panel.scene .panel-cap b,
+.panel.sg-scene .panel-cap b { color: var(--ink); font-weight: 600; }
 .panel.scene .label { color: var(--ink-2); }
 
 /* Listes documentaires (section Puces) */

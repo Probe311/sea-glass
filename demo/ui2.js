@@ -102,7 +102,7 @@
   };
   D.Sub = function (p) { return h('div', { className: 'sub' }, p.title && h('h3', null, p.title), p.text && h('p', null, p.text), p.children); };
   D.Panel = function (p) {
-    /* scene + sg-scene : wash démo + frost/alpha package sur .sg-glass enfants */
+    /* scene + sg-scene : frost/alpha package sur enfants — chrome = panel Couleurs (pas de wash) */
     return h('div', { className: cls('panel', p.scene && 'scene', p.scene && 'sg-scene') },
       h('div', { className: 'panel-body' }, p.children),
       (p.cap || p.tag) && h('div', { className: 'panel-cap' },

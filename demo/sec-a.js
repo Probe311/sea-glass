@@ -130,9 +130,11 @@
           return;
         }
         setStep(n);
+        /* Hold longer on empty white pill (0) and full stack (end) for pedagogy */
+        var wait = n === 0 ? 1800 : n < FAB_LAYERS.length ? 1100 : 2000;
         timer = setTimeout(function () {
           tick(n < FAB_LAYERS.length ? n + 1 : 0);
-        }, n < FAB_LAYERS.length ? 1100 : 1600);
+        }, wait);
       }
       function start() { if (!active) { active = true; tick(0); } }
       function stop() { active = false; clear(); setStep(0); }
@@ -168,7 +170,7 @@
     if (!on.tint) { style['--glass-a'] = 0.88; style['--tint-a'] = 0.12; }
 
     return h('div', { className: 'fab', ref: rootRef },
-      h('div', { className: 'fab-stage', 'aria-hidden': true },
+      h('div', { className: 'fab-stage' },
         h(Glass, {
           as: 'button',
           type: 'button',
@@ -184,16 +186,18 @@
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
           tintA: on.tint ? 0.92 : undefined,
+          'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
         }, on.ink ? [h(Icon, { key: 'i', name: 'plus' }), 'Collecter'] : null)),
       h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
         FAB_LAYERS.map(function (layer, i) {
-          var active = step > i;
+          var done = step > i;
+          var current = step === i + 1;
           return h('li', {
             key: layer.k,
-            className: 'fab-item' + (active ? ' is-on' : ''),
-            'aria-current': active ? 'true' : undefined,
+            className: 'fab-item' + (done ? ' is-on' : '') + (current ? ' is-current' : ''),
+            'aria-current': current ? 'step' : undefined,
           },
             h('button', {
               type: 'button',
