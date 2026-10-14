@@ -87,12 +87,12 @@
 
   /* ---------- Matière ---------- */
   var PROPS = [
-    { k: 'frosted', t: 'Frosted', d: 'Verre dépoli : le décor est flouté et un peu plus saturé derrière la matière.', o: {} },
+    { k: 'frosted', t: 'Frosted', d: 'Verre dépoli : blur 16 px, saturate 1.4. Actif seulement au-dessus d’un décor (.scene).', o: {} },
     { k: 'refractive', t: 'Refractive', d: 'Le décor se déforme dans l’épaisseur du verre. Visible dans Chromium, sans effet ailleurs.', o: { frosted: false } },
-    { k: 'alive', t: 'Alive', d: 'Le reflet suit le pointeur. La matière grossit au survol (scale 1.05) et s’enfonce à l’appui.', o: {} },
+    { k: 'alive', t: 'Alive', d: 'La matière grossit au survol (scale 1.05) et s’enfonce à l’appui, avec un wash blanc ~40 %.', o: {} },
     { k: 'rim', t: 'Rim', d: 'Liseré d’arête, vif côté lumière et repris côté opposé dans la couleur du verre.', o: {} },
-    { k: 'tint', t: 'Tint', d: 'La matière prend la couleur d’un galet, de façon mate et translucide.', o: { tint: 'aqua', tintA: 0.55 } },
-    { k: 'glow', t: 'Glow', d: 'Lumière diffuse sous l’objet, toujours de la couleur de sa teinte.', o: { glowColor: 'kelly' } }
+    { k: 'tint', t: 'Tint', d: 'Gelée diagonale 135° (clair → galet → un peu plus sombre) + encre *-ink pour texte et icônes.', o: { tint: 'aqua', tintA: 0.88 } },
+    { k: 'glow', t: 'Glow', d: 'Halo coloré optionnel sous l’objet. Pas le drop standard : l’ombre table reste neutre.', o: { glowColor: 'kelly' } }
   ];
   var ALL = PROPS.map(function (p) { return p.k; });
   function PropCard(p) {
@@ -103,13 +103,13 @@
   var TINTS = ['clear', 'aqua', 'seafoam', 'lavender', 'amber', 'ruby'];
   function Atelier() {
     var st = useState({ frosted: true, refractive: true, alive: true, rim: true, tint: true, glow: true }), on = st[0], setOn = st[1];
-    var ts = useState('aqua'), tint = ts[0], setTint = ts[1], bs = useState(12), blur = bs[0], setBlur = bs[1];
+    var ts = useState('aqua'), tint = ts[0], setTint = ts[1], bs = useState(16), blur = bs[0], setBlur = bs[1];
     var lines = ['<Glass'].concat(on.tint ? ['  tint="' + tint + '"'] : []).concat(ALL.filter(function (k) { return k !== 'tint'; }).map(function (k) { return on[k] ? '  ' + k : '  ' + k + '={false}'; })).concat(['  style={{ "--lg-blur": "' + blur + 'px" }}', '/>']);
     var code = lines.join('\n');
     return h(D.Panel, { scene: true, tag: 'Atelier', cap: 'Active ou coupe chaque propriété. Le code se met à jour.' },
       h('div', { style: { display: 'grid', gap: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', alignItems: 'start' } },
         h('div', { style: { display: 'grid', placeItems: 'center', padding: '12px 0' } },
-          h(Glass, { tint: on.tint ? tint : undefined, tintA: 0.4, frosted: on.frosted, refractive: on.refractive, alive: on.alive, rim: on.rim, glow: on.glow,
+          h(Glass, { tint: on.tint ? tint : undefined, tintA: 0.88, frosted: on.frosted, refractive: on.refractive, alive: on.alive, rim: on.rim, glow: on.glow,
             style: { padding: 26, width: 'min(100%, 320px)', display: 'grid', gap: 8, '--lg-r': '28px', '--gl': '24px', '--lg-blur': blur + 'px' } },
             h('span', { className: 'label', style: { color: 'inherit', opacity: .75 } }, 'Mer calme'),
             h('div', { style: { font: '600 46px/1 var(--font-display)' } }, '18 °C'),
@@ -125,39 +125,39 @@
             return h('button', { key: k, type: 'button', 'aria-label': k, 'aria-pressed': tint === k, onClick: function () { setTint(k); setOn(Object.assign({}, on, { tint: true })); },
               style: { width: 34, height: 34, borderRadius: '50%', border: '2px solid rgba(255,255,255,.85)', background: 'var(--' + k + ')', cursor: 'pointer', boxShadow: tint === k ? '0 0 0 2px #fff, 0 0 0 4px #10302A' : '0 2px 6px rgba(0,0,0,.2)' } });
           })),
-          h(UI.Slider, { label: 'Flou', value: 12, min: 0, max: 28, unit: ' px', onChange: setBlur }))),
+          h(UI.Slider, { label: 'Flou', value: 16, min: 0, max: 28, unit: ' px', onChange: setBlur }))),
       h(D.Code, { text: code }));
   }
 
   S.Matter = function () {
-    return h(D.Section, { id: 'matiere', label: 'Principes', title: 'Une matière, six propriétés', lead: 'Tout bloc ou élément de l’interface est un Glass. Le même composant produit un bouton, une carte ou une barre de navigation : seules les propriétés et le rayon changent. La lumière vient toujours du haut à gauche. Elle ressort teintée sur l’arête opposée, et s’inverse dans les parties creusées.' },
+    return h(D.Section, { id: 'matiere', label: 'Principes', title: 'Une matière, six propriétés', lead: 'Formule gelée : dégradé diagonal, grain, volume inset, ombre table neutre. Tout bloc est un Glass ; tint fixe aussi l’encre du galet pour texte et icônes.' },
       h(D.Sub, { title: 'Les six propriétés', text: 'Chaque propriété est un attribut indépendant. Les montrer isolées permet de voir ce qu’elle apporte.' },
         h(D.Panel, { scene: true, tag: 'Isolées', cap: 'Les contrôles de petite taille coupent refractive pour rester légers.' },
           h('div', { style: { display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))' } }, PROPS.map(function (p) { return h(PropCard, Object.assign({ key: p.k }, p)); })))),
       h(D.Sub, { title: 'Atelier' }, h(Atelier)),
-      h(D.Sub, { title: 'Modèle de lumière', text: 'La lumière vient du haut à gauche. Un objet posé la reçoit sur son arête haute et la laisse ressortir, teintée par le verre, sur l’arête opposée : c’est la caustique. Un objet creusé inverse tout : l’ombre tombe en haut à gauche et la lumière remonte en bas à droite.' },
-        h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Survole les objets : le reflet et l’angle du liseré suivent le pointeur, la caustique reste à l’opposé.' },
+      h(D.Sub, { title: 'Formule gelée', text: 'Même recette pour les 12 galets : clair en haut à gauche, saturé en bas à droite, grain overlay, volume bombé, ombre grise posée sur la table. Le glow coloré reste optionnel.' },
+        h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Teintes aqua / ruby : encre du parent, pas une couleur d’icône générique.' },
           h('div', { style: { display: 'grid', gap: 22, gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))' } },
-            [['Posé', {}], ['Teinté aqua', { tint: 'aqua', tintA: 0.45 }], ['Teinté ruby', { tint: 'ruby', tintA: 0.5 }], ['Creusé', { className: 'carved', frosted: false, refractive: false, glow: false, alive: false }]].map(function (o) {
+            [['Posé', {}], ['Teinté aqua', { tint: 'aqua', tintA: 0.88 }], ['Teinté ruby', { tint: 'ruby', tintA: 0.88 }], ['Creusé', { className: 'carved', frosted: false, refractive: false, glow: false, alive: false }]].map(function (o) {
               return h('div', { key: o[0], style: { display: 'grid', gap: 10, justifyItems: 'center', fontSize: 13, color: 'var(--ink)' } },
                 h(Glass, Object.assign({ style: { width: '100%', maxWidth: 170, height: 104, '--lg-r': '30px' } }, o[1])), h('b', { style: { fontWeight: 500 } }, o[0]));
             }))),
         h(D.Specs, { head: ['Élément', 'Valeur', 'Rôle'], rows: [
-          ['Arête éclairée', 'inset 1.5px 1.5px, blanc à 95 %', 'Haut gauche. Le liseré tourne vers le pointeur.'],
-          ['Arête opposée', 'inset -1.5px -1.5px, couleur du verre à 70 %', 'Bas droite. La lumière sort teintée.'],
-          ['Caustique douce', 'inset -6px -8px 12px -9px', 'Halo interne le long du bord opposé.'],
-          ['Reflet de surface', 'Nappe en haut, tache au pointeur, soft-light', 'Brillance sans voile blanc.'],
-          ['Objet creusé', 'Ombre haut gauche, lumière bas droite', 'Rails, champs, pistes, rail d’interrupteur.'],
-          ['Glow', 'Sous l’objet, couleur de la teinte', 'Jamais blanc, jamais d’une autre couleur.'],
-          ['Thème sombre', 'Arête à 60 %, caustique à 30 %', 'La lumière est plus discrète sur fond sombre.']] })),
+          ['Dégradé teinté', 'linear-gradient 135° clair → galet → sombre léger', 'Volume de gelée, pas un aplati.'],
+          ['Volume', 'inset 0 2px 1px blanc/50 %, inset 0 -3px 6px noir/6 %', 'Bombé haut, ombre interne bas.'],
+          ['Ombre table', '0 14px 0 -4px / 0 18px 24px -10px, noir neutre', 'Posé sur la table — pas de halo teinté.'],
+          ['Grain', 'noise.svg overlay, sparkle 0.08 (clair)', 'Texture monochrome légère.'],
+          ['Actif / press', 'overlay blanc 40 % + inset léger', 'Boutons, chips aria-pressed.'],
+          ['Glow', 'Optionnel, couleur de la teinte', 'Accent rare — jamais le drop par défaut.'],
+          ['Tint → ink', 'color: var(--{galet}-ink)', 'Icônes en currentColor suivent le parent.']] })),
       h(D.Sub, { title: 'Surfaces' },
-        h(D.Specs, { head: ['Contexte', 'Opacité du verre', 'Usage'], rows: [
-          ['Sur le sol', '0.74 clair · 0.08 sombre', 'Boutons, puces, champs : objets posés sur la page.'],
-          ['Sur un décor coloré', '0.26 clair · 0.12 sombre', 'Cartes météo, recherche, navigation : verre au-dessus d’une image.'],
-          ['Teinté', '0.40 à 0.78', 'Actions et états actifs : un galet de couleur, jamais opaque.'],
+        h(D.Specs, { head: ['Contexte', 'Opacité / flou', 'Usage'], rows: [
+          ['Sur le sol', 'alpha 0.88 clair · 0.08 sombre', 'Boutons, puces, champs : objets posés sur la page.'],
+          ['Sur un décor coloré', 'alpha 0.26 / 0.12 + blur 16', 'Cartes, recherche, nav : verre au-dessus d’une image.'],
+          ['Teinté', 'tint-a ≈ 0.88 + dégradé 135°', 'Actions et états : gelée colorée, encre du galet.'],
           ['Flou', 'Seulement dans .scene ou .over', 'Sur un sol uni il ne se voit pas et coûte cher : il est coupé.']] })),
-      h(D.Usage, { dos: ['Garder une seule source de lumière, en haut à gauche.', 'Inverser la lumière dans les parties creusées : rails, champs, pistes.', 'Donner au glow la couleur de la teinte.', 'Prévoir un décor coloré derrière le Givre : le flou n’est actif qu’au-dessus d’un décor.'],
-        donts: ['Ajouter des étoiles ou des scintillements.', 'Mélanger un halo d’une couleur et une teinte d’une autre.', 'Éclairer un objet depuis plusieurs directions.', 'Utiliser un verre très transparent sur un fond uni : il disparaît.'] }));
+      h(D.Usage, { dos: ['Garder l’ombre table neutre pour les objets posés.', 'Lier texte et icônes à l’encre du tint (currentColor).', 'Réserver data-glow aux accents rares.', 'Prévoir un décor coloré derrière le frost.'],
+        donts: ['Remplacer l’ombre table par un halo teinté sur chaque bouton.', 'Forcer une couleur d’icône qui ignore le parent teinté.', 'Mélanger un glow d’une couleur et une teinte d’une autre.', 'Utiliser un verre très transparent sur un fond uni : il disparaît.'] }));
   };
 
   /* ---------- Couleurs ---------- */

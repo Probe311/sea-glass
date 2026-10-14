@@ -6,6 +6,14 @@ import { JELLY_ALERT_ICONS } from './jelly-icons.js';
 
 export type Tone = 'info' | 'success' | 'warning' | 'danger' | 'error';
 
+const TONE_TINT: Record<Tone, string> = {
+  info: 'aqua',
+  success: 'kelly',
+  warning: 'amber',
+  danger: 'ruby',
+  error: 'ruby',
+};
+
 export type AlertProps = HTMLAttributes<HTMLDivElement> & {
   tone?: Tone;
   title?: ReactNode;
@@ -22,7 +30,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       role="alert"
       className={cx('sg-alert', className)}
       data-tone={dataTone}
-      data-tint=""
+      tint={TONE_TINT[tone] ?? 'aqua'}
       frosted
       {...rest}
     >

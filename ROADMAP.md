@@ -34,7 +34,7 @@ seaglass/
 - [x] **P0 · M** Source unique des tokens au format **W3C Design Tokens (DTCG)**, build via **Style Dictionary v4** → CSS vars, ESM/TS, JSON, preset Tailwind
 - [x] **P0 · S** Trois niveaux : *primitifs* (12 galets + encres, neutres) → *sémantiques* (`--sg-color-primary`, `-on-primary`, `-surface`, `-on-surface`, `-success`, `-warning`, `-danger`, `-info`, `-outline`, `-focus`) → *composants* (`--sg-button-height-md`…)
 - [x] **P0 · S** Ajouter les échelles manquantes : espacement (`--sg-space-1..12`, base 4 px), durées (`--sg-duration-fast/base/slow` 120/200/380), easing (`standard`, `spring`), typo (display/headline/title/body/label × lg/md/sm : size, line-height, weight, tracking), élévation (`--sg-elevation-0..5`), z-index (dropdown, sticky, overlay, modal, toast, tooltip), breakpoints
-- [x] **P0 · S** Échelle de matière nommée : `--sg-blur-sm/md/lg/xl` (4/8/12/20), opacité verre `--sg-glass-alpha-ground/scene`, rim, sheen, spec
+- [x] **P0 · S** Échelle de matière nommée : `--sg-blur-sm/md/lg` (4/8/16), opacité verre `--sg-glass-alpha-ground/scene` (sol clair ≈ 0.88), rim, sheen, spec, sparkle
 - [x] **P0 · S** Unifier le format couleur (triplets `r g b` partout, ou `oklch`) ; supprimer la copie RGB en JS (`core.js:8-15`)
 - [x] **P0 · S** Utiliser réellement les rayons `--sg-radius-*` partout ; renommer `xs/sm` de manière cohérente
 - [x] **P0 · XS** Supprimer variables mortes (`--gl`, `.lg-gloss`, prop `gloss`)
@@ -187,7 +187,7 @@ seaglass/
 | **1.0.0** | Gate : WCAG 2.2 AA audité, couverture visuelle, doc complète, API gelée | +2 sem. |
 
 ## Phase 9 — Fidélité à la source (vidéo « Google Glassea »)
-- [ ] P0 · M — Tokens matière : `translucency`, `frost` (flou), `refraction`, `rim` (reflet haut/gauche), `glow` (ombre diffuse), `sparkle` (grain), `tint` — chacun réglable via `data-*`
+- [x] P0 · M — Tokens matière : `translucency`, `frost` (flou), `refraction`, `rim` (reflet haut/gauche), `glow` (ombre diffuse), `sparkle` (grain `noise.svg`), `tint` — chacun réglable via `data-*` ; formule gelée + ombre table neutre
 - [x] P0 · S — Palette officielle des 12 teintes : Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber, Root beer, Clear, Mist (clair + sombre, contrastes validés)
 - [x] P0 · S — Formes : tokens pill, cercle, squircle (super-ellipse) ; aucun angle vif
 - [ ] P1 · M — Motion : tokens de ressorts (press scale-down, slide de l'indicateur segmenté, remplissage toggle/slider), tous neutralisés par `prefers-reduced-motion`

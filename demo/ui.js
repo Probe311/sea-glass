@@ -32,7 +32,7 @@
       'aria-label': p['aria-label'], 'aria-pressed': pressed, tabIndex: p.tabIndex,
       className: cls('btn', 'shape-' + shape, p.size, v === 'primary' && 'primary', love && 'love', loveOff && 'off', ghost && 'ghost', p.state && 'is-' + p.state),
       tint: v === 'primary' ? 'seafoam' : (love && !loveOff) ? 'ruby' : undefined, tintA: v === 'primary' ? 0.92 : (love && !loveOff) ? 1 : undefined,
-      glow: v === 'primary' || (love && !loveOff), refractive: false, frosted: !ghost, rim: !ghost, alive: !ghost
+      glow: false, refractive: false, frosted: !ghost, rim: !ghost, alive: !ghost
     }, p.children);
   };
 
@@ -40,7 +40,7 @@
   C.Chip = function (p) {
     var st = useState(!!p.defaultPressed), on = st[0], set = st[1];
     return h(Glass, { as: 'button', type: 'button', className: cls('chip', 'shape-' + (p.shape || 'pill'), p.state && 'is-' + p.state), 'aria-pressed': on, disabled: p.disabled,
-      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: on, refractive: false, onClick: function () { set(!on); } },
+      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: false, refractive: false, onClick: function () { set(!on); } },
       on && h(Icon, { name: 'check' }), p.children);
   };
 

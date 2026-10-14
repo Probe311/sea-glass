@@ -25,6 +25,8 @@ Colonnes :
 
 ## Surface & matière
 
+Formule gelée partagée (`.sg-glass` / `.lg`) : dégradé 135°, grain `noise.svg`, volume inset, ombre table neutre, frost blur 16 / sat 1.4, press blanc ~40 %. `data-tint` → `color: var(--*-ink)` ; icônes en `currentColor` (sauf coche blanche sur teal profond). `data-glow` = accent rare, pas le drop par défaut.
+
 | Composant       | CSS            | React | Démo       | Storybook        | Avancement                        |
 | --------------- | -------------- | ----- | ---------- | ---------------- | --------------------------------- |
 | Glass (surface) | ✅             | ✅    | ✅ Matière | ✅ Surface/Glass | ✅ Base du système                |
