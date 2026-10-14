@@ -97,8 +97,8 @@
     '  --cornflower: #C3D3F0;  --cobalt: #6B8CE3;  --lavender: #E4DAE8;  --ruby: #E07662;',
     '  --amber: #F7C96B;  --rootbeer: #B5866A;  --clear: #F7F9F7;  --mist: #CDD5D4;',
     '  --on-tint: #14463A;  --teal: #4F9482;  --teal-hi: #7BBFAC;',
-    '  --ga: 0.74;          /* verre sur sol uni */',
-    '  --ga-scene: 0.26;    /* verre sur décor coloré */',
+    '  --ga: 0.58;          /* verre sur sol uni */',
+    '  --ga-scene: 0.14;    /* verre sur décor coloré */',
     '  --lg-blur: 12px;     /* 12 à 16 px, 20 à 24 px sur fond chargé */',
     '  --lg-r: 28px;        /* 8 à 12 contrôles, 16 panneaux, 28 cartes, 999 pilules */',
     '  --ease: cubic-bezier(.2,0,0,1);  --spring: cubic-bezier(.34,1.4,.5,1);', '}',
@@ -124,7 +124,7 @@
     '// Catalogue : packages/react/README.md · Storybook : pnpm storybook',
   ].join('\n');
   function jsonTokens() {
-    var o = { color: {}, material: { glassOnGround: 0.74, glassOnScene: 0.26, blur: 14, radius: 28, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
+    var o = { color: {}, material: { glassOnGround: 0.58, glassOnScene: 0.14, blur: 14, radius: 28, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
       motion: { fast: '120ms', base: '200ms', soft: '380ms', ease: 'cubic-bezier(0.2,0,0,1)', spring: 'cubic-bezier(0.34,1.4,0.5,1)' }, theme: SG.isDark() ? 'dark' : 'light' };
     SG.PEBBLES.forEach(function (p) { o.color[p.key] = { value: SG.cssVar('--' + p.key), ink: SG.cssVar('--' + p.key + '-ink') }; });
     return JSON.stringify(o, null, 2);

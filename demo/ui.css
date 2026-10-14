@@ -406,7 +406,7 @@
 .card .kv { display: flex; justify-content: space-between; font-size: 13px; padding-top: 12px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
 .badge {
   display: inline-flex; align-items: center; height: 28px; padding-inline: 12px;
-  --lg-r: 999px; --lg-blur: 0; --tint-a: 0.92;
+  --lg-r: 999px; --lg-blur: 0; --tint-a: 0.4;
   font: 600 12px/1 var(--font-display); letter-spacing: 0.02em; white-space: nowrap;
   box-shadow: none;
 }

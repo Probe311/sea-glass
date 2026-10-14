@@ -24,7 +24,7 @@
     --sg-glass-radius: var(--sg-radius-xl);
     --sg-glass-blur: var(--sg-blur-lg);
     --sg-glass-tint-rgb: 255 255 255;
-    --sg-glass-tint-a: 0.88;
+    --sg-glass-tint-a: 0.45;
     --sg-glass-glow-rgb: var(--sg-color-kelly-rgb);
     --sg-glass-a: var(--sg-glass-alpha-ground);
     --sg-glass-cs: color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 40%, #fff);

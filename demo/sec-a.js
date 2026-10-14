@@ -188,7 +188,7 @@
           glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
-          tintA: on.tint ? 0.55 : undefined,
+          tintA: on.tint ? 0.38 : undefined,
           'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
@@ -225,8 +225,8 @@
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([
-        ['Alpha sol', '~0.88 clair · 0.08 sombre', 'Objets posés hors scène.'],
-        ['Alpha scène', '~0.26 / 0.12', 'Verre au-dessus d’un décor coloré.'],
+        ['Alpha sol', '~0.58 clair · 0.08 sombre', 'Objets posés hors scène.'],
+        ['Alpha scène', '~0.14 / 0.12', 'Verre au-dessus d’un décor coloré.'],
       ]) }),
       h(D.Usage, {
         dos: [
@@ -248,7 +248,7 @@
   S.Colors = function () {
     SG.useTheme();
     return h(D.Section, { id: 'couleurs', label: 'Fondations', title: 'Couleurs', lead: 'Pastels à basse saturation, un peu laiteux, avec quelques tons pleins pour les repères. Chaque forme est un galet arrondi, sans angle. Clique sur un galet pour copier sa variable.' },
-      h(D.Panel, { scene: true, tag: 'Palette', cap: 'Valeurs du thème clair. Les encres se renforcent en thème sombre.' },
+      h(D.Panel, { tag: 'Palette', cap: 'Valeurs du thème clair. Les encres se renforcent en thème sombre.' },
         h('div', { className: 'pebbles-wrap' }, h('div', { className: 'pebbles' }, SG.PEBBLES.map(function (p) {
           var hex = SG.cssVar('--' + p.key).toUpperCase();
           return h('button', { key: p.key, type: 'button', className: 'pebble-item', 'aria-label': 'Copier ' + p.name + ' ' + hex, onClick: function () { SG.copy('--' + p.key + ': ' + hex + ';', p.name + ' copié'); } },
@@ -294,7 +294,7 @@
               className: 'shape-radii__swatch',
               style: { height: 96, '--lg-r': r[1] + 'px' },
               tint: 'seafoam',
-              tintA: 0.55,
+              tintA: 0.38,
               rim: true,
               refractive: true,
               frosted: true,
