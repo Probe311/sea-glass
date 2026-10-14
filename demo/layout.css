@@ -52,34 +52,38 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .side {
   --side-pad: 14px;
   --sb-size: 8px;
+  --sb-inset: 5px;
   --sb-track: transparent;
   --sb-thumb: color-mix(in srgb, var(--ink) 18%, transparent);
   position: sticky; top: calc(var(--bar-h) + 12px); align-self: start;
   height: calc(100vh - var(--bar-h) - 24px); overflow-y: auto; overflow-x: hidden;
   scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track);
   scrollbar-gutter: stable;
-  margin: 12px 0 12px 12px; padding: var(--side-pad) 6px var(--side-pad) var(--side-pad);
+  margin: 12px 0 12px 12px; padding: var(--side-pad) calc(6px + var(--sb-inset)) var(--side-pad) var(--side-pad);
   display: flex; flex-direction: column; gap: 10px;
   border-radius: 24px;
   background: color-mix(in srgb, var(--ink) 4.5%, var(--ground));
   border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
   -webkit-backdrop-filter: blur(12px) saturate(1.2); backdrop-filter: blur(12px) saturate(1.2);
 }
-.side::-webkit-scrollbar { width: var(--sb-size); }
+/* Scrollbar inset 5px from the right edge; track height = 98% (−2%). */
+.side::-webkit-scrollbar { width: calc(var(--sb-size) + var(--sb-inset)); }
 .side::-webkit-scrollbar-track {
-  margin-block: 12px;
+  margin-block: 1%;
   background: transparent;
 }
 .side::-webkit-scrollbar-thumb {
   background: var(--sb-thumb);
   border-radius: 999px;
   border: 2px solid transparent;
+  border-right-width: calc(2px + var(--sb-inset));
   background-clip: padding-box;
 }
 .side::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--ink) 30%, transparent);
   background-clip: padding-box;
   border: 2px solid transparent;
+  border-right-width: calc(2px + var(--sb-inset));
 }
 .side nav { display: grid; gap: 18px; }
 .side .grp { display: grid; gap: 4px; }
@@ -172,6 +176,10 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .g2 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
 .g3 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
 .g2 > *, .g3 > * { min-width: 0; }
+.type-card { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.type-card__aa { font-size: 52px; line-height: 1; color: var(--ink); }
+.type-card__name { font-weight: 500; margin-top: 8px; color: var(--ink); }
+.type-card__role { font-size: 13px; color: var(--ink-3); }
 .fields-grid { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
 @media (max-width: 720px) { .fields-grid { grid-template-columns: 1fr; } }
 /* Curseur : laisser déborder anneaux / perle / bulle (le panel-cap garde ses coins bas arrondis) */
@@ -350,6 +358,91 @@ pre.code { margin: 0; padding: 18px; border-radius: 16px; background: color-mix(
 footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
 
 .matrix .cell.tall { padding-top: 32px; }
+
+/* ---------- Fabrication : assemblage couche par couche ---------- */
+.fab {
+  display: grid;
+  gap: clamp(28px, 4vw, 48px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(160px, 0.85fr);
+  align-items: center;
+  min-height: 320px;
+}
+@media (max-width: 720px) {
+  .fab { grid-template-columns: 1fr; min-height: 0; }
+}
+.fab-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 300px;
+  padding: 28px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.fab-grid {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 50%, #000 42%, transparent 72%);
+  pointer-events: none;
+}
+.fab-pebble {
+  position: relative;
+  z-index: 1;
+  width: min(72%, 260px);
+  aspect-ratio: 1.18 / 1;
+  transition:
+    background 500ms var(--ease),
+    box-shadow 500ms var(--ease),
+    opacity 500ms var(--ease),
+    filter 500ms var(--ease);
+}
+.fab-pebble--naked {
+  --sh-in: inset 0 0 0 0 transparent;
+  --sh-out: none;
+  opacity: 0.55;
+  background: rgb(255 255 255 / 0.08) !important;
+}
+.fab-pebble--no-sparkle::after { opacity: 0 !important; }
+.fab-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  justify-self: start;
+}
+.fab-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font: 500 18px/1.2 var(--font-display);
+  color: color-mix(in srgb, var(--ink) 28%, transparent);
+  transition: color 400ms var(--ease);
+}
+.fab-item.is-on { color: var(--ink); }
+.fab-dot {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  background: transparent;
+  transition: background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease);
+}
+.fab-item.is-on .fab-dot {
+  border-color: color-mix(in srgb, var(--seafoam) 70%, var(--seafoam-ink));
+  background: color-mix(in srgb, var(--seafoam) 88%, transparent);
+  box-shadow: inset 0 1px 1px rgb(255 255 255 / 0.55);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fab-pebble, .fab-item, .fab-dot { transition: none; }
+}
 
 /* Blobs : patates arrondies, animées doucement par morphing du border-radius */
 .blob { position: relative; aspect-ratio: 1.12 / 1; background: linear-gradient(160deg, color-mix(in srgb, var(--bc) 86%, #fff), var(--bc) 55%, color-mix(in srgb, var(--bc) 90%, #000));
