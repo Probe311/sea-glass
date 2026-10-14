@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@sea-glass/tailwind.svg)](https://www.npmjs.com/package/@sea-glass/tailwind)
 
-Tailwind preset (colours, radii, durations from `@sea-glass/tokens`) and `glass-*` utilities. npm **0.2.0**.
+Tailwind preset (colours, radii, durations from `@sea-glass/tokens`) and `glass-*` utilities. npm **0.2.1**.
 
 ```bash
 pnpm add @sea-glass/tailwind

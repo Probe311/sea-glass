@@ -1,6 +1,6 @@
 {
   "name": "@sea-glass/tailwind",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Sea Glass Tailwind preset and glass-* utilities.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",

@@ -195,6 +195,7 @@
       h('span', { className: 'pebble-blob__layer pebble-blob__alive', 'aria-hidden': true }),
       h('span', { className: 'pebble-blob__layer pebble-blob__rim', 'aria-hidden': true }),
       h('span', { className: 'pebble-blob__layer pebble-blob__tint', 'aria-hidden': true }),
+      h('span', { className: 'pebble-blob__layer pebble-blob__grain', 'aria-hidden': true }),
       h('span', { className: 'pebble-blob__layer pebble-blob__glow', 'aria-hidden': true }));
   };
 })();

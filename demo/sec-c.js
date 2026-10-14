@@ -181,7 +181,7 @@
       function esc(e) { if (e.key === 'Escape') setOpen(false); }
       document.addEventListener('keydown', esc); return function () { document.removeEventListener('keydown', esc); };
     }, []);
-    var ver = (window.SG_META && window.SG_META.version) || '0.2.0';
+    var ver = (window.SG_META && window.SG_META.version) || '0.2.1';
     var main = h('main', { className: 'main' },
       h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
       h(S.AccordionDoc), h(S.Alerts), h(S.Buttons), h(S.Cards), h(S.Checks), h(S.Fields),

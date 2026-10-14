@@ -98,6 +98,7 @@
 
   /* ---------- Fabrication ---------- */
   var FAB_LAYERS = [
+    { k: 'glass', t: 'Verre', role: 'data-frosted + --glass-a', note: 'Corps translucide + dépoli (blur) sur le décor.' },
     { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
     { k: 'tint', t: 'Teinte', role: 'tint + gelée 135°', note: 'Plein du galet : clair TL → saturé BR.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
@@ -130,8 +131,8 @@
           return;
         }
         setStep(n);
-        /* Hold longer on empty white pill (0) and full stack (end) for pedagogy */
-        var wait = n === 0 ? 1800 : n < FAB_LAYERS.length ? 1100 : 2000;
+        /* Hold covers ~900ms CSS crossfade + settle; longer on empty / full */
+        var wait = n === 0 ? 2000 : n < FAB_LAYERS.length ? 1600 : 2400;
         timer = setTimeout(function () {
           tick(n < FAB_LAYERS.length ? n + 1 : 0);
         }, wait);
@@ -147,27 +148,28 @@
     }, [reduce]);
 
     var on = {
-      rim: step >= 1,
-      tint: step >= 2,
-      refractive: step >= 3,
-      sparkle: step >= 4,
-      shadow: step >= 5,
-      ink: step >= 6,
+      glass: step >= 1,
+      rim: step >= 2,
+      tint: step >= 3,
+      refractive: step >= 4,
+      sparkle: step >= 5,
+      shadow: step >= 6,
+      ink: step >= 7,
     };
 
     function jump(i, e) {
-      pauseRef.current = Date.now() + 2800;
+      pauseRef.current = Date.now() + 3200;
       setStep(i + 1);
       SG.ripple(e.currentTarget, e);
     }
 
+    /* Frost always mounted so --lg-blur eases 0 → 16px (no backdrop snap). */
     var style = {
       '--lg-r': '999px',
-      '--lg-blur': '16px',
-      '--sh-out': on.shadow ? 'var(--table-drop)' : 'none',
+      '--sh-out': on.shadow ? 'var(--table-drop)' : '0 0 0 transparent',
+      '--fab-rim': on.rim ? 1 : 0,
     };
     if (!on.sparkle) style['--sparkle'] = 0;
-    /* Scene glass alpha (--ga-scene) — never force opaque 0.88 */
 
     return h('div', { className: 'fab', ref: rootRef },
       h('div', { className: 'fab-stage' },
@@ -176,12 +178,13 @@
           type: 'button',
           innerRef: ctaRef,
           className: 'fab-pebble'
-            + (step === 0 ? ' fab-pebble--naked' : '')
+            + (on.glass ? ' fab-pebble--glass' : ' fab-pebble--naked')
+            + (on.rim ? '' : ' fab-pebble--no-rim')
             + (on.sparkle ? '' : ' fab-pebble--no-sparkle')
             + (on.ink ? '' : ' fab-pebble--no-ink'),
           frosted: true,
           refractive: on.refractive,
-          rim: on.rim,
+          rim: true,
           glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
@@ -189,7 +192,8 @@
           'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
-        }, on.ink ? [h(Icon, { key: 'i', name: 'plus' }), 'Collecter'] : null)),
+        }, h('span', { className: 'fab-pebble__ink', 'aria-hidden': !on.ink },
+          h(Icon, { name: 'plus' }), 'Collecter'))),
       h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
         FAB_LAYERS.map(function (layer, i) {
           var done = step > i;
@@ -214,14 +218,13 @@
       id: 'fabrication',
       label: 'Principes',
       title: 'Fabrication',
-      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile bordure, teinte, réfraction, givre (grain), lueur (ombre table) et encre jusqu’à la gelée posée sur la table. Le dépoli (blur) est toujours actif sur scène.',
+      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile verre (dépoli), bordure, teinte, réfraction, givre (grain), lueur (ombre table) et encre jusqu’à la gelée posée sur la table.',
     },
-      h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — boucle automatique.', scene: true },
+      h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — transitions douces, boucle automatique.', scene: true },
         h(FabricateDemo)),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([
-        ['Dépoli', 'data-frosted', 'Toujours ON sur scène — hors liste d’étapes.'],
         ['Alpha sol', '~0.88 clair · 0.08 sombre', 'Objets posés hors scène.'],
         ['Alpha scène', '~0.26 / 0.12', 'Verre au-dessus d’un décor coloré.'],
       ]) }),
@@ -245,7 +248,7 @@
   S.Colors = function () {
     SG.useTheme();
     return h(D.Section, { id: 'couleurs', label: 'Fondations', title: 'Couleurs', lead: 'Pastels à basse saturation, un peu laiteux, avec quelques tons pleins pour les repères. Chaque forme est un galet arrondi, sans angle. Clique sur un galet pour copier sa variable.' },
-      h(D.Panel, { tag: 'Palette', cap: 'Valeurs du thème clair. Les encres se renforcent en thème sombre.' },
+      h(D.Panel, { scene: true, tag: 'Palette', cap: 'Valeurs du thème clair. Les encres se renforcent en thème sombre.' },
         h('div', { className: 'pebbles-wrap' }, h('div', { className: 'pebbles' }, SG.PEBBLES.map(function (p) {
           var hex = SG.cssVar('--' + p.key).toUpperCase();
           return h('button', { key: p.key, type: 'button', className: 'pebble-item', 'aria-label': 'Copier ' + p.name + ' ' + hex, onClick: function () { SG.copy('--' + p.key + ': ' + hex + ';', p.name + ' copié'); } },

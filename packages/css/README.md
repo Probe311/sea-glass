@@ -9,7 +9,7 @@ pnpm add @sea-glass/css @sea-glass/tokens
 ```
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/@sea-glass/css@0.2.0/dist/seaglass.css" />
+<link rel="stylesheet" href="https://unpkg.com/@sea-glass/css@0.2.1/dist/seaglass.css" />
 <div class="sg-scene">
   <button class="sg-glass sg-button" data-frosted data-rim type="button">Seafoam</button>
 </div>

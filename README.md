@@ -31,7 +31,7 @@
 
 ### Install
 
-Packages are on **npm** under the [`@sea-glass`](https://www.npmjs.com/org/sea-glass) / [`@sea-glass/*`](https://www.npmjs.com/search?q=%40sea-glass) scope (latest **0.2.0**). New packages may show `0.0.0-stage` briefly while npm finishes review.
+Packages are on **npm** under the [`@sea-glass`](https://www.npmjs.com/org/sea-glass) / [`@sea-glass/*`](https://www.npmjs.com/search?q=%40sea-glass) scope (latest **0.2.1**). New packages may show `0.0.0-stage` briefly while npm finishes review.
 
 ```bash
 pnpm add @sea-glass/css @sea-glass/tokens
@@ -96,7 +96,7 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 
 <a id="status"></a>
 
-| Package               | npm `0.2.0`                                          |
+| Package               | npm `0.2.1`                                          |
 | --------------------- | ---------------------------------------------------- |
 | `@sea-glass/tokens`   | DTCG → CSS / JS / JSON                               |
 | `@sea-glass/css`      | Material + prefixed components                       |
@@ -120,7 +120,7 @@ Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) and the [`Code of Conduct`](COD
 
 ### Installer
 
-Packages sur **npm** sous le scope [`@sea-glass`](https://www.npmjs.com/search?q=%40sea-glass) (dernière version **0.2.0**). npm peut afficher brièvement `0.0.0-stage` le temps de la revue des nouveaux packages.
+Packages sur **npm** sous le scope [`@sea-glass`](https://www.npmjs.com/search?q=%40sea-glass) (dernière version **0.2.1**). npm peut afficher brièvement `0.0.0-stage` le temps de la revue des nouveaux packages.
 
 ```bash
 pnpm add @sea-glass/css @sea-glass/tokens
@@ -173,7 +173,7 @@ Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue : [`doc
 
 ### Statut
 
-Alpha **npm 0.2.0**. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
+Alpha **npm 0.2.1**. SemVer strict ; 1.0 après le gate accessibilité + tests visuels.
 
 <p align="right"><a href="#-english">← 🇬🇧 English</a></p>
 

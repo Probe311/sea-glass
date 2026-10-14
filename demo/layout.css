@@ -315,7 +315,18 @@ pre.code { margin: 0; padding: 18px; border-radius: 16px; background: color-mix(
 .codebox > .btn { position: absolute; top: 10px; right: 10px; }
 
 /* Couleurs */
-.pebbles-wrap { overflow-x: auto; margin-inline: calc(-1 * clamp(20px, 3vw, 32px)); padding: 6px clamp(20px, 3vw, 32px) 8px; }
+.pebbles-wrap {
+  overflow-x: auto;
+  margin-inline: calc(-1 * clamp(20px, 3vw, 32px));
+  padding: 18px clamp(20px, 3vw, 32px) 20px;
+  border-radius: 20px;
+  /* Décor local pour lit le dépoli / grain des galets */
+  background:
+    radial-gradient(120% 80% at 12% 18%, color-mix(in srgb, var(--aqua) 28%, transparent), transparent 55%),
+    radial-gradient(90% 70% at 88% 82%, color-mix(in srgb, var(--seafoam) 34%, transparent), transparent 58%),
+    radial-gradient(70% 55% at 48% 45%, color-mix(in srgb, var(--cobalt) 14%, transparent), transparent 60%),
+    color-mix(in srgb, var(--ground-2) 35%, var(--ground));
+}
 .pebbles { display: grid; grid-template-columns: repeat(6, minmax(112px, 1fr)); gap: 30px 20px; min-width: 760px; }
 .pebble-item { display: grid; justify-items: center; gap: 4px; background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
 .pebble-item .pebble-blob { width: 100%; max-width: 124px; transition: transform 320ms var(--spring); }
@@ -401,8 +412,33 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     color-mix(in srgb, var(--ground-2) 40%, var(--ground));
   overflow: hidden;
 }
-.fab-pebble {
+/* Interpolate glass alpha + blur between Fabrication steps (scoped names) */
+@property --fab-glass-a {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0.92;
+}
+@property --fab-blur {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+@property --fab-rim {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+.fab-pebble,
+.scene .fab-pebble {
   --gl: 13px;
+  --fab-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
+  --fab-dur: 900ms;
+  --fab-glass-a: 0.92;
+  --fab-blur: 0px;
+  /* Beat .scene .lg { --glass-a: var(--ga-scene) } so Verre can ease in */
+  --glass-a: var(--fab-glass-a);
+  --lg-blur: var(--fab-blur);
+  --fab-rim: 0;
   position: relative;
   z-index: 1;
   width: min(92%, 260px);
@@ -418,10 +454,23 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   font: 600 18px/1 var(--font-display);
   color: var(--ink);
   transition:
-    background 500ms var(--ease),
-    box-shadow 500ms var(--ease),
-    opacity 500ms var(--ease),
-    transform 200ms var(--spring);
+    --fab-glass-a var(--fab-dur) var(--fab-ease),
+    --fab-blur var(--fab-dur) var(--fab-ease),
+    --fab-rim var(--fab-dur) var(--fab-ease),
+    background var(--fab-dur) var(--fab-ease),
+    box-shadow var(--fab-dur) var(--fab-ease),
+    color var(--fab-dur) var(--fab-ease),
+    opacity var(--fab-dur) var(--fab-ease),
+    -webkit-backdrop-filter var(--fab-dur) var(--fab-ease),
+    backdrop-filter var(--fab-dur) var(--fab-ease),
+    transform 220ms var(--spring);
+}
+.fab-pebble::before {
+  opacity: var(--fab-rim) !important;
+  transition: opacity var(--fab-dur) var(--fab-ease);
+}
+.fab-pebble::after {
+  transition: opacity var(--fab-dur) var(--fab-ease);
 }
 .fab-pebble:hover { transform: scale(1.05); }
 .fab-pebble:active { transform: scale(0.97); }
@@ -436,12 +485,42 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
       color-mix(in srgb, rgb(var(--tint)) 58%, transparent)
     );
 }
-/* Nu : verre scène, pas de forçage opaque */
+/* Nu → Verre : alpha scène + dépoli */
 .fab-pebble--naked {
+  --fab-glass-a: 0.92;
+  --fab-blur: 0px;
   color: transparent;
 }
+.fab-pebble--glass {
+  --fab-glass-a: 0.26;
+  --fab-blur: 16px;
+}
+:root[data-theme="dark"] .fab-pebble--glass {
+  --fab-glass-a: 0.12;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .fab-pebble--glass {
+    --fab-glass-a: 0.12;
+  }
+}
+.fab-pebble--no-rim { --fab-rim: 0; }
 .fab-pebble--no-sparkle::after { opacity: 0 !important; }
-.fab-pebble--no-ink { color: transparent; }
+.fab-pebble__ink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--fab-dur) var(--fab-ease),
+    transform var(--fab-dur) var(--fab-ease);
+}
+.fab-pebble--no-ink .fab-pebble__ink {
+  opacity: 0;
+  transform: translateY(4px);
+  pointer-events: none;
+}
 .fab-list {
   list-style: none;
   margin: 0;
@@ -456,7 +535,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   gap: 14px;
   font: 500 18px/1.2 var(--font-display);
   color: color-mix(in srgb, var(--ink) 28%, transparent);
-  transition: color 400ms var(--ease), opacity 400ms var(--ease);
+  transition: color 700ms var(--fab-ease, var(--ease)), opacity 700ms var(--fab-ease, var(--ease));
 }
 .fab-item.is-on { color: var(--ink); }
 .fab-item.is-current {
@@ -484,7 +563,11 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   border-radius: 50%;
   border: 1.5px solid color-mix(in srgb, var(--ink) 22%, transparent);
   background: transparent;
-  transition: background 400ms var(--ease), border-color 400ms var(--ease), box-shadow 400ms var(--ease), transform 400ms var(--spring);
+  transition:
+    background 700ms var(--fab-ease, var(--ease)),
+    border-color 700ms var(--fab-ease, var(--ease)),
+    box-shadow 700ms var(--fab-ease, var(--ease)),
+    transform 700ms var(--spring);
 }
 .fab-item.is-on .fab-dot {
   border-color: color-mix(in srgb, var(--seafoam) 70%, var(--seafoam-ink));
@@ -500,7 +583,12 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     0 0 0 3px color-mix(in srgb, var(--seafoam) 45%, transparent);
 }
 @media (prefers-reduced-motion: reduce) {
-  .fab-pebble, .fab-item, .fab-dot { transition: none; }
+  .fab-pebble,
+  .fab-pebble::before,
+  .fab-pebble::after,
+  .fab-pebble__ink,
+  .fab-item,
+  .fab-dot { transition: none; }
 }
 
 /* Forme : même contrat grille que Typo (.g3) + rythme label */
@@ -524,23 +612,31 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 /* Slider thumb still uses .blob as a flat mint disc (styles in ui.css). */
 .blob { position: relative; }
 
-/* Galets palette / hero : même stack matière que Button (tint, volume, grain, rim, glow) */
+/* Galets palette / hero : verre translucide + grain noise.svg (même famille que .lg) */
 .pebble-blob {
-  --pebble-tint-mix: 86%;
+  --pebble-tint-mix: 62%;
   --pebble-lit: 0.9;
-  --pebble-sparkle: 0.28;
+  --pebble-sparkle: 0.1;
   --pebble-sheen: rgb(255 255 255 / 0.22);
   --pebble-cs: color-mix(in srgb, var(--bc) 40%, #fff);
   position: relative;
   display: block;
   isolation: isolate;
+  overflow: hidden;
   aspect-ratio: 1.12 / 1;
   border-radius: var(--ba);
   rotate: var(--br);
   will-change: border-radius, transform;
   animation: blob-morph var(--bd, 9s) ease-in-out var(--bl, 0s) infinite alternate;
-  /* Lueur = ombre table neutre (pas halo teinté) */
-  box-shadow: var(--table-drop, 0 14px 0 -4px rgb(0 0 0 / 0.06), 0 18px 24px -10px rgb(0 0 0 / 0.12));
+  /* Corps verre + dépoli */
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0.22) 55%, rgb(255 255 255 / 0.28));
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow:
+    inset 0 2px 1px rgb(255 255 255 / 0.45),
+    inset 0 -3px 6px rgb(0 0 0 / 0.06),
+    var(--table-drop, 0 14px 0 -4px rgb(0 0 0 / 0.06), 0 18px 24px -10px rgb(0 0 0 / 0.12));
 }
 .pebble-blob__layer {
   position: absolute;
@@ -550,11 +646,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .pebble-blob__frost {
   z-index: 1;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")
-      center / 90px 90px,
-    linear-gradient(160deg, rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.28) 62%, rgb(255 255 255 / 0.18));
-  opacity: calc(0.4 + var(--pebble-sparkle) * 0.45);
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.4), rgb(255 255 255 / 0.12) 62%, rgb(255 255 255 / 0.06));
+  opacity: 0.85;
   box-shadow: inset 2px 2px 2px -1px rgb(255 255 255 / var(--pebble-lit));
 }
 .pebble-blob__refract {
@@ -595,13 +688,20 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .pebble-blob__tint {
   z-index: 5;
   inset: 1px;
+  /* Gelée translucide — laisse passer frost + décor */
   background: linear-gradient(
     135deg,
-    color-mix(in srgb, var(--bc) 55%, #fff),
-    var(--bc) 52%,
-    color-mix(in srgb, var(--bc) 88%, #000)
+    color-mix(in srgb, var(--bc) 42%, transparent),
+    color-mix(in srgb, var(--bc) 68%, transparent) 52%,
+    color-mix(in srgb, var(--bc) 48%, transparent)
   );
   opacity: calc(var(--pebble-tint-mix) / 100%);
+}
+.pebble-blob__grain {
+  z-index: 7;
+  background: url(noise.svg) center / 128px 128px repeat;
+  mix-blend-mode: overlay;
+  opacity: var(--pebble-sparkle);
 }
 .pebble-blob__glow {
   z-index: 6;
@@ -609,17 +709,21 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   box-shadow: none;
 }
 :root[data-theme="dark"] .pebble-blob {
-  --pebble-tint-mix: 78%;
+  --pebble-tint-mix: 52%;
   --pebble-lit: 0.65;
-  --pebble-sparkle: 0.12;
+  --pebble-sparkle: 0.06;
   --pebble-sheen: rgb(255 255 255 / 0.1);
+  background:
+    linear-gradient(135deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.06) 55%, rgb(255 255 255 / 0.1));
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .pebble-blob {
-    --pebble-tint-mix: 78%;
+    --pebble-tint-mix: 52%;
     --pebble-lit: 0.65;
-    --pebble-sparkle: 0.12;
+    --pebble-sparkle: 0.06;
     --pebble-sheen: rgb(255 255 255 / 0.1);
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.06) 55%, rgb(255 255 255 / 0.1));
   }
 }
 @keyframes blob-morph {
@@ -627,12 +731,22 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   100% { border-radius: var(--bb); transform: translate3d(0, -2px, 0); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .pebble-blob { --pebble-tint-mix: 96%; }
+  .pebble-blob {
+    --pebble-tint-mix: 96%;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bc);
+  }
   .pebble-blob__frost,
   .pebble-blob__refract,
   .pebble-blob__alive,
-  .pebble-blob__rim { display: none; }
-  .pebble-blob__tint { inset: 0; opacity: 1; }
+  .pebble-blob__rim,
+  .pebble-blob__grain { display: none; }
+  .pebble-blob__tint {
+    inset: 0;
+    opacity: 1;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--bc) 55%, #fff), var(--bc) 52%, color-mix(in srgb, var(--bc) 88%, #000));
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .pebble-blob { animation: none; border-radius: var(--ba); }
