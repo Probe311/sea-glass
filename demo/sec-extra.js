@@ -55,7 +55,7 @@
       { t: 'Quand utiliser un accordéon ?', b: 'Pour regrouper du contenu secondaire sans allonger la page.' },
     ];
     return h(D.Section, { id: 'accordeon', label: 'Composants', title: 'Accordéon', lead: 'Masquer ou révéler du contenu textuel. Un panneau ouvert à la fois dans cet aperçu.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Un panneau ouvert à la fois · aria-expanded.' },
         scene([
           h('div', { className: 'sg-accordion sg-glass', 'data-frosted': true },
             items.map(function (item, i) {
@@ -76,7 +76,7 @@
 
   S.OverlaysDoc = function () {
     return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Aperçu figé, lisible sur verre opaque.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Dialog', cap: 'Aperçu figé · role="dialog" · focus trap côté React.' },
         h('div', { className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-frosted': true, 'data-tint': true },
           h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
           h('div', { className: 'sg-dialog__body' }, 'Cette action est irréversible. Le fichier ne pourra pas être récupéré.'),
@@ -110,7 +110,7 @@
       setTimeout(function () { skipBlur.current = false; }, 0);
     }
     return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes déroulantes', lead: 'Combobox filtrable custom (chevron animé), champ mot de passe, dépôt de fichiers.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Combobox, mot de passe, dépôt de fichiers.' },
         scene([
           h('div', { className: 'sg-combobox' },
             h('label', null, 'Galet'),
@@ -181,7 +181,7 @@
 
   S.ChromeDoc = function () {
     return h(D.Section, { id: 'chrome', label: 'Composants', title: 'En-tête, pied et navigation', lead: 'Identification du site, navigation principale, latérale, fil d’Ariane, pagination et étapes.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Header', cap: 'Skip link, marque, nav, fil d’Ariane.' },
         scene([
           h('a', { className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, 'Aller au contenu'),
           h('header', { className: 'sg-header sg-glass', 'data-frosted': true },
@@ -194,7 +194,7 @@
               h('li', null, h('a', { className: 'sg-link', href: '#chrome' }, 'Docs'), ' / '),
               h('li', null, h('span', { 'aria-current': 'page' }, 'Chrome')))),
         ])),
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Footer', cap: 'Stepper, pagination, pied de page.' },
         scene([
           h('ol', { className: 'sg-stepper' },
             h('li', { className: 'sg-stepper__step', 'data-state': 'done' }, h('span', { className: 'sg-stepper__index' }, '1'), ' Tokens'),
@@ -216,7 +216,7 @@
 
   S.DataDoc = function () {
     return h(D.Section, { id: 'donnees', label: 'Composants', title: 'Données et contenu', lead: 'Tableaux, listes, tuiles, citation, média, hero et transcription.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Hero, tuile, citation, média, table, liste.' },
         scene([
           h('section', { className: 'sg-hero sg-glass', 'data-frosted': true },
             h('div', { className: 'sg-hero__copy' },
@@ -252,7 +252,7 @@
     var lang = useState('FR'), L = lang[0], setL = lang[1];
     var dark = SG.isDark();
     return h(D.Section, { id: 'prefs', label: 'Composants', title: 'Préférences', lead: 'Thème clair/sombre et choix de langue.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Contrôles', cap: 'Langue et thème · états persistés localement.' },
         h('div', { className: 'prefs-row' },
           h('div', { className: 'prefs-block' },
             h('span', { className: 'prefs-label' }, 'Langue'),

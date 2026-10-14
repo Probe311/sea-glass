@@ -29,7 +29,7 @@
   S.Cards = function () {
     var Card = UI.Card, B = UI.Badge;
     return h(D.Section, { id: 'cartes', label: 'Composants', title: 'Cartes et badges', lead: 'La carte est un Givre au rayon de 28 px, teintée par la couleur de son contenu. Les badges sont de petites pilules plates teintées avec leur encre.' },
-      h(D.Panel, { scene: true },
+      h(D.Panel, { scene: true, tag: 'Cartes', cap: 'Givre teinté · rayon 28 px · encre du galet.' },
         h('div', { className: 'g2' },
           h(Card, { tint: 'aqua' }, h('span', { className: 'label' }, 'Aujourd’hui'), h('h4', null, 'Mer calme'), h('p', null, 'Vent faible de sud-ouest, houle de 0,6 m. Bonne visibilité sur tout le littoral.'), h('div', { className: 'kv' }, h('span', null, 'Marée haute 17:42'), h('span', null, 'Coef. 78'))),
           h(Card, { tint: 'amber' }, h('span', { className: 'label' }, 'Observation'), h('h4', null, 'Anémone des mares'), h('p', null, 'Repérée à marée basse, accrochée à un bloc de granit.'), h('div', { className: 'stage' }, h(B, { tint: 'seafoam' }, 'Rivage'), h(B, { tint: 'amber' }, 'Rare'))))),
@@ -184,7 +184,7 @@
       h('div', { className: 'shell', id: 'top' },
         h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
         h('main', { className: 'main' },
-          h(S.Hero), h(S.Matter), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
+          h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
           h(S.Buttons), h(S.Chips), h(S.Toggle), h(S.Checks), h(S.Slider), h(S.Tabs), h(S.Fields),
           h(S.SelectDoc), h(S.Nav), h(S.ChromeDoc), h(S.Alerts), h(S.AccordionDoc), h(S.OverlaysDoc),
           h(S.Cards), h(S.DataDoc), h(S.PrefsDoc),

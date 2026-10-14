@@ -6,7 +6,7 @@
 
   /* ---------- Navigation latérale avec suivi de lecture ---------- */
   var NAV = [
-    ['Principes', [['matiere', 'Matière']]],
+    ['Principes', [['fabrication', 'Fabrication']]],
     ['Fondations', [['couleurs', 'Couleurs'], ['typo', 'Typographie'], ['forme', 'Forme et espace'], ['mouvement', 'Mouvement'], ['icones', 'Icônes']]],
     ['Composants', [
       ['boutons', 'Boutons'], ['puces', 'Puces'], ['interrupteur', 'Interrupteur'], ['cases', 'Cases et radios'],
@@ -20,7 +20,7 @@
   ];
   function norm(t) { return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
   function useSpy() {
-    var st = useState('matiere'), cur = st[0], set = st[1];
+    var st = useState('fabrication'), cur = st[0], set = st[1];
     useEffect(function () {
       var els = Array.prototype.slice.call(document.querySelectorAll('[data-spy]'));
       if (!window.IntersectionObserver) return;
@@ -85,85 +85,127 @@
         [['6', 'propriétés de matière'], ['12', 'couleurs'], ['~50', 'composants React'], ['2', 'thèmes']].map(function (m) { return h('div', { key: m[1] }, h('b', null, m[0]), h('span', null, m[1])); })));
   };
 
-  /* ---------- Matière ---------- */
-  var PROPS = [
-    { k: 'frosted', t: 'Frosted', d: 'Verre dépoli : blur 16 px, saturate 1.4. Actif seulement au-dessus d’un décor (.scene).', o: {} },
-    { k: 'refractive', t: 'Refractive', d: 'Le décor se déforme dans l’épaisseur du verre. Visible dans Chromium, sans effet ailleurs.', o: { frosted: false } },
-    { k: 'alive', t: 'Alive', d: 'La matière grossit au survol (scale 1.05) et s’enfonce à l’appui, avec un wash blanc ~40 %.', o: {} },
-    { k: 'rim', t: 'Rim', d: 'Liseré d’arête, vif côté lumière et repris côté opposé dans la couleur du verre.', o: {} },
-    { k: 'tint', t: 'Tint', d: 'Gelée diagonale 135° (clair → galet → un peu plus sombre) + encre *-ink pour texte et icônes.', o: { tint: 'aqua', tintA: 0.88 } },
-    { k: 'glow', t: 'Glow', d: 'Halo coloré optionnel sous l’objet. Pas le drop standard : l’ombre table reste neutre.', o: { glowColor: 'kelly' } }
+  /* ---------- Fabrication ---------- */
+  var FAB_LAYERS = [
+    { k: 'rim', t: 'Liseré', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
+    { k: 'tint', t: 'Teinte', role: 'tint + gelée 135°', note: 'Plein du galet : clair TL → saturé BR + encre *-ink.' },
+    { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
+    { k: 'frosted', t: 'Dépoli', role: 'data-frosted', note: 'blur(16px) saturate(1.4) — seulement sur scène.' },
+    { k: 'glow', t: 'Éclat', role: 'data-glow', note: 'Halo teinté optionnel — pas l’ombre table par défaut.' },
+    { k: 'sparkle', t: 'Scintillement', role: 'grain / --sparkle', note: 'Tuile noise.svg en overlay (~8 % clair).' },
   ];
-  var ALL = PROPS.map(function (p) { return p.k; });
-  function PropCard(p) {
-    var only = {}; ALL.forEach(function (k) { only[k] = false; }); only[p.k] = true;
-    var props = Object.assign({ className: 'pc', style: { padding: 20, minHeight: 168, display: 'grid', gap: 6, alignContent: 'start', '--lg-r': '24px', '--gl': '20px' } }, only, p.o);
-    return h(Glass, props, h('span', { className: 'mono', style: { fontSize: 11, letterSpacing: '.06em', opacity: .7 } }, 'data-' + p.k), h('b', { style: { font: '600 18px var(--font-display)' } }, p.t), h('span', { style: { fontSize: 13, lineHeight: 1.45, opacity: .9 } }, p.d));
-  }
-  var TINTS = ['clear', 'aqua', 'seafoam', 'lavender', 'amber', 'ruby'];
-  function Atelier() {
-    var st = useState({ frosted: true, refractive: true, alive: true, rim: true, tint: true, glow: true }), on = st[0], setOn = st[1];
-    var ts = useState('aqua'), tint = ts[0], setTint = ts[1], bs = useState(16), blur = bs[0], setBlur = bs[1];
-    var lines = ['<Glass'].concat(on.tint ? ['  tint="' + tint + '"'] : []).concat(ALL.filter(function (k) { return k !== 'tint'; }).map(function (k) { return on[k] ? '  ' + k : '  ' + k + '={false}'; })).concat(['  style={{ "--lg-blur": "' + blur + 'px" }}', '/>']);
-    var code = lines.join('\n');
-    return h(D.Panel, { scene: true, tag: 'Atelier', cap: 'Active ou coupe chaque propriété. Le code se met à jour.' },
-      h('div', { style: { display: 'grid', gap: 24, gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', alignItems: 'start' } },
-        h('div', { style: { display: 'grid', placeItems: 'center', padding: '12px 0' } },
-          h(Glass, { tint: on.tint ? tint : undefined, tintA: 0.88, frosted: on.frosted, refractive: on.refractive, alive: on.alive, rim: on.rim, glow: on.glow,
-            style: { padding: 26, width: 'min(100%, 320px)', display: 'grid', gap: 8, '--lg-r': '28px', '--gl': '24px', '--lg-blur': blur + 'px' } },
-            h('span', { className: 'label', style: { color: 'inherit', opacity: .75 } }, 'Mer calme'),
-            h('div', { style: { font: '600 46px/1 var(--font-display)' } }, '18 °C'),
-            h('p', { style: { fontSize: 14 } }, 'Vent faible de sud-ouest, houle de 0,6 m.'),
-            h('div', { style: { display: 'flex', justifyContent: 'space-between', fontSize: 13, paddingTop: 10, borderTop: '1px solid color-mix(in srgb, currentColor 18%, transparent)' } }, h('span', null, 'Marée haute 17:42'), h('span', null, 'Coef. 78')))),
-        h('div', { style: { display: 'grid', gap: 10 } },
-          ALL.map(function (k) {
-            var info = PROPS.filter(function (p) { return p.k === k; })[0];
-            return h(Glass, { key: k, style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '8px 8px 8px 16px', '--lg-r': '18px', '--gl': '10px' }, refractive: false, glow: false, alive: false },
-              h('b', { style: { fontWeight: 500, fontSize: 15 } }, info.t), h(UI.Toggle, { checked: on[k], onChange: function (v) { var n = Object.assign({}, on); n[k] = v; setOn(n); }, 'aria-label': info.t }));
-          }),
-          h('div', { className: 'stage', role: 'group', 'aria-label': 'Teinte' }, TINTS.map(function (k) {
-            return h('button', { key: k, type: 'button', 'aria-label': k, 'aria-pressed': tint === k, onClick: function () { setTint(k); setOn(Object.assign({}, on, { tint: true })); },
-              style: { width: 34, height: 34, borderRadius: '50%', border: '2px solid rgba(255,255,255,.85)', background: 'var(--' + k + ')', cursor: 'pointer', boxShadow: tint === k ? '0 0 0 2px #fff, 0 0 0 4px #10302A' : '0 2px 6px rgba(0,0,0,.2)' } });
-          })),
-          h(UI.Slider, { label: 'Flou', value: 16, min: 0, max: 28, unit: ' px', onChange: setBlur }))),
-      h(D.Code, { text: code }));
+  var FAB_BLOB = '58% 42% 48% 52% / 48% 52% 46% 54%';
+
+  function FabricateDemo() {
+    var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
+    var rootRef = React.useRef(null);
+    var reduce = typeof window !== 'undefined' && window.matchMedia
+      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    useEffect(function () {
+      if (reduce) { setStep(FAB_LAYERS.length); return; }
+      var el = rootRef.current;
+      if (!el || !window.IntersectionObserver) return;
+      var timer = null, active = false;
+
+      function clear() { if (timer) { clearTimeout(timer); timer = null; } }
+      function tick(n) {
+        clear();
+        setStep(n);
+        if (n < FAB_LAYERS.length) {
+          timer = setTimeout(function () { tick(n + 1); }, 1100);
+        } else {
+          timer = setTimeout(function () { tick(0); }, 1600);
+        }
+      }
+      function start() { if (!active) { active = true; tick(0); } }
+      function stop() { active = false; clear(); setStep(0); }
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
+      }, { threshold: 0.35 });
+      io.observe(el);
+      return function () { io.disconnect(); stop(); };
+    }, [reduce]);
+
+    var on = {
+      rim: step >= 1,
+      tint: step >= 2,
+      refractive: step >= 3,
+      frosted: step >= 4,
+      glow: step >= 5,
+      sparkle: step >= 6,
+    };
+
+    return h('div', { className: 'fab', ref: rootRef },
+      h('div', { className: 'fab-stage scene sg-scene', 'aria-hidden': true },
+        h('div', { className: 'fab-grid' }),
+        h(Glass, {
+          className: 'fab-pebble'
+            + (step === 0 ? ' fab-pebble--naked' : '')
+            + (on.sparkle ? '' : ' fab-pebble--no-sparkle'),
+          frosted: on.frosted,
+          refractive: on.refractive,
+          rim: on.rim,
+          glow: on.glow,
+          alive: false,
+          tint: on.tint ? 'seafoam' : undefined,
+          tintA: on.tint ? 0.72 : undefined,
+          style: Object.assign(
+            { '--lg-r': FAB_BLOB },
+            on.sparkle ? {} : { '--sparkle': 0 },
+            on.tint ? {} : { '--glass-a': 0.14 }
+          ),
+        })),
+      h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
+        FAB_LAYERS.map(function (layer, i) {
+          var active = step > i;
+          return h('li', {
+            key: layer.k,
+            className: 'fab-item' + (active ? ' is-on' : ''),
+            'aria-current': active ? 'true' : undefined,
+          },
+            h('span', { className: 'fab-dot', 'aria-hidden': true }),
+            h('span', { className: 'fab-label' }, layer.t));
+        })));
   }
 
-  S.Matter = function () {
-    return h(D.Section, { id: 'matiere', label: 'Principes', title: 'Une matière, six propriétés', lead: 'Formule gelée : dégradé diagonal, grain, volume inset, ombre table neutre. Tout bloc est un Glass ; tint fixe aussi l’encre du galet pour texte et icônes.' },
-      h(D.Sub, { title: 'Les six propriétés', text: 'Chaque propriété est un attribut indépendant. Les montrer isolées permet de voir ce qu’elle apporte.' },
-        h(D.Panel, { scene: true, tag: 'Isolées', cap: 'Les contrôles de petite taille coupent refractive pour rester légers.' },
-          h('div', { style: { display: 'grid', gap: 16, gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 230px), 1fr))' } }, PROPS.map(function (p) { return h(PropCard, Object.assign({ key: p.k }, p)); })))),
-      h(D.Sub, { title: 'Atelier' }, h(Atelier)),
-      h(D.Sub, { title: 'Formule gelée', text: 'Même recette pour les 12 galets : clair en haut à gauche, saturé en bas à droite, grain overlay, volume bombé, ombre grise posée sur la table. Le glow coloré reste optionnel.' },
-        h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Teintes aqua / ruby : encre du parent, pas une couleur d’icône générique.' },
-          h('div', { style: { display: 'grid', gap: 22, gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))' } },
-            [['Posé', {}], ['Teinté aqua', { tint: 'aqua', tintA: 0.88 }], ['Teinté ruby', { tint: 'ruby', tintA: 0.88 }], ['Creusé', { className: 'carved', frosted: false, refractive: false, glow: false, alive: false }]].map(function (o) {
-              return h('div', { key: o[0], style: { display: 'grid', gap: 10, justifyItems: 'center', fontSize: 13, color: 'var(--ink)' } },
-                h(Glass, Object.assign({ style: { width: '100%', maxWidth: 170, height: 104, '--lg-r': '30px' } }, o[1])), h('b', { style: { fontWeight: 500 } }, o[0]));
-            }))),
-        h(D.Specs, { head: ['Élément', 'Valeur', 'Rôle'], rows: [
-          ['Dégradé teinté', 'linear-gradient 135° clair → galet → sombre léger', 'Volume de gelée, pas un aplati.'],
-          ['Volume', 'inset 0 2px 1px blanc/50 %, inset 0 -3px 6px noir/6 %', 'Bombé haut, ombre interne bas.'],
-          ['Ombre table', '0 14px 0 -4px / 0 18px 24px -10px, noir neutre', 'Posé sur la table — pas de halo teinté.'],
-          ['Grain', 'noise.svg overlay, sparkle 0.08 (clair)', 'Texture monochrome légère.'],
-          ['Actif / press', 'overlay blanc 40 % + inset léger', 'Boutons, chips aria-pressed.'],
-          ['Glow', 'Optionnel, couleur de la teinte', 'Accent rare — jamais le drop par défaut.'],
-          ['Tint → ink', 'color: var(--{galet}-ink)', 'Icônes en currentColor suivent le parent.']] })),
-      h(D.Sub, { title: 'Surfaces' },
-        h(D.Specs, { head: ['Contexte', 'Opacité / flou', 'Usage'], rows: [
-          ['Sur le sol', 'alpha 0.88 clair · 0.08 sombre', 'Boutons, puces, champs : objets posés sur la page.'],
-          ['Sur un décor coloré', 'alpha 0.26 / 0.12 + blur 16', 'Cartes, recherche, nav : verre au-dessus d’une image.'],
-          ['Teinté', 'tint-a ≈ 0.88 + dégradé 135°', 'Actions et états : gelée colorée, encre du galet.'],
-          ['Flou', 'Seulement dans .scene ou .over', 'Sur un sol uni il ne se voit pas et coûte cher : il est coupé.']] })),
-      h(D.Usage, { dos: ['Garder l’ombre table neutre pour les objets posés.', 'Lier texte et icônes à l’encre du tint (currentColor).', 'Réserver data-glow aux accents rares.', 'Prévoir un décor coloré derrière le frost.'],
-        donts: ['Remplacer l’ombre table par un halo teinté sur chaque bouton.', 'Forcer une couleur d’icône qui ignore le parent teinté.', 'Mélanger un glow d’une couleur et une teinte d’une autre.', 'Utiliser un verre très transparent sur un fond uni : il disparaît.'] }));
+  S.Fabrication = function () {
+    return h(D.Section, {
+      id: 'fabrication',
+      label: 'Principes',
+      title: 'Fabrication',
+      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une forme nue, puis on empile liseré, teinte, réfraction, dépoli, éclat et scintillement jusqu’à la gelée posée sur la table.',
+    },
+      h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — boucle automatique.' },
+        h(FabricateDemo)),
+      h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
+        return [l.t, l.role, l.note];
+      }).concat([
+        ['Ombre table', 'elevation-3 neutre', 'Posé sur la table — pas de halo teinté par défaut.'],
+        ['Alpha sol', '~0.88 clair · 0.08 sombre', 'Objets posés hors scène.'],
+        ['Alpha scène', '~0.26 / 0.12', 'Verre au-dessus d’un décor coloré.'],
+      ]) }),
+      h(D.Usage, {
+        dos: [
+          'Garder l’ombre table neutre pour les objets posés.',
+          'Lier texte et icônes à l’encre du tint (currentColor).',
+          'Réserver data-glow aux accents rares.',
+          'Prévoir un décor coloré derrière le dépoli.',
+        ],
+        donts: [
+          'Remplacer l’ombre table par un halo teinté sur chaque bouton.',
+          'Forcer une couleur d’icône qui ignore le parent teinté.',
+          'Mélanger un éclat d’une couleur et une teinte d’une autre.',
+          'Utiliser un verre très transparent sur un fond uni : il disparaît.',
+        ],
+      }));
   };
 
   /* ---------- Couleurs ---------- */
   S.Colors = function () {
     SG.useTheme();
-    return h(D.Section, { id: 'couleurs', label: 'Fondations', title: 'Douze galets', lead: 'Pastels à basse saturation, un peu laiteux, avec quelques tons pleins pour les repères. Chaque forme est un galet arrondi, sans angle. Clique sur un galet pour copier sa variable.' },
+    return h(D.Section, { id: 'couleurs', label: 'Fondations', title: 'Couleurs', lead: 'Pastels à basse saturation, un peu laiteux, avec quelques tons pleins pour les repères. Chaque forme est un galet arrondi, sans angle. Clique sur un galet pour copier sa variable.' },
       h(D.Panel, { tag: 'Palette', cap: 'Valeurs du thème clair. Les encres se renforcent en thème sombre.' },
         h('div', { className: 'pebbles-wrap' }, h('div', { className: 'pebbles' }, SG.PEBBLES.map(function (p) {
           var hex = SG.cssVar('--' + p.key).toUpperCase();
@@ -188,9 +230,13 @@
       ['Corps', { fontSize: 14, lineHeight: '20px' }, 'Houle de 0,6 m, vent faible de sud-ouest, bonne visibilité.', '14 / 20 · 400'],
       ['Libellé', { fontSize: 12, lineHeight: '16px', fontWeight: 500, letterSpacing: '0.5px', textTransform: 'uppercase' }, 'Coefficient de marée', '12 / 16 · 500 · capitales']];
     return h(D.Section, { id: 'typo', label: 'Fondations', title: 'Typographie', lead: 'Poppins Bold pour les titres, le wordmark et les contrôles (géométrique arrondie, a mono-étage). Roboto pour le texte, Roboto Mono pour les valeurs. Les interlignes de 1,3 à 1,5 compensent la translucidité.' },
-      h('div', { className: 'g3' }, [['Poppins', 'var(--font-display)', 'Titres, boutons, onglets, logo'], ['Roboto', 'var(--font-body)', 'Texte, champs, légendes'], ['Roboto Mono', 'var(--font-mono)', 'Valeurs, tokens, code']].map(function (f) {
-        return h('div', { className: 'panel', key: f[0] }, h('div', { className: 'panel-body', style: { gap: 6 } }, h('span', { style: { fontFamily: f[1], fontSize: 52, lineHeight: 1 } }, 'Aa'), h('b', { style: { fontWeight: 500, marginTop: 8 } }, f[0]), h('span', { style: { fontSize: 13, color: 'var(--ink-3)' } }, f[2])));
-      })),
+      h(D.Panel, { tag: 'Familles', cap: 'Poppins pour les titres · Roboto pour le corps · Roboto Mono pour les valeurs.' },
+        h('div', { className: 'g3' }, [['Poppins', 'var(--font-display)', 'Titres, boutons, onglets, logo'], ['Roboto', 'var(--font-body)', 'Texte, champs, légendes'], ['Roboto Mono', 'var(--font-mono)', 'Valeurs, tokens, code']].map(function (f) {
+          return h('div', { className: 'type-card', key: f[0] },
+            h('span', { className: 'type-card__aa', style: { fontFamily: f[1] } }, 'Aa'),
+            h('b', { className: 'type-card__name' }, f[0]),
+            h('span', { className: 'type-card__role' }, f[2]));
+        }))),
       h(D.Specs, { head: ['Style', 'Aperçu', 'Taille / interligne · graisse'], rows: rows.map(function (r) { return [r[0], h('span', { style: Object.assign({ fontFamily: 'var(--font-body)', display: 'block', color: 'var(--ink)' }, r[1]) }, r[2]), r[3]]; }) }));
   };
 

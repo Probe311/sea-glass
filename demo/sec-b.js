@@ -32,7 +32,7 @@
           h(D.Stage, null, h(B, { variant: 'primary', size: 'sm' }, 'Petit'), h(B, { variant: 'primary' }, 'Moyen'), h(B, { variant: 'primary', size: 'xl' }, 'Grand'),
             h(B, { variant: 'love', icon: true, size: 'sm', 'aria-label': 'Favori', 'aria-pressed': true }, h(Icon, { name: 'heart' })), h(B, { variant: 'love', icon: true, size: 'xl', 'aria-label': 'Favori', 'aria-pressed': true }, h(Icon, { name: 'heart' }))))),
       h(D.Sub, { title: 'États', text: 'Chaque état est rendu avec les vrais styles du composant.' },
-        h(D.Panel, { tag: 'Matrice' }, h(D.Matrix, { corner: 'Variante', cols: STATES, rows: [['primary', 'Principal'], ['neutral', 'Neutre'], ['rect', 'Rectangle'], ['love', 'Cœur']], render: cell }))),
+        h(D.Panel, { tag: 'Matrice', cap: 'Variantes × états · cible tactile ≥ 40 px.' }, h(D.Matrix, { corner: 'Variante', cols: STATES, rows: [['primary', 'Principal'], ['neutral', 'Neutre'], ['rect', 'Rectangle'], ['love', 'Cœur']], render: cell }))),
       h(D.Sub, { title: 'Spécifications' },
         h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
           ['Hauteur', '40 · 48 · 56 px', 'Petit, moyen, grand.'], ['Padding horizontal', '18 · 24 · 32 px', 'Nul pour la forme cercle.'],
@@ -51,7 +51,7 @@
     }
     return h(D.Section, { id: 'puces', label: 'Composants', title: 'Puces', lead: 'La pilule sert aux filtres cumulables : une coche apparaît quand elle est active. Le rectangle arrondi sert aux options.' },
       h(D.Panel, { tag: 'Aperçu', cap: 'Clique pour activer ou désactiver.' }, h(D.Stage, null, h(C, { defaultPressed: true }, 'Givré'), h(C, null, 'Mare'), h(C, { shape: 'rect' }, 'Tide pool'), h(C, { shape: 'rect', defaultPressed: true }, 'Récif'))),
-      h(D.Panel, { tag: 'États' }, h(D.Matrix, { corner: 'Forme', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['sel', 'Sélectionnée'], ['focus', 'Focus'], ['dis', 'Désactivée']], rows: [['pill', 'Pilule'], ['rect', 'Rectangle']], render: cell })),
+      h(D.Panel, { tag: 'États', cap: 'Pilule et rectangle · coche à l’activation.' }, h(D.Matrix, { corner: 'Forme', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['sel', 'Sélectionnée'], ['focus', 'Focus'], ['dis', 'Désactivée']], rows: [['pill', 'Pilule'], ['rect', 'Rectangle']], render: cell })),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Hauteur', '36 px', 'Texte Roboto 500, 14 px.'], ['Rayon', '999 px ou 12 px', 'Pilule ou rectangle.'], ['Sélection', 'Teinte seafoam + coche 16 px', 'Le padding gauche se réduit de 6 px.']] }));
   };
 
@@ -65,7 +65,7 @@
     return h(D.Section, { id: 'interrupteur', label: 'Composants', title: 'Interrupteur', lead: 'Un rail de verre et une grosse poignée ronde, creusée comme un galet. Éteint, le rail est blanc et la poignée grise. Allumé, le rail passe en seafoam et la poignée en vert d’eau profond. À l’appui, la poignée s’étire.' },
       h(D.Panel, { tag: 'Aperçu', cap: 'Interactif : clique ou utilise la barre d’espace.' },
         h(D.Stage, { style: { gap: 32 } }, [['Marée', false], ['Houle', true]].map(function (t) { return h('label', { key: t[0], className: 'lab', style: { display: 'inline-flex', alignItems: 'center', gap: 12 } }, h(T, { defaultChecked: t[1], 'aria-label': t[0] }), t[0]); }))),
-      h(D.Panel, { tag: 'États' }, h(D.Matrix, { corner: 'Valeur', cols: STATES, rows: [['off', 'Éteint'], ['on', 'Allumé']], render: cell })),
+      h(D.Panel, { tag: 'États', cap: 'Éteint / allumé · poignée étirée à l’appui.' }, h(D.Matrix, { corner: 'Valeur', cols: STATES, rows: [['off', 'Éteint'], ['on', 'Allumé']], render: cell })),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Rail', '68 × 40 px, pilule', 'Verre teinté seafoam quand allumé.'], ['Poignée', '28 px, marge 6 px', 'Dégradé radial et ombre interne : elle paraît creusée.'], ['Course', '28 px', 'Ressort en 400 ms.'], ['Appui', 'Largeur 36 px', 'La poignée s’étire avant de partir.']] }));
   };
 
@@ -84,7 +84,7 @@
         h('div', { className: 'g2' },
           h('div', { className: 'stack' }, h('span', { className: 'label' }, 'Cases'), h(K, { defaultChecked: true }, 'Coquillages'), h(K, null, 'Algues'), h(K, { disabled: true }, 'Épaves')),
           h('div', { className: 'stack' }, h('span', { className: 'label' }, 'Radios'), h(UI.RadioGroup, { label: 'Zone', options: ['Rivage', 'Crique', 'Récif'] })))),
-      h(D.Panel, { tag: 'États' }, h(D.Matrix, { corner: 'Valeur', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['cb0', 'Case vide'], ['cb1', 'Case cochée'], ['cb2', 'Indéterminée'], ['rb0', 'Radio vide'], ['rb1', 'Radio choisi']], render: cell })),
+      h(D.Panel, { tag: 'États', cap: 'Case, indéterminée, radio · coche blanche sur teal.' }, h(D.Matrix, { corner: 'Valeur', cols: [['rest', 'Repos'], ['hover', 'Survol'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['cb0', 'Case vide'], ['cb1', 'Case cochée'], ['cb2', 'Indéterminée'], ['rb0', 'Radio vide'], ['rb1', 'Radio choisi']], render: cell })),
       h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [['Taille', '24 px', 'Zone cliquable étendue au libellé.'], ['Rayon', '8 px · 50 %', 'Case et radio.'], ['Fond coché', 'Dégradé #308069 → #256B5A', 'Teal profond : la coche blanche ressort à 4,7:1 minimum.'], ['Coche', 'Blanche, trait 3 px, tracé en 260 ms', 'Ombre fine pour détacher le trait du fond.'], ['Point du radio', 'Blanc, 10 px, ressort', 'Même fond teal profond que la case.'], ['Non coché', 'Creux, contour 1,5 px', 'Lumière inversée, contour encre à 62 %.'], ['Survol', 'scale(1.05) + halo', 'Pas de déplacement vertical.']] }));
   };
 
@@ -105,7 +105,7 @@
             h(UI.Slider, { label: 'Houle', value: 30, min: 0, max: 100, step: 10, marks: true, unit: ' cm' }),
             h(UI.Slider, { label: 'Désactivé', value: 25, unit: ' m', disabled: true })))),
       h(D.Sub, { title: 'États', text: 'Défaut = capsule mint continue. Appui = même matière, bout un peu plus large. Le focus n’apparaît qu’au clavier.' },
-        h(D.Panel, { tag: 'Matrice' }, h(D.Matrix, { tall: true, corner: 'Composant', cols: [['rest', 'Défaut'], ['hover', 'Survol'], ['press', 'Appui'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['s', 'Curseur']], render: cell }))),
+        h(D.Panel, { tag: 'Matrice', cap: 'Curseur · capsule mint continue.' }, h(D.Matrix, { tall: true, corner: 'Composant', cols: [['rest', 'Défaut'], ['hover', 'Survol'], ['press', 'Appui'], ['focus', 'Focus'], ['dis', 'Désactivé']], rows: [['s', 'Curseur']], render: cell }))),
       h(D.Sub, { title: 'Progression', text: 'Les barres gardent un rail creusé (sémantique différente du curseur interactif) et le même verre de remplissage. Quatre teintes, trois tailles, tampon, indéterminé et anneau.' },
         h(D.Panel, { tag: 'Barres', cap: 'Le remplissage rebondit légèrement à l’arrivée. Le mode indéterminé n’anime que transform.' },
           h('div', { className: 'g2' },
@@ -115,7 +115,7 @@
             h('div', { className: 'stack', style: { gap: 12 } }, [['sm', 'Petite · 10 px'], ['md', 'Moyenne · 18 px'], ['lg', 'Grande · 26 px']].map(function (z) {
               return h('div', { key: z[0], className: 'stack', style: { gap: 4 } }, h('span', { className: 'label' }, z[1]), h(UI.Progress, { label: z[1], value: 64, size: z[0] === 'md' ? undefined : z[0] }));
             })))),
-        h(D.Panel, { tag: 'Teintes et anneau' },
+        h(D.Panel, { tag: 'Teintes et anneau', cap: 'Progression teintée et anneau circulaire.' },
           h('div', { className: 'g2' },
             h('div', { className: 'stack', style: { gap: 14 } }, tones.map(function (t) { return h(UI.Progress, { key: t[0], label: t[1], value: t[2], tone: t[0] === 'seafoam' ? undefined : t[0], showValue: true }); })),
             h('div', { className: 'stage center', style: { gap: 28 } }, [18, 64, 100].map(function (v) { return h('div', { key: v, className: 'stack', style: { justifyItems: 'center', gap: 8 } }, h(UI.Ring, { value: v, size: 84, label: 'Complétion ' + v + ' %' }), h('span', { className: 'label' }, v === 100 ? 'Terminé' : v + ' %')); }))))),
@@ -140,7 +140,7 @@
       h(D.Sub, { title: 'Onglets à galet' },
         h(D.Panel, { tag: 'Aperçu', cap: 'role="tablist" · activation automatique au focus.' }, h(UI.Tabs, { items: items, label: 'Zones' }))),
       h('div', { className: 'g2' },
-        h(D.Sub, { title: 'Onglets à trait' }, h(D.Panel, { tag: 'Aperçu' }, h(UI.Tabs, { items: items, variant: 'line', label: 'Zones, variante à trait' }))),
+        h(D.Sub, { title: 'Onglets à trait' }, h(D.Panel, { tag: 'Aperçu', cap: 'Indicateur bas · flèches clavier.' }, h(UI.Tabs, { items: items, variant: 'line', label: 'Zones, variante à trait' }))),
         h(D.Sub, { title: 'Contrôle segmenté' }, h(D.Panel, { tag: 'Aperçu', cap: 'Choix exclusif sans panneau : role="radiogroup".' }, h(D.Stage, { col: true }, h(UI.Segmented, { label: 'Zone', options: ['Rivage', 'Crique', 'Récif'] }), h(UI.Segmented, { label: 'Vue', options: ['Jour', 'Semaine', 'Mois', 'Année'] }))))),
       h(D.Specs, { head: ['Touche', 'Action', 'Note'], rows: [['Tab', 'Entre dans la liste, puis en sort', 'Un seul onglet est focusable à la fois.'], ['← →', 'Onglet précédent ou suivant', 'Boucle aux extrémités.'], ['Début · Fin', 'Premier ou dernier onglet', ''], ['Entrée · Espace', 'Active l’onglet', 'Déjà actif si l’activation est automatique.']] }));
   };
