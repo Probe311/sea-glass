@@ -189,7 +189,9 @@
           h(S.ChromeDoc), h(S.Slider), h(S.DataDoc), h(S.Toggle), h(S.Bullets), h(S.OverlaysDoc),
           h(S.Nav), h(S.Tabs), h(S.PrefsDoc), h(S.Chips), h(S.SelectDoc),
           h(S.Contrast), h(S.Tokens),
-          h('footer', { className: 'end' }, h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.1.0-alpha.0')))),
+          h('footer', { className: 'end' },
+            h('span', null, 'Sea Glass · ' + ((window.SG_META && window.SG_META.version) || '0.2.0')),
+            h('span', null, 'Matière : bordure, teinte, réfraction, givre, lueur, encre · packages .sg-*')))),
       h(Toast));
   }
   ReactDOM.createRoot(document.getElementById('root')).render(h(App));
