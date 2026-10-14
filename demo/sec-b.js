@@ -37,7 +37,9 @@
         h(D.Specs, { head: ['Propriété', 'Valeur', 'Note'], rows: [
           ['Hauteur', '40 · 48 · 56 px', 'Petit, moyen, grand.'], ['Padding horizontal', '18 · 24 · 32 px', 'Nul pour la forme cercle.'],
           ['Rayon', '999 px · 14 px · 50 %', 'Pilule, rectangle, cercle.'], ['Police', 'Poppins 600, 14 · 16 · 18 px', 'Libellé court, verbe à l’infinitif.'],
-          ['Survol', 'scale(1.05), +3 % de luminosité', 'Le reflet suit le pointeur.'], ['Appui', 'scale(0.97), ombre interne creusée', 'Disque de contact et deux ondes.'],
+          ['Survol', 'scale(1.05), +3 % de luminosité', 'Le reflet suit le pointeur.'],
+          ['Appui', 'scale(0.97), ombre interne creusée', 'Disque de contact + 2 ondes concentriques (SG.ripple).'],
+          ['Ripple', 'pointer-down', 'Disque + 2 anneaux ; rebond scale 1.05 / 0.97. Ghost : pas de ripple.'],
           ['Désactivé', 'Opacité 0.45, désaturé', 'Le curseur devient interdit.']] })),
       h(D.Usage, { dos: ['Un seul bouton principal par vue.', 'Un libellé court qui annonce l’action.', 'Réserver la forme cercle aux icônes seules, avec un aria-label.'], donts: ['Mettre deux boutons teintés côte à côte.', 'Utiliser le cœur pour autre chose qu’un favori.', 'Réduire la hauteur sous 40 px.'] }));
   };

@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@sea-glass/tokens.svg)](https://www.npmjs.com/package/@sea-glass/tokens)
 
-Single source of Sea Glass design tokens in the [W3C Design Tokens (DTCG)](https://www.designtokens.org/) format. Built with [Style Dictionary v4](https://styledictionary.com/). npm **0.1.1**.
+Single source of Sea Glass design tokens in the [W3C Design Tokens (DTCG)](https://www.designtokens.org/) format. Built with [Style Dictionary v4](https://styledictionary.com/). npm **0.2.0**.
 
 ```bash
 pnpm add @sea-glass/tokens

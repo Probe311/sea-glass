@@ -13,7 +13,7 @@ import '@sea-glass/css';
 import { Glass, Button, TextField, Alert, Header, Table } from '@sea-glass/react';
 ```
 
-Peer : `react` / `react-dom` `^19`. npm **0.1.1**.
+Peer : `react` / `react-dom` `^19`. npm **0.2.0**.
 
 ## Catalogue
 

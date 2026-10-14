@@ -183,4 +183,11 @@
 
 .lg > :where(*) { position: relative; z-index: 4; }
 
+/* Ombre table uniquement sur le parent — jamais sur un Glass imbriqué */
+.lg .lg,
+.sg-snack .btn,
+.snack .btn {
+  --sh-out: none;
+}
+
 @media (prefers-reduced-motion: reduce) { .lg { transition: none; } .lg[data-alive]:hover, .lg[data-alive]:active { transform: none; } }

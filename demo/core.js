@@ -71,6 +71,37 @@
       h('use', { href: 'icons/sprite.svg#i-' + alias }));
   };
 
+  /** CTA press: contact disc + two concentric rings (respects reduced-motion). */
+  SG.ripple = function (el, e) {
+    if (!el || (e && e.button != null && e.button !== 0)) return;
+    if (el.disabled || el.getAttribute('aria-disabled') === 'true') return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var r = el.getBoundingClientRect();
+    var x = e && e.clientX != null ? e.clientX - r.left : r.width / 2;
+    var y = e && e.clientY != null ? e.clientY - r.top : r.height / 2;
+    var size = Math.max(r.width, r.height) * 1.7;
+    var disc = document.createElement('span');
+    disc.className = 'rp-disc';
+    disc.style.left = x + 'px';
+    disc.style.top = y + 'px';
+    el.appendChild(disc);
+    [0, 110].forEach(function (d) {
+      var s = document.createElement('span');
+      s.className = 'rp-ring';
+      s.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;animation-delay:' + d + 'ms';
+      el.appendChild(s);
+      setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 900 + d);
+    });
+    function up() {
+      disc.classList.add('out');
+      setTimeout(function () { if (disc.parentNode) disc.parentNode.removeChild(disc); }, 340);
+      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
+    }
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+  };
+
   /* ---------- Lumière : un seul écouteur pour tout le système ---------- */
   var live = null, last = null, raf = 0;
   function clearLight(el) {

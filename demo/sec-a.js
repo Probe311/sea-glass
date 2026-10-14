@@ -105,11 +105,13 @@
     { k: 'glow', t: 'Éclat', role: 'data-glow', note: 'Halo teinté optionnel — pas l’ombre table par défaut.' },
     { k: 'sparkle', t: 'Scintillement', role: 'grain / --sparkle', note: 'Tuile noise.svg en overlay (~8 % clair).' },
   ];
-  var FAB_BLOB = '58% 42% 48% 52% / 48% 52% 46% 54%';
-
   function FabricateDemo() {
     var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
     var rootRef = React.useRef(null);
+    var ctaRef = React.useRef(null);
+    var pauseRef = React.useRef(0);
+    var stepLive = React.useRef(0);
+    stepLive.current = step;
     var reduce = typeof window !== 'undefined' && window.matchMedia
       && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -122,12 +124,15 @@
       function clear() { if (timer) { clearTimeout(timer); timer = null; } }
       function tick(n) {
         clear();
-        setStep(n);
-        if (n < FAB_LAYERS.length) {
-          timer = setTimeout(function () { tick(n + 1); }, 1100);
-        } else {
-          timer = setTimeout(function () { tick(0); }, 1600);
+        var now = Date.now();
+        if (now < pauseRef.current) {
+          timer = setTimeout(function () { tick(stepLive.current); }, pauseRef.current - now);
+          return;
         }
+        setStep(n);
+        timer = setTimeout(function () {
+          tick(n < FAB_LAYERS.length ? n + 1 : 0);
+        }, n < FAB_LAYERS.length ? 1100 : 1600);
       }
       function start() { if (!active) { active = true; tick(0); } }
       function stop() { active = false; clear(); setStep(0); }
@@ -148,9 +153,18 @@
       sparkle: step >= 6,
     };
 
+    function jump(i, e) {
+      pauseRef.current = Date.now() + 2800;
+      setStep(i + 1);
+      SG.ripple(e.currentTarget, e);
+    }
+
     return h('div', { className: 'fab', ref: rootRef },
       h('div', { className: 'fab-stage', 'aria-hidden': true },
         h(Glass, {
+          as: 'button',
+          type: 'button',
+          innerRef: ctaRef,
           className: 'fab-pebble'
             + (step === 0 ? ' fab-pebble--naked' : '')
             + (on.sparkle ? '' : ' fab-pebble--no-sparkle'),
@@ -158,15 +172,16 @@
           refractive: on.refractive,
           rim: on.rim,
           glow: on.glow,
-          alive: false,
+          alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
           tintA: on.tint ? 0.92 : undefined,
+          onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: Object.assign(
-            { '--lg-r': FAB_BLOB, '--lg-blur': '8px' },
+            { '--lg-r': '999px', '--lg-blur': '8px' },
             on.sparkle ? {} : { '--sparkle': 0 },
             on.tint ? {} : { '--glass-a': 0.55, '--tint-a': 0.2 }
           ),
-        })),
+        }, 'Collecter')),
       h('ol', { className: 'fab-list', 'aria-label': 'Couches de matière' },
         FAB_LAYERS.map(function (layer, i) {
           var active = step > i;
@@ -175,8 +190,13 @@
             className: 'fab-item' + (active ? ' is-on' : ''),
             'aria-current': active ? 'true' : undefined,
           },
-            h('span', { className: 'fab-dot', 'aria-hidden': true }),
-            h('span', { className: 'fab-label' }, layer.t));
+            h('button', {
+              type: 'button',
+              className: 'fab-step',
+              onClick: function (e) { jump(i, e); },
+            },
+              h('span', { className: 'fab-dot', 'aria-hidden': true }),
+              h('span', { className: 'fab-label' }, layer.t)));
         })));
   }
 
@@ -187,7 +207,7 @@
       title: 'Fabrication',
       lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une forme nue, puis on empile liseré, teinte, réfraction, dépoli, éclat et scintillement jusqu’à la gelée posée sur la table.',
     },
-      h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — boucle automatique.' },
+      h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — boucle automatique.', scene: true },
         h(FabricateDemo)),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
@@ -282,7 +302,7 @@
       { label: 'Souple', token: '380ms', hint: 'Interrupteur, onglets, curseur', cycle: '3.4s', ease: 'var(--ease)', anim: 'mo-track' },
       { label: 'Spring', token: 'spring', hint: 'Poignée, galet d’onglet, rebond', cycle: '2.8s', ease: 'ease-in-out', anim: 'mo-track-spring' },
     ];
-    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Trois durées (120 · 200 · 380 ms) et un spring. Tout se calme avec prefers-reduced-motion.' },
+    return h(D.Section, { id: 'mouvement', label: 'Fondations', title: 'Mouvement', lead: 'Une courbe fluide pour tout, plus un ressort léger pour ce qui se pose : poignée d’interrupteur, galet d’onglet, rebond de survol. Trois durées (120 · 200 · 380 ms) et un spring. Au pointer-down sur un CTA : disque + 2 ondes concentriques, rebond scale 1.05 / 0.97. Tout se calme avec prefers-reduced-motion.' },
       h(D.Panel, { tag: 'Durées', cap: 'cubic-bezier(0.2, 0, 0, 1) · spring · pistes sans carte' },
         h('div', { className: 'mo-list' }, tracks.map(function (t) {
           return h('div', { key: t.token, className: 'mo' },

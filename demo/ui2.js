@@ -44,7 +44,7 @@
       return function () { if (ro) ro.disconnect(); };
     }, []);
     return h(Glass, { as: 'nav', className: 'navbar', innerRef: box, 'aria-label': 'Navigation principale' },
-      h(Glass, { as: 'span', className: 'pill', style: { left: pill.left + 'px', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true }),
+      h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pill.left + 'px,0,0)', width: pill.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true }),
       items.map(function (it, i) { return h('button', { key: it[0], type: 'button', className: 'nb', 'aria-current': i === cur ? 'page' : undefined, onClick: function () { set(i); } }, h(Icon, { name: it[0] }), it[1]); }));
   };
 

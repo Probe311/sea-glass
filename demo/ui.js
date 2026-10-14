@@ -11,21 +11,8 @@
     var ghost = v === 'ghost', love = v === 'love', pressed = p['aria-pressed'];
     var loveOff = love && pressed === false;
     function down(e) {
-      var el = ref.current;
-      if (!el || p.disabled || ghost) return;
-      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top, size = Math.max(r.width, r.height) * 1.7;
-      var disc = document.createElement('span'); disc.className = 'rp-disc'; disc.style.left = x + 'px'; disc.style.top = y + 'px'; el.appendChild(disc);
-      [0, 110].forEach(function (d) {
-        var s = document.createElement('span'); s.className = 'rp-ring';
-        s.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + size + 'px;height:' + size + 'px;animation-delay:' + d + 'ms';
-        el.appendChild(s); setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 900 + d);
-      });
-      function up() {
-        disc.classList.add('out'); setTimeout(function () { if (disc.parentNode) disc.parentNode.removeChild(disc); }, 340);
-        window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up);
-      }
-      window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
+      if (p.disabled || ghost) return;
+      SG.ripple(ref.current, e);
     }
     return h(Glass, {
       as: 'button', type: 'button', innerRef: ref, onPointerDown: down, onClick: p.onClick, disabled: p.disabled || p.state === 'disabled',
@@ -38,9 +25,16 @@
 
   /* ---------- Puce ---------- */
   C.Chip = function (p) {
+    var ref = useRef(null);
     var st = useState(!!p.defaultPressed), on = st[0], set = st[1];
-    return h(Glass, { as: 'button', type: 'button', className: cls('chip', 'shape-' + (p.shape || 'pill'), p.state && 'is-' + p.state), 'aria-pressed': on, disabled: p.disabled,
-      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: false, refractive: false, onClick: function () { set(!on); } },
+    return h(Glass, {
+      as: 'button', type: 'button', innerRef: ref,
+      className: cls('chip', 'shape-' + (p.shape || 'pill'), p.state && 'is-' + p.state),
+      'aria-pressed': on, disabled: p.disabled,
+      tint: on ? 'seafoam' : undefined, tintA: 0.62, glow: false, refractive: false, rim: true, alive: true,
+      onPointerDown: function (e) { if (!p.disabled) SG.ripple(ref.current, e); },
+      onClick: function () { set(!on); },
+    },
       on && h(Icon, { name: 'check' }), p.children);
   };
 
@@ -216,7 +210,7 @@
       return h('button', a, it.icon && h(Icon, { name: it.icon }), it.label);
     });
     var indicator = line ? h('span', { className: 'ind', style: { left: pos.left + 'px', width: pos.width + 'px' }, 'aria-hidden': true })
-      : h(Glass, { as: 'span', className: 'pill', style: { left: pos.left + 'px', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true });
+      : h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pos.left + 'px,0,0)', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.92, frosted: false, refractive: false, alive: false, glow: false, 'aria-hidden': true });
     var common = { role: p.kind === 'radio' ? 'radiogroup' : 'tablist', 'aria-label': p.label, onKeyDown: key };
     if (line) return h('div', Object.assign({ ref: box, className: p.variant === 'doc' ? 'm3tabs' : 'tabs-line' }, common), indicator, buttons);
     return h(Glass, Object.assign({ innerRef: box, className: 'tabs-list', refractive: false, glow: false }, common), indicator, buttons);
