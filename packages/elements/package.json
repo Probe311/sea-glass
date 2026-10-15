@@ -1,6 +1,6 @@
 {
   "name": "@sea-glass/elements",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Sea Glass web components (skeleton - Custom Elements / Lit in a later release).",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
