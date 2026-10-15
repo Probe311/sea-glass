@@ -33,7 +33,7 @@
       ['error', 'Erreur', 'Impossible d’enregistrer. Réessaie dans un instant.'],
     ];
     return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et toasts', lead: 'Relayer une information sans bloquer le parcours. Les toasts réutilisent le composant alerte, ancrés en haut au centre, avec un léger flou de l’arrière-plan.' },
-      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error · teinte 0.28 + givre 0.28.' },
+      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error · teinte 0.28 + givre 0.08.' },
         h('div', { className: 'alert-stage' }, scene(items.map(function (it) {
           return h('div', Object.assign({ key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-tint': true }, glassAttrs()),
             alertIcon(it[0]),
@@ -79,7 +79,7 @@
   };
 
   S.OverlaysDoc = function () {
-    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Même verre que les alertes : teinte 0.28, givre 0.28, frost scène.' },
+    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Même verre que les alertes : teinte 0.28, givre 0.08, frost scène.' },
       h(D.Panel, { scene: true, tag: 'Dialog', cap: 'Aperçu figé · role="dialog" · focus trap côté React.' },
         h('div', Object.assign({ className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-tint': true }, glassAttrs()),
           h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),

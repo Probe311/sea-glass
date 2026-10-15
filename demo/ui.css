@@ -94,7 +94,7 @@
   content: "";
   position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: url(noise.svg) center / 128px 128px repeat;
-  mix-blend-mode: overlay; opacity: 0.28;
+  mix-blend-mode: overlay; opacity: 0.08;
 }
 :root[data-theme="dark"] .sl-rail {
   background: color-mix(in srgb, #fff 8%, #0c1a18 70%, var(--ground-2));
@@ -529,7 +529,7 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
   background: linear-gradient(165deg, rgb(48 128 105 / 0.82), rgb(37 107 90 / 0.88));
   --sh-in: none;
   --sh-out: 0 5px 10px -5px rgba(37, 107, 90, 0.7);
-  --sparkle: 0.28;
+  --sparkle: 0.08;
 }
 .cb.on .box > .ico,
 .cb.on .box > .ico path { fill: #fff; color: #fff; }

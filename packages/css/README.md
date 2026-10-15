@@ -25,12 +25,14 @@ Reset optionnel : `@sea-glass/css/reset.css` - **non** inclus par défaut.
 
 **Glassmorphisme** (contrat UI unique) :
 
-| Token                | Clair                       | Sombre       |
-| -------------------- | --------------------------- | ------------ |
-| `--sg-glass-tint-a`  | **0.28** (Alert / Toast)    | selon teinte |
-| `--sg-glass-sparkle` | **0.28** overlay            | **0.14**     |
-| Frost                | `blur(16px) saturate(1.75)` | idem         |
-| Alpha scène / sol    | ≈ **0.08–0.12** / **0.42**  | ≈ **0.10**   |
+| Token                | Clair                       | Sombre           |
+| -------------------- | --------------------------- | ---------------- |
+| `--sg-glass-tint-a`  | **0.28** (Alert / Toast)    | selon teinte     |
+| `--sg-glass-sparkle` | **0.08** overlay (6–10 %)   | **0.06**         |
+| `--sg-shadow-cast`   | ombre table neutre          | idem             |
+| `--sg-shadow-glow`   | lueur teinte ~28 %          | un peu plus fort |
+| Frost                | `blur(16px) saturate(1.75)` | idem             |
+| Alpha scène / sol    | ≈ **0.08–0.12** / **0.42**  | ≈ **0.10**       |
 
 Frost **toujours** sur `.sg-scene`. Grain : `dist/noise.svg`. `isolation: auto`. Réfraction opt-in (`html.sg-refract` + `data-refractive`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
 

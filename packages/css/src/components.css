@@ -266,7 +266,9 @@
   .sg-check:has(input:checked) .sg-check__box,
   .sg-check:has(input:indeterminate) .sg-check__box {
     background: linear-gradient(165deg, var(--sg-color-teal-deep-hi), var(--sg-color-teal-deep));
-    --sg-shadow-out: 0 5px 10px -5px rgb(var(--sg-color-teal-deep-rgb) / 0.7);
+    --sg-shadow-cast: 0 4px 8px -4px rgb(0 0 0 / 0.28);
+    --sg-shadow-glow: 0 6px 14px -4px rgb(var(--sg-color-teal-deep-rgb) / 0.55);
+    --sg-shadow-out: var(--sg-shadow-cast), var(--sg-shadow-glow);
   }
 
   .sg-check input:focus-visible ~ .sg-check__box {

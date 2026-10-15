@@ -16,7 +16,9 @@ Matière UI (contrat unique, référence Alert / Toast) :
 | Token | Clair |
 | ----- | ----- |
 | Teinte (`tint-a`) | **0.28** |
-| Givre (`sparkle`) | **0.28** overlay |
+| Givre (`sparkle`) | **0.08** overlay (6–10 %) |
+| Ombre (`--sh-cast`) | neutre marquée |
+| Lueur (`--sh-glow`) | halo teinte soft |
 | Frost | blur **16px** / saturate **1.75** |
 | Alpha scène / sol | **~0.08–0.12** / **~0.42** |
 

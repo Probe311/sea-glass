@@ -2,7 +2,7 @@
 
 État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
-**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.28** overlay · frost blur **16** / sat **1.75** · référence visuelle = Alert / Toast.
+**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.08** overlay · ombre cast + lueur teinte · frost blur **16** / sat **1.75**.
 
 Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
@@ -34,13 +34,17 @@ Colonnes :
 | Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
 | Frost     | `backdrop-filter: blur(16px) saturate(1.75)` - **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
 | Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
-| Grain     | `noise.svg` overlay ≈ **28 %** (givre) · tuile 96 px                                                                                   |
+| Grain     | `noise.svg` overlay ≈ **8 %** (givre, 6–10 %) · tuile 128 px                                                                           |
 | Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
-| Lueur     | Ombre table neutre (pas de halo teinté)                                                                                                |
+| Ombre     | **Layer 1** · cast neutre (`--sg-shadow-cast` / `--sg-elevation-3`) — ancrage marqué au sol                                            |
+| Lueur     | **Layer 2** · glow teinte (`--sg-shadow-glow`) — halo soft de `--sg-glass-tint-rgb`, comme si la lumière traversait le verre           |
 | Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
 | Isolation | `isolation: auto` - ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
 
-`data-glow` = halo teinté rare. Ghost : pas de frost / grain. Stack Fabrication : **Verre** → bordure → **teinte (= formule Alert)** → réfraction → givre → lueur → encre. Prévoir un décor saturé derrière toute surface frosted.
+Drop = **toujours deux layers** : `box-shadow: …, var(--sg-shadow-cast), var(--sg-shadow-glow), …`.  
+`data-glow` **renforce** la lueur (layer 2), ne remplace pas l’ombre. Ghost : pas de frost / grain.
+
+Stack Fabrication : **Verre** → bordure → teinte → réfraction → givre → **ombre** → **lueur** → encre. Prévoir un décor saturé derrière toute surface frosted.
 
 | Composant       | CSS            | React | Démo           | Storybook        | Avancement                        |
 | --------------- | -------------- | ----- | -------------- | ---------------- | --------------------------------- |

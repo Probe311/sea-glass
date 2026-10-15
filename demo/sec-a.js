@@ -102,8 +102,9 @@
     { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
     { k: 'tint', t: 'Teinte', role: 'tint-a 0.4', note: 'Gelée seafoam lisible - remplace le wash blanc.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
-    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.28', note: 'Tuile noise.svg overlay (~28 %) — contrat global.' },
-    { k: 'shadow', t: 'Lueur', role: '--sh-out / --table-drop', note: 'Ombre table neutre - pas de halo teinté.' },
+    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.08', note: 'Bruit fin monochrome overlay (~8 %) sur la teinte.' },
+    { k: 'cast', t: 'Ombre', role: '--sh-cast / --table-drop', note: 'Ombre table neutre marquée — ancrage au sol.' },
+    { k: 'glow', t: 'Lueur', role: '--sh-glow / tint-glow', note: 'Halo de la teinte — lumière qui traverse le verre.' },
     { k: 'ink', t: 'Encre', role: 'currentColor / *-ink', note: 'Libellé et icône liés à l’encre du tint.' },
   ];
   function FabBgSwitch(p) {
@@ -121,9 +122,9 @@
         h('span', { className: 'fab-bg-switch__thumb' })),
       h('span', { className: 'fab-bg-switch__ico', 'aria-hidden': true }, h(Icon, { name: 'image', size: 16 })));
   }
-  function FabricateDemo() {
+  function FabricateDemo(p) {
     var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
-    var bgSt = useState('color'), bg = bgSt[0], setBg = bgSt[1];
+    var bg = p.bg === 'photo' ? 'photo' : 'color';
     var rootRef = React.useRef(null);
     var ctaRef = React.useRef(null);
     var pauseRef = React.useRef(0);
@@ -169,8 +170,9 @@
       tint: step >= 3,
       refractive: step >= 4,
       sparkle: step >= 5,
-      shadow: step >= 6,
-      ink: step >= 7,
+      cast: step >= 6,
+      glow: step >= 7,
+      ink: step >= 8,
     };
 
     function jump(i, e) {
@@ -183,19 +185,21 @@
     var style = {
       '--lg-r': '999px',
       '--fab-rim': on.rim ? 1 : 0,
+      /* Deux layers drop : ombre neutre + lueur teinte */
+      '--sh-cast': on.cast ? '0 8px 24px -8px rgb(0 0 0 / 0.18), 0 2px 4px rgb(0 0 0 / 0.06)' : 'none',
+      '--sh-glow': on.glow
+        ? (on.tint ? '0 10px 28px -6px rgb(var(--tint) / 0.35)' : '0 10px 28px -6px rgb(255 255 255 / 0.2)')
+        : 'none',
     };
-    /* Ne pas forcer sh-out transparent en Verre : laisse le drop glassmorphisme CSS. */
-    if (on.shadow) style['--sh-out'] = 'var(--table-drop)';
-    else if (!on.glass) style['--sh-out'] = 'none';
-    if (on.sparkle) style['--sparkle'] = 0.28;
+    if (!on.glass) {
+      style['--sh-cast'] = 'none';
+      style['--sh-glow'] = 'none';
+    }
+    if (on.sparkle) style['--sparkle'] = 0.08;
     else style['--sparkle'] = 0;
 
     return h('div', { className: 'fab', ref: rootRef, 'data-fab-bg': bg },
       h('div', { className: 'fab-stage' },
-        h(FabBgSwitch, {
-          photo: bg === 'photo',
-          onToggle: function () { setBg(bg === 'photo' ? 'color' : 'photo'); },
-        }),
         h(Glass, {
           as: 'button',
           type: 'button',
@@ -237,14 +241,20 @@
   }
 
   S.Fabrication = function () {
+    var bgSt = useState('color'), bg = bgSt[0], setBg = bgSt[1];
     return h(D.Section, {
       id: 'fabrication',
       label: 'Principes',
       title: 'Fabrication',
-      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile verre (dépoli), bordure, teinte, réfraction, givre (grain), lueur (ombre table) et encre jusqu’à la gelée posée sur la table.',
+      lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile verre, bordure, teinte, réfraction, givre, ombre (cast), lueur (glow teinte) et encre.',
     },
       h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois - transitions douces, boucle automatique.', scene: true },
-        h(FabricateDemo)),
+        h('div', { className: 'fab-panel' },
+          h(FabBgSwitch, {
+            photo: bg === 'photo',
+            onToggle: function () { setBg(bg === 'photo' ? 'color' : 'photo'); },
+          }),
+          h(FabricateDemo, { bg: bg }))),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([
@@ -253,13 +263,13 @@
       ]) }),
       h(D.Usage, {
         dos: [
-          'Garder la lueur (ombre table) neutre pour les objets posés.',
+          'Composer ombre cast + lueur teinte (deux layers) sur chaque surface sujet.',
+          'Lier la lueur à la teinte du composant (lumière à travers).',
           'Lier texte et icônes à l’encre du tint (currentColor).',
-          'Réserver data-glow aux accents rares (hors stack par défaut).',
-          'Prévoir un décor coloré derrière le dépoli de scène.',
+          'Réserver data-glow pour renforcer la lueur, pas pour remplacer l’ombre.',
         ],
         donts: [
-          'Remplacer la lueur table par un halo teinté sur chaque bouton.',
+          'Fusionner ombre et lueur en une seule ombre teintée opaque.',
           'Forcer une couleur d’icône qui ignore le parent teinté.',
           'Omettre le givre (grain) sur une surface sujet.',
           'Utiliser un verre très transparent sur un fond uni : il disparaît.',
