@@ -98,16 +98,32 @@
 
   /* ---------- Fabrication ---------- */
   var FAB_LAYERS = [
-    { k: 'glass', t: 'Verre', role: 'data-frosted + --glass-a', note: 'Corps translucide + dépoli (blur) sur le décor.' },
+    { k: 'glass', t: 'Verre', role: 'data-frosted + --glass-a ~0.28', note: 'Corps plus opaque + dépoli blur 22 px sur le décor.' },
     { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
-    { k: 'tint', t: 'Teinte', role: 'tint-a 0.28', note: 'Même gelée que Alert / Toast — remplace le wash blanc.' },
+    { k: 'tint', t: 'Teinte', role: 'tint-a 0.4', note: 'Gelée seafoam lisible — remplace le wash blanc.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
-    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.14', note: 'Tuile noise.svg soft-light (~14 % clair).' },
+    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.32', note: 'Tuile noise.svg overlay (~32 %) — grain bien visible.' },
     { k: 'shadow', t: 'Lueur', role: '--sh-out / --table-drop', note: 'Ombre table neutre — pas de halo teinté.' },
     { k: 'ink', t: 'Encre', role: 'currentColor / *-ink', note: 'Libellé et icône liés à l’encre du tint.' },
   ];
-  function FabricateDemo() {
+  function FabBgSwitch(p) {
+    var photo = !!p.photo;
+    return h('button', {
+      type: 'button',
+      className: 'fab-bg-switch' + (photo ? ' fab-bg-switch--photo' : ''),
+      'aria-pressed': photo,
+      'aria-label': photo ? 'Fond image — basculer vers palette' : 'Fond palette — basculer vers image',
+      title: photo ? 'Fond image' : 'Fond palette',
+      onClick: p.onToggle,
+    },
+      h('span', { className: 'fab-bg-switch__ico', 'aria-hidden': true }, h(Icon, { name: 'palette', size: 16 })),
+      h('span', { className: 'fab-bg-switch__track', 'aria-hidden': true },
+        h('span', { className: 'fab-bg-switch__thumb' })),
+      h('span', { className: 'fab-bg-switch__ico', 'aria-hidden': true }, h(Icon, { name: 'image', size: 16 })));
+  }
+  function FabricateDemo(p) {
     var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
+    var bg = p.bg === 'photo' ? 'photo' : 'color';
     var rootRef = React.useRef(null);
     var ctaRef = React.useRef(null);
     var pauseRef = React.useRef(0);
@@ -163,7 +179,7 @@
       SG.ripple(e.currentTarget, e);
     }
 
-    /* Frost always mounted so --lg-blur eases 0 → 16px (no backdrop snap). */
+    /* Frost always mounted so --lg-blur eases 0 → 22px (no backdrop snap). */
     var style = {
       '--lg-r': '999px',
       '--fab-rim': on.rim ? 1 : 0,
@@ -171,10 +187,10 @@
     /* Ne pas forcer sh-out transparent en Verre : laisse le drop glassmorphisme CSS. */
     if (on.shadow) style['--sh-out'] = 'var(--table-drop)';
     else if (!on.glass) style['--sh-out'] = 'none';
-    if (on.sparkle) style['--sparkle'] = 0.14;
+    if (on.sparkle) style['--sparkle'] = 0.32;
     else style['--sparkle'] = 0;
 
-    return h('div', { className: 'fab', ref: rootRef },
+    return h('div', { className: 'fab', ref: rootRef, 'data-fab-bg': bg },
       h('div', { className: 'fab-stage' },
         h(Glass, {
           as: 'button',
@@ -191,7 +207,7 @@
           glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
-          tintA: on.tint ? 0.28 : undefined,
+          tintA: on.tint ? 0.4 : undefined,
           'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
@@ -217,14 +233,19 @@
   }
 
   S.Fabrication = function () {
+    var bgSt = useState('color'), bg = bgSt[0], setBg = bgSt[1];
     return h(D.Section, {
       id: 'fabrication',
       label: 'Principes',
       title: 'Fabrication',
       lead: 'Sea Glass est un verre de mer dépoli : chaque surface d’interface est un même matériau assemblé couche par couche. On part d’une pilule blanche, puis on empile verre (dépoli), bordure, teinte, réfraction, givre (grain), lueur (ombre table) et encre jusqu’à la gelée posée sur la table.',
+      tools: h(FabBgSwitch, {
+        photo: bg === 'photo',
+        onToggle: function () { setBg(bg === 'photo' ? 'color' : 'photo'); },
+      }),
     },
       h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois — transitions douces, boucle automatique.', scene: true },
-        h(FabricateDemo)),
+        h(FabricateDemo, { bg: bg })),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([

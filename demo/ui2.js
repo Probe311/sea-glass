@@ -98,7 +98,12 @@
     if (g.sp.length) items.push({ id: 'sp', label: 'Spécifications', panel: h('div', { className: 'tabstack' }, g.sp) });
     if (g.rc.length) items.push({ id: 'rc', label: 'Recommandations', panel: h('div', { className: 'tabstack' }, g.rc) });
     return h('section', { className: 'sec', id: p.id, 'data-spy': p.id },
-      h('header', { className: 'sec-head' }, h('span', { className: 'crumb' }, p.label), h('h2', null, p.title), p.lead && h('p', null, p.lead)),
+      h('header', { className: 'sec-head' + (p.tools ? ' sec-head--tools' : '') },
+        h('div', { className: 'sec-head__main' },
+          h('span', { className: 'crumb' }, p.label),
+          h('h2', null, p.title),
+          p.lead && h('p', null, p.lead)),
+        p.tools && h('div', { className: 'sec-head__tools' }, p.tools)),
       items.length > 1 ? h(C.Tabs, { items: items, variant: 'doc', keep: true, label: p.title, className: 'sec-tabs' }) : h('div', { className: 'tabstack' }, g.ap));
   };
   D.Sub = function (p) { return h('div', { className: 'sub' }, p.title && h('h3', null, p.title), p.text && h('p', null, p.text), p.children); };
