@@ -7,7 +7,15 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
   { className, glass = true, ...rest },
   ref,
 ) {
-  return <span ref={ref} className={cx('sg-badge', glass && 'sg-glass', className)} {...rest} />;
+  return (
+    <span
+      ref={ref}
+      className={cx('sg-badge', glass && 'sg-glass', className)}
+      data-frosted={glass || undefined}
+      data-rim={glass || undefined}
+      {...rest}
+    />
+  );
 });
 
 export type TagProps = HTMLAttributes<HTMLSpanElement> & {
@@ -19,7 +27,13 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(function Tag(
   ref,
 ) {
   return (
-    <span ref={ref} className={cx('sg-tag', glass && 'sg-glass', className)} {...rest}>
+    <span
+      ref={ref}
+      className={cx('sg-tag', glass && 'sg-glass', className)}
+      data-frosted={glass || undefined}
+      data-rim={glass || undefined}
+      {...rest}
+    >
       {children}
       {onRemove ? (
         <button type="button" className="sg-tag__remove" aria-label="Remove" onClick={onRemove}>
@@ -53,6 +67,8 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
       ref={ref}
       type="button"
       className={cx('sg-chip', glass && 'sg-glass', className)}
+      data-frosted={glass || undefined}
+      data-rim={glass || undefined}
       aria-pressed={pressed}
       data-tint={pebble}
       style={nextStyle}

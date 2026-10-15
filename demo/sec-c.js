@@ -97,15 +97,15 @@
     '  --cornflower: #C3D3F0;  --cobalt: #6B8CE3;  --lavender: #E4DAE8;  --ruby: #E07662;',
     '  --amber: #F7C96B;  --rootbeer: #B5866A;  --clear: #F7F9F7;  --mist: #CDD5D4;',
     '  --on-tint: #14463A;  --teal: #4F9482;  --teal-hi: #7BBFAC;',
-    '  --ga: 0.58;          /* verre sur sol uni */',
-    '  --ga-scene: 0.14;    /* verre sur décor coloré */',
-    '  --lg-blur: 12px;     /* 12 à 16 px, 20 à 24 px sur fond chargé */',
+    '  --ga: 0.42;          /* verre sur sol uni (glassmorphisme) */',
+    '  --ga-scene: 0.08;    /* verre sur décor coloré — décor lisible */',
+    '  --lg-blur: 16px;     /* 16 px base, jusqu’à 22 px Fabrication */',
     '  --lg-r: 28px;        /* 8 à 12 contrôles, 16 panneaux, 28 cartes, 999 pilules */',
     '  --ease: cubic-bezier(.2,0,0,1);  --spring: cubic-bezier(.34,1.4,.5,1);', '}',
-    '/* sombre : --ground #0B1513, --ink #E8F1EE, --ga .08, --ga-scene .12, --teal #7BBFAC */', '',
-    '/* Attributs matière (.sg-glass) — frost toujours sur .sg-scene */',
-    '.sg-scene .sg-glass[data-frosted], .sg-glass.sg-glass--over[data-frosted] { backdrop-filter: blur(16px) saturate(1.4); }',
-    '.sg-refract .sg-scene .sg-glass[data-refractive] { backdrop-filter: blur(8px) url(#sg-refract) saturate(1.4); } /* Chromium */',
+    '/* sombre : --ground #0B1513, --ink #E8F1EE, --ga .10, --ga-scene .10, --teal #7BBFAC */', '',
+    '/* Attributs matière (.sg-glass) — frost toujours sur .sg-scene (isolation: auto) */',
+    '.sg-scene .sg-glass, .sg-glass.sg-glass--over { backdrop-filter: blur(16px) saturate(1.75); }',
+    '.sg-refract .sg-scene .sg-glass[data-refractive] { backdrop-filter: blur(9px) url(#sg-refract) saturate(1.75); } /* Chromium */',
     '.sg-glass[data-alive]      { /* reflet pointeur (--mx, --my), ressort au survol */ }',
     '.sg-glass[data-rim]        { /* bordure / liseré d’arête */ }',
     '.sg-glass[data-tint]       { /* --tint + encre *-ink via currentColor */ }',
@@ -124,7 +124,7 @@
     '// Catalogue : packages/react/README.md · Storybook : pnpm storybook',
   ].join('\n');
   function jsonTokens() {
-    var o = { color: {}, material: { glassOnGround: 0.58, glassOnScene: 0.14, blur: 14, radius: 28, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
+    var o = { color: {}, material: { glassOnGround: 0.42, glassOnScene: 0.08, blur: 16, tintA: 0.38, radius: 28, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
       motion: { fast: '120ms', base: '200ms', soft: '380ms', ease: 'cubic-bezier(0.2,0,0,1)', spring: 'cubic-bezier(0.34,1.4,0.5,1)' }, theme: SG.isDark() ? 'dark' : 'light' };
     SG.PEBBLES.forEach(function (p) { o.color[p.key] = { value: SG.cssVar('--' + p.key), ink: SG.cssVar('--' + p.key + '-ink') }; });
     return JSON.stringify(o, null, 2);

@@ -23,9 +23,7 @@ Couches : `sg.tokens`, `sg.material`, `sg.components`, `sg.utilities`, `sg.a11y`
 
 Reset optionnel : `@sea-glass/css/reset.css` — **non** inclus par défaut.
 
-Le flou frosted ne s’applique que sur `.sg-scene` / `.sg-glass--over`. La réfraction est opt-in (`html.sg-refract` + `data-refractive`), détectée dans `initSeaGlassLight` (pas de sniff UA).
-
-Formule gelée : dégradé diagonal, grain (`dist/noise.svg`), ombre table neutre (lueur). `data-tint` applique l’encre du galet (`*-ink`) ; `data-glow` = halo teinté rare (pas le drop). Frost toujours sur `.sg-scene` / `.sg-glass--over`.
+**Glassmorphisme** : wash blanc léger (alpha scène ≈ 0.08, sol ≈ 0.42) + `backdrop-filter: blur(16px) saturate(1.75)` pour que le décor transparaisse. Frost **toujours** sur `.sg-scene` ; hors scène via `data-frosted` / `.sg-glass--over`. Teinte translucide (`--sg-glass-tint-a` ≈ 0.38). Grain (`dist/noise.svg`), filet inset, ombre table neutre. `isolation: auto` (requis pour le blur). Réfraction opt-in (`html.sg-refract` + `data-refractive`, via `initSeaGlassLight`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
 
 ## Composants CSS (classes)
 

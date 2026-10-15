@@ -42,6 +42,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       : style
   ) as CSSProperties | undefined;
 
+  const frosted = glass && variant !== 'ghost';
+
   return (
     <button
       ref={ref}
@@ -58,6 +60,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         className,
       )}
       data-tint={pebble}
+      data-frosted={frosted || undefined}
+      data-rim={frosted || undefined}
       style={nextStyle}
       {...rest}
     >

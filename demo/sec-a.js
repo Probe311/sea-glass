@@ -166,9 +166,11 @@
     /* Frost always mounted so --lg-blur eases 0 → 16px (no backdrop snap). */
     var style = {
       '--lg-r': '999px',
-      '--sh-out': on.shadow ? 'var(--table-drop)' : '0 0 0 transparent',
       '--fab-rim': on.rim ? 1 : 0,
     };
+    /* Ne pas forcer sh-out transparent en Verre : laisse le drop glassmorphisme CSS. */
+    if (on.shadow) style['--sh-out'] = 'var(--table-drop)';
+    else if (!on.glass) style['--sh-out'] = 'none';
     if (!on.sparkle) style['--sparkle'] = 0;
 
     return h('div', { className: 'fab', ref: rootRef },
@@ -225,8 +227,8 @@
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];
       }).concat([
-        ['Alpha sol', '~0.58 clair · 0.08 sombre', 'Objets posés hors scène.'],
-        ['Alpha scène', '~0.14 / 0.12', 'Verre au-dessus d’un décor coloré.'],
+        ['Alpha sol', '~0.42 clair · 0.10 sombre', 'Objets posés hors scène.'],
+        ['Alpha scène', '~0.08 / 0.10', 'Glassmorphisme — décor saturé lisible à travers.'],
       ]) }),
       h(D.Usage, {
         dos: [

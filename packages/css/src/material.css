@@ -1,6 +1,6 @@
-/* Sea Glass material — jelly formula.
-   Diagonal tint, grain, volume insets, neutral table drop, frost blur 16 / sat 1.4.
-   data-glow is optional accent — not the default drop. */
+/* Sea Glass material — glassmorphism formula.
+   Light wash + frost blur (décor visible), grain, rim, neutral table drop.
+   Scene alpha ~0.08 ; tint translucent (~0.38). data-glow = rare accent. */
 @layer sg.material {
   @property --sg-mx {
     syntax: '<percentage>';
@@ -24,26 +24,31 @@
     --sg-glass-radius: var(--sg-radius-xl);
     --sg-glass-blur: var(--sg-blur-lg);
     --sg-glass-tint-rgb: 255 255 255;
-    --sg-glass-tint-a: 0.45;
+    --sg-glass-tint-a: 0.38;
     --sg-glass-glow-rgb: var(--sg-color-kelly-rgb);
     --sg-glass-a: var(--sg-glass-alpha-ground);
     --sg-glass-cs: color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 40%, #fff);
-    --sg-shadow-in: inset 0 2px 1px rgb(255 255 255 / 0.5), inset 0 -3px 6px rgb(0 0 0 / 0.06);
+    --sg-shadow-in: inset 0 1px 1px rgb(255 255 255 / 0.45), inset 0 -2px 4px rgb(0 0 0 / 0.05);
     --sg-shadow-out: var(--sg-elevation-3);
     --sg-glass-press: transparent;
     position: relative;
-    isolation: isolate;
+
+    /* isolate bloque le backdrop-filter — auto pour un vrai glassmorphisme */
+    isolation: auto;
     border-radius: var(--sg-glass-radius);
     color: var(--sg-color-ink);
     background:
       linear-gradient(var(--sg-glass-press), var(--sg-glass-press)),
       linear-gradient(
         135deg,
-        rgb(255 255 255 / calc(var(--sg-glass-a) + 0.06)),
+        rgb(255 255 255 / calc(var(--sg-glass-a) + 0.12)),
         rgb(255 255 255 / var(--sg-glass-a)) 55%,
-        rgb(255 255 255 / calc(var(--sg-glass-a) - 0.04))
+        rgb(255 255 255 / calc(var(--sg-glass-a) + 0.06))
       );
-    box-shadow: var(--sg-shadow-in), var(--sg-shadow-out);
+    box-shadow:
+      var(--sg-shadow-in),
+      var(--sg-shadow-out),
+      inset 0 0 0 1px rgb(255 255 255 / 0.35);
     transition:
       transform var(--sg-duration-base) var(--sg-ease-spring),
       box-shadow var(--sg-duration-base) var(--sg-ease-standard),
@@ -61,19 +66,25 @@
     --sg-glass-a: var(--sg-glass-alpha-text);
   }
 
-  /* Frosted: scène ou surface .sg-glass--over (blur coûteux hors décor). */
+  /*
+   * Frost / glassmorphisme :
+   * - toujours sur .sg-scene (contrat DS)
+   * - opt-in hors scène via data-frosted ou .sg-glass--over
+   */
+  .sg-scene .sg-glass,
   .sg-glass[data-frosted],
-  .sg-scene .sg-glass[data-frosted],
-  .sg-glass.sg-glass--over[data-frosted] {
-    -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.4);
-    backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.4);
+  .sg-glass.sg-glass--over[data-frosted],
+  .sg-glass.sg-glass--over {
+    -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.75);
+    backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.75);
   }
 
   /* Refraction is Chromium-only and opt-in (html.sg-refract + data-refractive). */
   .sg-refract .sg-scene .sg-glass[data-refractive],
   .sg-refract .sg-glass.sg-glass--over[data-refractive] {
-    -webkit-backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.5)) url('#sg-refract') saturate(1.4);
-    backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.5)) url('#sg-refract') saturate(1.4);
+    -webkit-backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.55)) url('#sg-refract')
+      saturate(1.75);
+    backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.55)) url('#sg-refract') saturate(1.75);
   }
 
   .sg-glass::before {
@@ -106,15 +117,15 @@
     opacity: 1;
   }
 
-  /* Tint: gelée diagonale translucide — TL → galet → BR */
+  /* Tint: gelée diagonale translucide — laisse passer frost + décor */
   .sg-glass[data-tint] {
     background:
       linear-gradient(var(--sg-glass-press), var(--sg-glass-press)),
       linear-gradient(
         135deg,
-        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 42%, transparent),
+        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 36%, transparent),
         rgb(var(--sg-glass-tint-rgb) / var(--sg-glass-tint-a)) 52%,
-        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 58%, transparent)
+        color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 48%, transparent)
       );
   }
 

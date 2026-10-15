@@ -12,6 +12,11 @@
 .btn.love.off { color: var(--ruby); }
 .btn.ghost { background: transparent; box-shadow: none; --lg-blur: 0px; }
 .btn.ghost::before, .btn.ghost::after { display: none; }
+.btn.ghost {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none;
+}
 .btn.ghost:hover, .btn.ghost.is-hover { background: color-mix(in srgb, var(--ink) 7%, transparent); transform: none; }
 .btn:hover, .btn.is-hover { transform: scale(1.05); --lit-a: 1; }
 .btn:active, .btn.is-active { transform: scale(0.97); }

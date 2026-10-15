@@ -7,11 +7,11 @@
   "glass": {
     "alpha-ground": {
       "$type": "number",
-      "$value": { "light": 0.58, "dark": 0.08 }
+      "$value": { "light": 0.42, "dark": 0.1 }
     },
     "alpha-scene": {
       "$type": "number",
-      "$value": { "light": 0.14, "dark": 0.12 }
+      "$value": { "light": 0.08, "dark": 0.1 }
     },
     "alpha-text": {
       "$type": "number",

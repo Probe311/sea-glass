@@ -76,11 +76,17 @@
     background: transparent;
     box-shadow: none;
     --sg-glass-blur: 0px;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .sg-button--ghost::before,
   .sg-button--ghost::after {
     display: none;
+  }
+
+  .sg-button--primary[data-tint] {
+    --sg-glass-tint-a: 0.38;
   }
 
   .sg-button--ghost:hover,
@@ -1700,7 +1706,7 @@
     position: relative;
     width: min(100%, 28rem);
     margin-inline: auto;
-    --sg-glass-tint-a: 0.92;
+    --sg-glass-tint-a: 0.28;
     --sg-glass-tint-rgb: 18 28 26;
     color: var(--sg-color-ink);
     transform: none;
@@ -1715,7 +1721,7 @@
 
   :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo {
     --sg-glass-tint-rgb: 247 249 247;
-    --sg-glass-tint-a: 0.96;
+    --sg-glass-tint-a: 0.22;
     color: var(--sg-color-ink);
   }
 

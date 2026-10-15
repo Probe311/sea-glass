@@ -29,7 +29,7 @@ Peer : `react` / `react-dom` `^19`. npm **0.2.1**.
 | Données / contenu | `Table`, `Quote`, `Media`, `Hero`, `Share`                                                                                               |
 | Chrome            | `LangSwitcher`, `ThemeToggle`, `ConsentBanner`                                                                                           |
 
-`Glass` / `Button` / `Chip` : `tint` (galet) fixe `data-tint` et l’encre `*-ink` pour le texte et les icônes (`currentColor`). `glow` est optionnel — l’ombre table neutre est le défaut.
+`Glass` / `Button` / `Chip` : `tint` (galet) fixe `data-tint` et l’encre `*-ink` (`currentColor`). Surfaces glass = **glassmorphisme** (wash léger + frost) ; `Button` non-ghost pose `data-frosted` + `data-rim`. Teinte ≈ 38 % d’opacité — le décor doit rester lisible. `glow` optionnel ; ombre table neutre par défaut.
 
 Hors scope volontaire (identité / auth État) : bloc marque, FranceConnect / ProConnect.
 

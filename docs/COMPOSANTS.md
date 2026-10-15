@@ -1,6 +1,6 @@
 # Catalogue des composants — avancement
 
-État au **2026-10-14** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
+État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
 Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
@@ -25,7 +25,20 @@ Colonnes :
 
 ## Surface & matière
 
-Formule gelée partagée (`.sg-glass`) : dégradé 135°, grain `noise.svg`, volume inset, ombre table neutre (lueur), frost blur 16 / sat 1.4, press blanc ~40 %. `data-tint` → `color: var(--*-ink)` (encre) ; icônes en `currentColor` (sauf coche blanche sur teal profond). `data-glow` = halo teinté rare, pas le drop. Sur scène, `data-frosted` est toujours actif. Stack Fabrication (démo) : bordure → teinte → réfraction → givre → lueur → encre.
+**Glassmorphisme** partagé (`.sg-glass`) — le décor derrière doit se lire à travers la surface :
+
+| Couche    | Contrat                                                                                                                                |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08**                                                                       |
+| Frost     | `backdrop-filter: blur(16px) saturate(1.75)` — **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
+| Teinte    | Gelée 135° translucide · `--sg-glass-tint-a` ≈ **0.38** (pas de plein opaque)                                                          |
+| Grain     | `noise.svg` overlay ≈ 8 % (givre)                                                                                                      |
+| Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
+| Lueur     | Ombre table neutre (pas de halo teinté)                                                                                                |
+| Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
+| Isolation | `isolation: auto` — ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
+
+`data-glow` = halo teinté rare. Ghost : pas de frost / grain. Stack Fabrication (démo) : **Verre** → bordure → teinte → réfraction → givre → lueur → encre. Prévoir un décor saturé derrière toute surface frosted.
 
 | Composant       | CSS            | React | Démo           | Storybook        | Avancement                        |
 | --------------- | -------------- | ----- | -------------- | ---------------- | --------------------------------- |

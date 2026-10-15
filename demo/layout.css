@@ -397,12 +397,13 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   min-height: 280px;
   padding: 24px 16px;
   border-radius: 20px;
-  /* Décor local (pas le panel) : lit frost / réfraction / givre */
+  /* Décor saturé : le blur glassmorphisme doit laisser lire aqua / seafoam / cobalt */
   background:
-    radial-gradient(120% 80% at 18% 22%, color-mix(in srgb, var(--aqua) 35%, transparent), transparent 55%),
-    radial-gradient(90% 70% at 88% 78%, color-mix(in srgb, var(--seafoam) 42%, transparent), transparent 58%),
-    radial-gradient(70% 60% at 55% 40%, color-mix(in srgb, var(--cobalt) 18%, transparent), transparent 62%),
-    color-mix(in srgb, var(--ground-2) 40%, var(--ground));
+    radial-gradient(90% 70% at 12% 18%, color-mix(in srgb, var(--aqua) 78%, #fff), transparent 52%),
+    radial-gradient(85% 75% at 92% 82%, color-mix(in srgb, var(--seafoam) 85%, #fff), transparent 55%),
+    radial-gradient(70% 60% at 50% 48%, color-mix(in srgb, var(--cobalt) 55%, transparent), transparent 58%),
+    radial-gradient(50% 40% at 70% 30%, color-mix(in srgb, var(--lavender) 45%, transparent), transparent 50%),
+    color-mix(in srgb, var(--ground-2) 55%, var(--ground));
   overflow: hidden;
 }
 /* Interpolate glass alpha + blur between Fabrication steps (scoped names) */
@@ -440,6 +441,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   border: 0;
   cursor: pointer;
   overflow: hidden;
+  /* isolate tue le backdrop-filter : on laisse le décor du stage traverser */
+  isolation: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -473,27 +476,77 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     linear-gradient(var(--press, transparent), var(--press, transparent)),
     linear-gradient(
       135deg,
-      color-mix(in srgb, rgb(var(--tint)) 42%, transparent),
-      rgb(var(--tint) / var(--tint-a, 0.55)) 52%,
-      color-mix(in srgb, rgb(var(--tint)) 58%, transparent)
+      color-mix(in srgb, rgb(var(--tint)) 36%, transparent),
+      rgb(var(--tint) / var(--tint-a, 0.38)) 52%,
+      color-mix(in srgb, rgb(var(--tint)) 48%, transparent)
     );
 }
-/* Nu → Verre : alpha scène + dépoli */
+/* Nu : pilule opaque — pas encore de verre */
 .fab-pebble--naked {
   --fab-glass-a: 0.92;
   --fab-blur: 0px;
   color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
-.fab-pebble--glass {
-  --fab-glass-a: 0.14;
-  --fab-blur: 16px;
+/*
+ * Verre = glassmorphisme lisible :
+ * wash blanc faible + blur fort + bordure claire + ombre légère.
+ * Spécificité > .lg pour forcer le fond (sinon le lait .lg masque le décor).
+ */
+.fab-pebble.fab-pebble--glass,
+.scene .fab-pebble.fab-pebble--glass {
+  --fab-glass-a: 0.08;
+  --fab-blur: 22px;
+  --glass-a: 0.08;
+  --sh-in: inset 0 1px 1px rgb(255 255 255 / 0.55);
+  --sh-out: 0 8px 24px -8px rgb(0 0 0 / 0.12);
+  background:
+    linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.28),
+      rgb(255 255 255 / 0.1) 52%,
+      rgb(255 255 255 / 0.18)
+    );
+  -webkit-backdrop-filter: blur(22px) saturate(1.75);
+  backdrop-filter: blur(22px) saturate(1.75);
+  box-shadow:
+    var(--sh-in),
+    var(--sh-out),
+    inset 0 0 0 1px rgb(255 255 255 / 0.45);
 }
-:root[data-theme="dark"] .fab-pebble--glass {
-  --fab-glass-a: 0.12;
+:root[data-theme="dark"] .fab-pebble.fab-pebble--glass,
+:root[data-theme="dark"] .scene .fab-pebble.fab-pebble--glass {
+  --fab-glass-a: 0.1;
+  --glass-a: 0.1;
+  background:
+    linear-gradient(
+      135deg,
+      rgb(255 255 255 / 0.14),
+      rgb(255 255 255 / 0.05) 52%,
+      rgb(255 255 255 / 0.1)
+    );
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.2),
+    0 8px 24px -8px rgb(0 0 0 / 0.45),
+    inset 0 0 0 1px rgb(255 255 255 / 0.18);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .fab-pebble--glass {
-    --fab-glass-a: 0.12;
+  :root:not([data-theme="light"]) .fab-pebble.fab-pebble--glass,
+  :root:not([data-theme="light"]) .scene .fab-pebble.fab-pebble--glass {
+    --fab-glass-a: 0.1;
+    --glass-a: 0.1;
+    background:
+      linear-gradient(
+        135deg,
+        rgb(255 255 255 / 0.14),
+        rgb(255 255 255 / 0.05) 52%,
+        rgb(255 255 255 / 0.1)
+      );
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 0.2),
+      0 8px 24px -8px rgb(0 0 0 / 0.45),
+      inset 0 0 0 1px rgb(255 255 255 / 0.18);
   }
 }
 .fab-pebble--no-rim { --fab-rim: 0; }
