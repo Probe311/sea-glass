@@ -1,4 +1,4 @@
-# Catalogue des composants — avancement
+# Catalogue des composants - avancement
 
 État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
@@ -14,7 +14,7 @@ Légende :
 | 🟡      | Présent, à peaufiner (API, a11y, variants)   |
 | ❌      | Absent / pas encore commencé                 |
 | ➖      | Hors scope volontaire (identité / auth État) |
-| —       | Non applicable                               |
+| -       | Non applicable                               |
 
 Colonnes :
 
@@ -27,25 +27,25 @@ Colonnes :
 
 ## Surface & matière
 
-**Glassmorphisme** partagé (`.sg-glass`) — le décor derrière doit se lire à travers la surface :
+**Glassmorphisme** partagé (`.sg-glass`) - le décor derrière doit se lire à travers la surface :
 
 | Couche    | Contrat                                                                                                                                |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
-| Frost     | `backdrop-filter: blur(16px) saturate(1.75)` — **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
+| Frost     | `backdrop-filter: blur(16px) saturate(1.75)` - **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
 | Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
 | Grain     | `noise.svg` soft-light ≈ **14 %** (givre)                                                                                              |
 | Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
 | Lueur     | Ombre table neutre (pas de halo teinté)                                                                                                |
 | Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
-| Isolation | `isolation: auto` — ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
+| Isolation | `isolation: auto` - ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
 
 `data-glow` = halo teinté rare. Ghost : pas de frost / grain. Stack Fabrication : **Verre** → bordure → **teinte (= formule Alert)** → réfraction → givre → lueur → encre. Prévoir un décor saturé derrière toute surface frosted.
 
 | Composant       | CSS            | React | Démo           | Storybook        | Avancement                        |
 | --------------- | -------------- | ----- | -------------- | ---------------- | --------------------------------- |
 | Glass (surface) | ✅             | ✅    | ✅ Fabrication | ✅ Surface/Glass | ✅ Base du système                |
-| Scene / décor   | ✅ `.sg-scene` | —     | ✅             | 🟡 décor preview | 🟡 Pas de composant React `Scene` |
+| Scene / décor   | ✅ `.sg-scene` | -     | ✅             | 🟡 décor preview | 🟡 Pas de composant React `Scene` |
 
 ---
 
@@ -56,9 +56,9 @@ Colonnes :
 | Button     | ✅          | ✅    | ✅ Boutons | 🟡 Forms overview | 🟡 Manque `href`, `loading`, variantes filled/tonal/outlined |
 | IconButton | ✅ (circle) | ✅    | ✅         | 🟡                | ✅ Aria-label obligatoire                                    |
 | Chip       | ✅          | ✅    | ✅ Puces   | 🟡                | ✅                                                           |
-| Listes doc | démo        | —     | ✅ Listes  | —                 | ✅ À puces / chiffrées / cochées (hors `.sg-list`)           |
-| Link       | ✅          | ✅    | ✅         | —                 | ✅                                                           |
-| SkipLink   | ✅          | ✅    | ✅         | —                 | ✅                                                           |
+| Listes doc | démo        | -     | ✅ Listes  | -                 | ✅ À puces / chiffrées / cochées (hors `.sg-list`)           |
+| Link       | ✅          | ✅    | ✅         | -                 | ✅                                                           |
+| SkipLink   | ✅          | ✅    | ✅         | -                 | ✅                                                           |
 
 ---
 
@@ -85,14 +85,14 @@ Colonnes :
 | PasswordField      | ✅  | ✅    | ✅ Listes       | 🟡 Forms  | ✅                                                                        |
 | Search             | ✅  | ✅    | ✅ Champs       | 🟡 Forms  | ✅                                                                        |
 | Select             | ✅  | ✅    | ✅ Listes       | 🟡 Forms  | 🟡 Listbox APG à peaufiner                                                |
-| Combobox           | ✅  | ✅    | ✅              | —         | 🟡 Filtre local ; multi-select riche à peaufiner                          |
+| Combobox           | ✅  | ✅    | ✅              | -         | 🟡 Filtre local ; multi-select riche à peaufiner                          |
 | Checkbox           | ✅  | ✅    | ✅ Cases        | 🟡 Forms  | ✅ Indeterminate                                                          |
 | Radio              | ✅  | ✅    | ✅ Cases        | 🟡 Forms  | ✅                                                                        |
-| RadioGroup         | —   | ❌    | ✅ (proto)      | —         | 🟡 Via inputs `name` ; pas d’export dédié                                 |
+| RadioGroup         | -   | ❌    | ✅ (proto)      | -         | 🟡 Via inputs `name` ; pas d’export dédié                                 |
 | Switch             | ✅  | ✅    | ✅ Interrupteur | 🟡 Forms  | ✅                                                                        |
 | Segmented          | ✅  | ✅    | ✅              | 🟡 Forms  | ✅                                                                        |
-| Slider             | ✅  | ✅    | ✅ Curseur      | —         | 🟡 Capsule→perle OK ; range / pipette / vertical à peaufiner côté package |
-| Form / Fieldset    | ✅  | ✅    | ✅              | —         | ✅                                                                        |
+| Slider             | ✅  | ✅    | ✅ Curseur      | -         | 🟡 Capsule→perle OK ; range / pipette / vertical à peaufiner côté package |
+| Form / Fieldset    | ✅  | ✅    | ✅              | -         | ✅                                                                        |
 | FileUpload         | ✅  | ✅    | ✅ Listes       | 🟡 Data   | ✅ Dropzone de base                                                       |
 | Number / OTP       | ❌  | ❌    | ❌              | ❌        | ❌ Roadmap P1                                                             |
 | Date / Time picker | ❌  | ❌    | ❌              | ❌        | ❌ Roadmap P2                                                             |
@@ -110,11 +110,11 @@ Colonnes :
 | Callout           | ✅            | ✅    | ✅ Alertes et toasts | 🟡 Feedback | ✅ Mise en avant / exergue                               |
 | Accordion         | ✅            | ✅    | ✅ Accordéon         | 🟡 Feedback | ✅                                                       |
 | Tabs              | ✅            | ✅    | ✅ Onglets           | 🟡 Feedback | ✅                                                       |
-| Tooltip           | ✅            | ✅    | ✅                   | —           | 🟡 Hover/focus ; Floating UI / délai / Échap à peaufiner |
-| Snackbar          | ✅            | ✅    | ✅ Alertes et toasts | —           | ✅ Snack + action                                        |
-| Toast             | ✅            | ✅    | ✅ Alertes et toasts | —           | ✅ Réutilise Alert · haut centre + blur                  |
+| Tooltip           | ✅            | ✅    | ✅                   | -           | 🟡 Hover/focus ; Floating UI / délai / Échap à peaufiner |
+| Snackbar          | ✅            | ✅    | ✅ Alertes et toasts | -           | ✅ Snack + action                                        |
+| Toast             | ✅            | ✅    | ✅ Alertes et toasts | -           | ✅ Réutilise Alert · haut centre + blur                  |
 | Progress          | ✅            | ✅    | ✅ Curseur           | 🟡 Feedback | ✅ Barre ; teintes / tailles                             |
-| Ring (circulaire) | ✅ `.sg-ring` | ❌    | ✅ Curseur (proto)   | —           | 🟡 CSS + démo ; pas d’export React                       |
+| Ring (circulaire) | ✅ `.sg-ring` | ❌    | ✅ Curseur (proto)   | -           | 🟡 CSS + démo ; pas d’export React                       |
 | Skeleton          | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P1                                            |
 | Spinner           | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P1                                            |
 | Empty state       | ❌            | ❌    | ❌                   | ❌          | ❌ Roadmap P2                                            |
@@ -141,14 +141,14 @@ Colonnes :
 | Header         | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | 🟡 Variante « connectée » absente |
 | Footer         | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
 | Sidebar        | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
-| Nav            | ✅  | ✅    | ✅ Navigation / Chrome | —             | 🟡 Rail / bottom nav à peaufiner  |
+| Nav            | ✅  | ✅    | ✅ Navigation / Chrome | -             | 🟡 Rail / bottom nav à peaufiner  |
 | Toc (sommaire) | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
 | Breadcrumbs    | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
 | Pagination     | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
 | Stepper        | ✅  | ✅    | ✅ Chrome              | 🟡 Navigation | ✅                                |
-| LangSwitcher   | ✅  | ✅    | ✅ Prefs               | —             | ✅                                |
-| ThemeToggle    | —   | ✅    | ✅ Prefs               | —             | ✅ Via Switch + `data-sg-theme`   |
-| ConsentBanner  | ✅  | ✅    | ✅ Prefs               | —             | ✅                                |
+| LangSwitcher   | ✅  | ✅    | ✅ Prefs               | -             | ✅                                |
+| ThemeToggle    | -   | ✅    | ✅ Prefs               | -             | ✅ Via Switch + `data-sg-theme`   |
+| ConsentBanner  | ✅  | ✅    | ✅ Prefs               | -             | ✅                                |
 
 ---
 
@@ -158,9 +158,9 @@ Colonnes :
 | ------------- | ---------------------- | ----- | ---------- | --------- | --------------------------------------- |
 | Table         | ✅                     | ✅    | ✅ Données | 🟡 Data   | 🟡 Tri OK ; sélection multi à peaufiner |
 | Quote         | ✅                     | ✅    | ✅ Données | 🟡 Data   | ✅                                      |
-| Media         | ✅                     | ✅    | ✅         | —         | ✅                                      |
+| Media         | ✅                     | ✅    | ✅         | -         | ✅                                      |
 | Hero          | ✅                     | ✅    | ✅ Données | 🟡 Data   | ✅ Zone d’expression visuelle           |
-| Share         | ✅                     | ✅    | ✅ Données | —         | ✅                                      |
+| Share         | ✅                     | ✅    | ✅ Données | -         | ✅                                      |
 | Transcription | ✅ `.sg-transcription` | ❌    | ✅         | ❌        | 🟡 CSS + démo ; pas d’adaptateur React  |
 | Carousel      | ❌                     | ❌    | ❌         | ❌        | ❌ Roadmap P2                           |
 | Timeline      | ❌                     | ❌    | ❌         | ❌        | ❌ Roadmap P2                           |
@@ -172,14 +172,14 @@ Colonnes :
 
 | Composant                  | CSS | React | Démo | Storybook | Avancement                                    |
 | -------------------------- | --- | ----- | ---- | --------- | --------------------------------------------- |
-| Stack / Grid / Container   | ❌  | ❌    | —    | —         | ❌ Roadmap P1                                 |
-| VisuallyHidden             | ❌  | ❌    | —    | —         | ❌ Roadmap P2                                 |
-| Portal / FocusTrap exposés | —   | ❌    | —    | —         | 🟡 Utilisés en interne (Dialog) ; pas publics |
-| `cx`                       | —   | ✅    | —    | —         | ✅ Utilitaire                                 |
+| Stack / Grid / Container   | ❌  | ❌    | -    | -         | ❌ Roadmap P1                                 |
+| VisuallyHidden             | ❌  | ❌    | -    | -         | ❌ Roadmap P2                                 |
+| Portal / FocusTrap exposés | -   | ❌    | -    | -         | 🟡 Utilisés en interne (Dialog) ; pas publics |
+| `cx`                       | -   | ✅    | -    | -         | ✅ Utilitaire                                 |
 
 ---
 
-## Hors scope (DSFR État — non prévus)
+## Hors scope (DSFR État - non prévus)
 
 | Composant                                 | Statut                                          |
 | ----------------------------------------- | ----------------------------------------------- |
@@ -193,9 +193,9 @@ Colonnes :
 
 | Couche                                       | ✅ / 🟡 | ❌  | ➖  |
 | -------------------------------------------- | ------- | --- | --- |
-| Adaptateurs React exportés                   | ~50     | —   | —   |
-| Manquants roadmap (Drawer, Skeleton, Date… ) | —       | ~15 | —   |
-| Hors scope État                              | —       | —   | 3   |
+| Adaptateurs React exportés                   | ~50     | -   | -   |
+| Manquants roadmap (Drawer, Skeleton, Date… ) | -       | ~15 | -   |
+| Hors scope État                              | -       | -   | 3   |
 
 **Priorités suivantes (ordre suggéré)**
 
