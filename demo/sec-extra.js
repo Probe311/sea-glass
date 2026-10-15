@@ -3,7 +3,7 @@
   var SG = window.SG, h = SG.h, D = SG.Doc, S = SG.S, Icon = SG.Icon;
   var useState = React.useState, useEffect = React.useEffect;
 
-  /* Stack only — Panel scene:true already provides the wash. */
+  /* Stack only - Panel scene:true already provides the wash. */
   function scene(children) {
     return h('div', { className: 'stack' }, children);
   }
@@ -33,7 +33,7 @@
       ['error', 'Erreur', 'Impossible d’enregistrer. Réessaie dans un instant.'],
     ];
     return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et toasts', lead: 'Relayer une information sans bloquer le parcours. Les toasts réutilisent le composant alerte, ancrés en haut au centre, avec un léger flou de l’arrière-plan.' },
-      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error · teinte 0.28 + givre 0.14.' },
+      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error · teinte 0.28 + givre 0.28.' },
         h('div', { className: 'alert-stage' }, scene(items.map(function (it) {
           return h('div', Object.assign({ key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-tint': true }, glassAttrs()),
             alertIcon(it[0]),
@@ -79,7 +79,7 @@
   };
 
   S.OverlaysDoc = function () {
-    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Même verre que les alertes : teinte 0.28, givre 0.14, frost scène.' },
+    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Même verre que les alertes : teinte 0.28, givre 0.28, frost scène.' },
       h(D.Panel, { scene: true, tag: 'Dialog', cap: 'Aperçu figé · role="dialog" · focus trap côté React.' },
         h('div', Object.assign({ className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-tint': true }, glassAttrs()),
           h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
@@ -112,7 +112,7 @@
       setOpen(!open);
       setTimeout(function () { skipBlur.current = false; }, 0);
     }
-    return h(D.Section, { id: 'saisie', label: 'Composants', title: 'Saisie avancée', lead: 'Combobox filtrable (chevron animé), champ mot de passe et dépôt de fichiers — au-delà du champ texte simple.' },
+    return h(D.Section, { id: 'saisie', label: 'Composants', title: 'Saisie avancée', lead: 'Combobox filtrable (chevron animé), champ mot de passe et dépôt de fichiers - au-delà du champ texte simple.' },
       h(D.Panel, { scene: true, tag: 'Aperçu', cap: 'Combobox, mot de passe, dépôt de fichiers.' },
         scene([
           h('div', { className: 'sg-combobox' },
@@ -181,7 +181,7 @@
   };
 
   S.ChromeDoc = function () {
-    return h(D.Section, { id: 'chrome', label: 'Composants', title: 'Chrome de page', lead: 'Cadre de page : skip link, en-tête, fil d’Ariane, stepper, pagination et pied — distinct de la barre de navigation mobile.' },
+    return h(D.Section, { id: 'chrome', label: 'Composants', title: 'Chrome de page', lead: 'Cadre de page : skip link, en-tête, fil d’Ariane, stepper, pagination et pied - distinct de la barre de navigation mobile.' },
       h(D.Panel, { scene: true, tag: 'Header', cap: 'Skip link, marque, nav, fil d’Ariane.' },
         scene([
           h('a', Object.assign({ className: 'sg-skip sg-glass', href: '#chrome', style: { position: 'static', transform: 'none' } }, glassAttrs()), 'Aller au contenu'),
@@ -228,7 +228,7 @@
             h('h3', { className: 'sg-tile__title' }, 'Tuile'), 'Redirige vers un contenu.'),
           h('blockquote', Object.assign({ className: 'sg-quote sg-glass' }, glassAttrs()),
             'La translucidité avant la décoration.',
-            h('footer', null, '— Sea Glass')),
+            h('footer', null, '- Sea Glass')),
           h('figure', Object.assign({ className: 'sg-media sg-glass' }, glassAttrs()),
             h('div', { className: 'sg-media__frame', 'aria-hidden': true },
               h('span', { className: 'sg-media__icon' }, h(Icon, { name: 'image', size: 40 }))),

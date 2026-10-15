@@ -65,7 +65,7 @@ import { initSeaGlassLight } from '@sea-glass/css/light';
 initSeaGlassLight(); // pointer rim; no-ops under prefers-reduced-motion
 ```
 
-React 19 (`@sea-glass/react`): `Glass` + Button, Field, Select, Alert, Table, Header, Footer… — full list in [`packages/react/README.md`](packages/react/README.md). Storybook 10: `pnpm storybook`. Tailwind v3:
+React 19 (`@sea-glass/react`): `Glass` + Button, Field, Select, Alert, Table, Header, Footer… - full list in [`packages/react/README.md`](packages/react/README.md). Storybook 10: `pnpm storybook`. Tailwind v3:
 
 ```js
 import { preset, plugin } from '@sea-glass/tailwind';
@@ -78,17 +78,17 @@ export default { presets: [preset], plugins: [plugin] };
 | ------------------------------------------------ | ------------------------------- |
 | [`assets/logo.svg`](assets/logo.svg)             | Wordmark on light backgrounds   |
 | [`assets/logo-light.svg`](assets/logo-light.svg) | Wordmark on dark backgrounds    |
-| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon — Cobalt disc `#6B8CE3` |
+| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon - Cobalt disc `#6B8CE3` |
 
 Wordmarks are outlined Poppins Bold + Cobalt period. Regenerate with `pnpm build:logo`.
 
-**Display / Hn:** [Poppins](https://fonts.google.com/specimen/Poppins) (OFL) — geometric rounded sans, single-story `a`. Load `@fontsource/poppins/700.css` or the Google Fonts CSS used by the demo. Fallback: Outfit. **Body:** Roboto. **No Google Sans.**
+**Display / Hn:** [Poppins](https://fonts.google.com/specimen/Poppins) (OFL) - geometric rounded sans, single-story `a`. Load `@fontsource/poppins/700.css` or the Google Fonts CSS used by the demo. Fallback: Outfit. **Body:** Roboto. **No Google Sans.**
 
 ### Material
 
-**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(16px) saturate(1.75)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), inset edge, neutral table drop. Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` is a rare tinted halo. Put saturated décor behind frosted surfaces.
+**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(16px) saturate(1.75)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **28 %**), inset edge, neutral table drop. Use `isolation: auto` - isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` is a rare tinted halo. Put saturated décor behind frosted surfaces.
 
-Demo Fabrication stack: **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.14**) → lueur → encre.
+Demo Fabrication stack: **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.28**) → lueur → encre.
 
 Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber, Root beer, Clear, Mist.
 
@@ -101,10 +101,10 @@ Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber
 | `@sea-glass/tokens`   | DTCG → CSS / JS / JSON                               |
 | `@sea-glass/css`      | Material + prefixed components                       |
 | `@sea-glass/elements` | Skeleton                                             |
-| `@sea-glass/react`    | ~50 adapters (forms, feedback, nav, data) — React 19 |
+| `@sea-glass/react`    | ~50 adapters (forms, feedback, nav, data) - React 19 |
 | `@sea-glass/tailwind` | Preset + `glass-*` plugin                            |
 
-Demo: [GitHub Pages](https://probe311.github.io/sea-glass/) — UI version via `pnpm sync:version`. Component status: [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap: [`ROADMAP.md`](ROADMAP.md).
+Demo: [GitHub Pages](https://probe311.github.io/sea-glass/) - UI version via `pnpm sync:version`. Component status: [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap: [`ROADMAP.md`](ROADMAP.md).
 
 ### Contributing
 
@@ -149,7 +149,7 @@ Fallback git : `pnpm add github:Probe311/sea-glass`
 </div>
 ```
 
-React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data — voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`.
+React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data - voir [`packages/react/README.md`](packages/react/README.md). Storybook 10 : `pnpm storybook`. Tailwind : preset + plugin `glass-*`.
 
 ### Marque et typo
 
@@ -157,7 +157,7 @@ React 19 (`@sea-glass/react`) : catalogue formulaires / feedback / nav / data �
 | ------------------------------------------------ | --------------------------------- |
 | [`assets/logo.svg`](assets/logo.svg)             | Fonds clairs                      |
 | [`assets/logo-light.svg`](assets/logo-light.svg) | Fonds sombres                     |
-| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon — disque Cobalt `#6B8CE3` |
+| [`demo/favicon.svg`](demo/favicon.svg)           | Favicon - disque Cobalt `#6B8CE3` |
 
 Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
@@ -165,9 +165,9 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 ### Matière
 
-**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(16px) saturate(1.75)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), filet inset, ombre table neutre. `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. Prévoir un décor saturé derrière toute surface frosted.
+**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(16px) saturate(1.75)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **28 %**), filet inset, ombre table neutre. `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. Prévoir un décor saturé derrière toute surface frosted.
 
-Stack Fabrication (démo) : **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.14**) → lueur → encre.
+Stack Fabrication (démo) : **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.28**) → lueur → encre.
 
 Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
 

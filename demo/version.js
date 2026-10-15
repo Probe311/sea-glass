@@ -3,6 +3,6 @@ window.SG_META = {
   "version": "0.2.1",
   "react": "19.3.0",
   "line": "0.2.1 · React 19.3.0",
-  "rev": "b9beabf",
-  "bust": "0.2.1-b9beabf"
+  "rev": "32e9861",
+  "bust": "0.2.1-32e9861"
 };

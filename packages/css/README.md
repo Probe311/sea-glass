@@ -21,14 +21,14 @@ pnpm add @sea-glass/css @sea-glass/tokens
 
 Couches : `sg.tokens`, `sg.material`, `sg.components`, `sg.utilities`, `sg.a11y`.
 
-Reset optionnel : `@sea-glass/css/reset.css` — **non** inclus par défaut.
+Reset optionnel : `@sea-glass/css/reset.css` - **non** inclus par défaut.
 
 **Glassmorphisme** (contrat UI unique) :
 
 | Token                | Clair                       | Sombre       |
 | -------------------- | --------------------------- | ------------ |
 | `--sg-glass-tint-a`  | **0.28** (Alert / Toast)    | selon teinte |
-| `--sg-glass-sparkle` | **0.14** soft-light         | **0.07**     |
+| `--sg-glass-sparkle` | **0.28** overlay            | **0.14**     |
 | Frost                | `blur(16px) saturate(1.75)` | idem         |
 | Alpha scène / sol    | ≈ **0.08–0.12** / **0.42**  | ≈ **0.10**   |
 

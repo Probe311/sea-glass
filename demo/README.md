@@ -7,7 +7,7 @@ Version UI = `package.json` + React installé (`pnpm sync:version` → `version.
 | Asset            | Rôle                                      |
 | ---------------- | ----------------------------------------- |
 | `logo.svg` / `logo-light.svg` | Wordmarks (`pnpm build:logo`) |
-| `favicon.svg`    | Favicon — disque Cobalt `#6B8CE3`         |
+| `favicon.svg`    | Favicon - disque Cobalt `#6B8CE3`         |
 
 Display type: **Poppins**. Prototype visuel + sections du sommaire (CSS `.sg-*` / React).
 
@@ -16,7 +16,7 @@ Matière UI (contrat unique, référence Alert / Toast) :
 | Token | Clair |
 | ----- | ----- |
 | Teinte (`tint-a`) | **0.28** |
-| Givre (`sparkle`) | **0.14** soft-light |
+| Givre (`sparkle`) | **0.28** overlay |
 | Frost | blur **16px** / saturate **1.75** |
 | Alpha scène / sol | **~0.08–0.12** / **~0.42** |
 

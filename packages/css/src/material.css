@@ -1,6 +1,6 @@
-/* Sea Glass material — glassmorphism formula.
+/* Sea Glass material - glassmorphism formula.
    Light wash + frost blur (décor visible), grain, rim, neutral table drop.
-   Scene alpha ~0.08–0.12 ; tint 0.28 (Alert) ; sparkle 0.14 soft-light. */
+   Scene alpha ~0.08–0.12 ; tint 0.28 (Alert) ; sparkle 0.28 overlay. */
 @layer sg.material {
   @property --sg-mx {
     syntax: '<percentage>';
@@ -33,7 +33,7 @@
     --sg-glass-press: transparent;
     position: relative;
 
-    /* isolate bloque le backdrop-filter — auto pour un vrai glassmorphisme */
+    /* isolate bloque le backdrop-filter - auto pour un vrai glassmorphisme */
     isolation: auto;
     border-radius: var(--sg-glass-radius);
     color: var(--sg-color-ink);
@@ -117,7 +117,7 @@
     opacity: 1;
   }
 
-  /* Tint: gelée diagonale translucide — laisse passer frost + décor */
+  /* Tint: gelée diagonale translucide - laisse passer frost + décor */
   .sg-glass[data-tint] {
     background:
       linear-gradient(var(--sg-glass-press), var(--sg-glass-press)),
@@ -178,12 +178,12 @@
     color: var(--sg-color-mist-ink);
   }
 
-  /* Optional colored drop — not the default table shadow */
+  /* Optional colored drop - not the default table shadow */
   .sg-glass[data-glow] {
     --sg-shadow-out: var(--sg-elevation-4);
   }
 
-  /* Grain / givre : noise.svg — soft-light pour rester lisible sur teinte Alert */
+  /* Grain / givre : noise.svg - overlay pour rester lisible sur teinte */
   .sg-glass::after {
     content: '';
     position: absolute;
@@ -191,8 +191,8 @@
     border-radius: inherit;
     pointer-events: none;
     z-index: 1;
-    background: url('noise.svg') center / 128px 128px repeat;
-    mix-blend-mode: soft-light;
+    background: url('noise.svg') center / 96px 96px repeat;
+    mix-blend-mode: overlay;
     opacity: var(--sg-glass-sparkle);
   }
 
@@ -202,7 +202,7 @@
       inset 1.5px 2px 3px -1px var(--sg-glass-carved-lo),
       inset -1px -1.5px 1px -1px var(--sg-glass-carved-hi);
     --sg-shadow-out: 0 1px 0 var(--sg-glass-carved-hi);
-    --sg-glass-sparkle: 0.1;
+    --sg-glass-sparkle: 0.2;
   }
 
   .sg-glass.sg-glass--carved:not([data-tint]) {

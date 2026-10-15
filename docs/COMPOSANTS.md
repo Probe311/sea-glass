@@ -2,7 +2,7 @@
 
 État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
-**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.14** soft-light · frost blur **16** / sat **1.75** · référence visuelle = Alert / Toast.
+**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.28** overlay · frost blur **16** / sat **1.75** · référence visuelle = Alert / Toast.
 
 Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
@@ -34,7 +34,7 @@ Colonnes :
 | Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
 | Frost     | `backdrop-filter: blur(16px) saturate(1.75)` - **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
 | Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
-| Grain     | `noise.svg` soft-light ≈ **14 %** (givre)                                                                                              |
+| Grain     | `noise.svg` overlay ≈ **28 %** (givre) · tuile 96 px                                                                                   |
 | Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
 | Lueur     | Ombre table neutre (pas de halo teinté)                                                                                                |
 | Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
