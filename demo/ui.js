@@ -19,7 +19,7 @@
       'aria-label': p['aria-label'], 'aria-pressed': pressed, tabIndex: p.tabIndex,
       className: cls('btn', 'shape-' + shape, p.size, v === 'primary' && 'primary', love && 'love', loveOff && 'off', ghost && 'ghost', p.state && 'is-' + p.state),
       tint: v === 'primary' ? 'seafoam' : (love && !loveOff) ? 'ruby' : undefined,
-      tintA: v === 'primary' ? 0.28 : (love && !loveOff) ? 0.55 : undefined,
+      tintA: v === 'primary' || (love && !loveOff) ? 0.28 : undefined,
       glow: false, refractive: !ghost, frosted: !ghost, rim: !ghost, alive: !ghost
     }, p.children);
   };

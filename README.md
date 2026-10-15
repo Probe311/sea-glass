@@ -86,7 +86,7 @@ Wordmarks are outlined Poppins Bold + Cobalt period. Regenerate with `pnpm build
 
 ### Material
 
-**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(16px) saturate(1.75)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **8 %**), inset edge. Drop = **two layers**: neutral cast shadow + soft tint glow (light through glass). Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` **boosts** the tint glow, it does not replace the cast. Put saturated décor behind frosted surfaces.
+**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(24px) saturate(2.05)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **22 %**), inset edge. Drop = **two layers**: flat downward cast + subtle tint glow. Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` **boosts** the tint glow, it does not replace the cast. Put saturated décor behind frosted surfaces.
 
 Demo Fabrication stack: **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.08**) → **ombre** → **lueur** → encre.
 
@@ -165,7 +165,7 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 ### Matière
 
-**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(16px) saturate(1.75)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **8 %**), filet inset. Drop = **deux layers** : ombre cast neutre + lueur teinte (lumière à travers). `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. `data-glow` renforce la lueur, ne remplace pas l’ombre. Prévoir un décor saturé derrière toute surface frosted.
+**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(24px) saturate(2.05)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` overlay ≈ **22 %**), filet inset. Drop = **deux layers** : ombre plate vers le bas + lueur teinte subtile. `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. `data-glow` renforce la lueur, ne remplace pas l’ombre. Prévoir un décor saturé derrière toute surface frosted.
 
 Stack Fabrication (démo) : **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.08**) → **ombre** → **lueur** → encre.
 

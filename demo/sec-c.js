@@ -99,13 +99,13 @@
     '  --on-tint: #14463A;  --teal: #4F9482;  --teal-hi: #7BBFAC;',
     '  --ga: 0.42;          /* verre sur sol uni (glassmorphisme) */',
     '  --ga-scene: 0.08;    /* verre sur décor coloré - décor lisible */',
-    '  --lg-blur: 16px;     /* 16 px base, jusqu’à 22 px Fabrication */',
+    '  --lg-blur: 24px;     /* 24 px base, jusqu’à 28 px Fabrication */',
     '  --lg-r: 28px;        /* 8 à 12 contrôles, 16 panneaux, 28 cartes, 999 pilules */',
     '  --ease: cubic-bezier(.2,0,0,1);  --spring: cubic-bezier(.34,1.4,.5,1);', '}',
     '/* sombre : --ground #0B1513, --ink #E8F1EE, --ga .10, --ga-scene .10, --teal #7BBFAC */', '',
     '/* Attributs matière (.sg-glass) - frost toujours sur .sg-scene (isolation: auto) */',
-    '.sg-scene .sg-glass, .sg-glass.sg-glass--over { backdrop-filter: blur(16px) saturate(1.75); }',
-    '.sg-refract .sg-scene .sg-glass[data-refractive] { backdrop-filter: blur(9px) url(#sg-refract) saturate(1.75); } /* Chromium */',
+    '.sg-scene .sg-glass, .sg-glass.sg-glass--over { backdrop-filter: blur(24px) saturate(2.05); }',
+    '.sg-refract .sg-scene .sg-glass[data-refractive] { backdrop-filter: blur(10px) url(#sg-refract) saturate(2.05); } /* Chromium */',
     '.sg-glass[data-alive]      { /* reflet pointeur (--mx, --my), ressort au survol */ }',
     '.sg-glass[data-rim]        { /* bordure / liseré d’arête */ }',
     '.sg-glass[data-tint]       { /* --tint + encre *-ink via currentColor */ }',
@@ -124,7 +124,7 @@
     '// Catalogue : packages/react/README.md · Storybook : pnpm storybook',
   ].join('\n');
   function jsonTokens() {
-    var o = { color: {}, material: { glassOnGround: 0.42, glassOnScene: 0.08, blur: 16, tintA: 0.28, sparkle: 0.14, radius: 28, shadowCast: true, shadowGlow: true, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
+    var o = { color: {}, material: { glassOnGround: 0.42, glassOnScene: 0.08, blur: 24, tintA: 0.28, sparkle: 0.22, radius: 28, shadowCast: true, shadowGlow: true, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
       motion: { fast: '120ms', base: '200ms', soft: '380ms', ease: 'cubic-bezier(0.2,0,0,1)', spring: 'cubic-bezier(0.34,1.4,0.5,1)' }, theme: SG.isDark() ? 'dark' : 'light' };
     SG.PEBBLES.forEach(function (p) { o.color[p.key] = { value: SG.cssVar('--' + p.key), ink: SG.cssVar('--' + p.key + '-ink') }; });
     return JSON.stringify(o, null, 2);
@@ -179,8 +179,13 @@
     var qs = useState(''), q = qs[0], setQ = qs[1], os = useState(false), open = os[0], setOpen = os[1];
     useEffect(function () {
       function esc(e) { if (e.key === 'Escape') setOpen(false); }
-      document.addEventListener('keydown', esc); return function () { document.removeEventListener('keydown', esc); };
+      document.addEventListener('keydown', esc);
+      return function () { document.removeEventListener('keydown', esc); };
     }, []);
+    useEffect(function () {
+      document.documentElement.classList.toggle('nav-open', open);
+      return function () { document.documentElement.classList.remove('nav-open'); };
+    }, [open]);
     var ver = (window.SG_META && window.SG_META.version) || '0.2.1';
     var main = h('main', { className: 'main' },
       h(S.Hero), h(S.Fabrication), h(S.Colors), h(S.Type), h(S.Shape), h(S.Motion), h(S.Icons),
@@ -190,12 +195,17 @@
       h(S.Contrast), h(S.Tokens),
       h('footer', { className: 'end' },
         h('span', null, 'Sea Glass · ' + ver),
-        h('span', null, 'Matière : bordure, teinte, réfraction, givre, lueur, encre · packages .sg-*')));
+        h('span', null, 'Matière : verre → bordure → teinte → réfraction → givre → ombre → lueur → encre')));
     var shell = h('div', { className: 'shell', id: 'top' },
       h(S.Side, { q: q, open: open, onClose: function () { setOpen(false); } }),
       main);
     return h(React.Fragment, null,
-      h(S.Bar, { q: q, setQ: setQ, open: open, onMenu: function () { setOpen(!open); } }),
+      h(S.Bar, {
+        q: q,
+        setQ: setQ,
+        open: open,
+        onMenu: function () { setOpen(function (v) { return !v; }); },
+      }),
       shell,
       h(Toast));
   }

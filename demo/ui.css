@@ -2,7 +2,7 @@
 .ico { width: 20px; height: 20px; fill: currentColor; flex: none; }
 
 /* ---------- Bouton : trois formes, quatre variantes ---------- */
-.btn { --lg-r: 999px; --lg-blur: 8px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding-inline: 24px; border: 0; cursor: pointer; overflow: hidden; font: 600 16px/1 var(--font-display); letter-spacing: 0.005em; color: var(--ink); white-space: nowrap; -webkit-tap-highlight-color: transparent; }
+.btn { --lg-r: 999px; --lg-blur: 12px; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding-inline: 24px; border: 0; cursor: pointer; overflow: hidden; font: 600 16px/1 var(--font-display); letter-spacing: 0.005em; color: var(--ink); white-space: nowrap; -webkit-tap-highlight-color: transparent; }
 .btn.shape-rect { --lg-r: 14px; }
 .btn.shape-circle { --lg-r: 50%; width: 48px; padding: 0; }
 .btn.sm { height: 40px; padding-inline: 18px; font-size: 14px; }
@@ -31,7 +31,7 @@
 @keyframes rp-out { to { opacity: 0; transform: translate(-50%, -50%) scale(1.3); } }
 
 /* ---------- Puce : pilule (filtre) ou rectangle (option) ---------- */
-.chip { --lg-r: 999px; --lg-blur: 8px; position: relative; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding-inline: 18px; border: 0; cursor: pointer; overflow: hidden; font: 500 14px/1 var(--font-body); color: var(--ink-2); }
+.chip { --lg-r: 999px; --lg-blur: 12px; position: relative; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding-inline: 18px; border: 0; cursor: pointer; overflow: hidden; font: 500 14px/1 var(--font-body); color: var(--ink-2); }
 .chip.shape-rect { --lg-r: 12px; }
 .chip .ico { width: 16px; height: 16px; }
 .chip[aria-pressed="true"] { color: inherit; padding-inline: 12px 18px; }
@@ -59,7 +59,7 @@
 /* ---------- Case et radio : même langage que l'interrupteur ---------- */
 .cb { position: relative; display: inline-flex; align-items: center; gap: 12px; cursor: pointer; font-size: 15px; min-height: 32px; }
 .cb input { position: absolute; left: 0; top: 50%; width: 24px; height: 24px; margin: -12px 0 0; opacity: 0; cursor: pointer; z-index: 6; }
-.cb .box { position: relative; width: 24px; height: 24px; flex: none; display: block; --lg-r: 8px; --lg-blur: 4px; }
+.cb .box { position: relative; width: 24px; height: 24px; flex: none; display: block; --lg-r: 8px; --lg-blur: 6px; }
 .cb.radio .box { --lg-r: 50%; }
 .cb .box > .ico { position: absolute; inset: 0; margin: auto; pointer-events: none; z-index: 5; width: 14px; height: 14px; fill: #fff; filter: drop-shadow(0 1px 1px rgba(0, 50, 40, 0.4)); opacity: 0; transform: scale(0.7); transition: opacity 180ms var(--ease), transform 260ms var(--spring); }
 .cb.on .box > .ico { opacity: 1; transform: scale(1); }
@@ -86,7 +86,7 @@
   background: color-mix(in srgb, #fff 55%, transparent);
   border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(var(--shade), 0.06), 0 1px 2px rgba(var(--drop), 0.06);
-  -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(2.05); backdrop-filter: blur(12px) saturate(2.05);
   transition: box-shadow 280ms var(--ease);
   overflow: hidden;
 }
@@ -94,7 +94,7 @@
   content: "";
   position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   background: url(noise.svg) center / 128px 128px repeat;
-  mix-blend-mode: overlay; opacity: 0.14;
+  mix-blend-mode: overlay; opacity: var(--sparkle, 0.22);
 }
 :root[data-theme="dark"] .sl-rail {
   background: color-mix(in srgb, #fff 8%, #0c1a18 70%, var(--ground-2));
@@ -251,12 +251,18 @@
 
 /* ---------- Progression : rail frosted (comme curseur), fill jelly sans glow ---------- */
 .pg {
-  --h: 18px; --f: 0.6; --buf: 0; --lg-r: 999px; --lg-blur: 8px;
+  --h: 18px; --f: 0.6; --buf: 0; --lg-r: 999px; --lg-blur: 12px;
   position: relative; height: var(--h); border-radius: 999px; overflow: hidden;
   background: color-mix(in srgb, #fff 55%, transparent);
   border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.85), inset 0 -1px 2px rgba(var(--shade), 0.06);
-  -webkit-backdrop-filter: blur(8px) saturate(1.2); backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(2.05); backdrop-filter: blur(12px) saturate(2.05);
+}
+.pg::after {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 0;
+  background: url(noise.svg) center / 128px 128px repeat;
+  mix-blend-mode: overlay; opacity: var(--sparkle, 0.22);
 }
 :root[data-theme="dark"] .pg {
   background: color-mix(in srgb, var(--ink) 12%, transparent);
@@ -315,7 +321,7 @@
 .ring span { position: relative; font: 600 15px var(--font-display); font-variant-numeric: tabular-nums; }
 
 /* ---------- Onglets et segmenté ---------- */
-.tabs-list { --lg-r: 999px; --lg-blur: 8px; display: inline-flex; padding: 4px; gap: 2px; position: relative; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.tabs-list { --lg-r: 999px; --lg-blur: 12px; display: inline-flex; padding: 4px; gap: 2px; position: relative; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
 .tabs-list::-webkit-scrollbar { display: none; }
 .tabs-list .pill {
   position: absolute; z-index: 1; top: 4px; bottom: 4px; left: 0;
@@ -411,9 +417,8 @@
 .card .kv { display: flex; justify-content: space-between; font-size: 13px; padding-top: 12px; border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); }
 .badge {
   display: inline-flex; align-items: center; height: 28px; padding-inline: 12px;
-  --lg-r: 999px; --lg-blur: 0; --tint-a: 0.28;
+  --lg-r: 999px; --lg-blur: 6px; --tint-a: 0.28;
   font: 600 12px/1 var(--font-display); letter-spacing: 0.02em; white-space: nowrap;
-  box-shadow: none;
 }
 /* Snack : bridge .snack (Glass démo) → métriques .sg-snack package */
 .snack {
@@ -527,9 +532,12 @@ table.ct td { padding: 11px 16px 11px 0; border-top: 1px solid var(--line); vert
 .cb.on .box {
   color: #fff;
   background: linear-gradient(165deg, rgb(48 128 105 / 0.82), rgb(37 107 90 / 0.88));
+  --glow: 37 107 90;
   --sh-in: none;
-  --sh-out: 0 5px 10px -5px rgba(37, 107, 90, 0.7);
-  --sparkle: 0.14;
+  --sh-cast: var(--table-drop);
+  --sh-glow: var(--tint-glow);
+  --sh-out: var(--sh-glow), var(--sh-cast);
+  --sparkle: 0.22;
 }
 .cb.on .box > .ico,
 .cb.on .box > .ico path { fill: #fff; color: #fff; }

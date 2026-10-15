@@ -2,7 +2,7 @@
 
 État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
-**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.08** overlay · ombre cast + lueur teinte · frost blur **16** / sat **1.75**.
+**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.22** overlay (carved **0.16**) · ombre plate + lueur teinte · frost **compact = `--sg-blur-md` (12)** / **panneau = `--sg-blur-lg` (24)** · sat **2.05**.
 
 Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
@@ -29,20 +29,21 @@ Colonnes :
 
 **Glassmorphisme** partagé (`.sg-glass`) - le décor derrière doit se lire à travers la surface :
 
-| Couche    | Contrat                                                                                                                                |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
-| Frost     | `backdrop-filter: blur(16px) saturate(1.75)` - **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
-| Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
-| Grain     | `noise.svg` overlay ≈ **14 %** (givre) · tuile 128 px                                                                                  |
-| Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
-| Ombre     | **Portée neutre** (`--sg-shadow-cast`) — noir/gris marqué, flottement                                                                  |
-| Lueur     | **Couleur du composant** (`--sg-shadow-glow` ← tint) — halo visible, lumière à travers                                                 |
-| Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
-| Isolation | `isolation: auto` - ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
+| Couche    | Contrat                                                                                                                                                                                                                                      |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                                                                                                                        |
+| Frost     | `blur(var(--sg-blur-*)) saturate(2.05)` — **compact** (button, chip, tabs, badge…) = **md 12** · **panneau** (card, dialog, header, alert) = **lg 24** · toujours sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
+| Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (Alert / Toast / callout / love — intensité via galet, pas alpha)                                                                                                                                |
+| Grain     | `noise.svg` overlay ≈ **22 %** (givre) · carved **16 %** · tuile 128 px                                                                                                                                                                      |
+| Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                                                                                                                        |
+| Ombre     | **Plate vers le bas** (`--sg-shadow-cast`) — noir neutre, serrée sous le galet                                                                                                                                                               |
+| Lueur     | **Teinte subtile** (`--sg-shadow-glow` ← tint pur) — halo discret, plus faible que l’ombre                                                                                                                                                   |
+| Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                                                                                                                                  |
+| Isolation | `isolation: auto` - ne pas isoler (sinon le blur ne voit plus le décor)                                                                                                                                                                      |
 
 Drop = **toujours deux layers** : `box-shadow: …, var(--sg-shadow-glow), var(--sg-shadow-cast), …`  
-(lueur = couleur · ombre = portée noire). `data-glow` renforce la lueur, ne remplace pas l’ombre.
+(lueur = couleur · ombre = portée noire). `data-glow` = boost `--sg-elevation-4` sur la lueur seule.  
+Glass imbriqué (`.sg-glass .sg-glass`) : **pas de 2e drop**. Exceptions volontaires : ghost (`blur 0`), champs carved, rails progress/slider (frost md + grain). FAB démo : blur **xl 28** (vitrine verre épais).
 
 Stack Fabrication : **Verre** → bordure → teinte → réfraction → givre → **ombre** → **lueur** → encre. Prévoir un décor saturé derrière toute surface frosted.
 

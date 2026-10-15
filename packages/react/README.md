@@ -29,7 +29,7 @@ Peer : `react` / `react-dom` `^19`. npm **0.2.1**.
 | Données / contenu | `Table`, `Quote`, `Media`, `Hero`, `Share`                                                                                               |
 | Chrome            | `LangSwitcher`, `ThemeToggle`, `ConsentBanner`                                                                                           |
 
-`Glass` / `Button` / `Chip` : `tint` (galet) fixe `data-tint` et l’encre `*-ink` (`currentColor`). Surfaces glass = **glassmorphisme** ; `Button` non-ghost pose `data-frosted` + `data-rim`. Teinte = **0.28** (formule Alert) ; givre ≈ **8 %** overlay. Drop = ombre cast + lueur teinte ; `glow` renforce la lueur.
+`Glass` / `Button` / `Chip` : `tint` (galet) fixe `data-tint` et l’encre `*-ink` (`currentColor`). Surfaces glass = **glassmorphisme** ; `Button` non-ghost pose `data-frosted` + `data-rim`. Teinte = **0.28** ; givre ≈ **0.22** overlay (carved **0.16**). Drop = ombre cast + lueur teinte ; `glow` renforce la lueur.
 
 Hors scope volontaire (identité / auth État) : bloc marque, FranceConnect / ProConnect.
 

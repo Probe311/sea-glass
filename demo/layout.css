@@ -40,14 +40,15 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .ib { width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; color: var(--ink-2); display: inline-grid; place-items: center; cursor: pointer; transition: background var(--theme-dur) var(--theme-ease), transform 220ms var(--spring); flex: none; }
 .ib:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); transform: scale(1.05); }
 .ib svg { width: 24px; height: 24px; }
-.menu-btn { display: none; }
+.menu-btn { display: none; -webkit-tap-highlight-color: transparent; }
+.menu-btn .ico { width: 22px; height: 22px; }
 .gsearch { margin-left: auto; flex: 0 1 420px; height: 46px; display: flex; align-items: center; gap: 12px; padding-inline: 16px; border-radius: 28px; background: var(--surf); color: var(--ink-2); transition: background var(--theme-dur) var(--theme-ease), box-shadow var(--theme-dur) var(--theme-ease); }
 .gsearch:hover { background: var(--surf-hi); }
 .gsearch:focus-within { background: var(--ground); box-shadow: 0 0 0 2px var(--focus); }
 .gsearch svg { width: 22px; height: 22px; flex: none; }
 .gsearch input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font: 400 16px var(--font-body); }
 .gsearch input::placeholder { color: var(--ink-2); opacity: 0.85; }
-.shell { position: relative; z-index: 1; max-width: 1440px; margin-inline: auto; padding-inline: 0 clamp(16px, 3vw, 48px); display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: clamp(16px, 3vw, 48px); }
+.shell { position: relative; max-width: 1440px; margin-inline: auto; padding-inline: 0 clamp(16px, 3vw, 48px); display: grid; grid-template-columns: 296px minmax(0, 1fr); gap: clamp(16px, 3vw, 48px); }
 .main { min-width: 0; padding-block: 32px 96px; }
 .side {
   --side-pad: 14px;
@@ -158,22 +159,73 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
   .appbar { padding-inline: 8px 12px; gap: 6px; }
   .appbar .brand-logo { height: 24px; }
   .gsearch { flex: 1 1 auto; min-width: 0; margin-left: 8px; }
-  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; padding-inline: clamp(16px, 3vw, 40px); }
-  .side { position: fixed; z-index: 80; top: var(--bar-h); left: 0; bottom: 0; width: min(320px, 86vw); height: auto; padding-top: 12px; background: var(--ground); border-radius: 0 28px 28px 0; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3); transform: translateX(-105%); visibility: hidden; transition: transform var(--theme-dur) var(--theme-ease), visibility 0s var(--theme-dur), background-color var(--theme-dur) var(--theme-ease); }
-  .side.open { transform: none; visibility: visible; transition: transform var(--theme-dur) var(--theme-ease), background-color var(--theme-dur) var(--theme-ease); }
-  .scrim { display: block; position: fixed; inset: var(--bar-h) 0 0 0; z-index: 70; background: rgba(0, 20, 16, 0.4); opacity: 0; pointer-events: none; transition: opacity var(--theme-dur) var(--theme-ease); }
+  /* z-index:auto : le tiroir fixed ne reste pas piégé sous la barre */
+  .shell { z-index: auto; grid-template-columns: minmax(0, 1fr); gap: 0; padding-inline: clamp(16px, 3vw, 40px); }
+  .side {
+    position: fixed;
+    z-index: 100;
+    top: var(--bar-h);
+    left: 0;
+    bottom: 0;
+    width: min(320px, 86vw);
+    height: auto;
+    margin: 0;
+    padding: 12px max(14px, env(safe-area-inset-right, 0px)) 16px max(14px, env(safe-area-inset-left, 0px));
+    background: var(--ground);
+    border: 0;
+    border-radius: 0 28px 28px 0;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transform: translate3d(-105%, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform var(--theme-dur) var(--theme-ease),
+      visibility 0s linear var(--theme-dur),
+      background-color var(--theme-dur) var(--theme-ease);
+  }
+  .side.open {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform var(--theme-dur) var(--theme-ease),
+      visibility 0s linear 0s,
+      background-color var(--theme-dur) var(--theme-ease);
+  }
+  .scrim {
+    display: block;
+    position: fixed;
+    inset: var(--bar-h) 0 0 0;
+    z-index: 90;
+    background: rgba(0, 20, 16, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--theme-dur) var(--theme-ease);
+  }
   .scrim.on { opacity: 1; pointer-events: auto; }
   .main { padding-top: 20px; }
+  html.nav-open, html.nav-open body { overflow: hidden; }
 }
 
 /* ---------- En-tête du document ---------- */
 .doc-hero { display: grid; gap: 22px; padding-bottom: 8px; }
 .doc-hero h1:not(:has(.hero-logo)) { font-size: clamp(48px, 8vw, 92px); line-height: 0.96; font-weight: 700; letter-spacing: -0.035em; }
 .doc-hero .lead { max-width: 64ch; font-size: 19px; line-height: 1.55; color: var(--ink-2); }
-.meta { display: flex; flex-wrap: wrap; gap: 10px 28px; padding-top: 18px; border-top: 1px solid var(--line); }
-.meta div { display: grid; gap: 2px; }
-.meta b { font: 600 20px var(--font-display); }
-.meta span { font-size: 12px; color: var(--ink-3); letter-spacing: 0.04em; }
+.meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.meta div { display: grid; gap: 4px; min-width: 0; }
+.meta b { font: 600 22px/1.1 var(--font-display); color: var(--ink); letter-spacing: -0.02em; }
+.meta span { font: 500 12px/1.35 var(--font-body); color: var(--ink-3); }
+@media (max-width: 560px) {
+  .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; }
+}
 .hero-pebbles { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; max-width: 720px; }
 .hero-pebbles .pebble-blob { width: 100%; }
 @media (max-width: 560px) { .hero-pebbles { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
@@ -285,7 +337,7 @@ code { font-size: 0.88em; padding: 1px 6px; border-radius: 6px; background: colo
 .scene .sg-dialog-demo .sg-dialog-demo__danger,
 .scene .sg-dialog-demo__danger {
   --sg-glass-tint-rgb: var(--sg-color-ruby-rgb);
-  --sg-glass-tint-a: 0.92;
+  --sg-glass-tint-a: 0.28;
   color: var(--sg-color-ruby-ink);
 }
 .scene .sg-media {
@@ -423,6 +475,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   cursor: not-allowed;
 }
 .fab-bg-clear {
+  position: relative;
   display: grid;
   place-items: center;
   width: 28px;
@@ -433,7 +486,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   background: transparent;
   color: var(--ruby, #e07662);
   cursor: pointer;
-  transition: color 200ms var(--ease), background 200ms var(--ease), transform 200ms var(--spring);
+  transition: color 280ms var(--ease), background 280ms var(--ease), transform 220ms var(--spring);
 }
 .fab-bg-clear:hover {
   background: color-mix(in srgb, var(--ruby, #e07662) 14%, transparent);
@@ -444,6 +497,33 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .fab-bg-clear--off:hover {
   background: color-mix(in srgb, var(--seafoam) 22%, transparent);
+}
+.fab-bg-clear__stack {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+.fab-bg-clear__face {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.72) rotate(-12deg);
+  transition:
+    opacity 320ms var(--ease),
+    transform 380ms var(--spring);
+  pointer-events: none;
+}
+.fab-bg-clear__face.is-on {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+.fab-bg-clear__face .ico {
+  display: block;
+  width: 18px;
+  height: 18px;
 }
 .fab-bg-switch__ico {
   display: grid;
@@ -630,23 +710,22 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 /*
  * Verre = glassmorphisme lisible - wash + blur 22, plus opaque que le DS base.
- * Teinte : règle plus spécifique ci-dessous (tint-a 0.4).
+ * Teinte canon 0.28 ; blur xl 28px (vitrine verre épais, hors échelle md/lg).
  */
 .fab-pebble.fab-pebble--glass,
 .scene .fab-pebble.fab-pebble--glass {
   --fab-glass-a: 0.28;
-  --fab-blur: 22px;
+  --fab-blur: 28px;
   --glass-a: 0.28;
-  --lg-blur: 22px;
+  --lg-blur: 28px;
   --sh-in: inset 0 1px 1px rgb(255 255 255 / 0.55);
   /* Alphas interpolés (--fab-*) : fade-in soft, pas de snap none→shadow */
   --sh-cast:
-    0 3px 6px rgb(0 0 0 / calc(0.24 * var(--fab-cast))),
-    0 18px 40px -6px rgb(0 0 0 / calc(0.52 * var(--fab-cast)));
+    0 2px 3px rgb(0 0 0 / calc(0.12 * var(--fab-cast))),
+    0 10px 18px -6px rgb(0 0 0 / calc(0.28 * var(--fab-cast)));
   --sh-glow:
-    0 0 28px color-mix(in srgb, rgb(var(--tint)) calc(70% * var(--fab-glow)), transparent),
-    0 10px 28px -2px color-mix(in srgb, color-mix(in srgb, rgb(var(--tint)) 58%, black) calc(100% * var(--fab-glow)), transparent),
-    0 24px 52px -8px color-mix(in srgb, color-mix(in srgb, rgb(var(--tint)) 42%, black) calc(100% * var(--fab-glow)), transparent);
+    0 0 18px rgb(var(--tint) / calc(0.18 * var(--fab-glow))),
+    0 6px 16px -2px rgb(var(--tint) / calc(0.22 * var(--fab-glow)));
   --sh-out: var(--sh-glow), var(--sh-cast);
   /* Teinte fondue via --fab-tint (0 = wash blanc, 1 = gelée) */
   background:
@@ -657,8 +736,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
       color-mix(in srgb, rgb(var(--tint) / 0.4) calc(100% * var(--fab-tint)), rgb(255 255 255 / 0.28)) 52%,
       color-mix(in srgb, rgb(var(--tint)) calc(70% * var(--fab-tint)), rgb(255 255 255 / 0.38))
     );
-  -webkit-backdrop-filter: blur(22px) saturate(1.85);
-  backdrop-filter: blur(22px) saturate(1.85);
+  -webkit-backdrop-filter: blur(28px) saturate(2.1);
+  backdrop-filter: blur(28px) saturate(2.1);
   box-shadow:
     var(--sh-in),
     var(--sh-out),
@@ -707,7 +786,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 /* Même grain global (overlay ~8 %) — pas d’override densifié */
 .fab-pebble.fab-pebble--glass::after {
   mix-blend-mode: overlay;
-  opacity: var(--sparkle, 0.14);
+  opacity: var(--sparkle, 0.22);
 }
 .fab-pebble__ink {
   display: inline-flex;
@@ -795,7 +874,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   .fab-dot,
   .fab-bg-switch__thumb,
   .fab-stage::before,
-  .fab-bg-clear { transition: none; }
+  .fab-bg-clear,
+  .fab-bg-clear__face { transition: none; }
 }
 
 /* Forme : même contrat grille que Typo (.g3) + rythme label */
@@ -823,7 +903,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .pebble-blob {
   --pebble-tint-mix: 48%;
   --pebble-lit: 0.9;
-  --pebble-sparkle: 0.14;
+  --pebble-sparkle: 0.22;
   --pebble-sheen: rgb(255 255 255 / 0.22);
   --pebble-cs: color-mix(in srgb, var(--bc) 40%, #fff);
   position: relative;
@@ -838,12 +918,12 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   /* Corps verre + dépoli */
   background:
     linear-gradient(135deg, rgb(255 255 255 / 0.28), rgb(255 255 255 / 0.12) 55%, rgb(255 255 255 / 0.18));
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(22px) saturate(1.85);
+  backdrop-filter: blur(22px) saturate(1.85);
   box-shadow:
     inset 0 2px 1px rgb(255 255 255 / 0.45),
     inset 0 -3px 6px rgb(0 0 0 / 0.06),
-    var(--table-drop, 0 3px 6px rgb(0 0 0 / 0.22), 0 16px 36px -6px rgb(0 0 0 / 0.5));
+    var(--table-drop, 0 2px 3px rgb(0 0 0 / 0.12), 0 10px 18px -6px rgb(0 0 0 / 0.28));
 }
 .pebble-blob__layer {
   position: absolute;
@@ -918,7 +998,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 :root[data-theme="dark"] .pebble-blob {
   --pebble-tint-mix: 40%;
   --pebble-lit: 0.65;
-  --pebble-sparkle: 0.1;
+  --pebble-sparkle: 0.16;
   --pebble-sheen: rgb(255 255 255 / 0.1);
   background:
     linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.07));
@@ -927,7 +1007,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   :root:not([data-theme="light"]) .pebble-blob {
     --pebble-tint-mix: 40%;
     --pebble-lit: 0.65;
-    --pebble-sparkle: 0.1;
+    --pebble-sparkle: 0.16;
     --pebble-sheen: rgb(255 255 255 / 0.1);
     background:
       linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.07));

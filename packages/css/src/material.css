@@ -1,7 +1,7 @@
 /* Sea Glass material - glassmorphism formula.
    Light wash + frost blur (décor visible), grain, rim.
    Drop = 2 layers: cast (ombre neutre) + glow (lueur teinte).
-   Scene alpha ~0.08–0.12 ; tint 0.28 ; sparkle 0.14 overlay. */
+   Scene alpha ~0.08–0.12 ; tint 0.28 ; sparkle 0.22 overlay ; blur 24. */
 @layer sg.material {
   @property --sg-mx {
     syntax: '<percentage>';
@@ -31,14 +31,11 @@
     --sg-glass-cs: color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 40%, #fff);
     --sg-shadow-in: inset 0 1px 1px rgb(255 255 255 / 0.45), inset 0 -2px 4px rgb(0 0 0 / 0.05);
 
-    /* Ombre = portée noire · Lueur = couleur du composant (pas l’inverse) */
+    /* Ombre = plate vers le bas · Lueur = teinte pure, subtile (maquette) */
     --sg-shadow-cast: var(--sg-elevation-3);
-
-    /* Pastels (seafoam…) : color-mix + black pour une lueur lisible sur fond clair */
     --sg-shadow-glow:
-      0 0 24px color-mix(in srgb, rgb(var(--sg-glass-glow-rgb)) 60%, transparent),
-      0 10px 28px -2px color-mix(in srgb, rgb(var(--sg-glass-glow-rgb)) 55%, black),
-      0 22px 48px -8px color-mix(in srgb, rgb(var(--sg-glass-glow-rgb)) 38%, black);
+      0 0 18px rgb(var(--sg-glass-glow-rgb) / 0.18),
+      0 6px 16px -2px rgb(var(--sg-glass-glow-rgb) / 0.22);
     --sg-shadow-out: var(--sg-shadow-glow), var(--sg-shadow-cast);
     --sg-glass-press: transparent;
     position: relative;
@@ -85,16 +82,16 @@
   .sg-glass[data-frosted],
   .sg-glass.sg-glass--over[data-frosted],
   .sg-glass.sg-glass--over {
-    -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.75);
-    backdrop-filter: blur(var(--sg-glass-blur)) saturate(1.75);
+    -webkit-backdrop-filter: blur(var(--sg-glass-blur)) saturate(2.05);
+    backdrop-filter: blur(var(--sg-glass-blur)) saturate(2.05);
   }
 
   /* Refraction is Chromium-only and opt-in (html.sg-refract + data-refractive). */
   .sg-refract .sg-scene .sg-glass[data-refractive],
   .sg-refract .sg-glass.sg-glass--over[data-refractive] {
-    -webkit-backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.55)) url('#sg-refract')
-      saturate(1.75);
-    backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.55)) url('#sg-refract') saturate(1.75);
+    -webkit-backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.4)) url('#sg-refract')
+      saturate(2.05);
+    backdrop-filter: blur(calc(var(--sg-glass-blur) * 0.4)) url('#sg-refract') saturate(2.05);
   }
 
   .sg-glass::before {
@@ -194,7 +191,14 @@
     --sg-shadow-glow: var(--sg-elevation-4);
   }
 
-  /* Grain : bruit fin monochrome sur la teinte — overlay lisible (~14 %) */
+  /* Glass imbriqué : pas de 2e drop (ombre table sur le parent seul) */
+  .sg-glass .sg-glass {
+    --sg-shadow-cast: none;
+    --sg-shadow-glow: none;
+    --sg-shadow-out: none;
+  }
+
+  /* Grain : bruit fin monochrome sur la teinte — overlay ~22 % */
   .sg-glass::after {
     content: '';
     position: absolute;
@@ -204,7 +208,7 @@
     z-index: 1;
     background: url('noise.svg') center / 128px 128px repeat;
     mix-blend-mode: overlay;
-    opacity: var(--sg-glass-sparkle, 0.14);
+    opacity: var(--sg-glass-sparkle, 0.22);
   }
 
   /* Creux : ombre inset + grain un peu plus léger — pas de drop cast/glow */
@@ -215,7 +219,7 @@
     --sg-shadow-cast: 0 1px 0 var(--sg-glass-carved-hi);
     --sg-shadow-glow: none;
     --sg-shadow-out: var(--sg-shadow-cast);
-    --sg-glass-sparkle: 0.1;
+    --sg-glass-sparkle: 0.16;
   }
 
   .sg-glass.sg-glass--carved:not([data-tint]) {

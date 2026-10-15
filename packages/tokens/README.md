@@ -18,4 +18,4 @@ import { tokens, pebbles } from '@sea-glass/tokens';
 
 Three layers: **primitives** (12 pebbles + inks, neutrals) → **semantic** (`primary`, `surface`, `danger`…) → **component** (`--sg-button-height-md`).
 
-Glass (light): alpha ground ≈ **0.42**, scene ≈ **0.08–0.12**, sparkle / givre ≈ **0.14** (overlay). Tint default in CSS ≈ **0.28** (Alert / Toast reference). Dark: sparkle ≈ **0.10**. Dark values live in `$extensions.seaglass.dark` and are emitted for `[data-sg-theme]` / `[data-theme]` plus `prefers-color-scheme` (excluded when either attribute is `light`).
+Glass (light): alpha ground ≈ **0.42**, scene ≈ **0.08–0.12**, blur ≈ **24px**, sparkle / givre ≈ **0.22** (overlay). Tint default in CSS ≈ **0.28** (Alert / Toast reference). Dark: sparkle ≈ **0.16**. Dark values live in `$extensions.seaglass.dark` and are emitted for `[data-sg-theme]` / `[data-theme]` plus `prefers-color-scheme` (excluded when either attribute is `light`).

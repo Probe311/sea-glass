@@ -16,10 +16,10 @@ Matière UI (contrat unique, référence Alert / Toast) :
 | Token | Clair |
 | ----- | ----- |
 | Teinte (`tint-a`) | **0.28** |
-| Givre (`sparkle`) | **0.14** overlay |
-| Ombre (`--sh-cast`) | neutre marquée |
-| Lueur (`--sh-glow`) | halo teinte soft |
-| Frost | blur **16px** / saturate **1.75** |
+| Givre (`sparkle`) | **0.22** overlay |
+| Ombre (`--sh-cast`) | plate vers le bas |
+| Lueur (`--sh-glow`) | teinte subtile |
+| Frost | blur **24px** / saturate **2.05** |
 | Alpha scène / sol | **~0.08–0.12** / **~0.42** |
 
 Détail : [docs/COMPOSANTS.md](../docs/COMPOSANTS.md). Footer page : `Sea Glass · version` uniquement.

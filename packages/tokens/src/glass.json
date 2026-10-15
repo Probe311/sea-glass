@@ -1,8 +1,9 @@
 {
   "blur": {
-    "sm": { "$type": "dimension", "$value": "4px" },
-    "md": { "$type": "dimension", "$value": "8px" },
-    "lg": { "$type": "dimension", "$value": "16px" }
+    "sm": { "$type": "dimension", "$value": "6px" },
+    "md": { "$type": "dimension", "$value": "12px" },
+    "lg": { "$type": "dimension", "$value": "24px" },
+    "xl": { "$type": "dimension", "$value": "32px" }
   },
   "glass": {
     "alpha-ground": {
@@ -67,8 +68,8 @@
     },
     "sparkle": {
       "$type": "number",
-      "$value": 0.14,
-      "$extensions": { "seaglass": { "dark": 0.1 } }
+      "$value": 0.22,
+      "$extensions": { "seaglass": { "dark": 0.16 } }
     }
   }
 }
