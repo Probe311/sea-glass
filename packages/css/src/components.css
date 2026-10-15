@@ -1721,7 +1721,7 @@
 
   :root:not([data-sg-theme='dark'], [data-theme='dark']) .sg-dialog-demo {
     --sg-glass-tint-rgb: 247 249 247;
-    --sg-glass-tint-a: 0.22;
+    --sg-glass-tint-a: 0.28;
     color: var(--sg-color-ink);
   }
 

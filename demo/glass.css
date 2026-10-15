@@ -1,6 +1,6 @@
 /* Sea Glass v4 · tokens et matériau
-   Formule gelée : dégradé 135°, grain, volume inset, ombre table neutre, overlay actif.
-   data-glow = accent rare, plus le drop standard. */
+   Glassmorphisme : wash + frost 16/1.75, teinte 0.28 (Alert), givre soft-light 0.14.
+   data-glow = accent rare, pas le drop standard. */
 
 @property --mx { syntax: '<percentage>'; inherits: false; initial-value: 28%; }
 @property --my { syntax: '<percentage>'; inherits: false; initial-value: 0%; }
@@ -183,7 +183,7 @@
 .lg.carved {
   --sh-in: inset 1.5px 2px 3px -1px var(--c-lo), inset -1px -1.5px 1px -1px var(--c-hi);
   --sh-out: 0 1px 0 var(--c-hi);
-  --sparkle: 0.05;
+  --sparkle: 0.1;
 }
 .lg.carved:not([data-tint]) {
   background: linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0.72));

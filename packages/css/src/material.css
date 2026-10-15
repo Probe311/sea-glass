@@ -202,7 +202,7 @@
       inset 1.5px 2px 3px -1px var(--sg-glass-carved-lo),
       inset -1px -1.5px 1px -1px var(--sg-glass-carved-hi);
     --sg-shadow-out: 0 1px 0 var(--sg-glass-carved-hi);
-    --sg-glass-sparkle: 0.05;
+    --sg-glass-sparkle: 0.1;
   }
 
   .sg-glass.sg-glass--carved:not([data-tint]) {

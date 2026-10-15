@@ -88,7 +88,7 @@ Wordmarks are outlined Poppins Bold + Cobalt period. Regenerate with `pnpm build
 
 **Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(16px) saturate(1.75)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), inset edge, neutral table drop. Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` is a rare tinted halo. Put saturated décor behind frosted surfaces.
 
-Demo Fabrication stack: bordure → teinte → réfraction → givre (grain) → lueur (ombre table) → encre.
+Demo Fabrication stack: **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.14**) → lueur → encre.
 
 Pebbles: Seafoam, Kelly, Citron, Aqua, Cornflower, Cobalt, Lavender, Ruby, Amber, Root beer, Clear, Mist.
 
@@ -167,7 +167,7 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 **Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(16px) saturate(1.75)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), filet inset, ombre table neutre. `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. Prévoir un décor saturé derrière toute surface frosted.
 
-Stack Fabrication (démo) : bordure → teinte → réfraction → givre → lueur → encre.
+Stack Fabrication (démo) : **Verre** → bordure → teinte (**0.28**) → réfraction → givre (**0.14**) → lueur → encre.
 
 Démo : [GitHub Pages](https://probe311.github.io/sea-glass/). Catalogue : [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md). Roadmap : [`ROADMAP.md`](ROADMAP.md).
 

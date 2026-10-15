@@ -2,6 +2,8 @@
 
 État au **2026-10-15** · Sea Glass **npm `@sea-glass/*` 0.2.1** · React 19 · couverture démo = sections dédiées du sommaire.
 
+**Réglages UI matière (tous les `.sg-glass` / démo `.lg`)** : teinte **0.28** · givre **0.14** soft-light · frost blur **16** / sat **1.75** · référence visuelle = Alert / Toast.
+
 Packages : [`@sea-glass/css`](https://www.npmjs.com/package/@sea-glass/css) · [`@sea-glass/react`](https://www.npmjs.com/package/@sea-glass/react) · [`@sea-glass/tokens`](https://www.npmjs.com/package/@sea-glass/tokens) · [`@sea-glass/tailwind`](https://www.npmjs.com/package/@sea-glass/tailwind) · [`@sea-glass/elements`](https://www.npmjs.com/package/@sea-glass/elements).
 
 Légende :

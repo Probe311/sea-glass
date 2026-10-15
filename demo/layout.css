@@ -672,7 +672,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .pebble-blob {
   --pebble-tint-mix: 48%;
   --pebble-lit: 0.9;
-  --pebble-sparkle: 0.1;
+  --pebble-sparkle: 0.14;
   --pebble-sheen: rgb(255 255 255 / 0.22);
   --pebble-cs: color-mix(in srgb, var(--bc) 40%, #fff);
   position: relative;
@@ -767,7 +767,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 :root[data-theme="dark"] .pebble-blob {
   --pebble-tint-mix: 40%;
   --pebble-lit: 0.65;
-  --pebble-sparkle: 0.06;
+  --pebble-sparkle: 0.07;
   --pebble-sheen: rgb(255 255 255 / 0.1);
   background:
     linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.07));
@@ -776,7 +776,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   :root:not([data-theme="light"]) .pebble-blob {
     --pebble-tint-mix: 40%;
     --pebble-lit: 0.65;
-    --pebble-sparkle: 0.06;
+    --pebble-sparkle: 0.07;
     --pebble-sheen: rgb(255 255 255 / 0.1);
     background:
       linear-gradient(135deg, rgb(255 255 255 / 0.1), rgb(255 255 255 / 0.04) 55%, rgb(255 255 255 / 0.07));

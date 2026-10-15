@@ -18,7 +18,7 @@
           rim: true,
           alive: false,
           tint: p.invalid ? 'ruby' : undefined,
-          tintA: p.invalid ? 0.35 : undefined,
+          tintA: p.invalid ? 0.28 : undefined,
         }),
         h('input', { id: id, type: 'text', placeholder: p.placeholder, defaultValue: p.value, disabled: p.disabled, 'aria-invalid': p.invalid ? 'true' : undefined, 'aria-describedby': p.help ? id + 'h' : undefined })),
       p.help && h('span', { id: id + 'h', className: cls('help', p.invalid && 'err') }, p.help));
@@ -54,7 +54,7 @@
       as: 'article',
       className: 'card',
       tint: p.tint,
-      tintA: 0.4,
+      tintA: 0.28,
       rim: true,
       frosted: true,
       refractive: true,

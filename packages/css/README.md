@@ -23,7 +23,16 @@ Couches : `sg.tokens`, `sg.material`, `sg.components`, `sg.utilities`, `sg.a11y`
 
 Reset optionnel : `@sea-glass/css/reset.css` — **non** inclus par défaut.
 
-**Glassmorphisme** : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42) + `backdrop-filter: blur(16px) saturate(1.75)`. Frost **toujours** sur `.sg-scene`. Teinte = formule Alert (`--sg-glass-tint-a` = **0.28**). Grain (`dist/noise.svg` soft-light ≈ **14 %**), filet inset, ombre table neutre. `isolation: auto`. Réfraction opt-in (`html.sg-refract` + `data-refractive`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
+**Glassmorphisme** (contrat UI unique) :
+
+| Token                | Clair                       | Sombre       |
+| -------------------- | --------------------------- | ------------ |
+| `--sg-glass-tint-a`  | **0.28** (Alert / Toast)    | selon teinte |
+| `--sg-glass-sparkle` | **0.14** soft-light         | **0.07**     |
+| Frost                | `blur(16px) saturate(1.75)` | idem         |
+| Alpha scène / sol    | ≈ **0.08–0.12** / **0.42**  | ≈ **0.10**   |
+
+Frost **toujours** sur `.sg-scene`. Grain : `dist/noise.svg`. `isolation: auto`. Réfraction opt-in (`html.sg-refract` + `data-refractive`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
 
 ## Composants CSS (classes)
 

@@ -79,7 +79,7 @@
   };
 
   S.OverlaysDoc = function () {
-    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Aperçu figé, lisible sur verre opaque.' },
+    return h(D.Section, { id: 'overlays', label: 'Composants', title: 'Modale', lead: 'Dialog pour une action bloquante. Même verre que les alertes : teinte 0.28, givre 0.14, frost scène.' },
       h(D.Panel, { scene: true, tag: 'Dialog', cap: 'Aperçu figé · role="dialog" · focus trap côté React.' },
         h('div', Object.assign({ className: 'sg-dialog-demo sg-dialog sg-glass', role: 'dialog', 'aria-labelledby': 'dlg-t', 'data-tint': true }, glassAttrs()),
           h('div', { className: 'sg-dialog__header' }, h('h3', { id: 'dlg-t', className: 'sg-dialog__title' }, 'Supprimer le brouillon ?')),
