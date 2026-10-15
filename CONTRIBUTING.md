@@ -32,10 +32,10 @@ Footers / hero use **`package.json` version** and the **installed React** versio
 
 ## Conventions
 
-1. **Tokens first.** Colours, space, time, type, elevation, blur live in `packages/tokens/src` (W3C DTCG). Do not add a magic number in CSS if a token exists — and if it should exist, add it there.
+1. **Tokens first.** Colours, space, time, type, elevation, blur live in `packages/tokens/src` (W3C DTCG). Do not add a magic number in CSS if a token exists - and if it should exist, add it there.
 2. **Prefix.** Public classes are `.sg-*` with BEM modifiers (`.sg-button--primary`). Stylelint enforces this.
 3. **No non-open assets.** No Google Sans, no hotlinked stock photos.
-4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate — see the Contrast section in the demo and [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md).
+4. **Accessibility.** Keyboard, `:focus-visible`, `prefers-reduced-motion`, `prefers-reduced-transparency`, `prefers-contrast`, `forced-colors`. Contrast on glass is a release gate - see the Contrast section in the demo and [`docs/COMPOSANTS.md`](docs/COMPOSANTS.md).
 5. **Commits.** [Conventional Commits](https://www.conventionalcommits.org/). Husky: `pre-commit` (lint-staged) + `pre-push` (`pnpm preflight`). `main` is protected (no force-push / deletion; CI required on PRs).
 6. **Changesets.** User-facing changes get `pnpm changeset`.
 

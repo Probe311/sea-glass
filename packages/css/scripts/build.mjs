@@ -14,7 +14,7 @@ const sheets = ['material.css', 'components.css', 'utilities.css', 'a11y.css'];
 const parts = await Promise.all(sheets.map((f) => readFile(join(src, f), 'utf8')));
 const reset = await readFile(join(src, 'reset.css'), 'utf8');
 
-const bundled = `/* Sea Glass CSS — tokens + material + components. Optional reset is a separate entry. */
+const bundled = `/* Sea Glass CSS - tokens + material + components. Optional reset is a separate entry. */
 @layer sg.tokens, sg.material, sg.components, sg.utilities, sg.a11y;
 
 @layer sg.tokens {

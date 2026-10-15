@@ -1,7 +1,7 @@
 {
   "name": "@sea-glass/tokens",
   "version": "0.2.1",
-  "description": "Sea Glass design tokens (W3C DTCG) — CSS custom properties, ESM, JSON.",
+  "description": "Sea Glass design tokens (W3C DTCG) - CSS custom properties, ESM, JSON.",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
   "type": "module",

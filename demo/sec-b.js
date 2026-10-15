@@ -46,7 +46,7 @@
 
   /* ---------- Listes (puces / chiffres / coches) ---------- */
   S.Bullets = function () {
-    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes', lead: 'Listes de contenu : puces, chiffres et coches. HTML sémantique (ul / ol), style Sea Glass — distinct des puces (chips) et des lignes interactives .sg-list.' },
+    return h(D.Section, { id: 'listes', label: 'Composants', title: 'Listes', lead: 'Listes de contenu : puces, chiffres et coches. HTML sémantique (ul / ol), style Sea Glass - distinct des puces (chips) et des lignes interactives .sg-list.' },
       h(D.Panel, { tag: 'Aperçu', cap: 'Trois motifs côte à côte.' },
         h('div', { className: 'doc-lists' },
           h('div', { className: 'doc-list-block' },

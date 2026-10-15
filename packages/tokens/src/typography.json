@@ -3,7 +3,7 @@
     "display": {
       "$type": "fontFamily",
       "$value": ["Poppins", "Outfit", "ui-rounded", "system-ui", "sans-serif"],
-      "$description": "Hn / wordmark. Match: geometric rounded sans, single-story a, soft terminals (Refractive-like). Poppins Bold OFL — self-host via @fontsource/poppins."
+      "$description": "Hn / wordmark. Match: geometric rounded sans, single-story a, soft terminals (Refractive-like). Poppins Bold OFL - self-host via @fontsource/poppins."
     },
     "body": {
       "$type": "fontFamily",

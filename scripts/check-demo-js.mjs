@@ -1,5 +1,5 @@
 /**
- * ponytail: O(n) parse check — fails CI/preflight if a demo/*.js has a syntax error.
+ * ponytail: O(n) parse check - fails CI/preflight if a demo/*.js has a syntax error.
  * Upgrade: fold into eslint when demo scripts are linted as modules.
  */
 import { readdirSync } from 'node:fs';

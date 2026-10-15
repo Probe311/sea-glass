@@ -12,7 +12,7 @@
     "spring": {
       "$type": "cubicBezier",
       "$value": [0.34, 1.4, 0.5, 1],
-      "$description": "Light overshoot — neutralize under prefers-reduced-motion"
+      "$description": "Light overshoot - neutralize under prefers-reduced-motion"
     }
   },
   "motion": {

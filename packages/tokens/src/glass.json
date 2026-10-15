@@ -67,8 +67,8 @@
     },
     "sparkle": {
       "$type": "number",
-      "$value": 0.08,
-      "$extensions": { "seaglass": { "dark": 0.06 } }
+      "$value": 0.14,
+      "$extensions": { "seaglass": { "dark": 0.1 } }
     }
   }
 }

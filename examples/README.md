@@ -8,4 +8,4 @@ python3 -m http.server 4173 --directory ..
 # open http://127.0.0.1:4173/examples/
 ```
 
-Needs `@sea-glass/css` — from npm (`pnpm add @sea-glass/css`) or the built `packages/css/dist` in this monorepo.
+Needs `@sea-glass/css` - from npm (`pnpm add @sea-glass/css`) or the built `packages/css/dist` in this monorepo.

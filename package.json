@@ -2,7 +2,7 @@
   "name": "seaglass",
   "private": true,
   "version": "0.2.1",
-  "description": "Sea Glass — frosted sea-glass design system (translucency, frost, refraction, rim, glow, grain, tint).",
+  "description": "Sea Glass - frosted sea-glass design system (translucency, frost, refraction, rim, glow, grain, tint).",
   "license": "MIT",
   "author": "Julien Vaissier (Probe311)",
   "homepage": "https://github.com/Probe311/sea-glass#readme",

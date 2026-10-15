@@ -11,7 +11,7 @@ export type GlassProps = HTMLAttributes<HTMLElement> & {
   alive?: boolean;
   /** Pebble key → `--sg-color-{tint}-rgb` + `data-tint` */
   tint?: string;
-  /** When `as` is an anchor / quote — kept loose for polymorphic tags */
+  /** When `as` is an anchor / quote - kept loose for polymorphic tags */
   href?: string;
   cite?: string;
 };

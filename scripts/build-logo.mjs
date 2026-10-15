@@ -2,8 +2,8 @@
  * Outline Sea Glass wordmarks from Poppins Bold (OFL).
  * Usage: node scripts/build-logo.mjs
  *
- *   logo.svg       — dark ink, for light backgrounds
- *   logo-light.svg — light ink, for dark backgrounds
+ *   logo.svg       - dark ink, for light backgrounds
+ *   logo-light.svg - light ink, for dark backgrounds
  *
  * Writes into `assets/` (repo) and `demo/` (GitHub Pages).
  */

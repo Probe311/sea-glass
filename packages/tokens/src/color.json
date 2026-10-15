@@ -243,7 +243,7 @@
     "on-glass": {
       "$type": "color",
       "$value": "#17262A",
-      "$description": "Text sitting on glass over a photograph — pair with the opacity floor",
+      "$description": "Text sitting on glass over a photograph - pair with the opacity floor",
       "$extensions": { "seaglass": { "dark": "#E8F1EE" } }
     }
   }

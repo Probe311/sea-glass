@@ -124,7 +124,7 @@
     '// Catalogue : packages/react/README.md · Storybook : pnpm storybook',
   ].join('\n');
   function jsonTokens() {
-    var o = { color: {}, material: { glassOnGround: 0.42, glassOnScene: 0.08, blur: 16, tintA: 0.28, sparkle: 0.08, radius: 28, shadowCast: true, shadowGlow: true, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
+    var o = { color: {}, material: { glassOnGround: 0.42, glassOnScene: 0.08, blur: 16, tintA: 0.28, sparkle: 0.14, radius: 28, shadowCast: true, shadowGlow: true, properties: ['frosted', 'refractive', 'alive', 'rim', 'tint', 'glow'] },
       motion: { fast: '120ms', base: '200ms', soft: '380ms', ease: 'cubic-bezier(0.2,0,0,1)', spring: 'cubic-bezier(0.34,1.4,0.5,1)' }, theme: SG.isDark() ? 'dark' : 'light' };
     SG.PEBBLES.forEach(function (p) { o.color[p.key] = { value: SG.cssVar('--' + p.key), ink: SG.cssVar('--' + p.key + '-ink') }; });
     return JSON.stringify(o, null, 2);

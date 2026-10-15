@@ -12,7 +12,7 @@ const cssSrc = join(root, 'packages/css/dist/seaglass.css');
 const cssDst = join(root, 'demo/seaglass.css');
 
 if (!existsSync(cssSrc)) {
-  console.error('sync-demo: missing packages/css/dist/seaglass.css — run pnpm build first');
+  console.error('sync-demo: missing packages/css/dist/seaglass.css - run pnpm build first');
   process.exit(1);
 }
 

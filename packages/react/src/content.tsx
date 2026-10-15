@@ -22,7 +22,7 @@ export const Quote = forwardRef<HTMLQuoteElement, QuoteProps>(function Quote(
       {...rest}
     >
       {children}
-      {cite ? <footer className="sg-quote__cite">— {cite}</footer> : null}
+      {cite ? <footer className="sg-quote__cite">- {cite}</footer> : null}
     </Glass>
   );
 });

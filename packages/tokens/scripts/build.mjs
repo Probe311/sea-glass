@@ -8,7 +8,7 @@ import StyleDictionary from 'style-dictionary';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
-// Explicit file list — `src/**/*.json` globs are flaky on Windows with SD 4.4.
+// Explicit file list - `src/**/*.json` globs are flaky on Windows with SD 4.4.
 const sources = readdirSync(join(root, 'src'))
   .filter((f) => f.endsWith('.json'))
   .map((f) => join(root, 'src', f));
@@ -159,7 +159,7 @@ StyleDictionary.registerFormat({
     );
     const darkBlock = `  color-scheme: dark;\n${dark}`;
     // data-theme = demo / HTML; data-sg-theme = package API (same values)
-    return `/* Sea Glass tokens — generated from W3C DTCG JSON. Do not edit. */
+    return `/* Sea Glass tokens - generated from W3C DTCG JSON. Do not edit. */
 :root {
   color-scheme: light dark;
 ${light}
@@ -190,7 +190,7 @@ StyleDictionary.registerFormat({
   format: ({ dictionary }) => {
     const tree = flatten(allTokens(dictionary));
     const pebbles = pebblesFrom(dictionary);
-    return `/* Sea Glass tokens — generated. Do not edit. */
+    return `/* Sea Glass tokens - generated. Do not edit. */
 export const tokens = ${JSON.stringify(tree, null, 2)};
 export const pebbles = ${JSON.stringify(pebbles, null, 2)};
 export default tokens;
@@ -238,7 +238,7 @@ StyleDictionary.registerFormat({
     for (const token of tokens.filter((t) => t.path[0] === 'radius')) {
       radii[token.path[1]] = tokenValue(token);
     }
-    return `/* Sea Glass Tailwind v3 preset — generated. Do not edit. */
+    return `/* Sea Glass Tailwind v3 preset - generated. Do not edit. */
 export default {
   theme: {
     extend: {

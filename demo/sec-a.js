@@ -102,9 +102,9 @@
     { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
     { k: 'tint', t: 'Teinte', role: 'tint-a 0.4', note: 'Gelée seafoam lisible - remplace le wash blanc.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
-    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.08', note: 'Bruit fin monochrome overlay (~8 %) sur la teinte.' },
-    { k: 'cast', t: 'Ombre', role: '--sh-cast / --table-drop', note: 'Ombre table neutre marquée — ancrage au sol.' },
-    { k: 'glow', t: 'Lueur', role: '--sh-glow / tint-glow', note: 'Halo de la teinte — lumière qui traverse le verre.' },
+    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.14', note: 'Bruit fin monochrome overlay (~14 %) sur la teinte.' },
+    { k: 'cast', t: 'Ombre', role: '--sh-cast (noir)', note: 'Ombre portée neutre marquée — flottement / ancrage.' },
+    { k: 'glow', t: 'Lueur', role: '--sh-glow (teinte)', note: 'Halo de la couleur du composant — lumière à travers.' },
     { k: 'ink', t: 'Encre', role: 'currentColor / *-ink', note: 'Libellé et icône liés à l’encre du tint.' },
   ];
   function FabBgSwitch(p) {
@@ -115,6 +115,7 @@
       'aria-pressed': photo,
       'aria-label': photo ? 'Fond image - basculer vers palette' : 'Fond palette - basculer vers image',
       title: photo ? 'Fond image' : 'Fond palette',
+      disabled: !!p.disabled,
       onClick: p.onToggle,
     },
       h('span', { className: 'fab-bg-switch__ico', 'aria-hidden': true }, h(Icon, { name: 'palette', size: 16 })),
@@ -122,9 +123,20 @@
         h('span', { className: 'fab-bg-switch__thumb' })),
       h('span', { className: 'fab-bg-switch__ico', 'aria-hidden': true }, h(Icon, { name: 'image', size: 16 })));
   }
+  function FabBgClear(p) {
+    var off = !!p.off;
+    return h('button', {
+      type: 'button',
+      className: 'fab-bg-clear' + (off ? ' fab-bg-clear--off' : ''),
+      'aria-pressed': off,
+      'aria-label': off ? 'Réafficher le fond' : 'Masquer le fond',
+      title: off ? 'Réafficher le fond' : 'Masquer le fond',
+      onClick: p.onToggle,
+    }, h(Icon, { name: off ? 'circle-plus' : 'circle-xmark', size: 18 }));
+  }
   function FabricateDemo(p) {
     var stepSt = useState(0), step = stepSt[0], setStep = stepSt[1];
-    var bg = p.bg === 'photo' ? 'photo' : 'color';
+    var bg = p.bg === 'photo' ? 'photo' : p.bg === 'none' ? 'none' : 'color';
     var rootRef = React.useRef(null);
     var ctaRef = React.useRef(null);
     var pauseRef = React.useRef(0);
@@ -181,22 +193,15 @@
       SG.ripple(e.currentTarget, e);
     }
 
-    /* Frost always mounted so --lg-blur eases 0 → 22px (no backdrop snap). */
+    /* Frost always mounted ; layers via --fab-* (0→1) pour fade soft */
     var style = {
       '--lg-r': '999px',
       '--fab-rim': on.rim ? 1 : 0,
-      /* Deux layers drop : ombre neutre + lueur teinte */
-      '--sh-cast': on.cast ? '0 8px 24px -8px rgb(0 0 0 / 0.18), 0 2px 4px rgb(0 0 0 / 0.06)' : 'none',
-      '--sh-glow': on.glow
-        ? (on.tint ? '0 10px 28px -6px rgb(var(--tint) / 0.35)' : '0 10px 28px -6px rgb(255 255 255 / 0.2)')
-        : 'none',
+      '--fab-tint': on.tint ? 1 : 0,
+      '--fab-cast': on.cast && on.glass ? 1 : 0,
+      '--fab-glow': on.glow && on.glass ? 1 : 0,
+      '--sparkle': on.sparkle ? 0.14 : 0,
     };
-    if (!on.glass) {
-      style['--sh-cast'] = 'none';
-      style['--sh-glow'] = 'none';
-    }
-    if (on.sparkle) style['--sparkle'] = 0.08;
-    else style['--sparkle'] = 0;
 
     return h('div', { className: 'fab', ref: rootRef, 'data-fab-bg': bg },
       h('div', { className: 'fab-stage' },
@@ -242,6 +247,12 @@
 
   S.Fabrication = function () {
     var bgSt = useState('color'), bg = bgSt[0], setBg = bgSt[1];
+    var lastBg = React.useRef('color');
+    var cleared = bg === 'none';
+    function setBgMode(next) {
+      if (next !== 'none') lastBg.current = next;
+      setBg(next);
+    }
     return h(D.Section, {
       id: 'fabrication',
       label: 'Principes',
@@ -250,10 +261,20 @@
     },
       h(D.Panel, { tag: 'Assemblage', cap: 'Une couche à la fois - transitions douces, boucle automatique.', scene: true },
         h('div', { className: 'fab-panel' },
-          h(FabBgSwitch, {
-            photo: bg === 'photo',
-            onToggle: function () { setBg(bg === 'photo' ? 'color' : 'photo'); },
-          }),
+          h('div', { className: 'fab-bg-tools' },
+            h(FabBgSwitch, {
+              photo: (cleared ? lastBg.current : bg) === 'photo',
+              disabled: cleared,
+              onToggle: function () {
+                setBgMode((cleared ? lastBg.current : bg) === 'photo' ? 'color' : 'photo');
+              },
+            }),
+            h(FabBgClear, {
+              off: cleared,
+              onToggle: function () {
+                setBg(cleared ? lastBg.current : 'none');
+              },
+            })),
           h(FabricateDemo, { bg: bg }))),
       h(D.Specs, { head: ['Couche', 'Attribut / token', 'Rôle'], rows: FAB_LAYERS.map(function (l) {
         return [l.t, l.role, l.note];

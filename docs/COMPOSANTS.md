@@ -34,15 +34,15 @@ Colonnes :
 | Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
 | Frost     | `backdrop-filter: blur(16px) saturate(1.75)` - **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
 | Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
-| Grain     | `noise.svg` overlay ≈ **8 %** (givre, 6–10 %) · tuile 128 px                                                                           |
+| Grain     | `noise.svg` overlay ≈ **14 %** (givre) · tuile 128 px                                                                                  |
 | Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
-| Ombre     | **Layer 1** · cast neutre (`--sg-shadow-cast` / `--sg-elevation-3`) — ancrage marqué au sol                                            |
-| Lueur     | **Layer 2** · glow teinte (`--sg-shadow-glow`) — halo soft de `--sg-glass-tint-rgb`, comme si la lumière traversait le verre           |
+| Ombre     | **Portée neutre** (`--sg-shadow-cast`) — noir/gris marqué, flottement                                                                  |
+| Lueur     | **Couleur du composant** (`--sg-shadow-glow` ← tint) — halo visible, lumière à travers                                                 |
 | Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
 | Isolation | `isolation: auto` - ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
 
-Drop = **toujours deux layers** : `box-shadow: …, var(--sg-shadow-cast), var(--sg-shadow-glow), …`.  
-`data-glow` **renforce** la lueur (layer 2), ne remplace pas l’ombre. Ghost : pas de frost / grain.
+Drop = **toujours deux layers** : `box-shadow: …, var(--sg-shadow-glow), var(--sg-shadow-cast), …`  
+(lueur = couleur · ombre = portée noire). `data-glow` renforce la lueur, ne remplace pas l’ombre.
 
 Stack Fabrication : **Verre** → bordure → teinte → réfraction → givre → **ombre** → **lueur** → encre. Prévoir un décor saturé derrière toute surface frosted.
 

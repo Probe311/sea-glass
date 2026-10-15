@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 const packages = readdirSync('packages', { withFileTypes: true }).filter((d) => d.isDirectory());
 
-console.log('Sea Glass — release dry-run\n');
+console.log('Sea Glass - release dry-run\n');
 console.log('Would publish:');
 for (const dir of packages) {
   const pkg = JSON.parse(readFileSync(join('packages', dir.name, 'package.json'), 'utf8'));
