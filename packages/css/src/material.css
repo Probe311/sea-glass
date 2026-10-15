@@ -1,6 +1,6 @@
 /* Sea Glass material — glassmorphism formula.
    Light wash + frost blur (décor visible), grain, rim, neutral table drop.
-   Scene alpha ~0.08 ; tint translucent (~0.38). data-glow = rare accent. */
+   Scene alpha ~0.08–0.12 ; tint 0.28 (Alert) ; sparkle 0.14 soft-light. */
 @layer sg.material {
   @property --sg-mx {
     syntax: '<percentage>';
@@ -24,7 +24,7 @@
     --sg-glass-radius: var(--sg-radius-xl);
     --sg-glass-blur: var(--sg-blur-lg);
     --sg-glass-tint-rgb: 255 255 255;
-    --sg-glass-tint-a: 0.38;
+    --sg-glass-tint-a: 0.28;
     --sg-glass-glow-rgb: var(--sg-color-kelly-rgb);
     --sg-glass-a: var(--sg-glass-alpha-ground);
     --sg-glass-cs: color-mix(in srgb, rgb(var(--sg-glass-tint-rgb)) 40%, #fff);
@@ -183,7 +183,7 @@
     --sg-shadow-out: var(--sg-elevation-4);
   }
 
-  /* Grain: monochrome noise tile at sparkle opacity */
+  /* Grain / givre : noise.svg — soft-light pour rester lisible sur teinte Alert */
   .sg-glass::after {
     content: '';
     position: absolute;
@@ -192,7 +192,7 @@
     pointer-events: none;
     z-index: 1;
     background: url('noise.svg') center / 128px 128px repeat;
-    mix-blend-mode: overlay;
+    mix-blend-mode: soft-light;
     opacity: var(--sg-glass-sparkle);
   }
 

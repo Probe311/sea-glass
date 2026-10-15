@@ -23,7 +23,7 @@ Couches : `sg.tokens`, `sg.material`, `sg.components`, `sg.utilities`, `sg.a11y`
 
 Reset optionnel : `@sea-glass/css/reset.css` — **non** inclus par défaut.
 
-**Glassmorphisme** : wash blanc léger (alpha scène ≈ 0.08, sol ≈ 0.42) + `backdrop-filter: blur(16px) saturate(1.75)` pour que le décor transparaisse. Frost **toujours** sur `.sg-scene` ; hors scène via `data-frosted` / `.sg-glass--over`. Teinte translucide (`--sg-glass-tint-a` ≈ 0.38). Grain (`dist/noise.svg`), filet inset, ombre table neutre. `isolation: auto` (requis pour le blur). Réfraction opt-in (`html.sg-refract` + `data-refractive`, via `initSeaGlassLight`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
+**Glassmorphisme** : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42) + `backdrop-filter: blur(16px) saturate(1.75)`. Frost **toujours** sur `.sg-scene`. Teinte = formule Alert (`--sg-glass-tint-a` = **0.28**). Grain (`dist/noise.svg` soft-light ≈ **14 %**), filet inset, ombre table neutre. `isolation: auto`. Réfraction opt-in (`html.sg-refract` + `data-refractive`). `data-tint` → encre `*-ink` ; `data-glow` = halo rare.
 
 ## Composants CSS (classes)
 

@@ -86,7 +86,7 @@ Wordmarks are outlined Poppins Bold + Cobalt period. Regenerate with `pnpm build
 
 ### Material
 
-**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08, ground ≈ 0.42) so the backdrop reads through, frost `blur(16px) saturate(1.75)`, translucent tint (`tint-a` ≈ 0.38), grain (`noise.svg` ≈ 8 %), inset edge, neutral table drop. Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` is a rare tinted halo. `data-tint` sets pebble `*-ink` for text/icons (`currentColor`). Put saturated décor behind frosted surfaces.
+**Glassmorphism** on `.sg-glass`: light white wash (scene alpha ≈ 0.08–0.12, ground ≈ 0.42), frost `blur(16px) saturate(1.75)`, tint like Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), inset edge, neutral table drop. Use `isolation: auto` — isolating kills backdrop-filter. Frost is always on in `.sg-scene`; opt-in elsewhere via `data-frosted` / `.sg-glass--over`. Composable `data-*`: `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Refraction is opt-in. `data-glow` is a rare tinted halo. Put saturated décor behind frosted surfaces.
 
 Demo Fabrication stack: bordure → teinte → réfraction → givre (grain) → lueur (ombre table) → encre.
 
@@ -165,7 +165,7 @@ Wordmark Poppins Bold + point Cobalt. Régénération : `pnpm build:logo`.
 
 ### Matière
 
-**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08, sol ≈ 0.42) pour laisser lire le décor, frost `blur(16px) saturate(1.75)`, teinte translucide (`tint-a` ≈ 0.38), grain (`noise.svg` ≈ 8 %), filet inset, ombre table neutre. `isolation: auto` (sinon le blur ne voit plus le fond). Dépoli toujours actif sur `.sg-scene` ; hors scène via `data-frosted` / `.sg-glass--over`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. `data-glow` = halo rare. `data-tint` → encre `*-ink`. Prévoir un décor saturé derrière toute surface frosted.
+**Glassmorphisme** sur `.sg-glass` : wash blanc léger (alpha scène ≈ 0.08–0.12, sol ≈ 0.42), frost `blur(16px) saturate(1.75)`, teinte type Alert/Toast (`tint-a` = **0.28**), grain (`noise.svg` soft-light ≈ **14 %**), filet inset, ombre table neutre. `isolation: auto`. Dépoli toujours actif sur `.sg-scene`. Attributs : `rim`, `tint`, `refractive`, `frosted`, `alive`, `glow`. Réfraction opt-in. Prévoir un décor saturé derrière toute surface frosted.
 
 Stack Fabrication (démo) : bordure → teinte → réfraction → givre → lueur → encre.
 

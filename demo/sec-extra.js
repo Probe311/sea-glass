@@ -33,12 +33,12 @@
       ['error', 'Erreur', 'Impossible d’enregistrer. Réessaie dans un instant.'],
     ];
     return h(D.Section, { id: 'alertes', label: 'Composants', title: 'Alertes et toasts', lead: 'Relayer une information sans bloquer le parcours. Les toasts réutilisent le composant alerte, ancrés en haut au centre, avec un léger flou de l’arrière-plan.' },
-      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error.' },
-        scene(items.map(function (it) {
+      h(D.Panel, { scene: true, tag: 'Alertes', cap: 'Quatre tons : info, warning, success, error · teinte 0.28 + givre 0.14.' },
+        h('div', { className: 'alert-stage' }, scene(items.map(function (it) {
           return h('div', Object.assign({ key: it[0], className: 'sg-alert sg-glass', role: 'alert', 'data-tone': it[0], 'data-tint': true }, glassAttrs()),
             alertIcon(it[0]),
             h('div', null, h('p', { className: 'sg-alert__title' }, it[1]), it[2]));
-        }))),
+        })))),
       h(D.Panel, { scene: true, tag: 'Snack', cap: 'Action Annuler sur la même surface.' },
         h(UI.Snack, { action: h(UI.Button, { variant: 'primary', size: 'sm' }, 'Annuler') }, 'Galet ajouté à ta collection')),
       h(D.Panel, { tag: 'Toast', cap: 'CTA → alerte éphémère haut centre + blur.' },

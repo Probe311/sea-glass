@@ -86,7 +86,7 @@
   }
 
   .sg-button--primary[data-tint] {
-    --sg-glass-tint-a: 0.38;
+    --sg-glass-tint-a: 0.28;
   }
 
   .sg-button--ghost:hover,

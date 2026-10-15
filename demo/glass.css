@@ -25,7 +25,7 @@
   /* Verre — gelée */
   --ga: 0.42;
   --ga-scene: 0.08;
-  --sparkle: 0.08;
+  --sparkle: 0.14;
   --spec: rgba(255, 255, 255, 0.5);
   --sheen: rgba(255, 255, 255, 0.22);
   --lit-a: 0.95;
@@ -66,7 +66,7 @@
     --ground: #14130F; --ground-2: #1C1B17;
     --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
     --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
-    --ga: 0.08; --ga-scene: 0.12; --sparkle: 0.04;
+    --ga: 0.1; --ga-scene: 0.1; --sparkle: 0.07;
     --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
     --lit-a: 0.6; --ce: 40%; --cc: 30%;
     --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
@@ -81,7 +81,7 @@
   --ground: #14130F; --ground-2: #1C1B17;
   --ink: #E8F1EE; --ink-2: #B5C5C1; --ink-3: #93A5A1;
   --line: rgba(232, 241, 238, 0.14); --focus: #9DB8FF; --drop: 0, 0, 0; --shade: 0, 20, 16;
-  --ga: 0.08; --ga-scene: 0.12; --sparkle: 0.04;
+  --ga: 0.1; --ga-scene: 0.1; --sparkle: 0.07;
   --spec: rgba(255, 255, 255, 0.24); --sheen: rgba(255, 255, 255, 0.08);
   --lit-a: 0.6; --ce: 40%; --cc: 30%;
   --c-lo: rgba(0, 0, 0, 0.55); --c-hi: rgba(255, 255, 255, 0.14); --well-a: 0.05; --well-b: 0.1;
@@ -96,7 +96,7 @@
   --lg-r: var(--r-xl);
   --lg-blur: 16px;
   --tint: 255 255 255;
-  --tint-a: 0.38;
+  --tint-a: 0.28;
   --glow: 79 168 119;
   --glass-a: var(--ga);
   --cs: color-mix(in srgb, rgb(var(--tint)) 40%, #fff);
@@ -166,7 +166,7 @@
 .lg::after {
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 1;
   background: url(noise.svg) center / 128px 128px repeat;
-  mix-blend-mode: overlay; opacity: var(--sparkle);
+  mix-blend-mode: soft-light; opacity: var(--sparkle);
 }
 
 /* 3 · alive */

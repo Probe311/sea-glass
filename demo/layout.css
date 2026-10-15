@@ -390,14 +390,15 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 @media (max-width: 720px) {
   .fab { grid-template-columns: 1fr; min-height: 0; }
 }
-.fab-stage {
+.fab-stage,
+.alert-stage {
   position: relative;
   display: grid;
   place-items: center;
   min-height: 280px;
   padding: 24px 16px;
   border-radius: 20px;
-  /* Décor saturé : le blur glassmorphisme doit laisser lire aqua / seafoam / cobalt */
+  /* Décor saturé : lit frost / teinte / givre (même contrat Alert + Fabrication) */
   background:
     radial-gradient(90% 70% at 12% 18%, color-mix(in srgb, var(--aqua) 78%, #fff), transparent 52%),
     radial-gradient(85% 75% at 92% 82%, color-mix(in srgb, var(--seafoam) 85%, #fff), transparent 55%),
@@ -405,6 +406,11 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     radial-gradient(50% 40% at 70% 30%, color-mix(in srgb, var(--lavender) 45%, transparent), transparent 50%),
     color-mix(in srgb, var(--ground-2) 55%, var(--ground));
   overflow: hidden;
+}
+.alert-stage {
+  min-height: 0;
+  place-items: stretch;
+  gap: 12px;
 }
 /* Interpolate glass alpha + blur between Fabrication steps (scoped names) */
 @property --fab-glass-a {
@@ -470,17 +476,6 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .fab-pebble:hover { transform: scale(1.05); }
 .fab-pebble:active { transform: scale(0.97); }
-/* Teinte translucide : laisse passer frost / décor (pas un plein opaque 0.92) */
-.fab-pebble[data-tint] {
-  background:
-    linear-gradient(var(--press, transparent), var(--press, transparent)),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, rgb(var(--tint)) 36%, transparent),
-      rgb(var(--tint) / var(--tint-a, 0.38)) 52%,
-      color-mix(in srgb, rgb(var(--tint)) 48%, transparent)
-    );
-}
 /* Nu : pilule opaque — pas encore de verre */
 .fab-pebble--naked {
   --fab-glass-a: 0.92;
@@ -490,33 +485,45 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
   backdrop-filter: none;
 }
 /*
- * Verre = glassmorphisme lisible :
- * wash blanc faible + blur fort + bordure claire + ombre légère.
- * Spécificité > .lg pour forcer le fond (sinon le lait .lg masque le décor).
+ * Verre = glassmorphisme (blur DS 16) — wash blanc uniquement sans teinte.
+ * Teinte : règle plus spécifique ci-dessous (formule Alert, tint-a 0.28).
  */
 .fab-pebble.fab-pebble--glass,
 .scene .fab-pebble.fab-pebble--glass {
-  --fab-glass-a: 0.08;
-  --fab-blur: 22px;
-  --glass-a: 0.08;
+  --fab-glass-a: 0.12;
+  --fab-blur: 16px;
+  --glass-a: 0.12;
   --sh-in: inset 0 1px 1px rgb(255 255 255 / 0.55);
   --sh-out: 0 8px 24px -8px rgb(0 0 0 / 0.12);
   background:
     linear-gradient(
       135deg,
       rgb(255 255 255 / 0.28),
-      rgb(255 255 255 / 0.1) 52%,
-      rgb(255 255 255 / 0.18)
+      rgb(255 255 255 / 0.12) 52%,
+      rgb(255 255 255 / 0.2)
     );
-  -webkit-backdrop-filter: blur(22px) saturate(1.75);
-  backdrop-filter: blur(22px) saturate(1.75);
+  -webkit-backdrop-filter: blur(16px) saturate(1.75);
+  backdrop-filter: blur(16px) saturate(1.75);
   box-shadow:
     var(--sh-in),
     var(--sh-out),
     inset 0 0 0 1px rgb(255 255 255 / 0.45);
 }
-:root[data-theme="dark"] .fab-pebble.fab-pebble--glass,
-:root[data-theme="dark"] .scene .fab-pebble.fab-pebble--glass {
+/* Teinte = formule Alert / Toast — gagne sur le wash blanc Verre */
+.fab-pebble.fab-pebble--glass[data-tint],
+.scene .fab-pebble.fab-pebble--glass[data-tint],
+.fab-pebble[data-tint] {
+  background:
+    linear-gradient(var(--press, transparent), var(--press, transparent)),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, rgb(var(--tint)) 36%, transparent),
+      rgb(var(--tint) / var(--tint-a, 0.28)) 52%,
+      color-mix(in srgb, rgb(var(--tint)) 48%, transparent)
+    );
+}
+:root[data-theme="dark"] .fab-pebble.fab-pebble--glass:not([data-tint]),
+:root[data-theme="dark"] .scene .fab-pebble.fab-pebble--glass:not([data-tint]) {
   --fab-glass-a: 0.1;
   --glass-a: 0.1;
   background:
@@ -532,8 +539,8 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
     inset 0 0 0 1px rgb(255 255 255 / 0.18);
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .fab-pebble.fab-pebble--glass,
-  :root:not([data-theme="light"]) .scene .fab-pebble.fab-pebble--glass {
+  :root:not([data-theme="light"]) .fab-pebble.fab-pebble--glass:not([data-tint]),
+  :root:not([data-theme="light"]) .scene .fab-pebble.fab-pebble--glass:not([data-tint]) {
     --fab-glass-a: 0.1;
     --glass-a: 0.1;
     background:
@@ -551,6 +558,9 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 }
 .fab-pebble--no-rim { --fab-rim: 0; }
 .fab-pebble--no-sparkle::after { opacity: 0 !important; }
+.fab-pebble.fab-pebble--glass::after {
+  mix-blend-mode: soft-light;
+}
 .fab-pebble__ink {
   display: inline-flex;
   align-items: center;
@@ -746,7 +756,7 @@ footer.end { margin-top: 96px; padding-top: 24px; border-top: 1px solid var(--li
 .pebble-blob__grain {
   z-index: 7;
   background: url(noise.svg) center / 128px 128px repeat;
-  mix-blend-mode: overlay;
+  mix-blend-mode: soft-light;
   opacity: var(--pebble-sparkle);
 }
 .pebble-blob__glow {

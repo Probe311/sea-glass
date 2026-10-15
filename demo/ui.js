@@ -19,7 +19,7 @@
       'aria-label': p['aria-label'], 'aria-pressed': pressed, tabIndex: p.tabIndex,
       className: cls('btn', 'shape-' + shape, p.size, v === 'primary' && 'primary', love && 'love', loveOff && 'off', ghost && 'ghost', p.state && 'is-' + p.state),
       tint: v === 'primary' ? 'seafoam' : (love && !loveOff) ? 'ruby' : undefined,
-      tintA: v === 'primary' ? 0.38 : (love && !loveOff) ? 0.55 : undefined,
+      tintA: v === 'primary' ? 0.28 : (love && !loveOff) ? 0.55 : undefined,
       glow: false, refractive: !ghost, frosted: !ghost, rim: !ghost, alive: !ghost
     }, p.children);
   };
@@ -32,7 +32,7 @@
       as: 'button', type: 'button', innerRef: ref,
       className: cls('chip', 'shape-' + (p.shape || 'pill'), p.state && 'is-' + p.state),
       'aria-pressed': on, disabled: p.disabled,
-      tint: on ? 'seafoam' : undefined, tintA: 0.38, glow: false, refractive: true, frosted: true, rim: true, alive: true,
+      tint: on ? 'seafoam' : undefined, tintA: 0.28, glow: false, refractive: true, frosted: true, rim: true, alive: true,
       onPointerDown: function (e) { if (!p.disabled) SG.ripple(ref.current, e); },
       onClick: function () { set(!on); },
     },
@@ -45,7 +45,7 @@
     var checked = p.checked !== undefined ? p.checked : on;
     return h('span', { className: cls('tgl', checked && 'on', p.disabled && 'dis', p.state && 'is-' + p.state) },
       h('input', { type: 'checkbox', role: 'switch', checked: checked, disabled: p.disabled, 'aria-label': p['aria-label'], onChange: function (e) { set(e.target.checked); if (p.onChange) p.onChange(e.target.checked); } }),
-      h(Glass, { as: 'span', className: 'tgl-track carved', tint: checked ? 'seafoam' : undefined, tintA: 0.38, glow: false, refractive: true, frosted: true, rim: true, alive: false, 'aria-hidden': true }),
+      h(Glass, { as: 'span', className: 'tgl-track carved', tint: checked ? 'seafoam' : undefined, tintA: 0.28, glow: false, refractive: true, frosted: true, rim: true, alive: false, 'aria-hidden': true }),
       h('span', { className: 'knob' }));
   };
 
@@ -147,7 +147,7 @@
             h('i', { className: 'fl t', 'aria-hidden': true }), h('i', { className: 'fl b', 'aria-hidden': true }),
             h('i', { className: 'stem', 'aria-hidden': true }),
             h('i', { className: 'ring r2', 'aria-hidden': true }), h('i', { className: 'ring r1', 'aria-hidden': true }),
-            h(Glass, { as: 'span', className: 'sl-bub', tint: 'seafoam', tintA: 0.38, frosted: true, refractive: true, alive: false, glow: false, rim: true, 'aria-hidden': true }, v + unit));
+            h(Glass, { as: 'span', className: 'sl-bub', tint: 'seafoam', tintA: 0.28, frosted: true, refractive: true, alive: false, glow: false, rim: true, 'aria-hidden': true }, v + unit));
         })));
   };
 
@@ -212,7 +212,7 @@
       return h('button', a, it.icon && h(Icon, { name: it.icon }), it.label);
     });
     var indicator = line ? h('span', { className: 'ind', style: { left: pos.left + 'px', width: pos.width + 'px' }, 'aria-hidden': true })
-      : h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pos.left + 'px,0,0)', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.38, frosted: true, refractive: true, alive: false, glow: false, rim: true, 'aria-hidden': true });
+      : h(Glass, { as: 'span', className: 'pill', style: { transform: 'translate3d(' + pos.left + 'px,0,0)', width: pos.width + 'px' }, tint: 'seafoam', tintA: 0.28, frosted: true, refractive: true, alive: false, glow: false, rim: true, 'aria-hidden': true });
     var common = { role: p.kind === 'radio' ? 'radiogroup' : 'tablist', 'aria-label': p.label, onKeyDown: key };
     if (line) return h('div', Object.assign({ ref: box, className: p.variant === 'doc' ? 'm3tabs' : 'tabs-line' }, common), indicator, buttons);
     return h(Glass, Object.assign({ innerRef: box, className: 'tabs-list', refractive: true, frosted: true, rim: true, glow: false }, common), indicator, buttons);

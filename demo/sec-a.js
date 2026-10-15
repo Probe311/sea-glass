@@ -100,9 +100,9 @@
   var FAB_LAYERS = [
     { k: 'glass', t: 'Verre', role: 'data-frosted + --glass-a', note: 'Corps translucide + dépoli (blur) sur le décor.' },
     { k: 'rim', t: 'Bordure', role: 'data-rim', note: 'Liseré d’arête, clair côté lumière, teinté à l’opposé.' },
-    { k: 'tint', t: 'Teinte', role: 'tint + gelée 135°', note: 'Plein du galet : clair TL → saturé BR.' },
+    { k: 'tint', t: 'Teinte', role: 'tint-a 0.28', note: 'Même gelée que Alert / Toast — remplace le wash blanc.' },
     { k: 'refractive', t: 'Réfraction', role: 'data-refractive', note: 'Déformation du décor dans l’épaisseur (Chromium).' },
-    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle', note: 'Tuile noise.svg en overlay (~8 % clair).' },
+    { k: 'sparkle', t: 'Givre', role: 'grain / --sparkle 0.14', note: 'Tuile noise.svg soft-light (~14 % clair).' },
     { k: 'shadow', t: 'Lueur', role: '--sh-out / --table-drop', note: 'Ombre table neutre — pas de halo teinté.' },
     { k: 'ink', t: 'Encre', role: 'currentColor / *-ink', note: 'Libellé et icône liés à l’encre du tint.' },
   ];
@@ -171,7 +171,8 @@
     /* Ne pas forcer sh-out transparent en Verre : laisse le drop glassmorphisme CSS. */
     if (on.shadow) style['--sh-out'] = 'var(--table-drop)';
     else if (!on.glass) style['--sh-out'] = 'none';
-    if (!on.sparkle) style['--sparkle'] = 0;
+    if (on.sparkle) style['--sparkle'] = 0.14;
+    else style['--sparkle'] = 0;
 
     return h('div', { className: 'fab', ref: rootRef },
       h('div', { className: 'fab-stage' },
@@ -190,7 +191,7 @@
           glow: false,
           alive: !!on.tint,
           tint: on.tint ? 'seafoam' : undefined,
-          tintA: on.tint ? 0.38 : undefined,
+          tintA: on.tint ? 0.28 : undefined,
           'aria-label': on.ink ? 'Collecter' : 'Surface verre en assemblage',
           onPointerDown: function (e) { SG.ripple(ctaRef.current, e); },
           style: style,
@@ -296,7 +297,7 @@
               className: 'shape-radii__swatch',
               style: { height: 96, '--lg-r': r[1] + 'px' },
               tint: 'seafoam',
-              tintA: 0.38,
+              tintA: 0.28,
               rim: true,
               refractive: true,
               frosted: true,

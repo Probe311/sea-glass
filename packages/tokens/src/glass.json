@@ -67,7 +67,7 @@
     },
     "sparkle": {
       "$type": "number",
-      "$value": { "light": 0.08, "dark": 0.04 }
+      "$value": { "light": 0.14, "dark": 0.07 }
     }
   }
 }

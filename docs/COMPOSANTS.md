@@ -29,16 +29,16 @@ Colonnes :
 
 | Couche    | Contrat                                                                                                                                |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08**                                                                       |
+| Corps     | Wash blanc léger · alpha sol ≈ **0.42** · alpha scène ≈ **0.08–0.12**                                                                  |
 | Frost     | `backdrop-filter: blur(16px) saturate(1.75)` — **toujours** sur `.sg-scene` ; opt-in hors scène via `data-frosted` / `.sg-glass--over` |
-| Teinte    | Gelée 135° translucide · `--sg-glass-tint-a` ≈ **0.38** (pas de plein opaque)                                                          |
-| Grain     | `noise.svg` overlay ≈ 8 % (givre)                                                                                                      |
+| Teinte    | Gelée 135° · `--sg-glass-tint-a` = **0.28** (référence Alert / Toast)                                                                  |
+| Grain     | `noise.svg` soft-light ≈ **14 %** (givre)                                                                                              |
 | Bordure   | `data-rim` + filet blanc inset ≈ 35 %                                                                                                  |
 | Lueur     | Ombre table neutre (pas de halo teinté)                                                                                                |
 | Encre     | `data-tint` → `color: var(--*-ink)` ; icônes `currentColor`                                                                            |
 | Isolation | `isolation: auto` — ne pas isoler (sinon le blur ne voit plus le décor)                                                                |
 
-`data-glow` = halo teinté rare. Ghost : pas de frost / grain. Stack Fabrication (démo) : **Verre** → bordure → teinte → réfraction → givre → lueur → encre. Prévoir un décor saturé derrière toute surface frosted.
+`data-glow` = halo teinté rare. Ghost : pas de frost / grain. Stack Fabrication : **Verre** → bordure → **teinte (= formule Alert)** → réfraction → givre → lueur → encre. Prévoir un décor saturé derrière toute surface frosted.
 
 | Composant       | CSS            | React | Démo           | Storybook        | Avancement                        |
 | --------------- | -------------- | ----- | -------------- | ---------------- | --------------------------------- |
