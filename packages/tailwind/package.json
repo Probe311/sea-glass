@@ -31,7 +31,7 @@
     "@sea-glass/tokens": "workspace:^"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.19"
+    "tailwindcss": "^4.3.3"
   },
   "publishConfig": {
     "access": "public"
